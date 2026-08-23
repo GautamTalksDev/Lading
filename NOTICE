@@ -1,0 +1,10 @@
+LADING
+Copyright 2026 GautamTalksDev
+
+This product includes software developed at LADING.
+
+This product is licensed under the Apache License, Version 2.0.
+See the LICENSE file for the full license text.
+
+Third-party dependencies and their licenses are declared in go.mod / go.sum
+and remain the property of their respective copyright holders.

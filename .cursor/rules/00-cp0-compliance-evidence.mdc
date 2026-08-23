@@ -1,0 +1,17 @@
+---
+description: CP-0 — Compliance evidence tool constraints (deterministic, no LLM/heuristics/unrequested network)
+alwaysApply: true
+---
+
+# CP-0: Compliance Evidence Constraints
+
+This is a compliance evidence tool. Every output is a claim someone will rely on in a regulatory filing.
+
+## Hard requirements
+
+- All logic must be **deterministic** and **unit-testable**.
+- **NEVER** add an LLM call, a heuristic score, a probability, or a network request the user did not explicitly request.
+- **NEVER** emit a `not_affected` verdict without a re-derivable evidence bundle.
+- When in doubt, the answer is `under_investigation`.
+- **Never** add a dependency not already in `go.mod` without asking first.
+- Prefer the standard library — `debug/elf`, `debug/pe`, `debug/macho` are stdlib and are the core of this tool.
