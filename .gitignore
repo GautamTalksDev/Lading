@@ -40,3 +40,22 @@ tmp/
 
 # Corpus artifact binaries (regenerate: scripts/corpus-download.sh)
 corpus/downloads/
+
+# Python venv (CP-8 schema validation)
+.venv/
+__pycache__/
+*.pyc
+
+# Scan/verify output directories
+lading-out/
+/out/
+
+# Signing material — belongs outside the repo (CP-3 DoD)
+cosign.key
+cosign.pub
+*.crt
+ed25519*
+
+# Local corpus scratch
+corpus/downloads/
+corpus/tmp/
