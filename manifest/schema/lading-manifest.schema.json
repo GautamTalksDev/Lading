@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/gautamtalksdev/lading/manifest/schema/lading-manifest.schema.json",
+  "title": "Lading Manifest",
+  "description": "Versioned Lading Manifest entry schema. Skeleton only; fields expand with the loader.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "id"],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Manifest schema version."
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Stable identifier for this manifest entry."
+    },
+    "purl": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Optional Package URL for the component."
+    },
+    "notes": {
+      "type": "string",
+      "description": "Human-readable notes; never a substitute for evidence."
+    }
+  }
+}

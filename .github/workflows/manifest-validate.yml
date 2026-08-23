@@ -1,0 +1,32 @@
+name: Manifest Validate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+    paths:
+      - "manifest/**"
+      - ".github/workflows/manifest-validate.yml"
+      - "scripts/validate-manifests.sh"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: validate-manifests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install check-jsonschema
+        run: pip install check-jsonschema
+
+      - name: Validate manifest files
+        run: bash scripts/validate-manifests.sh
