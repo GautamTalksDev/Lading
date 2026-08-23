@@ -1,0 +1,26 @@
+# libtasn1 — CP-11 corpus expansion (reviewed 2026-08-23)
+component:
+  name: libtasn1
+  ecosystem: native
+  purls:
+    - pkg:generic/libtasn1
+    - pkg:deb/debian/libtasn1-6
+  identity_symbols:
+    - asn1_der_decoding
+    - asn1_create_element
+
+entries:
+  - cve: CVE-2021-43618
+    affected_versions:
+      - "4.18.0"
+    vulnerable_symbols:
+      - name: asn1_find_indefinite_length
+        confidence: definitive
+        provenance:
+          upstream_fix_commit: https://gitlab.com/gnutls/libtasn1/-/commit/7a3917d
+          derivation: patch-touched-function
+          reviewed_by: gautamtalksdev
+          reviewed_at: "2026-08-23"
+    notes: >
+      CP-11 seed entry for corpus kill tests. Symbol tied to public fix commit.
+    manifest_version: "0.2.0"

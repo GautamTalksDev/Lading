@@ -1,0 +1,6 @@
+Trying to pull docker.io/library/ubuntu:24.04...
+Getting image source signatures
+Copying blob sha256:0926a8eb0e608a5c6888d1cd5594184bdf3ed3aa311dba5b42a547caefdc6f2e
+Copying config sha256:a6f81fb630d51837271b89f8193810a5fc493fa4f30a55d7ebcdb3a66f3cc63a
+Writing manifest to image destination
+a6f81fb630d51837271b89f8193810a5fc493fa4f30a55d7ebcdb3a66f3cc63a

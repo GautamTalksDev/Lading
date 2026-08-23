@@ -1,0 +1,31 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "version": 1,
+  "metadata": {
+    "component": {
+      "bom-ref": "app-a",
+      "type": "application",
+      "name": "app-a",
+      "purl": "pkg:generic/app-a@1.0.0"
+    }
+  },
+  "components": [
+    {
+      "bom-ref": "app-b",
+      "type": "application",
+      "name": "app-b",
+      "purl": "pkg:generic/app-b@2.0.0"
+    },
+    {
+      "bom-ref": "openssl",
+      "type": "library",
+      "name": "openssl",
+      "purl": "pkg:generic/openssl@3.0.2"
+    }
+  ],
+  "dependencies": [
+    { "ref": "app-a", "dependsOn": ["openssl"] },
+    { "ref": "app-b", "dependsOn": ["openssl"] }
+  ]
+}

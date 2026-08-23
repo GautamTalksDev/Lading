@@ -1,0 +1,428 @@
+[
+  {
+    "id": "zlib-CVE-2022-37434",
+    "repo": "zlib",
+    "commit": "eff308af425b67093bab25f80f1ae950166bece1",
+    "note": "CVE-2022-37434 inflate extra field",
+    "symbols": [
+      "inflate"
+    ],
+    "hand_checked": true,
+    "files": [
+      "00_new_inflate.c",
+      "01_old_inflate.c"
+    ],
+    "expected_symbols": [
+      "inflate"
+    ]
+  },
+  {
+    "id": "zlib-inflatePrime",
+    "repo": "zlib",
+    "commit": "12b345c4309b37ab905e7e702021c1c2d2c095cc",
+    "note": "inflatePrime shift",
+    "symbols": [
+      "inflatePrime"
+    ],
+    "hand_checked": true,
+    "files": [
+      "00_new_inflate.c"
+    ],
+    "expected_symbols": [
+      "inflatePrime"
+    ]
+  },
+  {
+    "id": "zlib-inftrees",
+    "repo": "zlib",
+    "commit": "51370f365607fe14a6a7a1a27b3bd29d788f5e5b",
+    "note": "inftrees rare bug",
+    "symbols": [
+      "inflate_table"
+    ],
+    "hand_checked": true,
+    "files": [
+      "00_old_inftrees.c",
+      "01_new_inftrees.c"
+    ],
+    "expected_symbols": [
+      "inflate_table"
+    ]
+  },
+  {
+    "id": "zlib-inflateSync",
+    "repo": "zlib",
+    "commit": "5af7cef45eeef86ddf6ab00b4e363c1eecaf47b6",
+    "note": "inflateSync",
+    "symbols": [
+      "inflateSync"
+    ],
+    "hand_checked": true,
+    "files": [
+      "00_old_inflate.c",
+      "01_new_inflate.c"
+    ],
+    "expected_symbols": [
+      "inflateSync"
+    ]
+  },
+  {
+    "id": "zlib-gzflush",
+    "repo": "zlib",
+    "commit": "d98251478246c8ef2f405d76e4ef1678c14d7eda",
+    "note": "gzflush",
+    "symbols": [
+      "gzbuffer"
+    ],
+    "hand_checked": true,
+    "files": [
+      "00_old_gzlib.c",
+      "01_new_gzlib.c"
+    ],
+    "expected_symbols": [
+      "gzbuffer"
+    ]
+  },
+  {
+    "id": "zlib-minizip-hdr",
+    "repo": "zlib",
+    "commit": "73331a6a0481067628f065ffe87bb1d8f787d10c",
+    "note": "minizip header overflow",
+    "symbols": [
+      "zipOpenNewFileInZip4_64"
+    ],
+    "hand_checked": true,
+    "files": [
+      "00_new_zip.c"
+    ],
+    "expected_symbols": [
+      "zipOpenNewFileInZip4_64"
+    ]
+  },
+  {
+    "id": "zlib-miniunz-trav",
+    "repo": "zlib",
+    "commit": "14a5f8f266c16c87ab6c086fc52b770b27701e01",
+    "note": "miniunz traversal",
+    "symbols": [
+      "do_extract_currentfile"
+    ],
+    "hand_checked": true,
+    "files": [
+      "00_new_miniunz.c"
+    ],
+    "expected_symbols": [
+      "do_extract_currentfile"
+    ]
+  },
+  {
+    "id": "zlib-pending-assert",
+    "repo": "zlib",
+    "commit": "ee474ff2d11715485a87b123edbdd615ba218b88",
+    "note": "pending buffer assert",
+    "symbols": [
+      "compress_block"
+    ],
+    "hand_checked": true,
+    "files": [
+      "00_old_trees.c",
+      "01_new_trees.c"
+    ],
+    "expected_symbols": [
+      "compress_block"
+    ]
+  },
+  {
+    "id": "zlib-inffast-incr",
+    "repo": "zlib",
+    "commit": "9aaec95e82117c1cb0f9624264c3618fc380cecb",
+    "note": "inffast post-increment",
+    "symbols": [
+      "inflate_fast"
+    ],
+    "hand_checked": true,
+    "files": [
+      "00_old_inffast.c",
+      "01_new_inffast.c"
+    ],
+    "expected_symbols": [
+      "inflate_fast"
+    ]
+  },
+  {
+    "id": "expat-CVE-2022-25315",
+    "repo": "libexpat",
+    "commit": "eb0362808b4f9f1e2345a0cf203b8cc196d776d9",
+    "note": "CVE-2022-25315 storeRawNames",
+    "symbols": [
+      "storeRawNames"
+    ],
+    "hand_checked": true,
+    "files": [
+      "00_new_xmlparse.c",
+      "01_old_xmlparse.c"
+    ],
+    "expected_symbols": [
+      "storeRawNames"
+    ]
+  },
+  {
+    "id": "expat-CVE-2022-25236",
+    "repo": "libexpat",
+    "commit": "a2fe525e660badd64b6c557c2b1ec26ddc07f6e4",
+    "note": "CVE-2022-25236 namespace",
+    "symbols": [
+      "addBinding"
+    ],
+    "hand_checked": true,
+    "files": [
+      "00_new_xmlparse.c"
+    ],
+    "expected_symbols": [
+      "addBinding"
+    ]
+  },
+  {
+    "id": "expat-CVE-2022-25314",
+    "repo": "libexpat",
+    "commit": "efcb347440ade24b9f1054671e6bd05e60b4cafd",
+    "note": "copyString overflow",
+    "symbols": [
+      "copyString"
+    ],
+    "hand_checked": true,
+    "files": [
+      "00_old_xmlparse.c",
+      "01_new_xmlparse.c"
+    ],
+    "expected_symbols": [
+      "copyString"
+    ]
+  },
+  {
+    "id": "expat-storeAtts",
+    "repo": "libexpat",
+    "commit": "12dc6d8d3d65f79471a94d8565f6bf1cf245f648",
+    "note": "storeAtts overflow",
+    "symbols": [
+      "storeAtts"
+    ],
+    "hand_checked": true,
+    "files": [
+      "00_new_xmlparse.c",
+      "01_old_xmlparse.c"
+    ],
+    "expected_symbols": [
+      "storeAtts"
+    ]
+  },
+  {
+    "id": "expat-addBinding",
+    "repo": "libexpat",
+    "commit": "babfc48090977cbf7be24b2c48f6053dca75c164",
+    "note": "addBinding overflow",
+    "symbols": [
+      "addBinding"
+    ],
+    "hand_checked": true,
+    "files": [
+      "00_new_xmlparse.c",
+      "01_old_xmlparse.c"
+    ],
+    "expected_symbols": [
+      "addBinding"
+    ]
+  },
+  {
+    "id": "expat-getAttributeId",
+    "repo": "libexpat",
+    "commit": "2c6c42d33689f6b266a5267b639e03cde17e53c0",
+    "note": "getAttributeId overflow",
+    "symbols": [
+      "getAttributeId"
+    ],
+    "hand_checked": true,
+    "files": [
+      "00_new_xmlparse.c"
+    ],
+    "expected_symbols": [
+      "getAttributeId"
+    ]
+  },
+  {
+    "id": "expat-build_model",
+    "repo": "libexpat",
+    "commit": "9b4ce651b26557f16103c3a366c91934ecd439ab",
+    "note": "Prevent stack exhaustion in build_model",
+    "symbols": [
+      "build_model",
+      "build_node"
+    ],
+    "hand_checked": true,
+    "files": [
+      "00_old_xmlparse.c",
+      "01_new_xmlparse.c"
+    ],
+    "expected_symbols": [
+      "build_model",
+      "build_node"
+    ]
+  },
+  {
+    "id": "openssl-CVE-2023-0286",
+    "repo": "openssl",
+    "commit": "2f7530077e0ef79d98718138716bc51ca0cad658",
+    "note": "CVE-2023-0286 GENERAL_NAME_cmp",
+    "symbols": [
+      "GENERAL_NAME_cmp"
+    ],
+    "hand_checked": true,
+    "files": [
+      "00_old_v3_genn.c",
+      "01_new_v3_genn.c",
+      "02_new_v3nametest.c"
+    ],
+    "expected_symbols": [
+      "GENERAL_NAME_cmp"
+    ]
+  },
+  {
+    "id": "openssl-CVE-2022-3602",
+    "repo": "openssl",
+    "commit": "3b421ebc64c7b52f1b9feb3812bdc7781c784332",
+    "note": "CVE-2022-3602 punycode",
+    "symbols": [
+      "ossl_punycode_decode"
+    ],
+    "hand_checked": true,
+    "files": [
+      "00_new_punycode.c",
+      "01_old_punycode.c"
+    ],
+    "expected_symbols": [
+      "ossl_punycode_decode"
+    ]
+  },
+  {
+    "id": "openssl-CVE-2022-3786",
+    "repo": "openssl",
+    "commit": "680e65b94c916af259bfdc2e25f1ab6e0c7a97d6",
+    "note": "CVE-2022-3786 punycode",
+    "symbols": [
+      "ossl_a2ucompare",
+      "ossl_a2ulabel",
+      "ossl_punycode_decode"
+    ],
+    "hand_checked": true,
+    "files": [
+      "00_old_punycode.c",
+      "01_new_punycode.c"
+    ],
+    "expected_symbols": [
+      "ossl_punycode_decode"
+    ]
+  },
+  {
+    "id": "openssl-BIO-linebuf",
+    "repo": "openssl",
+    "commit": "475c466ef2fbd8fc1df6fae1c3eed9c813fc8ff6",
+    "note": "BIO_f_linebuffer",
+    "symbols": [
+      "linebuffer_write"
+    ],
+    "hand_checked": true,
+    "files": [
+      "00_old_bf_lbuf.c",
+      "01_new_bf_lbuf.c"
+    ],
+    "expected_symbols": [
+      "linebuffer_write"
+    ]
+  },
+  {
+    "id": "openssl-ASN1-mbstring",
+    "repo": "openssl",
+    "commit": "bd17511070fb39a67bfa19682affb765e706a974",
+    "note": "ASN1_mbstring_ncopy",
+    "symbols": [
+      "ASN1_mbstring_ncopy",
+      "out_utf8"
+    ],
+    "hand_checked": true,
+    "files": [
+      "00_new_a_mbstr.c",
+      "01_old_a_mbstr.c"
+    ],
+    "expected_symbols": [
+      "ASN1_mbstring_ncopy"
+    ]
+  },
+  {
+    "id": "openssl-ASN1-trunc",
+    "repo": "openssl",
+    "commit": "cbe418ae978539cf14a398a207dba834c0e93e83",
+    "note": "ASN1_STRING_set",
+    "symbols": [
+      "asn1_ex_c2i"
+    ],
+    "hand_checked": true,
+    "files": [
+      "00_old_tasn_dec.c",
+      "01_new_tasn_dec.c"
+    ],
+    "expected_symbols": [
+      "asn1_ex_c2i"
+    ]
+  },
+  {
+    "id": "openssl-cms-kek",
+    "repo": "openssl",
+    "commit": "eecbe330977e8d023aae1ca2d9bdbe983ef3fdc6",
+    "note": "cms kek_unwrap_key",
+    "symbols": [
+      "kek_unwrap_key"
+    ],
+    "hand_checked": true,
+    "files": [
+      "00_old_cms_pwri.c",
+      "01_new_cms_pwri.c"
+    ],
+    "expected_symbols": [
+      "kek_unwrap_key"
+    ]
+  },
+  {
+    "id": "openssl-cms-auth",
+    "repo": "openssl",
+    "commit": "03c1f4d45fb963aee7d5833390c507cd290182bc",
+    "note": "CMS AuthEnvelopedData",
+    "symbols": [
+      "ossl_cms_EncryptedContent_init_bio"
+    ],
+    "hand_checked": true,
+    "files": [
+      "00_old_cms_enc.c",
+      "01_new_cms_enc.c"
+    ],
+    "expected_symbols": [
+      "ossl_cms_EncryptedContent_init_bio"
+    ]
+  },
+  {
+    "id": "openssl-PKCS7-UAF",
+    "repo": "openssl",
+    "commit": "9dfd688ad2290fc5075cacbc9bf0c9a93eefed54",
+    "note": "PKCS7_verify UAF",
+    "symbols": [
+      "PKCS7_verify"
+    ],
+    "hand_checked": true,
+    "files": [
+      "00_new_pk7_smime.c",
+      "01_old_pk7_smime.c"
+    ],
+    "expected_symbols": [
+      "PKCS7_verify"
+    ]
+  }
+]

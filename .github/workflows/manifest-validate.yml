@@ -2,23 +2,42 @@ name: Manifest Validate
 
 on:
   pull_request:
+    paths:
+      - "manifest/**"
+      - ".github/**"
+      - "scripts/validate-manifests.sh"
+      - "scripts/validate-manifest-candidates.sh"
+      - "scripts/check-provenance-urls.sh"
+      - "scripts/check-manifest-definitive-label.sh"
+      - "scripts/check-readme-coverage-sync.sh"
+      - "scripts/manifest-pr-gate.sh"
+      - ".github/workflows/manifest-validate.yml"
   push:
     branches: [main]
     paths:
       - "manifest/**"
-      - ".github/workflows/manifest-validate.yml"
+      - ".github/**"
       - "scripts/validate-manifests.sh"
+      - "scripts/validate-manifest-candidates.sh"
+      - "scripts/check-provenance-urls.sh"
+      - "scripts/check-manifest-definitive-label.sh"
+      - "scripts/check-readme-coverage-sync.sh"
+      - "scripts/manifest-pr-gate.sh"
+      - ".github/workflows/manifest-validate.yml"
 
 permissions:
   contents: read
+  pull-requests: read
 
 jobs:
   validate:
-    name: validate-manifests
+    name: manifest-pr-gate
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -28,5 +47,5 @@ jobs:
       - name: Install check-jsonschema
         run: pip install check-jsonschema
 
-      - name: Validate manifest files
-        run: bash scripts/validate-manifests.sh
+      - name: Manifest PR gate
+        run: bash scripts/manifest-pr-gate.sh

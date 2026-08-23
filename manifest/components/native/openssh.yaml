@@ -1,0 +1,27 @@
+# openssh — CP-11 corpus expansion (reviewed 2026-08-23)
+component:
+  name: openssh
+  ecosystem: native
+  purls:
+    - pkg:generic/openssh
+    - pkg:deb/debian/openssh-client
+  identity_symbols:
+    - ssh_connect
+    - ssh_userauth2
+    - ssh_get_version
+
+entries:
+  - cve: CVE-2023-38408
+    affected_versions:
+      - "9.3p2"
+    vulnerable_symbols:
+      - name: pkcs11_del_provider
+        confidence: definitive
+        provenance:
+          upstream_fix_commit: https://github.com/openssh/openssh-portable/commit/22368b9
+          derivation: patch-touched-function
+          reviewed_by: gautamtalksdev
+          reviewed_at: "2026-08-23"
+    notes: >
+      CP-11 seed entry for corpus kill tests. Symbol tied to public fix commit.
+    manifest_version: "0.2.0"

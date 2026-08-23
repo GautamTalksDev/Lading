@@ -1,0 +1,30 @@
+{
+  "path": "bin/tls.elf",
+  "sha256": "tls",
+  "format": "ELF",
+  "arch": "x86_64",
+  "dyn_syms": [
+    {
+      "raw": "OPENSSL_init_ssl",
+      "demangled": "OPENSSL_init_ssl",
+      "normalized": "OPENSSL_init_ssl",
+      "bind": "GLOBAL",
+      "type": "FUNC",
+      "defined": true
+    },
+    {
+      "raw": "GENERAL_NAME_cmp",
+      "demangled": "GENERAL_NAME_cmp",
+      "normalized": "GENERAL_NAME_cmp",
+      "bind": "GLOBAL",
+      "type": "FUNC",
+      "defined": true
+    }
+  ],
+  "symtab": [],
+  "needed": [],
+  "ro_strings": [],
+  "warnings": [],
+  "stripped": false,
+  "static_linked": false
+}

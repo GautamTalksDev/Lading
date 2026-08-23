@@ -1,0 +1,26 @@
+# libarchive — CP-11 corpus expansion (reviewed 2026-08-23)
+component:
+  name: libarchive
+  ecosystem: native
+  purls:
+    - pkg:generic/libarchive
+    - pkg:deb/debian/libarchive13
+  identity_symbols:
+    - archive_read_open_filename
+    - archive_read_data_block
+
+entries:
+  - cve: CVE-2023-30571
+    affected_versions:
+      - "3.7.1"
+    vulnerable_symbols:
+      - name: archive_write_pax_free
+        confidence: definitive
+        provenance:
+          upstream_fix_commit: https://github.com/libarchive/libarchive/commit/7c27d26
+          derivation: patch-touched-function
+          reviewed_by: gautamtalksdev
+          reviewed_at: "2026-08-23"
+    notes: >
+      CP-11 seed entry for corpus kill tests. Symbol tied to public fix commit.
+    manifest_version: "0.2.0"

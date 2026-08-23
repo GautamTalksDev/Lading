@@ -1,0 +1,27 @@
+# pcre2 — CP-11 corpus expansion (reviewed 2026-08-23)
+component:
+  name: pcre2
+  ecosystem: native
+  purls:
+    - pkg:generic/pcre2
+    - pkg:deb/debian/libpcre2-8-0
+  identity_symbols:
+    - pcre2_compile
+    - pcre2_match
+    - pcre2_code_free
+
+entries:
+  - cve: CVE-2022-41409
+    affected_versions:
+      - "10.40"
+    vulnerable_symbols:
+      - name: get_recurse_data
+        confidence: definitive
+        provenance:
+          upstream_fix_commit: https://github.com/PCRE2Project/pcre2/commit/a5a585a
+          derivation: patch-touched-function
+          reviewed_by: gautamtalksdev
+          reviewed_at: "2026-08-23"
+    notes: >
+      CP-11 seed entry for corpus kill tests. Symbol tied to public fix commit.
+    manifest_version: "0.2.0"

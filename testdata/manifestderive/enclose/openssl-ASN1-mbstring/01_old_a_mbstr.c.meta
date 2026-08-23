@@ -1,0 +1,3 @@
+path=crypto/asn1/a_mbstr.c
+side=old
+lines=189,190,274

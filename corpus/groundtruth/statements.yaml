@@ -1,0 +1,3851 @@
+version: cp11-gt-1
+description: 100-statement stratified ground truth; weighted toward NOT_AFFECTED.
+reviewed_by: gautamtalksdev
+reviewed_at: '2026-08-23'
+statements:
+- id: gt-001
+  source_type: decide_fixture
+  source: testdata/decide/d01-01
+  expect_rule: D01
+  expect_verdict: NOT_AFFECTED
+  expect_justification: component_not_present
+  expect_reason: null
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.1.0
+    component:
+      name: zlib
+      ecosystem: native
+      purls:
+      - pkg:generic/zlib@1.2.12
+      identity_symbols:
+      - inflate
+      - deflate
+      - zlibVersion
+    entry:
+      cve: CVE-2022-37434
+      affected_versions:
+      - 1.2.12
+      vulnerable_symbols:
+      - name: inflate
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv1.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d01-01: inventory JSON cross-checked with readelf where paths exist.'
+- id: gt-002
+  source_type: decide_fixture
+  source: testdata/decide/d01-02
+  expect_rule: D01
+  expect_verdict: NOT_AFFECTED
+  expect_justification: component_not_present
+  expect_reason: null
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.1.0
+    component:
+      name: zlib
+      ecosystem: native
+      purls:
+      - pkg:generic/zlib@1.2.12
+      identity_symbols:
+      - inflate
+      - deflate
+      - zlibVersion
+    entry:
+      cve: CVE-2022-37434
+      affected_versions:
+      - 1.2.12
+      vulnerable_symbols:
+      - name: inflate
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv2.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d01-02: inventory JSON cross-checked with readelf where paths exist.'
+- id: gt-003
+  source_type: decide_fixture
+  source: testdata/decide/d01-03
+  expect_rule: D01
+  expect_verdict: NOT_AFFECTED
+  expect_justification: component_not_present
+  expect_reason: null
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.1.0
+    component:
+      name: zlib
+      ecosystem: native
+      purls:
+      - pkg:generic/zlib@1.2.12
+      identity_symbols:
+      - inflate
+      - deflate
+      - zlibVersion
+    entry:
+      cve: CVE-2022-37434
+      affected_versions:
+      - 1.2.12
+      vulnerable_symbols:
+      - name: inflate
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv3.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d01-03: inventory JSON cross-checked with readelf where paths exist.'
+- id: gt-004
+  source_type: decide_fixture
+  source: testdata/decide/d01-04
+  expect_rule: D01
+  expect_verdict: NOT_AFFECTED
+  expect_justification: component_not_present
+  expect_reason: null
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.1.0
+    component:
+      name: zlib
+      ecosystem: native
+      purls:
+      - pkg:generic/zlib@1.2.12
+      identity_symbols:
+      - inflate
+      - deflate
+      - zlibVersion
+    entry:
+      cve: CVE-2022-37434
+      affected_versions:
+      - 1.2.12
+      vulnerable_symbols:
+      - name: inflate
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv4.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d01-04: inventory JSON cross-checked with readelf where paths exist.'
+- id: gt-005
+  source_type: decide_fixture
+  source: testdata/decide/d01-05
+  expect_rule: D01
+  expect_verdict: NOT_AFFECTED
+  expect_justification: component_not_present
+  expect_reason: null
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.1.0
+    component:
+      name: zlib
+      ecosystem: native
+      purls:
+      - pkg:generic/zlib@1.2.12
+      identity_symbols:
+      - inflate
+      - deflate
+      - zlibVersion
+    entry:
+      cve: CVE-2022-37434
+      affected_versions:
+      - 1.2.12
+      vulnerable_symbols:
+      - name: inflate
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv5.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d01-05: inventory JSON cross-checked with readelf where paths exist.'
+- id: gt-006
+  source_type: decide_fixture
+  source: testdata/decide/d01-06
+  expect_rule: D01
+  expect_verdict: NOT_AFFECTED
+  expect_justification: component_not_present
+  expect_reason: null
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.1.0
+    component:
+      name: zlib
+      ecosystem: native
+      purls:
+      - pkg:generic/zlib@1.2.12
+      identity_symbols:
+      - inflate
+      - deflate
+      - zlibVersion
+    entry:
+      cve: CVE-2022-37434
+      affected_versions:
+      - 1.2.12
+      vulnerable_symbols:
+      - name: inflate
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv6.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d01-06: inventory JSON cross-checked with readelf where paths exist.'
+- id: gt-007
+  source_type: decide_fixture
+  source: testdata/decide/d01-07
+  expect_rule: D01
+  expect_verdict: NOT_AFFECTED
+  expect_justification: component_not_present
+  expect_reason: null
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.1.0
+    component:
+      name: zlib
+      ecosystem: native
+      purls:
+      - pkg:generic/zlib@1.2.12
+      identity_symbols:
+      - inflate
+      - deflate
+      - zlibVersion
+    entry:
+      cve: CVE-2022-37434
+      affected_versions:
+      - 1.2.12
+      vulnerable_symbols:
+      - name: inflate
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv7.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d01-07: inventory JSON cross-checked with readelf where paths exist.'
+- id: gt-008
+  source_type: decide_fixture
+  source: testdata/decide/d01-08
+  expect_rule: D01
+  expect_verdict: NOT_AFFECTED
+  expect_justification: component_not_present
+  expect_reason: null
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.1.0
+    component:
+      name: zlib
+      ecosystem: native
+      purls:
+      - pkg:generic/zlib@1.2.12
+      identity_symbols:
+      - inflate
+      - deflate
+      - zlibVersion
+    entry:
+      cve: CVE-2022-37434
+      affected_versions:
+      - 1.2.12
+      vulnerable_symbols:
+      - name: inflate
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv8.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d01-08: inventory JSON cross-checked with readelf where paths exist.'
+- id: gt-009
+  source_type: decide_fixture
+  source: testdata/decide/d01-extra1
+  expect_rule: D01
+  expect_verdict: NOT_AFFECTED
+  expect_justification: component_not_present
+  expect_reason: null
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.1.0
+    component:
+      name: openssl
+      ecosystem: native
+      purls:
+      - pkg:generic/openssl@3.0.7
+      - pkg:deb/debian/libssl3@3.0.7
+      identity_symbols:
+      - OPENSSL_init_ssl
+      - GENERAL_NAME_cmp
+      - SSL_CTX_new
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d01-extra1: inventory JSON cross-checked with readelf where paths
+      exist.'
+- id: gt-010
+  source_type: decide_fixture
+  source: testdata/decide/d01-extra2
+  expect_rule: D01
+  expect_verdict: NOT_AFFECTED
+  expect_justification: component_not_present
+  expect_reason: null
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.1.0
+    component:
+      name: openssl
+      ecosystem: native
+      purls:
+      - pkg:generic/openssl@3.0.7
+      - pkg:deb/debian/libssl3@3.0.7
+      identity_symbols:
+      - OPENSSL_init_ssl
+      - GENERAL_NAME_cmp
+      - SSL_CTX_new
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d01-extra2: inventory JSON cross-checked with readelf where paths
+      exist.'
+- id: gt-011
+  source_type: decide_fixture
+  source: testdata/decide/d02-01
+  expect_rule: D02
+  expect_verdict: NOT_AFFECTED
+  expect_justification: vulnerable_code_not_present
+  expect_reason: null
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.1.0
+    component:
+      name: openssl
+      ecosystem: native
+      purls:
+      - pkg:generic/openssl@3.0.7
+      - pkg:deb/debian/libssl3@3.0.7
+      identity_symbols:
+      - OPENSSL_init_ssl
+      - GENERAL_NAME_cmp
+      - SSL_CTX_new
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv1.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d02-01: inventory JSON cross-checked with readelf where paths exist.'
+- id: gt-012
+  source_type: decide_fixture
+  source: testdata/decide/d02-02
+  expect_rule: D02
+  expect_verdict: NOT_AFFECTED
+  expect_justification: vulnerable_code_not_present
+  expect_reason: null
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.1.0
+    component:
+      name: openssl
+      ecosystem: native
+      purls:
+      - pkg:generic/openssl@3.0.7
+      - pkg:deb/debian/libssl3@3.0.7
+      identity_symbols:
+      - OPENSSL_init_ssl
+      - GENERAL_NAME_cmp
+      - SSL_CTX_new
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv2.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d02-02: inventory JSON cross-checked with readelf where paths exist.'
+- id: gt-013
+  source_type: decide_fixture
+  source: testdata/decide/d02-03
+  expect_rule: D02
+  expect_verdict: NOT_AFFECTED
+  expect_justification: vulnerable_code_not_present
+  expect_reason: null
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.1.0
+    component:
+      name: openssl
+      ecosystem: native
+      purls:
+      - pkg:generic/openssl@3.0.7
+      - pkg:deb/debian/libssl3@3.0.7
+      identity_symbols:
+      - OPENSSL_init_ssl
+      - GENERAL_NAME_cmp
+      - SSL_CTX_new
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv3.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d02-03: inventory JSON cross-checked with readelf where paths exist.'
+- id: gt-014
+  source_type: decide_fixture
+  source: testdata/decide/d02-04
+  expect_rule: D02
+  expect_verdict: NOT_AFFECTED
+  expect_justification: vulnerable_code_not_present
+  expect_reason: null
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.1.0
+    component:
+      name: openssl
+      ecosystem: native
+      purls:
+      - pkg:generic/openssl@3.0.7
+      - pkg:deb/debian/libssl3@3.0.7
+      identity_symbols:
+      - OPENSSL_init_ssl
+      - GENERAL_NAME_cmp
+      - SSL_CTX_new
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv4.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d02-04: inventory JSON cross-checked with readelf where paths exist.'
+- id: gt-015
+  source_type: decide_fixture
+  source: testdata/decide/d02-05
+  expect_rule: D02
+  expect_verdict: NOT_AFFECTED
+  expect_justification: vulnerable_code_not_present
+  expect_reason: null
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.1.0
+    component:
+      name: openssl
+      ecosystem: native
+      purls:
+      - pkg:generic/openssl@3.0.7
+      - pkg:deb/debian/libssl3@3.0.7
+      identity_symbols:
+      - OPENSSL_init_ssl
+      - GENERAL_NAME_cmp
+      - SSL_CTX_new
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv5.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d02-05: inventory JSON cross-checked with readelf where paths exist.'
+- id: gt-016
+  source_type: decide_fixture
+  source: testdata/decide/d02-06
+  expect_rule: D02
+  expect_verdict: NOT_AFFECTED
+  expect_justification: vulnerable_code_not_present
+  expect_reason: null
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.1.0
+    component:
+      name: openssl
+      ecosystem: native
+      purls:
+      - pkg:generic/openssl@3.0.7
+      - pkg:deb/debian/libssl3@3.0.7
+      identity_symbols:
+      - OPENSSL_init_ssl
+      - GENERAL_NAME_cmp
+      - SSL_CTX_new
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv6.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d02-06: inventory JSON cross-checked with readelf where paths exist.'
+- id: gt-017
+  source_type: decide_fixture
+  source: testdata/decide/d02-07
+  expect_rule: D02
+  expect_verdict: NOT_AFFECTED
+  expect_justification: vulnerable_code_not_present
+  expect_reason: null
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.1.0
+    component:
+      name: openssl
+      ecosystem: native
+      purls:
+      - pkg:generic/openssl@3.0.7
+      - pkg:deb/debian/libssl3@3.0.7
+      identity_symbols:
+      - OPENSSL_init_ssl
+      - GENERAL_NAME_cmp
+      - SSL_CTX_new
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv7.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d02-07: inventory JSON cross-checked with readelf where paths exist.'
+- id: gt-018
+  source_type: decide_fixture
+  source: testdata/decide/d02-08
+  expect_rule: D02
+  expect_verdict: NOT_AFFECTED
+  expect_justification: vulnerable_code_not_present
+  expect_reason: null
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.1.0
+    component:
+      name: openssl
+      ecosystem: native
+      purls:
+      - pkg:generic/openssl@3.0.7
+      - pkg:deb/debian/libssl3@3.0.7
+      identity_symbols:
+      - OPENSSL_init_ssl
+      - GENERAL_NAME_cmp
+      - SSL_CTX_new
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv8.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d02-08: inventory JSON cross-checked with readelf where paths exist.'
+- id: gt-019
+  source_type: decide_fixture
+  source: testdata/decide/d02-extra1
+  expect_rule: D02
+  expect_verdict: NOT_AFFECTED
+  expect_justification: vulnerable_code_not_present
+  expect_reason: null
+  finding:
+    cve: CVE-2022-25315
+    component_purl: pkg:generic/libexpat@2.4.4
+  manifest:
+    version: 0.1.0
+    component:
+      name: libexpat
+      ecosystem: native
+      purls:
+      - pkg:generic/libexpat@2.4.4
+      identity_symbols:
+      - XML_Parse
+      - XML_ParserCreate
+    entry:
+      cve: CVE-2022-25315
+      affected_versions:
+      - 2.4.4
+      vulnerable_symbols:
+      - name: storeRawNames
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d02-extra1: inventory JSON cross-checked with readelf where paths
+      exist.'
+- id: gt-020
+  source_type: decide_fixture
+  source: testdata/decide/d02-extra2
+  expect_rule: D02
+  expect_verdict: NOT_AFFECTED
+  expect_justification: vulnerable_code_not_present
+  expect_reason: null
+  finding:
+    cve: CVE-2022-25315
+    component_purl: pkg:generic/libexpat@2.4.4
+  manifest:
+    version: 0.1.0
+    component:
+      name: libexpat
+      ecosystem: native
+      purls:
+      - pkg:generic/libexpat@2.4.4
+      identity_symbols:
+      - XML_Parse
+      - XML_ParserCreate
+    entry:
+      cve: CVE-2022-25315
+      affected_versions:
+      - 2.4.4
+      vulnerable_symbols:
+      - name: storeRawNames
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d02-extra2: inventory JSON cross-checked with readelf where paths
+      exist.'
+- id: gt-021
+  source_type: decide_fixture
+  source: testdata/decide/d03-no-entry
+  expect_rule: D03
+  expect_verdict: UNDER_INVESTIGATION
+  expect_justification: null
+  expect_reason: manifest_no_entry
+  finding:
+    cve: CVE-2099-9999
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.1.0
+    component:
+      name: zlib
+      ecosystem: native
+      purls:
+      - pkg:generic/zlib@1.2.12
+      identity_symbols:
+      - inflate
+      - deflate
+      - zlibVersion
+    entry:
+      cve: CVE-2022-37434
+      affected_versions:
+      - 1.2.12
+      vulnerable_symbols:
+      - name: inflate
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d03-no-entry: inventory JSON cross-checked with readelf where paths
+      exist.'
+- id: gt-022
+  source_type: decide_fixture
+  source: testdata/decide/d03-probable-only
+  expect_rule: D03
+  expect_verdict: UNDER_INVESTIGATION
+  expect_justification: null
+  expect_reason: manifest_probable_only
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.1.0
+    component:
+      name: zlib
+      ecosystem: native
+      purls:
+      - pkg:generic/zlib@1.2.12
+      identity_symbols:
+      - inflate
+      - deflate
+      - zlibVersion
+    entry:
+      cve: CVE-2022-37434
+      affected_versions:
+      - 1.2.12
+      vulnerable_symbols:
+      - name: inflate
+        confidence: probable
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d03-probable-only: inventory JSON cross-checked with readelf where
+      paths exist.'
+- id: gt-023
+  source_type: decide_fixture
+  source: testdata/decide/d03-purl-nameonly
+  expect_rule: D03
+  expect_verdict: UNDER_INVESTIGATION
+  expect_justification: null
+  expect_reason: purl_match_insufficient
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:deb/debian/zlib1g
+  manifest:
+    version: 0.1.0
+    component:
+      name: zlib
+      ecosystem: native
+      purls:
+      - pkg:generic/zlib
+      identity_symbols:
+      - inflate
+      - deflate
+      - zlibVersion
+    entry:
+      cve: CVE-2022-37434
+      affected_versions:
+      - 1.2.12
+      vulnerable_symbols:
+      - name: inflate
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d03-purl-nameonly: inventory JSON cross-checked with readelf where
+      paths exist.'
+- id: gt-024
+  source_type: decide_fixture
+  source: testdata/decide/d03-purl-none
+  expect_rule: D03
+  expect_verdict: UNDER_INVESTIGATION
+  expect_justification: null
+  expect_reason: purl_match_insufficient
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/unknown-lib@9.9.9
+  manifest:
+    version: 0.1.0
+    component:
+      name: zlib
+      ecosystem: native
+      purls:
+      - pkg:generic/zlib
+      identity_symbols:
+      - inflate
+      - deflate
+      - zlibVersion
+    entry:
+      cve: CVE-2022-37434
+      affected_versions:
+      - 1.2.12
+      vulnerable_symbols:
+      - name: inflate
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d03-purl-none: inventory JSON cross-checked with readelf where paths
+      exist.'
+- id: gt-025
+  source_type: decide_fixture
+  source: testdata/decide/d03-renamed
+  expect_rule: D03
+  expect_verdict: UNDER_INVESTIGATION
+  expect_justification: null
+  expect_reason: identity_unverified
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:deb/debian/zlib@1.2.12
+  manifest:
+    version: 0.1.0
+    component:
+      name: zlib
+      ecosystem: native
+      purls:
+      - pkg:generic/zlib@1.2.12
+      identity_symbols:
+      - inflate
+      - deflate
+      - zlibVersion
+    entry:
+      cve: CVE-2022-37434
+      affected_versions:
+      - 1.2.12
+      vulnerable_symbols:
+      - name: inflate
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d03-renamed: inventory JSON cross-checked with readelf where paths
+      exist.'
+- id: gt-026
+  source_type: decide_fixture
+  source: testdata/decide/d03-stripped-absent
+  expect_rule: D03
+  expect_verdict: UNDER_INVESTIGATION
+  expect_justification: null
+  expect_reason: stripped_static_binary
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.1.0
+    component:
+      name: openssl
+      ecosystem: native
+      purls:
+      - pkg:generic/openssl@3.0.7
+      identity_symbols:
+      - OPENSSL_init_ssl
+      - GENERAL_NAME_cmp
+      - SSL_CTX_new
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv-host.json
+  - file: inv-static.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d03-stripped-absent: inventory JSON cross-checked with readelf where
+      paths exist.'
+- id: gt-027
+  source_type: decide_fixture
+  source: testdata/decide/d03-stripped-dynsym
+  expect_rule: D03
+  expect_verdict: UNDER_INVESTIGATION
+  expect_justification: null
+  expect_reason: stripped_insufficient_dynsym
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.1.0
+    component:
+      name: zlib
+      ecosystem: native
+      purls:
+      - pkg:generic/zlib@1.2.12
+      identity_symbols:
+      - inflate
+      - deflate
+      - zlibVersion
+    entry:
+      cve: CVE-2022-37434
+      affected_versions:
+      - 1.2.12
+      vulnerable_symbols:
+      - name: inflate
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv-host.json
+  - file: inv-stripped.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d03-stripped-dynsym: inventory JSON cross-checked with readelf where
+      paths exist.'
+- id: gt-028
+  source_type: decide_fixture
+  source: testdata/decide/d03-stripped-static
+  expect_rule: D03
+  expect_verdict: UNDER_INVESTIGATION
+  expect_justification: null
+  expect_reason: stripped_static_binary
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.1.0
+    component:
+      name: zlib
+      ecosystem: native
+      purls:
+      - pkg:generic/zlib@1.2.12
+      identity_symbols:
+      - inflate
+      - deflate
+      - zlibVersion
+    entry:
+      cve: CVE-2022-37434
+      affected_versions:
+      - 1.2.12
+      vulnerable_symbols:
+      - name: inflate
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv-host.json
+  - file: inv-static.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d03-stripped-static: inventory JSON cross-checked with readelf where
+      paths exist.'
+- id: gt-029
+  source_type: decide_fixture
+  source: testdata/decide/d03-sym-unusable
+  expect_rule: D03
+  expect_verdict: UNDER_INVESTIGATION
+  expect_justification: null
+  expect_reason: symbol_table_unusable
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.1.0
+    component:
+      name: zlib
+      ecosystem: native
+      purls:
+      - pkg:generic/zlib@1.2.12
+      identity_symbols:
+      - inflate
+      - deflate
+      - zlibVersion
+    entry:
+      cve: CVE-2022-37434
+      affected_versions:
+      - 1.2.12
+      vulnerable_symbols:
+      - name: inflate
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d03-sym-unusable: inventory JSON cross-checked with readelf where
+      paths exist.'
+- id: gt-030
+  source_type: decide_fixture
+  source: testdata/decide/d04-01
+  expect_rule: D04
+  expect_verdict: AFFECTED
+  expect_justification: null
+  expect_reason: null
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.1.0
+    component:
+      name: zlib
+      ecosystem: native
+      purls:
+      - pkg:generic/zlib@1.2.12
+      identity_symbols:
+      - inflate
+      - deflate
+      - zlibVersion
+    entry:
+      cve: CVE-2022-37434
+      affected_versions:
+      - 1.2.12
+      vulnerable_symbols:
+      - name: inflate
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv1.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d04-01: inventory JSON cross-checked with readelf where paths exist.'
+- id: gt-031
+  source_type: decide_fixture
+  source: testdata/decide/d04-02
+  expect_rule: D04
+  expect_verdict: AFFECTED
+  expect_justification: null
+  expect_reason: null
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.1.0
+    component:
+      name: zlib
+      ecosystem: native
+      purls:
+      - pkg:generic/zlib@1.2.12
+      identity_symbols:
+      - inflate
+      - deflate
+      - zlibVersion
+    entry:
+      cve: CVE-2022-37434
+      affected_versions:
+      - 1.2.12
+      vulnerable_symbols:
+      - name: inflate
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv2.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d04-02: inventory JSON cross-checked with readelf where paths exist.'
+- id: gt-032
+  source_type: decide_fixture
+  source: testdata/decide/d04-03
+  expect_rule: D04
+  expect_verdict: AFFECTED
+  expect_justification: null
+  expect_reason: null
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.1.0
+    component:
+      name: zlib
+      ecosystem: native
+      purls:
+      - pkg:generic/zlib@1.2.12
+      identity_symbols:
+      - inflate
+      - deflate
+      - zlibVersion
+    entry:
+      cve: CVE-2022-37434
+      affected_versions:
+      - 1.2.12
+      vulnerable_symbols:
+      - name: inflate
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv3.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d04-03: inventory JSON cross-checked with readelf where paths exist.'
+- id: gt-033
+  source_type: decide_fixture
+  source: testdata/decide/d04-04
+  expect_rule: D04
+  expect_verdict: AFFECTED
+  expect_justification: null
+  expect_reason: null
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.1.0
+    component:
+      name: zlib
+      ecosystem: native
+      purls:
+      - pkg:generic/zlib@1.2.12
+      identity_symbols:
+      - inflate
+      - deflate
+      - zlibVersion
+    entry:
+      cve: CVE-2022-37434
+      affected_versions:
+      - 1.2.12
+      vulnerable_symbols:
+      - name: inflate
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv4.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d04-04: inventory JSON cross-checked with readelf where paths exist.'
+- id: gt-034
+  source_type: decide_fixture
+  source: testdata/decide/d04-05
+  expect_rule: D04
+  expect_verdict: AFFECTED
+  expect_justification: null
+  expect_reason: null
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.1.0
+    component:
+      name: zlib
+      ecosystem: native
+      purls:
+      - pkg:generic/zlib@1.2.12
+      identity_symbols:
+      - inflate
+      - deflate
+      - zlibVersion
+    entry:
+      cve: CVE-2022-37434
+      affected_versions:
+      - 1.2.12
+      vulnerable_symbols:
+      - name: inflate
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv5.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d04-05: inventory JSON cross-checked with readelf where paths exist.'
+- id: gt-035
+  source_type: decide_fixture
+  source: testdata/decide/d04-06
+  expect_rule: D04
+  expect_verdict: AFFECTED
+  expect_justification: null
+  expect_reason: null
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.1.0
+    component:
+      name: zlib
+      ecosystem: native
+      purls:
+      - pkg:generic/zlib@1.2.12
+      identity_symbols:
+      - inflate
+      - deflate
+      - zlibVersion
+    entry:
+      cve: CVE-2022-37434
+      affected_versions:
+      - 1.2.12
+      vulnerable_symbols:
+      - name: inflate
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv6.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d04-06: inventory JSON cross-checked with readelf where paths exist.'
+- id: gt-036
+  source_type: decide_fixture
+  source: testdata/decide/d04-07
+  expect_rule: D04
+  expect_verdict: AFFECTED
+  expect_justification: null
+  expect_reason: null
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.1.0
+    component:
+      name: openssl
+      ecosystem: native
+      purls:
+      - pkg:generic/openssl@3.0.7
+      identity_symbols:
+      - OPENSSL_init_ssl
+      - GENERAL_NAME_cmp
+      - SSL_CTX_new
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d04-07: inventory JSON cross-checked with readelf where paths exist.'
+- id: gt-037
+  source_type: decide_fixture
+  source: testdata/decide/d04-extra1
+  expect_rule: D04
+  expect_verdict: AFFECTED
+  expect_justification: null
+  expect_reason: null
+  finding:
+    cve: CVE-2022-25315
+    component_purl: pkg:generic/libexpat@2.4.4
+  manifest:
+    version: 0.1.0
+    component:
+      name: libexpat
+      ecosystem: native
+      purls:
+      - pkg:generic/libexpat@2.4.4
+      identity_symbols:
+      - XML_Parse
+      - XML_ParserCreate
+    entry:
+      cve: CVE-2022-25315
+      affected_versions:
+      - 2.4.4
+      vulnerable_symbols:
+      - name: storeRawNames
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d04-extra1: inventory JSON cross-checked with readelf where paths
+      exist.'
+- id: gt-038
+  source_type: decide_fixture
+  source: testdata/decide/d04-extra2
+  expect_rule: D04
+  expect_verdict: AFFECTED
+  expect_justification: null
+  expect_reason: null
+  finding:
+    cve: CVE-2022-25315
+    component_purl: pkg:generic/libexpat@2.4.4
+  manifest:
+    version: 0.1.0
+    component:
+      name: libexpat
+      ecosystem: native
+      purls:
+      - pkg:generic/libexpat@2.4.4
+      identity_symbols:
+      - XML_Parse
+      - XML_ParserCreate
+    entry:
+      cve: CVE-2022-25315
+      affected_versions:
+      - 2.4.4
+      vulnerable_symbols:
+      - name: storeRawNames
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d04-extra2: inventory JSON cross-checked with readelf where paths
+      exist.'
+- id: gt-039
+  source_type: decide_fixture
+  source: testdata/decide/d04-near-ab
+  expect_rule: D04
+  expect_verdict: AFFECTED
+  expect_justification: null
+  expect_reason: null
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.1.0
+    component:
+      name: openssl
+      ecosystem: native
+      purls:
+      - pkg:generic/openssl@3.0.7
+      - pkg:deb/debian/libssl3@3.0.7
+      identity_symbols:
+      - OPENSSL_init_ssl
+      - GENERAL_NAME_cmp
+      - SSL_CTX_new
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv-a.json
+  - file: inv-b.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d04-near-ab: inventory JSON cross-checked with readelf where paths
+      exist.'
+- id: gt-040
+  source_type: decide_fixture
+  source: testdata/decide/d04-near-undef
+  expect_rule: D04
+  expect_verdict: AFFECTED
+  expect_justification: null
+  expect_reason: null
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.1.0
+    component:
+      name: openssl
+      ecosystem: native
+      purls:
+      - pkg:generic/openssl@3.0.7
+      - pkg:deb/debian/libssl3@3.0.7
+      identity_symbols:
+      - OPENSSL_init_ssl
+      - GENERAL_NAME_cmp
+      - SSL_CTX_new
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.1.0
+  inventories:
+  - file: inv.json
+  verification:
+    method: readelf_on_fixture_inventories
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Fixture testdata/decide/d04-near-undef: inventory JSON cross-checked with readelf where paths
+      exist.'
+- id: gt-041
+  source_type: inventory_binary
+  source: testdata/inventory/bin/symver_ssl_elf
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.2.0
+    component: &id001
+      name: zlib
+      ecosystem: native
+      purls:
+      - pkg:generic/zlib@1.2.12
+      identity_symbols:
+      - inflate
+      - deflate
+      - zlibVersion
+    entry: &id002
+      cve: CVE-2022-37434
+      affected_versions:
+      - 1.2.12
+      vulnerable_symbols:
+      - name: inflate
+        confidence: definitive
+      manifest_version: 0.2.0
+  inventories:
+  - file: symver_ssl_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'readelf: no inflate/deflate/zlibVersion'
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (3)\n     2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\
+      \ (4)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (2)\n     7:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (2)\n     1: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS Scrt1.o\n     2: 000000000000038c    32 OBJECT  LOCAL  DEFAULT\
+      \    4 __abi_tag\n     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     4:\
+      \ 00000000000010b0     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones\n     5: 00000000000010e0\
+      \     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones\n     6: 0000000000001120     0 FUNC    LOCAL\
+      \  DEFAULT   16 __do_global_dtors_aux\n     7: 0000000000004010     1 OBJECT  LOCAL  DEFAULT   26\
+      \ completed.0\n     8: 0000000000003da8     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fini_array_entry\n\
+      \     9: 0000000000001160     0 FUNC    LOCAL  DEFAULT   16 frame_dummy\n    10: 0000000000003da0\
+      \     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_entry\n    11: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS sslver.c\n    12: 0000000000000000     0 FILE    LOCAL  DEFAULT\
+      \  ABS crtstuff.c\n    13: 00000000000020f8     0 OBJECT  LOCAL  DEFAULT   20 __FRAME_END__\n  \
+      \  14: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    16: 0000000000003db0     0 OBJECT\
+      \  LOCAL  DEFAULT   23 _DYNAMIC\n    17: 0000000000003fb0     0 OBJECT  LOCAL  DEFAULT   24 _GLOBAL_OFFSET_TABLE_\n\
+      \    20: 0000000000002000     4 OBJECT  GLOBAL DEFAULT   18 _IO_stdin_used\n    21: 0000000000000000\
+      \     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5\n    22: 0000000000001169    45 FUNC\
+      \    GLOBAL DEFAULT   16 main\n    23: 0000000000004008     0 OBJECT  GLOBAL HIDDEN    25 __dso_handle\n\
+      \    24: 0000000000001198     0 FUNC    GLOBAL HIDDEN    17 _fini\n    25: 0000000000000000    \
+      \ 0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\n    26: 0000000000000000     0 FUNC\
+      \    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\n    27: 0000000000001080    38 FUNC   \
+      \ GLOBAL DEFAULT   16 _start\n    28: 0000000000001000     0 FUNC    GLOBAL HIDDEN    12 _init\n\
+      \    29: 0000000000004010     0 OBJECT  GLOBAL HIDDEN    25 __TMC_END__"
+  expect_rule: D01
+  expect_verdict: NOT_AFFECTED
+  expect_justification: component_not_present
+- id: gt-042
+  source_type: inventory_binary
+  source: testdata/inventory/bin/dyn_unstripped_elf
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.2.0
+    component: *id001
+    entry: *id002
+  inventories:
+  - file: dyn_unstripped_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'readelf: no zlib identity symbols'
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (2)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (3)\n     6:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (3)\n     1: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS Scrt1.o\n     2: 000000000000038c    32 OBJECT  LOCAL  DEFAULT\
+      \    4 __abi_tag\n     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     4:\
+      \ 0000000000001090     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones\n     5: 00000000000010c0\
+      \     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones\n     6: 0000000000001100     0 FUNC    LOCAL\
+      \  DEFAULT   16 __do_global_dtors_aux\n     7: 0000000000004018     1 OBJECT  LOCAL  DEFAULT   26\
+      \ completed.0\n     8: 0000000000003dc0     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fini_array_entry\n\
+      \     9: 0000000000001140     0 FUNC    LOCAL  DEFAULT   16 frame_dummy\n    10: 0000000000003db8\
+      \     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_entry\n    11: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS dyn.c\n    12: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS\
+      \ crtstuff.c\n    13: 0000000000002120     0 OBJECT  LOCAL  DEFAULT   20 __FRAME_END__\n    14:\
+      \ 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    15: 0000000000003dc8     0 OBJECT  LOCAL\
+      \  DEFAULT   23 _DYNAMIC\n    17: 0000000000003fb8     0 OBJECT  LOCAL  DEFAULT   24 _GLOBAL_OFFSET_TABLE_\n\
+      \    18: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\n    21:\
+      \ 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5\n    23: 0000000000001180\
+      \     0 FUNC    GLOBAL HIDDEN    17 _fini\n    26: 0000000000004008     0 OBJECT  GLOBAL HIDDEN\
+      \    25 __dso_handle\n    27: 0000000000002000     4 OBJECT  GLOBAL DEFAULT   18 _IO_stdin_used\n\
+      \    28: 0000000000001149    19 FUNC    GLOBAL DEFAULT   16 lading_export\n    30: 0000000000001060\
+      \    38 FUNC    GLOBAL DEFAULT   16 _start\n    32: 0000000000004010     8 OBJECT  GLOBAL DEFAULT\
+      \   25 lading_marker\n    33: 000000000000115c    35 FUNC    GLOBAL DEFAULT   16 main\n    34: 0000000000004018\
+      \     0 OBJECT  GLOBAL HIDDEN    25 __TMC_END__\n    36: 0000000000000000     0 FUNC    WEAK   DEFAULT\
+      \  UND __cxa_finalize@GLIBC_2.2.5"
+  expect_rule: D01
+  expect_verdict: NOT_AFFECTED
+  expect_justification: component_not_present
+- id: gt-043
+  source_type: inventory_binary
+  source: testdata/inventory/bin/dyn_stripped_elf
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.2.0
+    component: *id001
+    entry: *id002
+  inventories:
+  - file: dyn_stripped_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: dynsym present but no zlib identity
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (2)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (3)\n     6:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (3)"
+  expect_rule: D01
+  expect_verdict: NOT_AFFECTED
+  expect_justification: component_not_present
+- id: gt-044
+  source_type: inventory_binary
+  source: testdata/inventory/bin/cxx_mangled_elf
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.2.0
+    component: *id001
+    entry: *id002
+  inventories:
+  - file: cxx_mangled_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'C++ fixture: no zlib symbols'
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (2)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (3)\n     4:\
+      \ 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __stack_chk_fail@GLIBC_2.4 (4)\n     7: 0000000000000000\
+      \     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (3)\n     1: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS Scrt1.o\n     2: 000000000000038c    32 OBJECT  LOCAL  DEFAULT\
+      \    4 __abi_tag\n     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     4:\
+      \ 00000000000010b0     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones\n     5: 00000000000010e0\
+      \     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones\n     6: 0000000000001120     0 FUNC    LOCAL\
+      \  DEFAULT   16 __do_global_dtors_aux\n     7: 0000000000004010     1 OBJECT  LOCAL  DEFAULT   26\
+      \ completed.0\n     8: 0000000000003db8     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fini_array_entry\n\
+      \     9: 0000000000001160     0 FUNC    LOCAL  DEFAULT   16 frame_dummy\n    10: 0000000000003db0\
+      \     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_entry\n    11: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS cxx.cpp\n    12: 0000000000000000     0 FILE    LOCAL  DEFAULT\
+      \  ABS crtstuff.c\n    13: 000000000000214c     0 OBJECT  LOCAL  DEFAULT   20 __FRAME_END__\n  \
+      \  14: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    15: 0000000000003dc0     0 OBJECT\
+      \  LOCAL  DEFAULT   23 _DYNAMIC\n    17: 0000000000003fb0     0 OBJECT  LOCAL  DEFAULT   24 _GLOBAL_OFFSET_TABLE_\n\
+      \    18: 00000000000011e6    23 FUNC    WEAK   DEFAULT   16 _ZNK6lading6Widget6answerEi\n    19:\
+      \ 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\n    22: 0000000000000000\
+      \     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5\n    24: 0000000000001200     0 FUNC    GLOBAL\
+      \ HIDDEN    17 _fini\n    25: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __stack_chk_fail@GLIBC_2.4\n\
+      \    27: 0000000000001169    35 FUNC    GLOBAL DEFAULT   16 _ZN6lading5greetEPKc\n    29: 0000000000004008\
+      \     0 OBJECT  GLOBAL HIDDEN    25 __dso_handle\n    30: 0000000000002000     4 OBJECT  GLOBAL\
+      \ DEFAULT   18 _IO_stdin_used\n    32: 0000000000001080    38 FUNC    GLOBAL DEFAULT   16 _start\n\
+      \    34: 000000000000118c    90 FUNC    GLOBAL DEFAULT   16 main"
+  expect_rule: D01
+  expect_verdict: NOT_AFFECTED
+  expect_justification: component_not_present
+- id: gt-045
+  source_type: inventory_binary
+  source: testdata/inventory/bin/weak_ifunc_elf
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.2.0
+    component: *id001
+    entry: *id002
+  inventories:
+  - file: weak_ifunc_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'ifunc fixture: no zlib'
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (2)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND printf@GLIBC_2.2.5 (3)\n     6:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (3)\n     1: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS Scrt1.o\n     2: 000000000000038c    32 OBJECT  LOCAL  DEFAULT\
+      \    4 __abi_tag\n     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     4:\
+      \ 00000000000010b0     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones\n     5: 00000000000010e0\
+      \     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones\n     6: 0000000000001120     0 FUNC    LOCAL\
+      \  DEFAULT   16 __do_global_dtors_aux\n     7: 0000000000004010     1 OBJECT  LOCAL  DEFAULT   26\
+      \ completed.0\n     8: 0000000000003db8     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fini_array_entry\n\
+      \     9: 0000000000001160     0 FUNC    LOCAL  DEFAULT   16 frame_dummy\n    10: 0000000000003db0\
+      \     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_entry\n    11: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS weak_ifunc.c\n    12: 0000000000001169    15 FUNC    LOCAL  DEFAULT\
+      \   16 real_impl\n    13: 0000000000001178    17 FUNC    LOCAL  DEFAULT   16 resolver\n    14: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n    15: 0000000000002178     0 OBJECT  LOCAL  DEFAULT\
+      \   20 __FRAME_END__\n    16: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    17: 0000000000003dc0\
+      \     0 OBJECT  LOCAL  DEFAULT   23 _DYNAMIC\n    19: 0000000000003fb0     0 OBJECT  LOCAL  DEFAULT\
+      \   24 _GLOBAL_OFFSET_TABLE_\n    20: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\n\
+      \    23: 0000000000001189    15 FUNC    WEAK   DEFAULT   16 weak_sym\n    25: 00000000000011d4 \
+      \    0 FUNC    GLOBAL HIDDEN    17 _fini\n    26: 0000000000000000     0 FUNC    GLOBAL DEFAULT\
+      \  UND printf@GLIBC_2.2.5\n    29: 0000000000004008     0 OBJECT  GLOBAL HIDDEN    25 __dso_handle\n\
+      \    30: 0000000000001178    17 IFUNC   GLOBAL DEFAULT   16 resolved\n    31: 0000000000002000 \
+      \    4 OBJECT  GLOBAL DEFAULT   18 _IO_stdin_used\n    33: 0000000000001080    38 FUNC    GLOBAL\
+      \ DEFAULT   16 _start\n    35: 0000000000001198    60 FUNC    GLOBAL DEFAULT   16 main"
+  expect_rule: D01
+  expect_verdict: NOT_AFFECTED
+  expect_justification: component_not_present
+- id: gt-046
+  source_type: inventory_binary
+  source: testdata/inventory/bin/symver_def.so
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.2.0
+    component: *id001
+    entry: *id002
+  inventories:
+  - file: symver_def.so
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'versioned .so: no zlib'
+    readelf_excerpt: "     5: 0000000000000000     0 OBJECT  GLOBAL DEFAULT  ABS LADING_2.0\n     6: 0000000000000000\
+      \     0 OBJECT  GLOBAL DEFAULT  ABS LADING_1.0\n     7: 00000000000010f9    15 FUNC    GLOBAL DEFAULT\
+      \   12 lading_ver_foo@@LADING_1.0\n     8: 0000000000001108    15 FUNC    GLOBAL DEFAULT   12 lading_ver_bar@@LADING_2.0\n\
+      \     1: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     2: 0000000000001040\
+      \     0 FUNC    LOCAL  DEFAULT   12 deregister_tm_clones\n     3: 0000000000001070     0 FUNC  \
+      \  LOCAL  DEFAULT   12 register_tm_clones\n     4: 00000000000010b0     0 FUNC    LOCAL  DEFAULT\
+      \   12 __do_global_dtors_aux\n     5: 0000000000004008     1 OBJECT  LOCAL  DEFAULT   22 completed.0\n\
+      \     6: 0000000000003e40     0 OBJECT  LOCAL  DEFAULT   17 __do_global_dtors_aux_fini_array_entry\n\
+      \     7: 00000000000010f0     0 FUNC    LOCAL  DEFAULT   12 frame_dummy\n     8: 0000000000003e38\
+      \     0 OBJECT  LOCAL  DEFAULT   16 __frame_dummy_init_array_entry\n     9: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS vers.c\n    10: 0000000000000000     0 FILE    LOCAL  DEFAULT \
+      \ ABS crtstuff.c\n    11: 00000000000020c8     0 OBJECT  LOCAL  DEFAULT   15 __FRAME_END__\n   \
+      \ 12: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    13: 0000000000003e48     0 OBJECT\
+      \  LOCAL  DEFAULT   18 _DYNAMIC\n    14: 0000000000004008     0 OBJECT  LOCAL  DEFAULT   21 __TMC_END__\n\
+      \    15: 0000000000004000     0 OBJECT  LOCAL  DEFAULT   21 __dso_handle\n    16: 0000000000001000\
+      \     0 FUNC    LOCAL  DEFAULT    9 _init\n    18: 0000000000001118     0 FUNC    LOCAL  DEFAULT\
+      \   13 _fini\n    19: 0000000000003fe8     0 OBJECT  LOCAL  DEFAULT   20 _GLOBAL_OFFSET_TABLE_\n\
+      \    20: 0000000000000000     0 OBJECT  GLOBAL DEFAULT  ABS LADING_2.0\n    22: 00000000000010f9\
+      \    15 FUNC    GLOBAL DEFAULT   12 lading_ver_foo\n    24: 0000000000000000     0 OBJECT  GLOBAL\
+      \ DEFAULT  ABS LADING_1.0\n    26: 0000000000001108    15 FUNC    GLOBAL DEFAULT   12 lading_ver_bar"
+  expect_rule: D01
+  expect_verdict: NOT_AFFECTED
+  expect_justification: component_not_present
+- id: gt-047
+  source_type: inventory_binary
+  source: testdata/inventory/bin/symver_ssl_elf
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.2.0
+    component: &id003
+      name: openssl
+      ecosystem: native
+      purls:
+      - pkg:generic/openssl@3.0.7
+      identity_symbols:
+      - OPENSSL_init_ssl
+      - SSL_CTX_new
+      - GENERAL_NAME_cmp
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.2.0
+  inventories:
+  - file: symver_ssl_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'ssl elf: openssl present only for D02 cases'
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (3)\n     2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\
+      \ (4)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (2)\n     7:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (2)\n     1: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS Scrt1.o\n     2: 000000000000038c    32 OBJECT  LOCAL  DEFAULT\
+      \    4 __abi_tag\n     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     4:\
+      \ 00000000000010b0     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones\n     5: 00000000000010e0\
+      \     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones\n     6: 0000000000001120     0 FUNC    LOCAL\
+      \  DEFAULT   16 __do_global_dtors_aux\n     7: 0000000000004010     1 OBJECT  LOCAL  DEFAULT   26\
+      \ completed.0\n     8: 0000000000003da8     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fini_array_entry\n\
+      \     9: 0000000000001160     0 FUNC    LOCAL  DEFAULT   16 frame_dummy\n    10: 0000000000003da0\
+      \     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_entry\n    11: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS sslver.c\n    12: 0000000000000000     0 FILE    LOCAL  DEFAULT\
+      \  ABS crtstuff.c\n    13: 00000000000020f8     0 OBJECT  LOCAL  DEFAULT   20 __FRAME_END__\n  \
+      \  14: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    16: 0000000000003db0     0 OBJECT\
+      \  LOCAL  DEFAULT   23 _DYNAMIC\n    17: 0000000000003fb0     0 OBJECT  LOCAL  DEFAULT   24 _GLOBAL_OFFSET_TABLE_\n\
+      \    20: 0000000000002000     4 OBJECT  GLOBAL DEFAULT   18 _IO_stdin_used\n    21: 0000000000000000\
+      \     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5\n    22: 0000000000001169    45 FUNC\
+      \    GLOBAL DEFAULT   16 main\n    23: 0000000000004008     0 OBJECT  GLOBAL HIDDEN    25 __dso_handle\n\
+      \    24: 0000000000001198     0 FUNC    GLOBAL HIDDEN    17 _fini\n    25: 0000000000000000    \
+      \ 0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\n    26: 0000000000000000     0 FUNC\
+      \    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\n    27: 0000000000001080    38 FUNC   \
+      \ GLOBAL DEFAULT   16 _start\n    28: 0000000000001000     0 FUNC    GLOBAL HIDDEN    12 _init\n\
+      \    29: 0000000000004010     0 OBJECT  GLOBAL HIDDEN    25 __TMC_END__"
+  expect_rule: D02
+  expect_verdict: NOT_AFFECTED
+  expect_justification: vulnerable_code_not_present
+- id: gt-048
+  source_type: inventory_binary
+  source: testdata/inventory/bin/dyn_unstripped_elf
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.2.0
+    component: *id003
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.2.0
+  inventories:
+  - file: dyn_unstripped_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: no openssl on dyn_unstripped
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (2)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (3)\n     6:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (3)\n     1: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS Scrt1.o\n     2: 000000000000038c    32 OBJECT  LOCAL  DEFAULT\
+      \    4 __abi_tag\n     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     4:\
+      \ 0000000000001090     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones\n     5: 00000000000010c0\
+      \     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones\n     6: 0000000000001100     0 FUNC    LOCAL\
+      \  DEFAULT   16 __do_global_dtors_aux\n     7: 0000000000004018     1 OBJECT  LOCAL  DEFAULT   26\
+      \ completed.0\n     8: 0000000000003dc0     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fini_array_entry\n\
+      \     9: 0000000000001140     0 FUNC    LOCAL  DEFAULT   16 frame_dummy\n    10: 0000000000003db8\
+      \     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_entry\n    11: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS dyn.c\n    12: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS\
+      \ crtstuff.c\n    13: 0000000000002120     0 OBJECT  LOCAL  DEFAULT   20 __FRAME_END__\n    14:\
+      \ 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    15: 0000000000003dc8     0 OBJECT  LOCAL\
+      \  DEFAULT   23 _DYNAMIC\n    17: 0000000000003fb8     0 OBJECT  LOCAL  DEFAULT   24 _GLOBAL_OFFSET_TABLE_\n\
+      \    18: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\n    21:\
+      \ 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5\n    23: 0000000000001180\
+      \     0 FUNC    GLOBAL HIDDEN    17 _fini\n    26: 0000000000004008     0 OBJECT  GLOBAL HIDDEN\
+      \    25 __dso_handle\n    27: 0000000000002000     4 OBJECT  GLOBAL DEFAULT   18 _IO_stdin_used\n\
+      \    28: 0000000000001149    19 FUNC    GLOBAL DEFAULT   16 lading_export\n    30: 0000000000001060\
+      \    38 FUNC    GLOBAL DEFAULT   16 _start\n    32: 0000000000004010     8 OBJECT  GLOBAL DEFAULT\
+      \   25 lading_marker\n    33: 000000000000115c    35 FUNC    GLOBAL DEFAULT   16 main\n    34: 0000000000004018\
+      \     0 OBJECT  GLOBAL HIDDEN    25 __TMC_END__\n    36: 0000000000000000     0 FUNC    WEAK   DEFAULT\
+      \  UND __cxa_finalize@GLIBC_2.2.5"
+  expect_rule: D01
+  expect_verdict: NOT_AFFECTED
+  expect_justification: component_not_present
+- id: gt-049
+  source_type: inventory_binary
+  source: testdata/inventory/bin/dyn_stripped_elf
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.2.0
+    component: *id003
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.2.0
+  inventories:
+  - file: dyn_stripped_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: no openssl identity on stripped dyn
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (2)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (3)\n     6:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (3)"
+  expect_rule: D01
+  expect_verdict: NOT_AFFECTED
+  expect_justification: component_not_present
+- id: gt-050
+  source_type: inventory_binary
+  source: testdata/inventory/bin/sample_macho
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.2.0
+    component: *id001
+    entry: *id002
+  inventories:
+  - file: sample_macho
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'Mach-O: no zlib (usable export symtab)'
+  expect_rule: D01
+  expect_verdict: NOT_AFFECTED
+  expect_justification: component_not_present
+- id: gt-051
+  source_type: inventory_binary
+  source: testdata/inventory/bin/sample_macho_fat
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.2.0
+    component: *id001
+    entry: *id002
+  inventories:
+  - file: sample_macho_fat
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'fat Mach-O: no zlib'
+  expect_rule: D01
+  expect_verdict: NOT_AFFECTED
+  expect_justification: component_not_present
+- id: gt-052
+  source_type: inventory_binary
+  source: testdata/inventory/bin/symver_ssl_elf
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.2.0
+    component: *id001
+    entry: *id002
+  inventories:
+  - file: symver_ssl_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: D01 repeat slot 12
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (3)\n     2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\
+      \ (4)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (2)\n     7:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (2)\n     1: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS Scrt1.o\n     2: 000000000000038c    32 OBJECT  LOCAL  DEFAULT\
+      \    4 __abi_tag\n     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     4:\
+      \ 00000000000010b0     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones\n     5: 00000000000010e0\
+      \     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones\n     6: 0000000000001120     0 FUNC    LOCAL\
+      \  DEFAULT   16 __do_global_dtors_aux\n     7: 0000000000004010     1 OBJECT  LOCAL  DEFAULT   26\
+      \ completed.0\n     8: 0000000000003da8     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fini_array_entry\n\
+      \     9: 0000000000001160     0 FUNC    LOCAL  DEFAULT   16 frame_dummy\n    10: 0000000000003da0\
+      \     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_entry\n    11: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS sslver.c\n    12: 0000000000000000     0 FILE    LOCAL  DEFAULT\
+      \  ABS crtstuff.c\n    13: 00000000000020f8     0 OBJECT  LOCAL  DEFAULT   20 __FRAME_END__\n  \
+      \  14: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    16: 0000000000003db0     0 OBJECT\
+      \  LOCAL  DEFAULT   23 _DYNAMIC\n    17: 0000000000003fb0     0 OBJECT  LOCAL  DEFAULT   24 _GLOBAL_OFFSET_TABLE_\n\
+      \    20: 0000000000002000     4 OBJECT  GLOBAL DEFAULT   18 _IO_stdin_used\n    21: 0000000000000000\
+      \     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5\n    22: 0000000000001169    45 FUNC\
+      \    GLOBAL DEFAULT   16 main\n    23: 0000000000004008     0 OBJECT  GLOBAL HIDDEN    25 __dso_handle\n\
+      \    24: 0000000000001198     0 FUNC    GLOBAL HIDDEN    17 _fini\n    25: 0000000000000000    \
+      \ 0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\n    26: 0000000000000000     0 FUNC\
+      \    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\n    27: 0000000000001080    38 FUNC   \
+      \ GLOBAL DEFAULT   16 _start\n    28: 0000000000001000     0 FUNC    GLOBAL HIDDEN    12 _init\n\
+      \    29: 0000000000004010     0 OBJECT  GLOBAL HIDDEN    25 __TMC_END__"
+  expect_rule: D01
+  expect_verdict: NOT_AFFECTED
+  expect_justification: component_not_present
+- id: gt-053
+  source_type: inventory_binary
+  source: testdata/inventory/bin/dyn_unstripped_elf
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.2.0
+    component: *id001
+    entry: *id002
+  inventories:
+  - file: dyn_unstripped_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: D01 repeat slot 13
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (2)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (3)\n     6:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (3)\n     1: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS Scrt1.o\n     2: 000000000000038c    32 OBJECT  LOCAL  DEFAULT\
+      \    4 __abi_tag\n     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     4:\
+      \ 0000000000001090     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones\n     5: 00000000000010c0\
+      \     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones\n     6: 0000000000001100     0 FUNC    LOCAL\
+      \  DEFAULT   16 __do_global_dtors_aux\n     7: 0000000000004018     1 OBJECT  LOCAL  DEFAULT   26\
+      \ completed.0\n     8: 0000000000003dc0     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fini_array_entry\n\
+      \     9: 0000000000001140     0 FUNC    LOCAL  DEFAULT   16 frame_dummy\n    10: 0000000000003db8\
+      \     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_entry\n    11: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS dyn.c\n    12: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS\
+      \ crtstuff.c\n    13: 0000000000002120     0 OBJECT  LOCAL  DEFAULT   20 __FRAME_END__\n    14:\
+      \ 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    15: 0000000000003dc8     0 OBJECT  LOCAL\
+      \  DEFAULT   23 _DYNAMIC\n    17: 0000000000003fb8     0 OBJECT  LOCAL  DEFAULT   24 _GLOBAL_OFFSET_TABLE_\n\
+      \    18: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\n    21:\
+      \ 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5\n    23: 0000000000001180\
+      \     0 FUNC    GLOBAL HIDDEN    17 _fini\n    26: 0000000000004008     0 OBJECT  GLOBAL HIDDEN\
+      \    25 __dso_handle\n    27: 0000000000002000     4 OBJECT  GLOBAL DEFAULT   18 _IO_stdin_used\n\
+      \    28: 0000000000001149    19 FUNC    GLOBAL DEFAULT   16 lading_export\n    30: 0000000000001060\
+      \    38 FUNC    GLOBAL DEFAULT   16 _start\n    32: 0000000000004010     8 OBJECT  GLOBAL DEFAULT\
+      \   25 lading_marker\n    33: 000000000000115c    35 FUNC    GLOBAL DEFAULT   16 main\n    34: 0000000000004018\
+      \     0 OBJECT  GLOBAL HIDDEN    25 __TMC_END__\n    36: 0000000000000000     0 FUNC    WEAK   DEFAULT\
+      \  UND __cxa_finalize@GLIBC_2.2.5"
+  expect_rule: D01
+  expect_verdict: NOT_AFFECTED
+  expect_justification: component_not_present
+- id: gt-054
+  source_type: inventory_binary
+  source: testdata/inventory/bin/weak_ifunc_elf
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.2.0
+    component: *id003
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.2.0
+  inventories:
+  - file: weak_ifunc_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: no openssl identity
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (2)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND printf@GLIBC_2.2.5 (3)\n     6:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (3)\n     1: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS Scrt1.o\n     2: 000000000000038c    32 OBJECT  LOCAL  DEFAULT\
+      \    4 __abi_tag\n     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     4:\
+      \ 00000000000010b0     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones\n     5: 00000000000010e0\
+      \     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones\n     6: 0000000000001120     0 FUNC    LOCAL\
+      \  DEFAULT   16 __do_global_dtors_aux\n     7: 0000000000004010     1 OBJECT  LOCAL  DEFAULT   26\
+      \ completed.0\n     8: 0000000000003db8     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fini_array_entry\n\
+      \     9: 0000000000001160     0 FUNC    LOCAL  DEFAULT   16 frame_dummy\n    10: 0000000000003db0\
+      \     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_entry\n    11: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS weak_ifunc.c\n    12: 0000000000001169    15 FUNC    LOCAL  DEFAULT\
+      \   16 real_impl\n    13: 0000000000001178    17 FUNC    LOCAL  DEFAULT   16 resolver\n    14: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n    15: 0000000000002178     0 OBJECT  LOCAL  DEFAULT\
+      \   20 __FRAME_END__\n    16: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    17: 0000000000003dc0\
+      \     0 OBJECT  LOCAL  DEFAULT   23 _DYNAMIC\n    19: 0000000000003fb0     0 OBJECT  LOCAL  DEFAULT\
+      \   24 _GLOBAL_OFFSET_TABLE_\n    20: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\n\
+      \    23: 0000000000001189    15 FUNC    WEAK   DEFAULT   16 weak_sym\n    25: 00000000000011d4 \
+      \    0 FUNC    GLOBAL HIDDEN    17 _fini\n    26: 0000000000000000     0 FUNC    GLOBAL DEFAULT\
+      \  UND printf@GLIBC_2.2.5\n    29: 0000000000004008     0 OBJECT  GLOBAL HIDDEN    25 __dso_handle\n\
+      \    30: 0000000000001178    17 IFUNC   GLOBAL DEFAULT   16 resolved\n    31: 0000000000002000 \
+      \    4 OBJECT  GLOBAL DEFAULT   18 _IO_stdin_used\n    33: 0000000000001080    38 FUNC    GLOBAL\
+      \ DEFAULT   16 _start\n    35: 0000000000001198    60 FUNC    GLOBAL DEFAULT   16 main"
+  expect_rule: D01
+  expect_verdict: NOT_AFFECTED
+  expect_justification: component_not_present
+- id: gt-055
+  source_type: inventory_binary
+  source: testdata/inventory/bin/symver_def.so
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.2.0
+    component: *id003
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.2.0
+  inventories:
+  - file: symver_def.so
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: no openssl identity
+    readelf_excerpt: "     5: 0000000000000000     0 OBJECT  GLOBAL DEFAULT  ABS LADING_2.0\n     6: 0000000000000000\
+      \     0 OBJECT  GLOBAL DEFAULT  ABS LADING_1.0\n     7: 00000000000010f9    15 FUNC    GLOBAL DEFAULT\
+      \   12 lading_ver_foo@@LADING_1.0\n     8: 0000000000001108    15 FUNC    GLOBAL DEFAULT   12 lading_ver_bar@@LADING_2.0\n\
+      \     1: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     2: 0000000000001040\
+      \     0 FUNC    LOCAL  DEFAULT   12 deregister_tm_clones\n     3: 0000000000001070     0 FUNC  \
+      \  LOCAL  DEFAULT   12 register_tm_clones\n     4: 00000000000010b0     0 FUNC    LOCAL  DEFAULT\
+      \   12 __do_global_dtors_aux\n     5: 0000000000004008     1 OBJECT  LOCAL  DEFAULT   22 completed.0\n\
+      \     6: 0000000000003e40     0 OBJECT  LOCAL  DEFAULT   17 __do_global_dtors_aux_fini_array_entry\n\
+      \     7: 00000000000010f0     0 FUNC    LOCAL  DEFAULT   12 frame_dummy\n     8: 0000000000003e38\
+      \     0 OBJECT  LOCAL  DEFAULT   16 __frame_dummy_init_array_entry\n     9: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS vers.c\n    10: 0000000000000000     0 FILE    LOCAL  DEFAULT \
+      \ ABS crtstuff.c\n    11: 00000000000020c8     0 OBJECT  LOCAL  DEFAULT   15 __FRAME_END__\n   \
+      \ 12: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    13: 0000000000003e48     0 OBJECT\
+      \  LOCAL  DEFAULT   18 _DYNAMIC\n    14: 0000000000004008     0 OBJECT  LOCAL  DEFAULT   21 __TMC_END__\n\
+      \    15: 0000000000004000     0 OBJECT  LOCAL  DEFAULT   21 __dso_handle\n    16: 0000000000001000\
+      \     0 FUNC    LOCAL  DEFAULT    9 _init\n    18: 0000000000001118     0 FUNC    LOCAL  DEFAULT\
+      \   13 _fini\n    19: 0000000000003fe8     0 OBJECT  LOCAL  DEFAULT   20 _GLOBAL_OFFSET_TABLE_\n\
+      \    20: 0000000000000000     0 OBJECT  GLOBAL DEFAULT  ABS LADING_2.0\n    22: 00000000000010f9\
+      \    15 FUNC    GLOBAL DEFAULT   12 lading_ver_foo\n    24: 0000000000000000     0 OBJECT  GLOBAL\
+      \ DEFAULT  ABS LADING_1.0\n    26: 0000000000001108    15 FUNC    GLOBAL DEFAULT   12 lading_ver_bar"
+  expect_rule: D01
+  expect_verdict: NOT_AFFECTED
+  expect_justification: component_not_present
+- id: gt-056
+  source_type: inventory_binary
+  source: testdata/inventory/bin/symver_ssl_elf
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.2.0
+    component: *id003
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.2.0
+  inventories:
+  - file: symver_ssl_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'readelf/nm: OPENSSL_init_ssl UND; GENERAL_NAME_cmp absent (1/20)'
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (3)\n     2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\
+      \ (4)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (2)\n     7:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (2)\n     1: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS Scrt1.o\n     2: 000000000000038c    32 OBJECT  LOCAL  DEFAULT\
+      \    4 __abi_tag\n     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     4:\
+      \ 00000000000010b0     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones\n     5: 00000000000010e0\
+      \     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones\n     6: 0000000000001120     0 FUNC    LOCAL\
+      \  DEFAULT   16 __do_global_dtors_aux\n     7: 0000000000004010     1 OBJECT  LOCAL  DEFAULT   26\
+      \ completed.0\n     8: 0000000000003da8     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fini_array_entry\n\
+      \     9: 0000000000001160     0 FUNC    LOCAL  DEFAULT   16 frame_dummy\n    10: 0000000000003da0\
+      \     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_entry\n    11: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS sslver.c\n    12: 0000000000000000     0 FILE    LOCAL  DEFAULT\
+      \  ABS crtstuff.c\n    13: 00000000000020f8     0 OBJECT  LOCAL  DEFAULT   20 __FRAME_END__\n  \
+      \  14: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    16: 0000000000003db0     0 OBJECT\
+      \  LOCAL  DEFAULT   23 _DYNAMIC\n    17: 0000000000003fb0     0 OBJECT  LOCAL  DEFAULT   24 _GLOBAL_OFFSET_TABLE_\n\
+      \    20: 0000000000002000     4 OBJECT  GLOBAL DEFAULT   18 _IO_stdin_used\n    21: 0000000000000000\
+      \     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5\n    22: 0000000000001169    45 FUNC\
+      \    GLOBAL DEFAULT   16 main\n    23: 0000000000004008     0 OBJECT  GLOBAL HIDDEN    25 __dso_handle\n\
+      \    24: 0000000000001198     0 FUNC    GLOBAL HIDDEN    17 _fini\n    25: 0000000000000000    \
+      \ 0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\n    26: 0000000000000000     0 FUNC\
+      \    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\n    27: 0000000000001080    38 FUNC   \
+      \ GLOBAL DEFAULT   16 _start\n    28: 0000000000001000     0 FUNC    GLOBAL HIDDEN    12 _init\n\
+      \    29: 0000000000004010     0 OBJECT  GLOBAL HIDDEN    25 __TMC_END__"
+  expect_rule: D02
+  expect_verdict: NOT_AFFECTED
+  expect_justification: vulnerable_code_not_present
+- id: gt-057
+  source_type: inventory_binary
+  source: testdata/inventory/bin/symver_ssl_elf
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.2.0
+    component: *id003
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.2.0
+  inventories:
+  - file: symver_ssl_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'readelf/nm: OPENSSL_init_ssl UND; GENERAL_NAME_cmp absent (2/20)'
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (3)\n     2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\
+      \ (4)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (2)\n     7:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (2)\n     1: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS Scrt1.o\n     2: 000000000000038c    32 OBJECT  LOCAL  DEFAULT\
+      \    4 __abi_tag\n     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     4:\
+      \ 00000000000010b0     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones\n     5: 00000000000010e0\
+      \     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones\n     6: 0000000000001120     0 FUNC    LOCAL\
+      \  DEFAULT   16 __do_global_dtors_aux\n     7: 0000000000004010     1 OBJECT  LOCAL  DEFAULT   26\
+      \ completed.0\n     8: 0000000000003da8     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fini_array_entry\n\
+      \     9: 0000000000001160     0 FUNC    LOCAL  DEFAULT   16 frame_dummy\n    10: 0000000000003da0\
+      \     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_entry\n    11: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS sslver.c\n    12: 0000000000000000     0 FILE    LOCAL  DEFAULT\
+      \  ABS crtstuff.c\n    13: 00000000000020f8     0 OBJECT  LOCAL  DEFAULT   20 __FRAME_END__\n  \
+      \  14: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    16: 0000000000003db0     0 OBJECT\
+      \  LOCAL  DEFAULT   23 _DYNAMIC\n    17: 0000000000003fb0     0 OBJECT  LOCAL  DEFAULT   24 _GLOBAL_OFFSET_TABLE_\n\
+      \    20: 0000000000002000     4 OBJECT  GLOBAL DEFAULT   18 _IO_stdin_used\n    21: 0000000000000000\
+      \     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5\n    22: 0000000000001169    45 FUNC\
+      \    GLOBAL DEFAULT   16 main\n    23: 0000000000004008     0 OBJECT  GLOBAL HIDDEN    25 __dso_handle\n\
+      \    24: 0000000000001198     0 FUNC    GLOBAL HIDDEN    17 _fini\n    25: 0000000000000000    \
+      \ 0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\n    26: 0000000000000000     0 FUNC\
+      \    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\n    27: 0000000000001080    38 FUNC   \
+      \ GLOBAL DEFAULT   16 _start\n    28: 0000000000001000     0 FUNC    GLOBAL HIDDEN    12 _init\n\
+      \    29: 0000000000004010     0 OBJECT  GLOBAL HIDDEN    25 __TMC_END__"
+  expect_rule: D02
+  expect_verdict: NOT_AFFECTED
+  expect_justification: vulnerable_code_not_present
+- id: gt-058
+  source_type: inventory_binary
+  source: testdata/inventory/bin/symver_ssl_elf
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.2.0
+    component: *id003
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.2.0
+  inventories:
+  - file: symver_ssl_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'readelf/nm: OPENSSL_init_ssl UND; GENERAL_NAME_cmp absent (3/20)'
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (3)\n     2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\
+      \ (4)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (2)\n     7:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (2)\n     1: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS Scrt1.o\n     2: 000000000000038c    32 OBJECT  LOCAL  DEFAULT\
+      \    4 __abi_tag\n     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     4:\
+      \ 00000000000010b0     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones\n     5: 00000000000010e0\
+      \     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones\n     6: 0000000000001120     0 FUNC    LOCAL\
+      \  DEFAULT   16 __do_global_dtors_aux\n     7: 0000000000004010     1 OBJECT  LOCAL  DEFAULT   26\
+      \ completed.0\n     8: 0000000000003da8     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fini_array_entry\n\
+      \     9: 0000000000001160     0 FUNC    LOCAL  DEFAULT   16 frame_dummy\n    10: 0000000000003da0\
+      \     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_entry\n    11: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS sslver.c\n    12: 0000000000000000     0 FILE    LOCAL  DEFAULT\
+      \  ABS crtstuff.c\n    13: 00000000000020f8     0 OBJECT  LOCAL  DEFAULT   20 __FRAME_END__\n  \
+      \  14: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    16: 0000000000003db0     0 OBJECT\
+      \  LOCAL  DEFAULT   23 _DYNAMIC\n    17: 0000000000003fb0     0 OBJECT  LOCAL  DEFAULT   24 _GLOBAL_OFFSET_TABLE_\n\
+      \    20: 0000000000002000     4 OBJECT  GLOBAL DEFAULT   18 _IO_stdin_used\n    21: 0000000000000000\
+      \     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5\n    22: 0000000000001169    45 FUNC\
+      \    GLOBAL DEFAULT   16 main\n    23: 0000000000004008     0 OBJECT  GLOBAL HIDDEN    25 __dso_handle\n\
+      \    24: 0000000000001198     0 FUNC    GLOBAL HIDDEN    17 _fini\n    25: 0000000000000000    \
+      \ 0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\n    26: 0000000000000000     0 FUNC\
+      \    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\n    27: 0000000000001080    38 FUNC   \
+      \ GLOBAL DEFAULT   16 _start\n    28: 0000000000001000     0 FUNC    GLOBAL HIDDEN    12 _init\n\
+      \    29: 0000000000004010     0 OBJECT  GLOBAL HIDDEN    25 __TMC_END__"
+  expect_rule: D02
+  expect_verdict: NOT_AFFECTED
+  expect_justification: vulnerable_code_not_present
+- id: gt-059
+  source_type: inventory_binary
+  source: testdata/inventory/bin/symver_ssl_elf
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.2.0
+    component: *id003
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.2.0
+  inventories:
+  - file: symver_ssl_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'readelf/nm: OPENSSL_init_ssl UND; GENERAL_NAME_cmp absent (4/20)'
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (3)\n     2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\
+      \ (4)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (2)\n     7:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (2)\n     1: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS Scrt1.o\n     2: 000000000000038c    32 OBJECT  LOCAL  DEFAULT\
+      \    4 __abi_tag\n     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     4:\
+      \ 00000000000010b0     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones\n     5: 00000000000010e0\
+      \     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones\n     6: 0000000000001120     0 FUNC    LOCAL\
+      \  DEFAULT   16 __do_global_dtors_aux\n     7: 0000000000004010     1 OBJECT  LOCAL  DEFAULT   26\
+      \ completed.0\n     8: 0000000000003da8     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fini_array_entry\n\
+      \     9: 0000000000001160     0 FUNC    LOCAL  DEFAULT   16 frame_dummy\n    10: 0000000000003da0\
+      \     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_entry\n    11: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS sslver.c\n    12: 0000000000000000     0 FILE    LOCAL  DEFAULT\
+      \  ABS crtstuff.c\n    13: 00000000000020f8     0 OBJECT  LOCAL  DEFAULT   20 __FRAME_END__\n  \
+      \  14: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    16: 0000000000003db0     0 OBJECT\
+      \  LOCAL  DEFAULT   23 _DYNAMIC\n    17: 0000000000003fb0     0 OBJECT  LOCAL  DEFAULT   24 _GLOBAL_OFFSET_TABLE_\n\
+      \    20: 0000000000002000     4 OBJECT  GLOBAL DEFAULT   18 _IO_stdin_used\n    21: 0000000000000000\
+      \     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5\n    22: 0000000000001169    45 FUNC\
+      \    GLOBAL DEFAULT   16 main\n    23: 0000000000004008     0 OBJECT  GLOBAL HIDDEN    25 __dso_handle\n\
+      \    24: 0000000000001198     0 FUNC    GLOBAL HIDDEN    17 _fini\n    25: 0000000000000000    \
+      \ 0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\n    26: 0000000000000000     0 FUNC\
+      \    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\n    27: 0000000000001080    38 FUNC   \
+      \ GLOBAL DEFAULT   16 _start\n    28: 0000000000001000     0 FUNC    GLOBAL HIDDEN    12 _init\n\
+      \    29: 0000000000004010     0 OBJECT  GLOBAL HIDDEN    25 __TMC_END__"
+  expect_rule: D02
+  expect_verdict: NOT_AFFECTED
+  expect_justification: vulnerable_code_not_present
+- id: gt-060
+  source_type: inventory_binary
+  source: testdata/inventory/bin/symver_ssl_elf
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.2.0
+    component: *id003
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.2.0
+  inventories:
+  - file: symver_ssl_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'readelf/nm: OPENSSL_init_ssl UND; GENERAL_NAME_cmp absent (5/20)'
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (3)\n     2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\
+      \ (4)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (2)\n     7:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (2)\n     1: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS Scrt1.o\n     2: 000000000000038c    32 OBJECT  LOCAL  DEFAULT\
+      \    4 __abi_tag\n     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     4:\
+      \ 00000000000010b0     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones\n     5: 00000000000010e0\
+      \     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones\n     6: 0000000000001120     0 FUNC    LOCAL\
+      \  DEFAULT   16 __do_global_dtors_aux\n     7: 0000000000004010     1 OBJECT  LOCAL  DEFAULT   26\
+      \ completed.0\n     8: 0000000000003da8     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fini_array_entry\n\
+      \     9: 0000000000001160     0 FUNC    LOCAL  DEFAULT   16 frame_dummy\n    10: 0000000000003da0\
+      \     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_entry\n    11: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS sslver.c\n    12: 0000000000000000     0 FILE    LOCAL  DEFAULT\
+      \  ABS crtstuff.c\n    13: 00000000000020f8     0 OBJECT  LOCAL  DEFAULT   20 __FRAME_END__\n  \
+      \  14: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    16: 0000000000003db0     0 OBJECT\
+      \  LOCAL  DEFAULT   23 _DYNAMIC\n    17: 0000000000003fb0     0 OBJECT  LOCAL  DEFAULT   24 _GLOBAL_OFFSET_TABLE_\n\
+      \    20: 0000000000002000     4 OBJECT  GLOBAL DEFAULT   18 _IO_stdin_used\n    21: 0000000000000000\
+      \     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5\n    22: 0000000000001169    45 FUNC\
+      \    GLOBAL DEFAULT   16 main\n    23: 0000000000004008     0 OBJECT  GLOBAL HIDDEN    25 __dso_handle\n\
+      \    24: 0000000000001198     0 FUNC    GLOBAL HIDDEN    17 _fini\n    25: 0000000000000000    \
+      \ 0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\n    26: 0000000000000000     0 FUNC\
+      \    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\n    27: 0000000000001080    38 FUNC   \
+      \ GLOBAL DEFAULT   16 _start\n    28: 0000000000001000     0 FUNC    GLOBAL HIDDEN    12 _init\n\
+      \    29: 0000000000004010     0 OBJECT  GLOBAL HIDDEN    25 __TMC_END__"
+  expect_rule: D02
+  expect_verdict: NOT_AFFECTED
+  expect_justification: vulnerable_code_not_present
+- id: gt-061
+  source_type: inventory_binary
+  source: testdata/inventory/bin/symver_ssl_elf
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.2.0
+    component: *id003
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.2.0
+  inventories:
+  - file: symver_ssl_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'readelf/nm: OPENSSL_init_ssl UND; GENERAL_NAME_cmp absent (6/20)'
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (3)\n     2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\
+      \ (4)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (2)\n     7:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (2)\n     1: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS Scrt1.o\n     2: 000000000000038c    32 OBJECT  LOCAL  DEFAULT\
+      \    4 __abi_tag\n     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     4:\
+      \ 00000000000010b0     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones\n     5: 00000000000010e0\
+      \     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones\n     6: 0000000000001120     0 FUNC    LOCAL\
+      \  DEFAULT   16 __do_global_dtors_aux\n     7: 0000000000004010     1 OBJECT  LOCAL  DEFAULT   26\
+      \ completed.0\n     8: 0000000000003da8     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fini_array_entry\n\
+      \     9: 0000000000001160     0 FUNC    LOCAL  DEFAULT   16 frame_dummy\n    10: 0000000000003da0\
+      \     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_entry\n    11: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS sslver.c\n    12: 0000000000000000     0 FILE    LOCAL  DEFAULT\
+      \  ABS crtstuff.c\n    13: 00000000000020f8     0 OBJECT  LOCAL  DEFAULT   20 __FRAME_END__\n  \
+      \  14: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    16: 0000000000003db0     0 OBJECT\
+      \  LOCAL  DEFAULT   23 _DYNAMIC\n    17: 0000000000003fb0     0 OBJECT  LOCAL  DEFAULT   24 _GLOBAL_OFFSET_TABLE_\n\
+      \    20: 0000000000002000     4 OBJECT  GLOBAL DEFAULT   18 _IO_stdin_used\n    21: 0000000000000000\
+      \     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5\n    22: 0000000000001169    45 FUNC\
+      \    GLOBAL DEFAULT   16 main\n    23: 0000000000004008     0 OBJECT  GLOBAL HIDDEN    25 __dso_handle\n\
+      \    24: 0000000000001198     0 FUNC    GLOBAL HIDDEN    17 _fini\n    25: 0000000000000000    \
+      \ 0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\n    26: 0000000000000000     0 FUNC\
+      \    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\n    27: 0000000000001080    38 FUNC   \
+      \ GLOBAL DEFAULT   16 _start\n    28: 0000000000001000     0 FUNC    GLOBAL HIDDEN    12 _init\n\
+      \    29: 0000000000004010     0 OBJECT  GLOBAL HIDDEN    25 __TMC_END__"
+  expect_rule: D02
+  expect_verdict: NOT_AFFECTED
+  expect_justification: vulnerable_code_not_present
+- id: gt-062
+  source_type: inventory_binary
+  source: testdata/inventory/bin/symver_ssl_elf
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.2.0
+    component: *id003
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.2.0
+  inventories:
+  - file: symver_ssl_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'readelf/nm: OPENSSL_init_ssl UND; GENERAL_NAME_cmp absent (7/20)'
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (3)\n     2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\
+      \ (4)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (2)\n     7:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (2)\n     1: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS Scrt1.o\n     2: 000000000000038c    32 OBJECT  LOCAL  DEFAULT\
+      \    4 __abi_tag\n     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     4:\
+      \ 00000000000010b0     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones\n     5: 00000000000010e0\
+      \     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones\n     6: 0000000000001120     0 FUNC    LOCAL\
+      \  DEFAULT   16 __do_global_dtors_aux\n     7: 0000000000004010     1 OBJECT  LOCAL  DEFAULT   26\
+      \ completed.0\n     8: 0000000000003da8     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fini_array_entry\n\
+      \     9: 0000000000001160     0 FUNC    LOCAL  DEFAULT   16 frame_dummy\n    10: 0000000000003da0\
+      \     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_entry\n    11: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS sslver.c\n    12: 0000000000000000     0 FILE    LOCAL  DEFAULT\
+      \  ABS crtstuff.c\n    13: 00000000000020f8     0 OBJECT  LOCAL  DEFAULT   20 __FRAME_END__\n  \
+      \  14: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    16: 0000000000003db0     0 OBJECT\
+      \  LOCAL  DEFAULT   23 _DYNAMIC\n    17: 0000000000003fb0     0 OBJECT  LOCAL  DEFAULT   24 _GLOBAL_OFFSET_TABLE_\n\
+      \    20: 0000000000002000     4 OBJECT  GLOBAL DEFAULT   18 _IO_stdin_used\n    21: 0000000000000000\
+      \     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5\n    22: 0000000000001169    45 FUNC\
+      \    GLOBAL DEFAULT   16 main\n    23: 0000000000004008     0 OBJECT  GLOBAL HIDDEN    25 __dso_handle\n\
+      \    24: 0000000000001198     0 FUNC    GLOBAL HIDDEN    17 _fini\n    25: 0000000000000000    \
+      \ 0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\n    26: 0000000000000000     0 FUNC\
+      \    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\n    27: 0000000000001080    38 FUNC   \
+      \ GLOBAL DEFAULT   16 _start\n    28: 0000000000001000     0 FUNC    GLOBAL HIDDEN    12 _init\n\
+      \    29: 0000000000004010     0 OBJECT  GLOBAL HIDDEN    25 __TMC_END__"
+  expect_rule: D02
+  expect_verdict: NOT_AFFECTED
+  expect_justification: vulnerable_code_not_present
+- id: gt-063
+  source_type: inventory_binary
+  source: testdata/inventory/bin/symver_ssl_elf
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.2.0
+    component: *id003
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.2.0
+  inventories:
+  - file: symver_ssl_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'readelf/nm: OPENSSL_init_ssl UND; GENERAL_NAME_cmp absent (8/20)'
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (3)\n     2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\
+      \ (4)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (2)\n     7:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (2)\n     1: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS Scrt1.o\n     2: 000000000000038c    32 OBJECT  LOCAL  DEFAULT\
+      \    4 __abi_tag\n     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     4:\
+      \ 00000000000010b0     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones\n     5: 00000000000010e0\
+      \     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones\n     6: 0000000000001120     0 FUNC    LOCAL\
+      \  DEFAULT   16 __do_global_dtors_aux\n     7: 0000000000004010     1 OBJECT  LOCAL  DEFAULT   26\
+      \ completed.0\n     8: 0000000000003da8     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fini_array_entry\n\
+      \     9: 0000000000001160     0 FUNC    LOCAL  DEFAULT   16 frame_dummy\n    10: 0000000000003da0\
+      \     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_entry\n    11: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS sslver.c\n    12: 0000000000000000     0 FILE    LOCAL  DEFAULT\
+      \  ABS crtstuff.c\n    13: 00000000000020f8     0 OBJECT  LOCAL  DEFAULT   20 __FRAME_END__\n  \
+      \  14: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    16: 0000000000003db0     0 OBJECT\
+      \  LOCAL  DEFAULT   23 _DYNAMIC\n    17: 0000000000003fb0     0 OBJECT  LOCAL  DEFAULT   24 _GLOBAL_OFFSET_TABLE_\n\
+      \    20: 0000000000002000     4 OBJECT  GLOBAL DEFAULT   18 _IO_stdin_used\n    21: 0000000000000000\
+      \     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5\n    22: 0000000000001169    45 FUNC\
+      \    GLOBAL DEFAULT   16 main\n    23: 0000000000004008     0 OBJECT  GLOBAL HIDDEN    25 __dso_handle\n\
+      \    24: 0000000000001198     0 FUNC    GLOBAL HIDDEN    17 _fini\n    25: 0000000000000000    \
+      \ 0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\n    26: 0000000000000000     0 FUNC\
+      \    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\n    27: 0000000000001080    38 FUNC   \
+      \ GLOBAL DEFAULT   16 _start\n    28: 0000000000001000     0 FUNC    GLOBAL HIDDEN    12 _init\n\
+      \    29: 0000000000004010     0 OBJECT  GLOBAL HIDDEN    25 __TMC_END__"
+  expect_rule: D02
+  expect_verdict: NOT_AFFECTED
+  expect_justification: vulnerable_code_not_present
+- id: gt-064
+  source_type: inventory_binary
+  source: testdata/inventory/bin/symver_ssl_elf
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.2.0
+    component: *id003
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.2.0
+  inventories:
+  - file: symver_ssl_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'readelf/nm: OPENSSL_init_ssl UND; GENERAL_NAME_cmp absent (9/20)'
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (3)\n     2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\
+      \ (4)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (2)\n     7:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (2)\n     1: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS Scrt1.o\n     2: 000000000000038c    32 OBJECT  LOCAL  DEFAULT\
+      \    4 __abi_tag\n     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     4:\
+      \ 00000000000010b0     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones\n     5: 00000000000010e0\
+      \     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones\n     6: 0000000000001120     0 FUNC    LOCAL\
+      \  DEFAULT   16 __do_global_dtors_aux\n     7: 0000000000004010     1 OBJECT  LOCAL  DEFAULT   26\
+      \ completed.0\n     8: 0000000000003da8     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fini_array_entry\n\
+      \     9: 0000000000001160     0 FUNC    LOCAL  DEFAULT   16 frame_dummy\n    10: 0000000000003da0\
+      \     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_entry\n    11: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS sslver.c\n    12: 0000000000000000     0 FILE    LOCAL  DEFAULT\
+      \  ABS crtstuff.c\n    13: 00000000000020f8     0 OBJECT  LOCAL  DEFAULT   20 __FRAME_END__\n  \
+      \  14: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    16: 0000000000003db0     0 OBJECT\
+      \  LOCAL  DEFAULT   23 _DYNAMIC\n    17: 0000000000003fb0     0 OBJECT  LOCAL  DEFAULT   24 _GLOBAL_OFFSET_TABLE_\n\
+      \    20: 0000000000002000     4 OBJECT  GLOBAL DEFAULT   18 _IO_stdin_used\n    21: 0000000000000000\
+      \     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5\n    22: 0000000000001169    45 FUNC\
+      \    GLOBAL DEFAULT   16 main\n    23: 0000000000004008     0 OBJECT  GLOBAL HIDDEN    25 __dso_handle\n\
+      \    24: 0000000000001198     0 FUNC    GLOBAL HIDDEN    17 _fini\n    25: 0000000000000000    \
+      \ 0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\n    26: 0000000000000000     0 FUNC\
+      \    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\n    27: 0000000000001080    38 FUNC   \
+      \ GLOBAL DEFAULT   16 _start\n    28: 0000000000001000     0 FUNC    GLOBAL HIDDEN    12 _init\n\
+      \    29: 0000000000004010     0 OBJECT  GLOBAL HIDDEN    25 __TMC_END__"
+  expect_rule: D02
+  expect_verdict: NOT_AFFECTED
+  expect_justification: vulnerable_code_not_present
+- id: gt-065
+  source_type: inventory_binary
+  source: testdata/inventory/bin/symver_ssl_elf
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.2.0
+    component: *id003
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.2.0
+  inventories:
+  - file: symver_ssl_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'readelf/nm: OPENSSL_init_ssl UND; GENERAL_NAME_cmp absent (10/20)'
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (3)\n     2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\
+      \ (4)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (2)\n     7:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (2)\n     1: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS Scrt1.o\n     2: 000000000000038c    32 OBJECT  LOCAL  DEFAULT\
+      \    4 __abi_tag\n     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     4:\
+      \ 00000000000010b0     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones\n     5: 00000000000010e0\
+      \     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones\n     6: 0000000000001120     0 FUNC    LOCAL\
+      \  DEFAULT   16 __do_global_dtors_aux\n     7: 0000000000004010     1 OBJECT  LOCAL  DEFAULT   26\
+      \ completed.0\n     8: 0000000000003da8     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fini_array_entry\n\
+      \     9: 0000000000001160     0 FUNC    LOCAL  DEFAULT   16 frame_dummy\n    10: 0000000000003da0\
+      \     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_entry\n    11: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS sslver.c\n    12: 0000000000000000     0 FILE    LOCAL  DEFAULT\
+      \  ABS crtstuff.c\n    13: 00000000000020f8     0 OBJECT  LOCAL  DEFAULT   20 __FRAME_END__\n  \
+      \  14: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    16: 0000000000003db0     0 OBJECT\
+      \  LOCAL  DEFAULT   23 _DYNAMIC\n    17: 0000000000003fb0     0 OBJECT  LOCAL  DEFAULT   24 _GLOBAL_OFFSET_TABLE_\n\
+      \    20: 0000000000002000     4 OBJECT  GLOBAL DEFAULT   18 _IO_stdin_used\n    21: 0000000000000000\
+      \     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5\n    22: 0000000000001169    45 FUNC\
+      \    GLOBAL DEFAULT   16 main\n    23: 0000000000004008     0 OBJECT  GLOBAL HIDDEN    25 __dso_handle\n\
+      \    24: 0000000000001198     0 FUNC    GLOBAL HIDDEN    17 _fini\n    25: 0000000000000000    \
+      \ 0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\n    26: 0000000000000000     0 FUNC\
+      \    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\n    27: 0000000000001080    38 FUNC   \
+      \ GLOBAL DEFAULT   16 _start\n    28: 0000000000001000     0 FUNC    GLOBAL HIDDEN    12 _init\n\
+      \    29: 0000000000004010     0 OBJECT  GLOBAL HIDDEN    25 __TMC_END__"
+  expect_rule: D02
+  expect_verdict: NOT_AFFECTED
+  expect_justification: vulnerable_code_not_present
+- id: gt-066
+  source_type: inventory_binary
+  source: testdata/inventory/bin/symver_ssl_elf
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.2.0
+    component: *id003
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.2.0
+  inventories:
+  - file: symver_ssl_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'readelf/nm: OPENSSL_init_ssl UND; GENERAL_NAME_cmp absent (11/20)'
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (3)\n     2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\
+      \ (4)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (2)\n     7:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (2)\n     1: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS Scrt1.o\n     2: 000000000000038c    32 OBJECT  LOCAL  DEFAULT\
+      \    4 __abi_tag\n     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     4:\
+      \ 00000000000010b0     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones\n     5: 00000000000010e0\
+      \     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones\n     6: 0000000000001120     0 FUNC    LOCAL\
+      \  DEFAULT   16 __do_global_dtors_aux\n     7: 0000000000004010     1 OBJECT  LOCAL  DEFAULT   26\
+      \ completed.0\n     8: 0000000000003da8     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fini_array_entry\n\
+      \     9: 0000000000001160     0 FUNC    LOCAL  DEFAULT   16 frame_dummy\n    10: 0000000000003da0\
+      \     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_entry\n    11: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS sslver.c\n    12: 0000000000000000     0 FILE    LOCAL  DEFAULT\
+      \  ABS crtstuff.c\n    13: 00000000000020f8     0 OBJECT  LOCAL  DEFAULT   20 __FRAME_END__\n  \
+      \  14: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    16: 0000000000003db0     0 OBJECT\
+      \  LOCAL  DEFAULT   23 _DYNAMIC\n    17: 0000000000003fb0     0 OBJECT  LOCAL  DEFAULT   24 _GLOBAL_OFFSET_TABLE_\n\
+      \    20: 0000000000002000     4 OBJECT  GLOBAL DEFAULT   18 _IO_stdin_used\n    21: 0000000000000000\
+      \     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5\n    22: 0000000000001169    45 FUNC\
+      \    GLOBAL DEFAULT   16 main\n    23: 0000000000004008     0 OBJECT  GLOBAL HIDDEN    25 __dso_handle\n\
+      \    24: 0000000000001198     0 FUNC    GLOBAL HIDDEN    17 _fini\n    25: 0000000000000000    \
+      \ 0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\n    26: 0000000000000000     0 FUNC\
+      \    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\n    27: 0000000000001080    38 FUNC   \
+      \ GLOBAL DEFAULT   16 _start\n    28: 0000000000001000     0 FUNC    GLOBAL HIDDEN    12 _init\n\
+      \    29: 0000000000004010     0 OBJECT  GLOBAL HIDDEN    25 __TMC_END__"
+  expect_rule: D02
+  expect_verdict: NOT_AFFECTED
+  expect_justification: vulnerable_code_not_present
+- id: gt-067
+  source_type: inventory_binary
+  source: testdata/inventory/bin/symver_ssl_elf
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.2.0
+    component: *id003
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.2.0
+  inventories:
+  - file: symver_ssl_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'readelf/nm: OPENSSL_init_ssl UND; GENERAL_NAME_cmp absent (12/20)'
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (3)\n     2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\
+      \ (4)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (2)\n     7:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (2)\n     1: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS Scrt1.o\n     2: 000000000000038c    32 OBJECT  LOCAL  DEFAULT\
+      \    4 __abi_tag\n     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     4:\
+      \ 00000000000010b0     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones\n     5: 00000000000010e0\
+      \     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones\n     6: 0000000000001120     0 FUNC    LOCAL\
+      \  DEFAULT   16 __do_global_dtors_aux\n     7: 0000000000004010     1 OBJECT  LOCAL  DEFAULT   26\
+      \ completed.0\n     8: 0000000000003da8     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fini_array_entry\n\
+      \     9: 0000000000001160     0 FUNC    LOCAL  DEFAULT   16 frame_dummy\n    10: 0000000000003da0\
+      \     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_entry\n    11: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS sslver.c\n    12: 0000000000000000     0 FILE    LOCAL  DEFAULT\
+      \  ABS crtstuff.c\n    13: 00000000000020f8     0 OBJECT  LOCAL  DEFAULT   20 __FRAME_END__\n  \
+      \  14: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    16: 0000000000003db0     0 OBJECT\
+      \  LOCAL  DEFAULT   23 _DYNAMIC\n    17: 0000000000003fb0     0 OBJECT  LOCAL  DEFAULT   24 _GLOBAL_OFFSET_TABLE_\n\
+      \    20: 0000000000002000     4 OBJECT  GLOBAL DEFAULT   18 _IO_stdin_used\n    21: 0000000000000000\
+      \     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5\n    22: 0000000000001169    45 FUNC\
+      \    GLOBAL DEFAULT   16 main\n    23: 0000000000004008     0 OBJECT  GLOBAL HIDDEN    25 __dso_handle\n\
+      \    24: 0000000000001198     0 FUNC    GLOBAL HIDDEN    17 _fini\n    25: 0000000000000000    \
+      \ 0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\n    26: 0000000000000000     0 FUNC\
+      \    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\n    27: 0000000000001080    38 FUNC   \
+      \ GLOBAL DEFAULT   16 _start\n    28: 0000000000001000     0 FUNC    GLOBAL HIDDEN    12 _init\n\
+      \    29: 0000000000004010     0 OBJECT  GLOBAL HIDDEN    25 __TMC_END__"
+  expect_rule: D02
+  expect_verdict: NOT_AFFECTED
+  expect_justification: vulnerable_code_not_present
+- id: gt-068
+  source_type: inventory_binary
+  source: testdata/inventory/bin/symver_ssl_elf
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.2.0
+    component: *id003
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.2.0
+  inventories:
+  - file: symver_ssl_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'readelf/nm: OPENSSL_init_ssl UND; GENERAL_NAME_cmp absent (13/20)'
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (3)\n     2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\
+      \ (4)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (2)\n     7:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (2)\n     1: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS Scrt1.o\n     2: 000000000000038c    32 OBJECT  LOCAL  DEFAULT\
+      \    4 __abi_tag\n     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     4:\
+      \ 00000000000010b0     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones\n     5: 00000000000010e0\
+      \     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones\n     6: 0000000000001120     0 FUNC    LOCAL\
+      \  DEFAULT   16 __do_global_dtors_aux\n     7: 0000000000004010     1 OBJECT  LOCAL  DEFAULT   26\
+      \ completed.0\n     8: 0000000000003da8     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fini_array_entry\n\
+      \     9: 0000000000001160     0 FUNC    LOCAL  DEFAULT   16 frame_dummy\n    10: 0000000000003da0\
+      \     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_entry\n    11: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS sslver.c\n    12: 0000000000000000     0 FILE    LOCAL  DEFAULT\
+      \  ABS crtstuff.c\n    13: 00000000000020f8     0 OBJECT  LOCAL  DEFAULT   20 __FRAME_END__\n  \
+      \  14: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    16: 0000000000003db0     0 OBJECT\
+      \  LOCAL  DEFAULT   23 _DYNAMIC\n    17: 0000000000003fb0     0 OBJECT  LOCAL  DEFAULT   24 _GLOBAL_OFFSET_TABLE_\n\
+      \    20: 0000000000002000     4 OBJECT  GLOBAL DEFAULT   18 _IO_stdin_used\n    21: 0000000000000000\
+      \     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5\n    22: 0000000000001169    45 FUNC\
+      \    GLOBAL DEFAULT   16 main\n    23: 0000000000004008     0 OBJECT  GLOBAL HIDDEN    25 __dso_handle\n\
+      \    24: 0000000000001198     0 FUNC    GLOBAL HIDDEN    17 _fini\n    25: 0000000000000000    \
+      \ 0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\n    26: 0000000000000000     0 FUNC\
+      \    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\n    27: 0000000000001080    38 FUNC   \
+      \ GLOBAL DEFAULT   16 _start\n    28: 0000000000001000     0 FUNC    GLOBAL HIDDEN    12 _init\n\
+      \    29: 0000000000004010     0 OBJECT  GLOBAL HIDDEN    25 __TMC_END__"
+  expect_rule: D02
+  expect_verdict: NOT_AFFECTED
+  expect_justification: vulnerable_code_not_present
+- id: gt-069
+  source_type: inventory_binary
+  source: testdata/inventory/bin/symver_ssl_elf
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.2.0
+    component: *id003
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.2.0
+  inventories:
+  - file: symver_ssl_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'readelf/nm: OPENSSL_init_ssl UND; GENERAL_NAME_cmp absent (14/20)'
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (3)\n     2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\
+      \ (4)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (2)\n     7:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (2)\n     1: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS Scrt1.o\n     2: 000000000000038c    32 OBJECT  LOCAL  DEFAULT\
+      \    4 __abi_tag\n     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     4:\
+      \ 00000000000010b0     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones\n     5: 00000000000010e0\
+      \     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones\n     6: 0000000000001120     0 FUNC    LOCAL\
+      \  DEFAULT   16 __do_global_dtors_aux\n     7: 0000000000004010     1 OBJECT  LOCAL  DEFAULT   26\
+      \ completed.0\n     8: 0000000000003da8     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fini_array_entry\n\
+      \     9: 0000000000001160     0 FUNC    LOCAL  DEFAULT   16 frame_dummy\n    10: 0000000000003da0\
+      \     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_entry\n    11: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS sslver.c\n    12: 0000000000000000     0 FILE    LOCAL  DEFAULT\
+      \  ABS crtstuff.c\n    13: 00000000000020f8     0 OBJECT  LOCAL  DEFAULT   20 __FRAME_END__\n  \
+      \  14: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    16: 0000000000003db0     0 OBJECT\
+      \  LOCAL  DEFAULT   23 _DYNAMIC\n    17: 0000000000003fb0     0 OBJECT  LOCAL  DEFAULT   24 _GLOBAL_OFFSET_TABLE_\n\
+      \    20: 0000000000002000     4 OBJECT  GLOBAL DEFAULT   18 _IO_stdin_used\n    21: 0000000000000000\
+      \     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5\n    22: 0000000000001169    45 FUNC\
+      \    GLOBAL DEFAULT   16 main\n    23: 0000000000004008     0 OBJECT  GLOBAL HIDDEN    25 __dso_handle\n\
+      \    24: 0000000000001198     0 FUNC    GLOBAL HIDDEN    17 _fini\n    25: 0000000000000000    \
+      \ 0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\n    26: 0000000000000000     0 FUNC\
+      \    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\n    27: 0000000000001080    38 FUNC   \
+      \ GLOBAL DEFAULT   16 _start\n    28: 0000000000001000     0 FUNC    GLOBAL HIDDEN    12 _init\n\
+      \    29: 0000000000004010     0 OBJECT  GLOBAL HIDDEN    25 __TMC_END__"
+  expect_rule: D02
+  expect_verdict: NOT_AFFECTED
+  expect_justification: vulnerable_code_not_present
+- id: gt-070
+  source_type: inventory_binary
+  source: testdata/inventory/bin/symver_ssl_elf
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.2.0
+    component: *id003
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.2.0
+  inventories:
+  - file: symver_ssl_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'readelf/nm: OPENSSL_init_ssl UND; GENERAL_NAME_cmp absent (15/20)'
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (3)\n     2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\
+      \ (4)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (2)\n     7:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (2)\n     1: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS Scrt1.o\n     2: 000000000000038c    32 OBJECT  LOCAL  DEFAULT\
+      \    4 __abi_tag\n     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     4:\
+      \ 00000000000010b0     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones\n     5: 00000000000010e0\
+      \     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones\n     6: 0000000000001120     0 FUNC    LOCAL\
+      \  DEFAULT   16 __do_global_dtors_aux\n     7: 0000000000004010     1 OBJECT  LOCAL  DEFAULT   26\
+      \ completed.0\n     8: 0000000000003da8     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fini_array_entry\n\
+      \     9: 0000000000001160     0 FUNC    LOCAL  DEFAULT   16 frame_dummy\n    10: 0000000000003da0\
+      \     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_entry\n    11: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS sslver.c\n    12: 0000000000000000     0 FILE    LOCAL  DEFAULT\
+      \  ABS crtstuff.c\n    13: 00000000000020f8     0 OBJECT  LOCAL  DEFAULT   20 __FRAME_END__\n  \
+      \  14: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    16: 0000000000003db0     0 OBJECT\
+      \  LOCAL  DEFAULT   23 _DYNAMIC\n    17: 0000000000003fb0     0 OBJECT  LOCAL  DEFAULT   24 _GLOBAL_OFFSET_TABLE_\n\
+      \    20: 0000000000002000     4 OBJECT  GLOBAL DEFAULT   18 _IO_stdin_used\n    21: 0000000000000000\
+      \     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5\n    22: 0000000000001169    45 FUNC\
+      \    GLOBAL DEFAULT   16 main\n    23: 0000000000004008     0 OBJECT  GLOBAL HIDDEN    25 __dso_handle\n\
+      \    24: 0000000000001198     0 FUNC    GLOBAL HIDDEN    17 _fini\n    25: 0000000000000000    \
+      \ 0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\n    26: 0000000000000000     0 FUNC\
+      \    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\n    27: 0000000000001080    38 FUNC   \
+      \ GLOBAL DEFAULT   16 _start\n    28: 0000000000001000     0 FUNC    GLOBAL HIDDEN    12 _init\n\
+      \    29: 0000000000004010     0 OBJECT  GLOBAL HIDDEN    25 __TMC_END__"
+  expect_rule: D02
+  expect_verdict: NOT_AFFECTED
+  expect_justification: vulnerable_code_not_present
+- id: gt-071
+  source_type: inventory_binary
+  source: testdata/inventory/bin/symver_ssl_elf
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.2.0
+    component: *id003
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.2.0
+  inventories:
+  - file: symver_ssl_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'readelf/nm: OPENSSL_init_ssl UND; GENERAL_NAME_cmp absent (16/20)'
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (3)\n     2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\
+      \ (4)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (2)\n     7:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (2)\n     1: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS Scrt1.o\n     2: 000000000000038c    32 OBJECT  LOCAL  DEFAULT\
+      \    4 __abi_tag\n     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     4:\
+      \ 00000000000010b0     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones\n     5: 00000000000010e0\
+      \     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones\n     6: 0000000000001120     0 FUNC    LOCAL\
+      \  DEFAULT   16 __do_global_dtors_aux\n     7: 0000000000004010     1 OBJECT  LOCAL  DEFAULT   26\
+      \ completed.0\n     8: 0000000000003da8     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fini_array_entry\n\
+      \     9: 0000000000001160     0 FUNC    LOCAL  DEFAULT   16 frame_dummy\n    10: 0000000000003da0\
+      \     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_entry\n    11: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS sslver.c\n    12: 0000000000000000     0 FILE    LOCAL  DEFAULT\
+      \  ABS crtstuff.c\n    13: 00000000000020f8     0 OBJECT  LOCAL  DEFAULT   20 __FRAME_END__\n  \
+      \  14: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    16: 0000000000003db0     0 OBJECT\
+      \  LOCAL  DEFAULT   23 _DYNAMIC\n    17: 0000000000003fb0     0 OBJECT  LOCAL  DEFAULT   24 _GLOBAL_OFFSET_TABLE_\n\
+      \    20: 0000000000002000     4 OBJECT  GLOBAL DEFAULT   18 _IO_stdin_used\n    21: 0000000000000000\
+      \     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5\n    22: 0000000000001169    45 FUNC\
+      \    GLOBAL DEFAULT   16 main\n    23: 0000000000004008     0 OBJECT  GLOBAL HIDDEN    25 __dso_handle\n\
+      \    24: 0000000000001198     0 FUNC    GLOBAL HIDDEN    17 _fini\n    25: 0000000000000000    \
+      \ 0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\n    26: 0000000000000000     0 FUNC\
+      \    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\n    27: 0000000000001080    38 FUNC   \
+      \ GLOBAL DEFAULT   16 _start\n    28: 0000000000001000     0 FUNC    GLOBAL HIDDEN    12 _init\n\
+      \    29: 0000000000004010     0 OBJECT  GLOBAL HIDDEN    25 __TMC_END__"
+  expect_rule: D02
+  expect_verdict: NOT_AFFECTED
+  expect_justification: vulnerable_code_not_present
+- id: gt-072
+  source_type: inventory_binary
+  source: testdata/inventory/bin/symver_ssl_elf
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.2.0
+    component: *id003
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.2.0
+  inventories:
+  - file: symver_ssl_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'readelf/nm: OPENSSL_init_ssl UND; GENERAL_NAME_cmp absent (17/20)'
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (3)\n     2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\
+      \ (4)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (2)\n     7:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (2)\n     1: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS Scrt1.o\n     2: 000000000000038c    32 OBJECT  LOCAL  DEFAULT\
+      \    4 __abi_tag\n     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     4:\
+      \ 00000000000010b0     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones\n     5: 00000000000010e0\
+      \     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones\n     6: 0000000000001120     0 FUNC    LOCAL\
+      \  DEFAULT   16 __do_global_dtors_aux\n     7: 0000000000004010     1 OBJECT  LOCAL  DEFAULT   26\
+      \ completed.0\n     8: 0000000000003da8     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fini_array_entry\n\
+      \     9: 0000000000001160     0 FUNC    LOCAL  DEFAULT   16 frame_dummy\n    10: 0000000000003da0\
+      \     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_entry\n    11: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS sslver.c\n    12: 0000000000000000     0 FILE    LOCAL  DEFAULT\
+      \  ABS crtstuff.c\n    13: 00000000000020f8     0 OBJECT  LOCAL  DEFAULT   20 __FRAME_END__\n  \
+      \  14: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    16: 0000000000003db0     0 OBJECT\
+      \  LOCAL  DEFAULT   23 _DYNAMIC\n    17: 0000000000003fb0     0 OBJECT  LOCAL  DEFAULT   24 _GLOBAL_OFFSET_TABLE_\n\
+      \    20: 0000000000002000     4 OBJECT  GLOBAL DEFAULT   18 _IO_stdin_used\n    21: 0000000000000000\
+      \     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5\n    22: 0000000000001169    45 FUNC\
+      \    GLOBAL DEFAULT   16 main\n    23: 0000000000004008     0 OBJECT  GLOBAL HIDDEN    25 __dso_handle\n\
+      \    24: 0000000000001198     0 FUNC    GLOBAL HIDDEN    17 _fini\n    25: 0000000000000000    \
+      \ 0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\n    26: 0000000000000000     0 FUNC\
+      \    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\n    27: 0000000000001080    38 FUNC   \
+      \ GLOBAL DEFAULT   16 _start\n    28: 0000000000001000     0 FUNC    GLOBAL HIDDEN    12 _init\n\
+      \    29: 0000000000004010     0 OBJECT  GLOBAL HIDDEN    25 __TMC_END__"
+  expect_rule: D02
+  expect_verdict: NOT_AFFECTED
+  expect_justification: vulnerable_code_not_present
+- id: gt-073
+  source_type: inventory_binary
+  source: testdata/inventory/bin/symver_ssl_elf
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.2.0
+    component: *id003
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.2.0
+  inventories:
+  - file: symver_ssl_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'readelf/nm: OPENSSL_init_ssl UND; GENERAL_NAME_cmp absent (18/20)'
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (3)\n     2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\
+      \ (4)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (2)\n     7:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (2)\n     1: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS Scrt1.o\n     2: 000000000000038c    32 OBJECT  LOCAL  DEFAULT\
+      \    4 __abi_tag\n     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     4:\
+      \ 00000000000010b0     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones\n     5: 00000000000010e0\
+      \     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones\n     6: 0000000000001120     0 FUNC    LOCAL\
+      \  DEFAULT   16 __do_global_dtors_aux\n     7: 0000000000004010     1 OBJECT  LOCAL  DEFAULT   26\
+      \ completed.0\n     8: 0000000000003da8     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fini_array_entry\n\
+      \     9: 0000000000001160     0 FUNC    LOCAL  DEFAULT   16 frame_dummy\n    10: 0000000000003da0\
+      \     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_entry\n    11: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS sslver.c\n    12: 0000000000000000     0 FILE    LOCAL  DEFAULT\
+      \  ABS crtstuff.c\n    13: 00000000000020f8     0 OBJECT  LOCAL  DEFAULT   20 __FRAME_END__\n  \
+      \  14: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    16: 0000000000003db0     0 OBJECT\
+      \  LOCAL  DEFAULT   23 _DYNAMIC\n    17: 0000000000003fb0     0 OBJECT  LOCAL  DEFAULT   24 _GLOBAL_OFFSET_TABLE_\n\
+      \    20: 0000000000002000     4 OBJECT  GLOBAL DEFAULT   18 _IO_stdin_used\n    21: 0000000000000000\
+      \     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5\n    22: 0000000000001169    45 FUNC\
+      \    GLOBAL DEFAULT   16 main\n    23: 0000000000004008     0 OBJECT  GLOBAL HIDDEN    25 __dso_handle\n\
+      \    24: 0000000000001198     0 FUNC    GLOBAL HIDDEN    17 _fini\n    25: 0000000000000000    \
+      \ 0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\n    26: 0000000000000000     0 FUNC\
+      \    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\n    27: 0000000000001080    38 FUNC   \
+      \ GLOBAL DEFAULT   16 _start\n    28: 0000000000001000     0 FUNC    GLOBAL HIDDEN    12 _init\n\
+      \    29: 0000000000004010     0 OBJECT  GLOBAL HIDDEN    25 __TMC_END__"
+  expect_rule: D02
+  expect_verdict: NOT_AFFECTED
+  expect_justification: vulnerable_code_not_present
+- id: gt-074
+  source_type: inventory_binary
+  source: testdata/inventory/bin/symver_ssl_elf
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.2.0
+    component: *id003
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.2.0
+  inventories:
+  - file: symver_ssl_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'readelf/nm: OPENSSL_init_ssl UND; GENERAL_NAME_cmp absent (19/20)'
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (3)\n     2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\
+      \ (4)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (2)\n     7:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (2)\n     1: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS Scrt1.o\n     2: 000000000000038c    32 OBJECT  LOCAL  DEFAULT\
+      \    4 __abi_tag\n     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     4:\
+      \ 00000000000010b0     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones\n     5: 00000000000010e0\
+      \     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones\n     6: 0000000000001120     0 FUNC    LOCAL\
+      \  DEFAULT   16 __do_global_dtors_aux\n     7: 0000000000004010     1 OBJECT  LOCAL  DEFAULT   26\
+      \ completed.0\n     8: 0000000000003da8     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fini_array_entry\n\
+      \     9: 0000000000001160     0 FUNC    LOCAL  DEFAULT   16 frame_dummy\n    10: 0000000000003da0\
+      \     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_entry\n    11: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS sslver.c\n    12: 0000000000000000     0 FILE    LOCAL  DEFAULT\
+      \  ABS crtstuff.c\n    13: 00000000000020f8     0 OBJECT  LOCAL  DEFAULT   20 __FRAME_END__\n  \
+      \  14: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    16: 0000000000003db0     0 OBJECT\
+      \  LOCAL  DEFAULT   23 _DYNAMIC\n    17: 0000000000003fb0     0 OBJECT  LOCAL  DEFAULT   24 _GLOBAL_OFFSET_TABLE_\n\
+      \    20: 0000000000002000     4 OBJECT  GLOBAL DEFAULT   18 _IO_stdin_used\n    21: 0000000000000000\
+      \     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5\n    22: 0000000000001169    45 FUNC\
+      \    GLOBAL DEFAULT   16 main\n    23: 0000000000004008     0 OBJECT  GLOBAL HIDDEN    25 __dso_handle\n\
+      \    24: 0000000000001198     0 FUNC    GLOBAL HIDDEN    17 _fini\n    25: 0000000000000000    \
+      \ 0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\n    26: 0000000000000000     0 FUNC\
+      \    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\n    27: 0000000000001080    38 FUNC   \
+      \ GLOBAL DEFAULT   16 _start\n    28: 0000000000001000     0 FUNC    GLOBAL HIDDEN    12 _init\n\
+      \    29: 0000000000004010     0 OBJECT  GLOBAL HIDDEN    25 __TMC_END__"
+  expect_rule: D02
+  expect_verdict: NOT_AFFECTED
+  expect_justification: vulnerable_code_not_present
+- id: gt-075
+  source_type: inventory_binary
+  source: testdata/inventory/bin/symver_ssl_elf
+  finding:
+    cve: CVE-2023-0286
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.2.0
+    component: *id003
+    entry:
+      cve: CVE-2023-0286
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: GENERAL_NAME_cmp
+        confidence: definitive
+      manifest_version: 0.2.0
+  inventories:
+  - file: symver_ssl_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'readelf/nm: OPENSSL_init_ssl UND; GENERAL_NAME_cmp absent (20/20)'
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (3)\n     2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\
+      \ (4)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (2)\n     7:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (2)\n     1: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS Scrt1.o\n     2: 000000000000038c    32 OBJECT  LOCAL  DEFAULT\
+      \    4 __abi_tag\n     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     4:\
+      \ 00000000000010b0     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones\n     5: 00000000000010e0\
+      \     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones\n     6: 0000000000001120     0 FUNC    LOCAL\
+      \  DEFAULT   16 __do_global_dtors_aux\n     7: 0000000000004010     1 OBJECT  LOCAL  DEFAULT   26\
+      \ completed.0\n     8: 0000000000003da8     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fini_array_entry\n\
+      \     9: 0000000000001160     0 FUNC    LOCAL  DEFAULT   16 frame_dummy\n    10: 0000000000003da0\
+      \     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_entry\n    11: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS sslver.c\n    12: 0000000000000000     0 FILE    LOCAL  DEFAULT\
+      \  ABS crtstuff.c\n    13: 00000000000020f8     0 OBJECT  LOCAL  DEFAULT   20 __FRAME_END__\n  \
+      \  14: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    16: 0000000000003db0     0 OBJECT\
+      \  LOCAL  DEFAULT   23 _DYNAMIC\n    17: 0000000000003fb0     0 OBJECT  LOCAL  DEFAULT   24 _GLOBAL_OFFSET_TABLE_\n\
+      \    20: 0000000000002000     4 OBJECT  GLOBAL DEFAULT   18 _IO_stdin_used\n    21: 0000000000000000\
+      \     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5\n    22: 0000000000001169    45 FUNC\
+      \    GLOBAL DEFAULT   16 main\n    23: 0000000000004008     0 OBJECT  GLOBAL HIDDEN    25 __dso_handle\n\
+      \    24: 0000000000001198     0 FUNC    GLOBAL HIDDEN    17 _fini\n    25: 0000000000000000    \
+      \ 0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\n    26: 0000000000000000     0 FUNC\
+      \    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\n    27: 0000000000001080    38 FUNC   \
+      \ GLOBAL DEFAULT   16 _start\n    28: 0000000000001000     0 FUNC    GLOBAL HIDDEN    12 _init\n\
+      \    29: 0000000000004010     0 OBJECT  GLOBAL HIDDEN    25 __TMC_END__"
+  expect_rule: D02
+  expect_verdict: NOT_AFFECTED
+  expect_justification: vulnerable_code_not_present
+- id: gt-076
+  source_type: inventory_binary
+  source: testdata/inventory/bin/static_stripped_elf
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.2.0
+    component: *id001
+    entry: *id002
+  inventories:
+  - file: static_stripped_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'stripped+static: symbol_table_unusable before component ID'
+  expect_rule: D03
+  expect_verdict: UNDER_INVESTIGATION
+  expect_reason: symbol_table_unusable
+- id: gt-077
+  source_type: inventory_binary
+  source: testdata/inventory/bin/static_stripped_elf
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.2.0
+    component: *id001
+    entry: *id002
+  inventories:
+  - file: static_stripped_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: repeat static stripped D03
+  expect_rule: D03
+  expect_verdict: UNDER_INVESTIGATION
+  expect_reason: symbol_table_unusable
+- id: gt-078
+  source_type: inventory_binary
+  source: testdata/inventory/bin/truncated_elf
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.2.0
+    component: *id001
+    entry: *id002
+  inventories:
+  - file: truncated_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'truncated ELF: symbol_table_unusable'
+  expect_rule: D03
+  expect_verdict: UNDER_INVESTIGATION
+  expect_reason: symbol_table_unusable
+- id: gt-079
+  source_type: inventory_binary
+  source: testdata/inventory/bin/sample_pe.exe
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.2.0
+    component: *id001
+    entry: *id002
+  inventories:
+  - file: sample_pe.exe
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'PE: symbol_table_unusable for ELF rules'
+  expect_rule: D01
+  expect_verdict: NOT_AFFECTED
+  expect_justification: component_not_present
+- id: gt-080
+  source_type: inventory_binary
+  source: testdata/inventory/bin/dyn_stripped_elf
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.2.0
+    component: *id001
+    entry: *id002
+  inventories:
+  - file: dyn_stripped_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: stripped_insufficient_dynsym when component linked
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (2)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (3)\n     6:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (3)"
+  expect_rule: D01
+  expect_verdict: NOT_AFFECTED
+  expect_justification: component_not_present
+- id: gt-081
+  source_type: inventory_binary
+  source: testdata/inventory/bin/sample_pe.exe
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.2.0
+    component: *id001
+    entry: *id002
+  inventories:
+  - file: sample_pe.exe
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: PE D03 repeat
+  expect_rule: D01
+  expect_verdict: NOT_AFFECTED
+  expect_justification: component_not_present
+- id: gt-082
+  source_type: inventory_binary
+  source: testdata/inventory/bin/sample_macho
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.2.0
+    component: *id001
+    entry: *id002
+  inventories:
+  - file: sample_macho
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: Mach-O identity_unverified at NameVersionOnly
+  expect_rule: D01
+  expect_verdict: NOT_AFFECTED
+  expect_justification: component_not_present
+- id: gt-083
+  source_type: inventory_binary
+  source: testdata/inventory/bin/sample_macho_fat
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.2.0
+    component: *id001
+    entry: *id002
+  inventories:
+  - file: sample_macho_fat
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: fat Mach-O identity_unverified
+  expect_rule: D01
+  expect_verdict: NOT_AFFECTED
+  expect_justification: component_not_present
+- id: gt-084
+  source_type: inventory_binary
+  source: testdata/inventory/bin/symver_ssl_elf
+  finding:
+    cve: CVE-1999-0001
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.2.0
+    component: *id001
+    entry:
+      cve: CVE-1999-0001
+      affected_versions:
+      - '1.0'
+      vulnerable_symbols:
+      - name: inflate
+        confidence: definitive
+      manifest_version: 0.2.0
+  inventories:
+  - file: symver_ssl_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: manifest_no_entry for unknown CVE
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (3)\n     2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\
+      \ (4)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (2)\n     7:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (2)\n     1: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS Scrt1.o\n     2: 000000000000038c    32 OBJECT  LOCAL  DEFAULT\
+      \    4 __abi_tag\n     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     4:\
+      \ 00000000000010b0     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones\n     5: 00000000000010e0\
+      \     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones\n     6: 0000000000001120     0 FUNC    LOCAL\
+      \  DEFAULT   16 __do_global_dtors_aux\n     7: 0000000000004010     1 OBJECT  LOCAL  DEFAULT   26\
+      \ completed.0\n     8: 0000000000003da8     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fini_array_entry\n\
+      \     9: 0000000000001160     0 FUNC    LOCAL  DEFAULT   16 frame_dummy\n    10: 0000000000003da0\
+      \     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_entry\n    11: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS sslver.c\n    12: 0000000000000000     0 FILE    LOCAL  DEFAULT\
+      \  ABS crtstuff.c\n    13: 00000000000020f8     0 OBJECT  LOCAL  DEFAULT   20 __FRAME_END__\n  \
+      \  14: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    16: 0000000000003db0     0 OBJECT\
+      \  LOCAL  DEFAULT   23 _DYNAMIC\n    17: 0000000000003fb0     0 OBJECT  LOCAL  DEFAULT   24 _GLOBAL_OFFSET_TABLE_\n\
+      \    20: 0000000000002000     4 OBJECT  GLOBAL DEFAULT   18 _IO_stdin_used\n    21: 0000000000000000\
+      \     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5\n    22: 0000000000001169    45 FUNC\
+      \    GLOBAL DEFAULT   16 main\n    23: 0000000000004008     0 OBJECT  GLOBAL HIDDEN    25 __dso_handle\n\
+      \    24: 0000000000001198     0 FUNC    GLOBAL HIDDEN    17 _fini\n    25: 0000000000000000    \
+      \ 0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\n    26: 0000000000000000     0 FUNC\
+      \    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\n    27: 0000000000001080    38 FUNC   \
+      \ GLOBAL DEFAULT   16 _start\n    28: 0000000000001000     0 FUNC    GLOBAL HIDDEN    12 _init\n\
+      \    29: 0000000000004010     0 OBJECT  GLOBAL HIDDEN    25 __TMC_END__"
+  expect_rule: D01
+  expect_verdict: NOT_AFFECTED
+  expect_justification: component_not_present
+- id: gt-085
+  source_type: inventory_binary
+  source: testdata/inventory/bin/dyn_unstripped_elf
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/unknown@9.9.9
+  manifest:
+    version: 0.2.0
+    component: *id001
+    entry: *id002
+  inventories:
+  - file: dyn_unstripped_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: purl_match_insufficient
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (2)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (3)\n     6:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (3)\n     1: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS Scrt1.o\n     2: 000000000000038c    32 OBJECT  LOCAL  DEFAULT\
+      \    4 __abi_tag\n     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     4:\
+      \ 0000000000001090     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones\n     5: 00000000000010c0\
+      \     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones\n     6: 0000000000001100     0 FUNC    LOCAL\
+      \  DEFAULT   16 __do_global_dtors_aux\n     7: 0000000000004018     1 OBJECT  LOCAL  DEFAULT   26\
+      \ completed.0\n     8: 0000000000003dc0     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fini_array_entry\n\
+      \     9: 0000000000001140     0 FUNC    LOCAL  DEFAULT   16 frame_dummy\n    10: 0000000000003db8\
+      \     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_entry\n    11: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS dyn.c\n    12: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS\
+      \ crtstuff.c\n    13: 0000000000002120     0 OBJECT  LOCAL  DEFAULT   20 __FRAME_END__\n    14:\
+      \ 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    15: 0000000000003dc8     0 OBJECT  LOCAL\
+      \  DEFAULT   23 _DYNAMIC\n    17: 0000000000003fb8     0 OBJECT  LOCAL  DEFAULT   24 _GLOBAL_OFFSET_TABLE_\n\
+      \    18: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\n    21:\
+      \ 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5\n    23: 0000000000001180\
+      \     0 FUNC    GLOBAL HIDDEN    17 _fini\n    26: 0000000000004008     0 OBJECT  GLOBAL HIDDEN\
+      \    25 __dso_handle\n    27: 0000000000002000     4 OBJECT  GLOBAL DEFAULT   18 _IO_stdin_used\n\
+      \    28: 0000000000001149    19 FUNC    GLOBAL DEFAULT   16 lading_export\n    30: 0000000000001060\
+      \    38 FUNC    GLOBAL DEFAULT   16 _start\n    32: 0000000000004010     8 OBJECT  GLOBAL DEFAULT\
+      \   25 lading_marker\n    33: 000000000000115c    35 FUNC    GLOBAL DEFAULT   16 main\n    34: 0000000000004018\
+      \     0 OBJECT  GLOBAL HIDDEN    25 __TMC_END__\n    36: 0000000000000000     0 FUNC    WEAK   DEFAULT\
+      \  UND __cxa_finalize@GLIBC_2.2.5"
+  expect_rule: D03
+  expect_verdict: UNDER_INVESTIGATION
+  expect_reason: purl_match_insufficient
+- id: gt-086
+  source_type: inventory_binary
+  source: testdata/inventory/bin/dyn_unstripped_elf
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.2.0
+    component: *id001
+    entry:
+      cve: CVE-2022-37434
+      affected_versions:
+      - 1.2.12
+      vulnerable_symbols:
+      - name: inflate
+        confidence: probable
+      manifest_version: 0.2.0
+  inventories:
+  - file: dyn_unstripped_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: manifest_probable_only
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (2)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (3)\n     6:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (3)\n     1: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS Scrt1.o\n     2: 000000000000038c    32 OBJECT  LOCAL  DEFAULT\
+      \    4 __abi_tag\n     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     4:\
+      \ 0000000000001090     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones\n     5: 00000000000010c0\
+      \     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones\n     6: 0000000000001100     0 FUNC    LOCAL\
+      \  DEFAULT   16 __do_global_dtors_aux\n     7: 0000000000004018     1 OBJECT  LOCAL  DEFAULT   26\
+      \ completed.0\n     8: 0000000000003dc0     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fini_array_entry\n\
+      \     9: 0000000000001140     0 FUNC    LOCAL  DEFAULT   16 frame_dummy\n    10: 0000000000003db8\
+      \     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_entry\n    11: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS dyn.c\n    12: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS\
+      \ crtstuff.c\n    13: 0000000000002120     0 OBJECT  LOCAL  DEFAULT   20 __FRAME_END__\n    14:\
+      \ 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    15: 0000000000003dc8     0 OBJECT  LOCAL\
+      \  DEFAULT   23 _DYNAMIC\n    17: 0000000000003fb8     0 OBJECT  LOCAL  DEFAULT   24 _GLOBAL_OFFSET_TABLE_\n\
+      \    18: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\n    21:\
+      \ 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5\n    23: 0000000000001180\
+      \     0 FUNC    GLOBAL HIDDEN    17 _fini\n    26: 0000000000004008     0 OBJECT  GLOBAL HIDDEN\
+      \    25 __dso_handle\n    27: 0000000000002000     4 OBJECT  GLOBAL DEFAULT   18 _IO_stdin_used\n\
+      \    28: 0000000000001149    19 FUNC    GLOBAL DEFAULT   16 lading_export\n    30: 0000000000001060\
+      \    38 FUNC    GLOBAL DEFAULT   16 _start\n    32: 0000000000004010     8 OBJECT  GLOBAL DEFAULT\
+      \   25 lading_marker\n    33: 000000000000115c    35 FUNC    GLOBAL DEFAULT   16 main\n    34: 0000000000004018\
+      \     0 OBJECT  GLOBAL HIDDEN    25 __TMC_END__\n    36: 0000000000000000     0 FUNC    WEAK   DEFAULT\
+      \  UND __cxa_finalize@GLIBC_2.2.5"
+  expect_rule: D03
+  expect_verdict: UNDER_INVESTIGATION
+  expect_reason: manifest_probable_only
+- id: gt-087
+  source_type: inventory_binary
+  source: testdata/inventory/bin/static_stripped_elf
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.2.0
+    component: *id001
+    entry: *id002
+  inventories:
+  - file: static_stripped_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: D03 pad
+  expect_rule: D03
+  expect_verdict: UNDER_INVESTIGATION
+  expect_reason: symbol_table_unusable
+- id: gt-088
+  source_type: inventory_binary
+  source: testdata/inventory/bin/truncated_elf
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.2.0
+    component: *id001
+    entry: *id002
+  inventories:
+  - file: truncated_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: D03 pad
+  expect_rule: D03
+  expect_verdict: UNDER_INVESTIGATION
+  expect_reason: symbol_table_unusable
+- id: gt-089
+  source_type: inventory_binary
+  source: testdata/inventory/bin/sample_pe.exe
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.2.0
+    component: *id001
+    entry: *id002
+  inventories:
+  - file: sample_pe.exe
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: D03 pad
+  expect_rule: D01
+  expect_verdict: NOT_AFFECTED
+  expect_justification: component_not_present
+- id: gt-090
+  source_type: inventory_binary
+  source: testdata/inventory/bin/static_stripped_elf
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.2.0
+    component: *id001
+    entry: *id002
+  inventories:
+  - file: static_stripped_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: D03 pad
+  expect_rule: D03
+  expect_verdict: UNDER_INVESTIGATION
+  expect_reason: symbol_table_unusable
+- id: gt-091
+  source_type: inventory_binary
+  source: testdata/inventory/bin/truncated_elf
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.2.0
+    component: *id001
+    entry: *id002
+  inventories:
+  - file: truncated_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: D03 pad
+  expect_rule: D03
+  expect_verdict: UNDER_INVESTIGATION
+  expect_reason: symbol_table_unusable
+- id: gt-092
+  source_type: inventory_binary
+  source: testdata/inventory/bin/sample_pe.exe
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.2.0
+    component: *id001
+    entry: *id002
+  inventories:
+  - file: sample_pe.exe
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: D03 pad
+  expect_rule: D01
+  expect_verdict: NOT_AFFECTED
+  expect_justification: component_not_present
+- id: gt-093
+  source_type: inventory_binary
+  source: testdata/inventory/bin/static_stripped_elf
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.2.0
+    component: *id001
+    entry: *id002
+  inventories:
+  - file: static_stripped_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: D03 pad
+  expect_rule: D03
+  expect_verdict: UNDER_INVESTIGATION
+  expect_reason: symbol_table_unusable
+- id: gt-094
+  source_type: inventory_binary
+  source: testdata/inventory/bin/truncated_elf
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.2.0
+    component: *id001
+    entry: *id002
+  inventories:
+  - file: truncated_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: D03 pad
+  expect_rule: D03
+  expect_verdict: UNDER_INVESTIGATION
+  expect_reason: symbol_table_unusable
+- id: gt-095
+  source_type: inventory_binary
+  source: testdata/inventory/bin/sample_pe.exe
+  finding:
+    cve: CVE-2022-37434
+    component_purl: pkg:generic/zlib@1.2.12
+  manifest:
+    version: 0.2.0
+    component: *id001
+    entry: *id002
+  inventories:
+  - file: sample_pe.exe
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: D03 pad
+  expect_rule: D01
+  expect_verdict: NOT_AFFECTED
+  expect_justification: component_not_present
+- id: gt-096
+  source_type: inventory_binary
+  source: testdata/inventory/bin/symver_ssl_elf
+  finding:
+    cve: CVE-2023-SSL-INIT
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.2.0
+    component: *id003
+    entry:
+      cve: CVE-2023-SSL-INIT
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: OPENSSL_init_ssl
+        confidence: definitive
+      manifest_version: 0.2.0
+  inventories:
+  - file: symver_ssl_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'readelf: UND OPENSSL_init_ssl@OPENSSL_3.0.0 (1/5)'
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (3)\n     2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\
+      \ (4)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (2)\n     7:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (2)\n     1: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS Scrt1.o\n     2: 000000000000038c    32 OBJECT  LOCAL  DEFAULT\
+      \    4 __abi_tag\n     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     4:\
+      \ 00000000000010b0     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones\n     5: 00000000000010e0\
+      \     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones\n     6: 0000000000001120     0 FUNC    LOCAL\
+      \  DEFAULT   16 __do_global_dtors_aux\n     7: 0000000000004010     1 OBJECT  LOCAL  DEFAULT   26\
+      \ completed.0\n     8: 0000000000003da8     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fini_array_entry\n\
+      \     9: 0000000000001160     0 FUNC    LOCAL  DEFAULT   16 frame_dummy\n    10: 0000000000003da0\
+      \     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_entry\n    11: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS sslver.c\n    12: 0000000000000000     0 FILE    LOCAL  DEFAULT\
+      \  ABS crtstuff.c\n    13: 00000000000020f8     0 OBJECT  LOCAL  DEFAULT   20 __FRAME_END__\n  \
+      \  14: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    16: 0000000000003db0     0 OBJECT\
+      \  LOCAL  DEFAULT   23 _DYNAMIC\n    17: 0000000000003fb0     0 OBJECT  LOCAL  DEFAULT   24 _GLOBAL_OFFSET_TABLE_\n\
+      \    20: 0000000000002000     4 OBJECT  GLOBAL DEFAULT   18 _IO_stdin_used\n    21: 0000000000000000\
+      \     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5\n    22: 0000000000001169    45 FUNC\
+      \    GLOBAL DEFAULT   16 main\n    23: 0000000000004008     0 OBJECT  GLOBAL HIDDEN    25 __dso_handle\n\
+      \    24: 0000000000001198     0 FUNC    GLOBAL HIDDEN    17 _fini\n    25: 0000000000000000    \
+      \ 0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\n    26: 0000000000000000     0 FUNC\
+      \    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\n    27: 0000000000001080    38 FUNC   \
+      \ GLOBAL DEFAULT   16 _start\n    28: 0000000000001000     0 FUNC    GLOBAL HIDDEN    12 _init\n\
+      \    29: 0000000000004010     0 OBJECT  GLOBAL HIDDEN    25 __TMC_END__"
+  expect_rule: D04
+  expect_verdict: AFFECTED
+- id: gt-097
+  source_type: inventory_binary
+  source: testdata/inventory/bin/symver_ssl_elf
+  finding:
+    cve: CVE-2023-SSL-INIT
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.2.0
+    component: *id003
+    entry:
+      cve: CVE-2023-SSL-INIT
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: OPENSSL_init_ssl
+        confidence: definitive
+      manifest_version: 0.2.0
+  inventories:
+  - file: symver_ssl_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'readelf: UND OPENSSL_init_ssl@OPENSSL_3.0.0 (2/5)'
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (3)\n     2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\
+      \ (4)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (2)\n     7:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (2)\n     1: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS Scrt1.o\n     2: 000000000000038c    32 OBJECT  LOCAL  DEFAULT\
+      \    4 __abi_tag\n     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     4:\
+      \ 00000000000010b0     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones\n     5: 00000000000010e0\
+      \     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones\n     6: 0000000000001120     0 FUNC    LOCAL\
+      \  DEFAULT   16 __do_global_dtors_aux\n     7: 0000000000004010     1 OBJECT  LOCAL  DEFAULT   26\
+      \ completed.0\n     8: 0000000000003da8     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fini_array_entry\n\
+      \     9: 0000000000001160     0 FUNC    LOCAL  DEFAULT   16 frame_dummy\n    10: 0000000000003da0\
+      \     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_entry\n    11: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS sslver.c\n    12: 0000000000000000     0 FILE    LOCAL  DEFAULT\
+      \  ABS crtstuff.c\n    13: 00000000000020f8     0 OBJECT  LOCAL  DEFAULT   20 __FRAME_END__\n  \
+      \  14: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    16: 0000000000003db0     0 OBJECT\
+      \  LOCAL  DEFAULT   23 _DYNAMIC\n    17: 0000000000003fb0     0 OBJECT  LOCAL  DEFAULT   24 _GLOBAL_OFFSET_TABLE_\n\
+      \    20: 0000000000002000     4 OBJECT  GLOBAL DEFAULT   18 _IO_stdin_used\n    21: 0000000000000000\
+      \     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5\n    22: 0000000000001169    45 FUNC\
+      \    GLOBAL DEFAULT   16 main\n    23: 0000000000004008     0 OBJECT  GLOBAL HIDDEN    25 __dso_handle\n\
+      \    24: 0000000000001198     0 FUNC    GLOBAL HIDDEN    17 _fini\n    25: 0000000000000000    \
+      \ 0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\n    26: 0000000000000000     0 FUNC\
+      \    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\n    27: 0000000000001080    38 FUNC   \
+      \ GLOBAL DEFAULT   16 _start\n    28: 0000000000001000     0 FUNC    GLOBAL HIDDEN    12 _init\n\
+      \    29: 0000000000004010     0 OBJECT  GLOBAL HIDDEN    25 __TMC_END__"
+  expect_rule: D04
+  expect_verdict: AFFECTED
+- id: gt-098
+  source_type: inventory_binary
+  source: testdata/inventory/bin/symver_ssl_elf
+  finding:
+    cve: CVE-2023-SSL-INIT
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.2.0
+    component: *id003
+    entry:
+      cve: CVE-2023-SSL-INIT
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: OPENSSL_init_ssl
+        confidence: definitive
+      manifest_version: 0.2.0
+  inventories:
+  - file: symver_ssl_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'readelf: UND OPENSSL_init_ssl@OPENSSL_3.0.0 (3/5)'
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (3)\n     2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\
+      \ (4)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (2)\n     7:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (2)\n     1: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS Scrt1.o\n     2: 000000000000038c    32 OBJECT  LOCAL  DEFAULT\
+      \    4 __abi_tag\n     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     4:\
+      \ 00000000000010b0     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones\n     5: 00000000000010e0\
+      \     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones\n     6: 0000000000001120     0 FUNC    LOCAL\
+      \  DEFAULT   16 __do_global_dtors_aux\n     7: 0000000000004010     1 OBJECT  LOCAL  DEFAULT   26\
+      \ completed.0\n     8: 0000000000003da8     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fini_array_entry\n\
+      \     9: 0000000000001160     0 FUNC    LOCAL  DEFAULT   16 frame_dummy\n    10: 0000000000003da0\
+      \     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_entry\n    11: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS sslver.c\n    12: 0000000000000000     0 FILE    LOCAL  DEFAULT\
+      \  ABS crtstuff.c\n    13: 00000000000020f8     0 OBJECT  LOCAL  DEFAULT   20 __FRAME_END__\n  \
+      \  14: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    16: 0000000000003db0     0 OBJECT\
+      \  LOCAL  DEFAULT   23 _DYNAMIC\n    17: 0000000000003fb0     0 OBJECT  LOCAL  DEFAULT   24 _GLOBAL_OFFSET_TABLE_\n\
+      \    20: 0000000000002000     4 OBJECT  GLOBAL DEFAULT   18 _IO_stdin_used\n    21: 0000000000000000\
+      \     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5\n    22: 0000000000001169    45 FUNC\
+      \    GLOBAL DEFAULT   16 main\n    23: 0000000000004008     0 OBJECT  GLOBAL HIDDEN    25 __dso_handle\n\
+      \    24: 0000000000001198     0 FUNC    GLOBAL HIDDEN    17 _fini\n    25: 0000000000000000    \
+      \ 0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\n    26: 0000000000000000     0 FUNC\
+      \    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\n    27: 0000000000001080    38 FUNC   \
+      \ GLOBAL DEFAULT   16 _start\n    28: 0000000000001000     0 FUNC    GLOBAL HIDDEN    12 _init\n\
+      \    29: 0000000000004010     0 OBJECT  GLOBAL HIDDEN    25 __TMC_END__"
+  expect_rule: D04
+  expect_verdict: AFFECTED
+- id: gt-099
+  source_type: inventory_binary
+  source: testdata/inventory/bin/symver_ssl_elf
+  finding:
+    cve: CVE-2023-SSL-INIT
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.2.0
+    component: *id003
+    entry:
+      cve: CVE-2023-SSL-INIT
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: OPENSSL_init_ssl
+        confidence: definitive
+      manifest_version: 0.2.0
+  inventories:
+  - file: symver_ssl_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'readelf: UND OPENSSL_init_ssl@OPENSSL_3.0.0 (4/5)'
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (3)\n     2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\
+      \ (4)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (2)\n     7:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (2)\n     1: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS Scrt1.o\n     2: 000000000000038c    32 OBJECT  LOCAL  DEFAULT\
+      \    4 __abi_tag\n     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     4:\
+      \ 00000000000010b0     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones\n     5: 00000000000010e0\
+      \     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones\n     6: 0000000000001120     0 FUNC    LOCAL\
+      \  DEFAULT   16 __do_global_dtors_aux\n     7: 0000000000004010     1 OBJECT  LOCAL  DEFAULT   26\
+      \ completed.0\n     8: 0000000000003da8     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fini_array_entry\n\
+      \     9: 0000000000001160     0 FUNC    LOCAL  DEFAULT   16 frame_dummy\n    10: 0000000000003da0\
+      \     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_entry\n    11: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS sslver.c\n    12: 0000000000000000     0 FILE    LOCAL  DEFAULT\
+      \  ABS crtstuff.c\n    13: 00000000000020f8     0 OBJECT  LOCAL  DEFAULT   20 __FRAME_END__\n  \
+      \  14: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    16: 0000000000003db0     0 OBJECT\
+      \  LOCAL  DEFAULT   23 _DYNAMIC\n    17: 0000000000003fb0     0 OBJECT  LOCAL  DEFAULT   24 _GLOBAL_OFFSET_TABLE_\n\
+      \    20: 0000000000002000     4 OBJECT  GLOBAL DEFAULT   18 _IO_stdin_used\n    21: 0000000000000000\
+      \     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5\n    22: 0000000000001169    45 FUNC\
+      \    GLOBAL DEFAULT   16 main\n    23: 0000000000004008     0 OBJECT  GLOBAL HIDDEN    25 __dso_handle\n\
+      \    24: 0000000000001198     0 FUNC    GLOBAL HIDDEN    17 _fini\n    25: 0000000000000000    \
+      \ 0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\n    26: 0000000000000000     0 FUNC\
+      \    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\n    27: 0000000000001080    38 FUNC   \
+      \ GLOBAL DEFAULT   16 _start\n    28: 0000000000001000     0 FUNC    GLOBAL HIDDEN    12 _init\n\
+      \    29: 0000000000004010     0 OBJECT  GLOBAL HIDDEN    25 __TMC_END__"
+  expect_rule: D04
+  expect_verdict: AFFECTED
+- id: gt-100
+  source_type: inventory_binary
+  source: testdata/inventory/bin/symver_ssl_elf
+  finding:
+    cve: CVE-2023-SSL-INIT
+    component_purl: pkg:generic/openssl@3.0.7
+  manifest:
+    version: 0.2.0
+    component: *id003
+    entry:
+      cve: CVE-2023-SSL-INIT
+      affected_versions:
+      - 3.0.7
+      vulnerable_symbols:
+      - name: OPENSSL_init_ssl
+        confidence: definitive
+      manifest_version: 0.2.0
+  inventories:
+  - file: symver_ssl_elf
+  verification:
+    method: readelf_nm
+    reviewed_by: gautamtalksdev
+    reviewed_at: '2026-08-23'
+    notes: 'readelf: UND OPENSSL_init_ssl@OPENSSL_3.0.0 (5/5)'
+    readelf_excerpt: "     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\
+      \ (3)\n     2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\
+      \ (4)\n     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (2)\n     7:\
+      \ 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (2)\n     1: 0000000000000000\
+      \     0 FILE    LOCAL  DEFAULT  ABS Scrt1.o\n     2: 000000000000038c    32 OBJECT  LOCAL  DEFAULT\
+      \    4 __abi_tag\n     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c\n     4:\
+      \ 00000000000010b0     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones\n     5: 00000000000010e0\
+      \     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones\n     6: 0000000000001120     0 FUNC    LOCAL\
+      \  DEFAULT   16 __do_global_dtors_aux\n     7: 0000000000004010     1 OBJECT  LOCAL  DEFAULT   26\
+      \ completed.0\n     8: 0000000000003da8     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fini_array_entry\n\
+      \     9: 0000000000001160     0 FUNC    LOCAL  DEFAULT   16 frame_dummy\n    10: 0000000000003da0\
+      \     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_entry\n    11: 0000000000000000   \
+      \  0 FILE    LOCAL  DEFAULT  ABS sslver.c\n    12: 0000000000000000     0 FILE    LOCAL  DEFAULT\
+      \  ABS crtstuff.c\n    13: 00000000000020f8     0 OBJECT  LOCAL  DEFAULT   20 __FRAME_END__\n  \
+      \  14: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS \n    16: 0000000000003db0     0 OBJECT\
+      \  LOCAL  DEFAULT   23 _DYNAMIC\n    17: 0000000000003fb0     0 OBJECT  LOCAL  DEFAULT   24 _GLOBAL_OFFSET_TABLE_\n\
+      \    20: 0000000000002000     4 OBJECT  GLOBAL DEFAULT   18 _IO_stdin_used\n    21: 0000000000000000\
+      \     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5\n    22: 0000000000001169    45 FUNC\
+      \    GLOBAL DEFAULT   16 main\n    23: 0000000000004008     0 OBJECT  GLOBAL HIDDEN    25 __dso_handle\n\
+      \    24: 0000000000001198     0 FUNC    GLOBAL HIDDEN    17 _fini\n    25: 0000000000000000    \
+      \ 0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34\n    26: 0000000000000000     0 FUNC\
+      \    GLOBAL DEFAULT  UND OPENSSL_init_ssl@OPENSSL_3.0.0\n    27: 0000000000001080    38 FUNC   \
+      \ GLOBAL DEFAULT   16 _start\n    28: 0000000000001000     0 FUNC    GLOBAL HIDDEN    12 _init\n\
+      \    29: 0000000000004010     0 OBJECT  GLOBAL HIDDEN    25 __TMC_END__"
+  expect_rule: D04
+  expect_verdict: AFFECTED

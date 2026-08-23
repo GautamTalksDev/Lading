@@ -1,0 +1,27 @@
+# libuv — CP-11 corpus expansion (reviewed 2026-08-23)
+component:
+  name: libuv
+  ecosystem: native
+  purls:
+    - pkg:generic/libuv
+    - pkg:deb/debian/libuv1
+  identity_symbols:
+    - uv_run
+    - uv_loop_init
+    - uv_close
+
+entries:
+  - cve: CVE-2024-24806
+    affected_versions:
+      - "1.48.0"
+    vulnerable_symbols:
+      - name: uv__idna_toascii
+        confidence: definitive
+        provenance:
+          upstream_fix_commit: https://github.com/libuv/libuv/commit/a1e9c3d
+          derivation: patch-touched-function
+          reviewed_by: gautamtalksdev
+          reviewed_at: "2026-08-23"
+    notes: >
+      CP-11 seed entry for corpus kill tests. Symbol tied to public fix commit.
+    manifest_version: "0.2.0"

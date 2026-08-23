@@ -1,0 +1,56 @@
+---
+name: Manifest entry dispute
+description: Wrong or disputed symbol↔CVE mapping in the public Manifest
+title: "manifest: "
+labels:
+  - manifest-dispute
+body:
+  - type: markdown
+    value: |
+      Manifest disputes receive a **5 business-day** first response. Include upstream
+      fix commit URL and binary verification steps. See [docs/MANIFEST.md](../docs/MANIFEST.md).
+
+  - type: input
+    id: component
+    attributes:
+      label: Component name
+      placeholder: e.g. zlib
+    validations:
+      required: true
+
+  - type: input
+    id: cve
+    attributes:
+      label: CVE ID
+      placeholder: CVE-YYYY-NNNN
+    validations:
+      required: true
+
+  - type: input
+    id: fix_commit
+    attributes:
+      label: Upstream fix commit URL
+    validations:
+      required: true
+
+  - type: textarea
+    id: dispute
+    attributes:
+      label: What is wrong?
+      description: Symbol name, affected version, or provenance error — cite patch lines
+    validations:
+      required: true
+
+  - type: textarea
+    id: verification
+    attributes:
+      label: How you verified (nm/objdump/build recipe)
+    validations:
+      required: true
+
+  - type: textarea
+    id: fixture
+    attributes:
+      label: Test fixture or build recipe path
+    validations:
+      required: true

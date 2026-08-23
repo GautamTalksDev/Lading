@@ -1,0 +1,26 @@
+# mbedtls — CP-11 corpus expansion (reviewed 2026-08-23)
+component:
+  name: mbedtls
+  ecosystem: native
+  purls:
+    - pkg:generic/mbedtls
+    - pkg:deb/debian/libmbedcrypto7
+  identity_symbols:
+    - mbedtls_ssl_handshake
+    - mbedtls_ctr_drbg_random
+
+entries:
+  - cve: CVE-2023-43615
+    affected_versions:
+      - "3.4.1"
+    vulnerable_symbols:
+      - name: mbedtls_ssl_parse_certificate
+        confidence: definitive
+        provenance:
+          upstream_fix_commit: https://github.com/Mbed-TLS/mbedtls/commit/4b7b373
+          derivation: patch-touched-function
+          reviewed_by: gautamtalksdev
+          reviewed_at: "2026-08-23"
+    notes: >
+      CP-11 seed entry for corpus kill tests. Symbol tied to public fix commit.
+    manifest_version: "0.2.0"

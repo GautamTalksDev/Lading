@@ -1,0 +1,39 @@
+{
+  "path": "bin/vendored.elf",
+  "sha256": "bin-vendored.elf",
+  "format": "ELF",
+  "arch": "x86_64",
+  "dyn_syms": [
+    {
+      "raw": "z_inflate",
+      "demangled": "z_inflate",
+      "normalized": "z_inflate",
+      "bind": "GLOBAL",
+      "type": "FUNC",
+      "defined": true
+    },
+    {
+      "raw": "z_deflate",
+      "demangled": "z_deflate",
+      "normalized": "z_deflate",
+      "bind": "GLOBAL",
+      "type": "FUNC",
+      "defined": true
+    }
+  ],
+  "symtab": [
+    {
+      "raw": "main",
+      "demangled": "main",
+      "normalized": "main",
+      "bind": "GLOBAL",
+      "type": "FUNC",
+      "defined": true
+    }
+  ],
+  "needed": [],
+  "ro_strings": [],
+  "warnings": [],
+  "stripped": false,
+  "static_linked": false
+}

@@ -1,0 +1,27 @@
+# libgcrypt — CP-11 corpus expansion (reviewed 2026-08-23)
+component:
+  name: libgcrypt
+  ecosystem: native
+  purls:
+    - pkg:generic/libgcrypt
+    - pkg:deb/debian/libgcrypt20
+  identity_symbols:
+    - gcry_cipher_open
+    - gcry_mpi_powm
+    - gcry_check_version
+
+entries:
+  - cve: CVE-2024-2236
+    affected_versions:
+      - "1.10.3"
+    vulnerable_symbols:
+      - name: rsa_decrypt
+        confidence: definitive
+        provenance:
+          upstream_fix_commit: https://dev.gnupg.org/r/libgcrypt.git/commit/?id=634722b
+          derivation: patch-touched-function
+          reviewed_by: gautamtalksdev
+          reviewed_at: "2026-08-23"
+    notes: >
+      CP-11 seed entry for corpus kill tests. Symbol tied to public fix commit.
+    manifest_version: "0.2.0"

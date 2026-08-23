@@ -1,0 +1,13 @@
+{
+  "path": "bin/stripped.elf",
+  "sha256": "bin-stripped.elf",
+  "format": "Unknown",
+  "arch": "x86_64",
+  "dyn_syms": [],
+  "symtab": [],
+  "needed": [],
+  "ro_strings": [],
+  "warnings": [],
+  "stripped": true,
+  "static_linked": true
+}

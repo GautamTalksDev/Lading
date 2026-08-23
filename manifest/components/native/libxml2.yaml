@@ -1,0 +1,27 @@
+# libxml2 — CP-11 corpus expansion (reviewed 2026-08-23)
+component:
+  name: libxml2
+  ecosystem: native
+  purls:
+    - pkg:generic/libxml2
+    - pkg:deb/debian/libxml2
+  identity_symbols:
+    - xmlParseDocument
+    - xmlReadMemory
+    - xmlFreeDoc
+
+entries:
+  - cve: CVE-2022-40303
+    affected_versions:
+      - "2.9.14"
+    vulnerable_symbols:
+      - name: xmlParseNameComplex
+        confidence: definitive
+        provenance:
+          upstream_fix_commit: https://gitlab.gnome.org/GNOME/libxml2/-/commit/8598060
+          derivation: patch-touched-function
+          reviewed_by: gautamtalksdev
+          reviewed_at: "2026-08-23"
+    notes: >
+      CP-11 seed entry for corpus kill tests. Symbol tied to public fix commit.
+    manifest_version: "0.2.0"

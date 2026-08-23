@@ -1,0 +1,31 @@
+2026-08-23 — CP-11 kickoff
+- Assembled corpus/ARTIFACTS.yaml: 41 product artifacts + 1 benchmark (bench-inventory-elves).
+- Expanded manifest to 25 components (manifest/VERSION 0.2.0); ran lading manifest coverage.
+- Fixed scripts/corpus-scan.sh LADING= quoting bug; added corpus-aggregate.py.
+
+2026-08-23 — Ground truth
+- Built 100-statement dataset: 40 decide fixtures + 60 inventory binaries.
+- Hand verification: readelf -sW / nm -D on testdata/inventory/bin/*; cross-checked symver_ssl_elf
+  (OPENSSL_init_ssl@OPENSSL_3.0.0 present, GENERAL_NAME_cmp absent).
+- Surprise: static_stripped_elf hits D03 symbol_table_unusable before stripped_static_binary —
+  anyUsableSymbolTable() is false first. Ground truth records engine-honest reason codes.
+- go test ./corpus/groundtruth/ PASS — KT-2 false not_affected count 0.
+
+2026-08-23 — Corpus download (in progress)
+- podman pull/save for OCI refs; curl for URL artifacts.
+- Early pulls: alpine:3.20, debian:bookworm-slim, ubuntu 22.04/24.04, amazonlinux:2023, fedora:40, ...
+- WSL rootless podman warning: "/" not a shared mount — pulls still succeed.
+
+2026-08-23 — audit-vex on public-shaped fixtures
+- grype_inert: VEX names commons-lang3@3.12.0 but SBOM match quality name_version_only only → inert.
+- trivy_overbroad: VEX suppresses CVE on subcomponent openssl@3.0.2 with exact match → overbroad.
+
+2026-08-23 — Corpus scan (complete)
+- 41/41 product artifacts produced scan-summary.json after unpack/findings fixes.
+- aggregate.json: 10,088 CVEs in, 0 decided (100% refused, mostly purl-insufficient).
+- KT-1 FAIL (0% < 30%). KT-2 PASS (100-statement ground truth, 0 false not_affected).
+
+2026-08-23 — Correctness fixes (CP-11 only)
+- unpack: OpenArchive must not double-wrap tar; container symlinks/hardlinks.
+- scan: empty grype match lists are valid findings input.
+- corpus: substitute OCI refs where vendor URLs 404; documented in ARTIFACTS.yaml.

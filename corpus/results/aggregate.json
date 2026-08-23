@@ -1,0 +1,450 @@
+{
+  "totals": {
+    "artifacts": 43,
+    "cves_in": 10088,
+    "not_affected": 0,
+    "affected": 0,
+    "refused": 10088,
+    "decided": 0,
+    "coverage_percent": 0
+  },
+  "by_class": {
+    "rtos-sdk": {
+      "artifacts": 3,
+      "cves_in": 124,
+      "decided": 0,
+      "coverage_percent": 0
+    },
+    "static-binary": {
+      "artifacts": 8,
+      "cves_in": 487,
+      "decided": 0,
+      "coverage_percent": 0
+    },
+    "unknown": {
+      "artifacts": 2,
+      "cves_in": 253,
+      "decided": 0,
+      "coverage_percent": 0
+    },
+    "firmware": {
+      "artifacts": 3,
+      "cves_in": 72,
+      "decided": 0,
+      "coverage_percent": 0
+    },
+    "oci-base": {
+      "artifacts": 10,
+      "cves_in": 2597,
+      "decided": 0,
+      "coverage_percent": 0
+    },
+    "oci-app": {
+      "artifacts": 12,
+      "cves_in": 6498,
+      "decided": 0,
+      "coverage_percent": 0
+    },
+    "openwrt": {
+      "artifacts": 4,
+      "cves_in": 44,
+      "decided": 0,
+      "coverage_percent": 0
+    },
+    "yocto": {
+      "artifacts": 1,
+      "cves_in": 13,
+      "decided": 0,
+      "coverage_percent": 0
+    }
+  },
+  "artifacts": [
+    {
+      "id": "arm-gnu-toolchain",
+      "class": "rtos-sdk",
+      "cves_in": 0,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 0,
+      "coverage_percent": 0
+    },
+    {
+      "id": "bin-bat-0.24.0",
+      "class": "static-binary",
+      "cves_in": 0,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 0,
+      "coverage_percent": 0
+    },
+    {
+      "id": "bin-cosign-2.2.4",
+      "class": "static-binary",
+      "cves_in": 144,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 144,
+      "coverage_percent": 0
+    },
+    {
+      "id": "bin-cosign-2.2.4-single",
+      "class": "unknown",
+      "cves_in": 144,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 144,
+      "coverage_percent": 0
+    },
+    {
+      "id": "bin-fd-10.2.0",
+      "class": "static-binary",
+      "cves_in": 0,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 0,
+      "coverage_percent": 0
+    },
+    {
+      "id": "bin-helm-3.15.3",
+      "class": "static-binary",
+      "cves_in": 114,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 114,
+      "coverage_percent": 0
+    },
+    {
+      "id": "bin-hugo-0.128.0",
+      "class": "static-binary",
+      "cves_in": 120,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 120,
+      "coverage_percent": 0
+    },
+    {
+      "id": "bin-jq-1.7.1",
+      "class": "static-binary",
+      "cves_in": 0,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 0,
+      "coverage_percent": 0
+    },
+    {
+      "id": "bin-restic-0.16.4",
+      "class": "static-binary",
+      "cves_in": 109,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 109,
+      "coverage_percent": 0
+    },
+    {
+      "id": "bin-restic-0.16.4-single",
+      "class": "unknown",
+      "cves_in": 109,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 109,
+      "coverage_percent": 0
+    },
+    {
+      "id": "bin-ripgrep-14.1.0",
+      "class": "static-binary",
+      "cves_in": 0,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 0,
+      "coverage_percent": 0
+    },
+    {
+      "id": "esp-idf-tools",
+      "class": "rtos-sdk",
+      "cves_in": 124,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 124,
+      "coverage_percent": 0
+    },
+    {
+      "id": "netgear-r7000-gpl",
+      "class": "firmware",
+      "cves_in": 53,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 53,
+      "coverage_percent": 0
+    },
+    {
+      "id": "oci-alpine-3.20",
+      "class": "oci-base",
+      "cves_in": 3,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 3,
+      "coverage_percent": 0
+    },
+    {
+      "id": "oci-amazonlinux-2023",
+      "class": "oci-base",
+      "cves_in": 0,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 0,
+      "coverage_percent": 0
+    },
+    {
+      "id": "oci-busybox-latest",
+      "class": "oci-base",
+      "cves_in": 3,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 3,
+      "coverage_percent": 0
+    },
+    {
+      "id": "oci-debian-bookworm-slim",
+      "class": "oci-base",
+      "cves_in": 167,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 167,
+      "coverage_percent": 0
+    },
+    {
+      "id": "oci-distrasless-cc-debian12",
+      "class": "oci-base",
+      "cves_in": 1467,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 1467,
+      "coverage_percent": 0
+    },
+    {
+      "id": "oci-fedora-40",
+      "class": "oci-base",
+      "cves_in": 29,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 29,
+      "coverage_percent": 0
+    },
+    {
+      "id": "oci-grafana-11",
+      "class": "oci-app",
+      "cves_in": 296,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 296,
+      "coverage_percent": 0
+    },
+    {
+      "id": "oci-httpd-2.4",
+      "class": "oci-app",
+      "cves_in": 254,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 254,
+      "coverage_percent": 0
+    },
+    {
+      "id": "oci-mariadb-11",
+      "class": "oci-app",
+      "cves_in": 582,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 582,
+      "coverage_percent": 0
+    },
+    {
+      "id": "oci-memcached-1.6",
+      "class": "oci-app",
+      "cves_in": 188,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 188,
+      "coverage_percent": 0
+    },
+    {
+      "id": "oci-nginx-1.25",
+      "class": "oci-app",
+      "cves_in": 626,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 626,
+      "coverage_percent": 0
+    },
+    {
+      "id": "oci-node-20",
+      "class": "oci-app",
+      "cves_in": 2922,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 2922,
+      "coverage_percent": 0
+    },
+    {
+      "id": "oci-postgres-16",
+      "class": "oci-app",
+      "cves_in": 369,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 369,
+      "coverage_percent": 0
+    },
+    {
+      "id": "oci-python-3.12",
+      "class": "oci-app",
+      "cves_in": 204,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 204,
+      "coverage_percent": 0
+    },
+    {
+      "id": "oci-rabbitmq-3",
+      "class": "oci-app",
+      "cves_in": 479,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 479,
+      "coverage_percent": 0
+    },
+    {
+      "id": "oci-redis-7",
+      "class": "oci-app",
+      "cves_in": 173,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 173,
+      "coverage_percent": 0
+    },
+    {
+      "id": "oci-rockylinux-9",
+      "class": "oci-base",
+      "cves_in": 607,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 607,
+      "coverage_percent": 0
+    },
+    {
+      "id": "oci-ruby-3.3",
+      "class": "oci-app",
+      "cves_in": 185,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 185,
+      "coverage_percent": 0
+    },
+    {
+      "id": "oci-traefik-v3",
+      "class": "oci-app",
+      "cves_in": 220,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 220,
+      "coverage_percent": 0
+    },
+    {
+      "id": "oci-ubi9-minimal",
+      "class": "oci-base",
+      "cves_in": 134,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 134,
+      "coverage_percent": 0
+    },
+    {
+      "id": "oci-ubuntu-22.04",
+      "class": "oci-base",
+      "cves_in": 96,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 96,
+      "coverage_percent": 0
+    },
+    {
+      "id": "oci-ubuntu-24.04",
+      "class": "oci-base",
+      "cves_in": 91,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 91,
+      "coverage_percent": 0
+    },
+    {
+      "id": "openwrt-22.03-armvirt-rootfs",
+      "class": "openwrt",
+      "cves_in": 6,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 6,
+      "coverage_percent": 0
+    },
+    {
+      "id": "openwrt-23.05-x86-64-kernel",
+      "class": "openwrt",
+      "cves_in": 8,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 8,
+      "coverage_percent": 0
+    },
+    {
+      "id": "openwrt-23.05-x86-64-rootfs",
+      "class": "openwrt",
+      "cves_in": 8,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 8,
+      "coverage_percent": 0
+    },
+    {
+      "id": "openwrt-layerscape-sdcard",
+      "class": "firmware",
+      "cves_in": 5,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 5,
+      "coverage_percent": 0
+    },
+    {
+      "id": "openwrt-snapshot-x86-rootfs",
+      "class": "openwrt",
+      "cves_in": 22,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 22,
+      "coverage_percent": 0
+    },
+    {
+      "id": "tplink-archer-gpl",
+      "class": "firmware",
+      "cves_in": 14,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 14,
+      "coverage_percent": 0
+    },
+    {
+      "id": "yocto-poky-qemuarm64",
+      "class": "yocto",
+      "cves_in": 13,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 13,
+      "coverage_percent": 0
+    },
+    {
+      "id": "zephyr-sdk-0.16.5",
+      "class": "rtos-sdk",
+      "cves_in": 0,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 0,
+      "coverage_percent": 0
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+# Manifest DATA is the only external extension point. All production entries
+# require maintainer review before definitive confidence ships.
+/manifest/components/ @gautamtalksdev

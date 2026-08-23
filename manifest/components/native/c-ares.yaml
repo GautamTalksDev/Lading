@@ -1,0 +1,27 @@
+# c-ares — CP-11 corpus expansion (reviewed 2026-08-23)
+component:
+  name: c-ares
+  ecosystem: native
+  purls:
+    - pkg:generic/c-ares
+    - pkg:deb/debian/libcares2
+  identity_symbols:
+    - ares_init
+    - ares_getaddrinfo
+    - ares_destroy
+
+entries:
+  - cve: CVE-2023-32067
+    affected_versions:
+      - "1.19.1"
+    vulnerable_symbols:
+      - name: process_answer
+        confidence: definitive
+        provenance:
+          upstream_fix_commit: https://github.com/c-ares/c-ares/commit/0a061fd
+          derivation: patch-touched-function
+          reviewed_by: gautamtalksdev
+          reviewed_at: "2026-08-23"
+    notes: >
+      CP-11 seed entry for corpus kill tests. Symbol tied to public fix commit.
+    manifest_version: "0.2.0"

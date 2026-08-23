@@ -1,0 +1,26 @@
+# nghttp2 — CP-11 corpus expansion (reviewed 2026-08-23)
+component:
+  name: nghttp2
+  ecosystem: native
+  purls:
+    - pkg:generic/nghttp2
+    - pkg:deb/debian/libnghttp2-14
+  identity_symbols:
+    - nghttp2_session_mem_recv
+    - nghttp2_submit_settings
+
+entries:
+  - cve: CVE-2023-44487
+    affected_versions:
+      - "1.55.1"
+    vulnerable_symbols:
+      - name: nghttp2_session_mem_recv
+        confidence: definitive
+        provenance:
+          upstream_fix_commit: https://github.com/nghttp2/nghttp2/commit/7c45d21
+          derivation: patch-touched-function
+          reviewed_by: gautamtalksdev
+          reviewed_at: "2026-08-23"
+    notes: >
+      CP-11 seed entry for corpus kill tests. Symbol tied to public fix commit.
+    manifest_version: "0.2.0"

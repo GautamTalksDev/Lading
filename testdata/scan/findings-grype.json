@@ -1,0 +1,8 @@
+{
+  "matches": [
+    {
+      "vulnerability": { "id": "CVE-2023-0286" },
+      "artifact": { "purl": "pkg:generic/openssl" }
+    }
+  ]
+}

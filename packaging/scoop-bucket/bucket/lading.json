@@ -1,0 +1,23 @@
+{
+    "version": "0.1.0",
+    "description": "Deterministic compliance evidence for binary vulnerability triage",
+    "homepage": "https://github.com/gautamtalksdev/lading",
+    "license": "Apache-2.0",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/gautamtalksdev/lading/releases/download/v0.1.0/lading_0.1.0_windows_amd64.zip",
+            "hash": "REPLACE_ON_RELEASE"
+        }
+    },
+    "bin": "lading.exe",
+    "checkver": {
+        "github": "https://github.com/gautamtalksdev/lading"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/gautamtalksdev/lading/releases/download/v$version/lading_$version_windows_amd64.zip"
+            }
+        }
+    }
+}

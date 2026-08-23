@@ -1,0 +1,43 @@
+---
+name: Bug report
+description: Incorrect verdict or tool failure — requires reproducible artifact
+title: "bug: "
+labels:
+  - bug
+body:
+  - type: markdown
+    value: |
+      Issues without a reproducible artifact are closed. See [SUPPORT.md](../SUPPORT.md).
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Minimal reproduction
+      description: Fixture binary digest or path, SBOM/grype input, exact command run
+      placeholder: |
+        lading scan --sbom sbom.json --grype grype.json --artifact ./fixture.so
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result
+      placeholder: verdict, rule_id, bundle_id
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual result
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: lading version
+      placeholder: v0.x.y or git sha
+    validations:
+      required: true

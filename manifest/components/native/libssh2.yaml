@@ -1,0 +1,26 @@
+# libssh2 — CP-11 corpus expansion (reviewed 2026-08-23)
+component:
+  name: libssh2
+  ecosystem: native
+  purls:
+    - pkg:generic/libssh2
+    - pkg:deb/debian/libssh2-1
+  identity_symbols:
+    - libssh2_session_handshake
+    - libssh2_channel_open_ex
+
+entries:
+  - cve: CVE-2019-13115
+    affected_versions:
+      - "1.9.0"
+    vulnerable_symbols:
+      - name: kex_method_diffie_hellman_gex
+        confidence: definitive
+        provenance:
+          upstream_fix_commit: https://github.com/libssh2/libssh2/commit/426673a
+          derivation: patch-touched-function
+          reviewed_by: gautamtalksdev
+          reviewed_at: "2026-08-23"
+    notes: >
+      CP-11 seed entry for corpus kill tests. Symbol tied to public fix commit.
+    manifest_version: "0.2.0"

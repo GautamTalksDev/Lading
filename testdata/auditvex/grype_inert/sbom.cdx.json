@@ -1,0 +1,27 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "version": 1,
+  "metadata": {
+    "component": {
+      "bom-ref": "app",
+      "type": "application",
+      "name": "billing-api",
+      "purl": "pkg:generic/billing-api@1.0.0"
+    }
+  },
+  "components": [
+    {
+      "bom-ref": "commons-lang3",
+      "type": "library",
+      "name": "commons-lang3",
+      "purl": "pkg:maven/org.apache.commons/commons-lang3@3.12.0"
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "app",
+      "dependsOn": ["commons-lang3"]
+    }
+  ]
+}

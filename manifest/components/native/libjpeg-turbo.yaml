@@ -1,0 +1,27 @@
+# libjpeg-turbo — CP-11 corpus expansion (reviewed 2026-08-23)
+component:
+  name: libjpeg-turbo
+  ecosystem: native
+  purls:
+    - pkg:generic/libjpeg-turbo
+    - pkg:deb/debian/libjpeg62-turbo
+  identity_symbols:
+    - jpeg_CreateDecompress
+    - jpeg_read_header
+    - jpeg_finish_decompress
+
+entries:
+  - cve: CVE-2020-13790
+    affected_versions:
+      - "2.0.4"
+    vulnerable_symbols:
+      - name: get_sos
+        confidence: definitive
+        provenance:
+          upstream_fix_commit: https://github.com/libjpeg-turbo/libjpeg-turbo/commit/4d769dee
+          derivation: patch-touched-function
+          reviewed_by: gautamtalksdev
+          reviewed_at: "2026-08-23"
+    notes: >
+      CP-11 seed entry for corpus kill tests. Symbol tied to public fix commit.
+    manifest_version: "0.2.0"

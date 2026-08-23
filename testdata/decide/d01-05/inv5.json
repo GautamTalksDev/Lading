@@ -1,0 +1,39 @@
+{
+  "path": "bin/app5.elf",
+  "sha256": "bin-app5.elf",
+  "format": "ELF",
+  "arch": "x86_64",
+  "dyn_syms": [
+    {
+      "raw": "malloc",
+      "demangled": "malloc",
+      "normalized": "malloc",
+      "bind": "GLOBAL",
+      "type": "FUNC",
+      "defined": false
+    }
+  ],
+  "symtab": [
+    {
+      "raw": "main",
+      "demangled": "main",
+      "normalized": "main",
+      "bind": "GLOBAL",
+      "type": "FUNC",
+      "defined": true
+    },
+    {
+      "raw": "printf",
+      "demangled": "printf",
+      "normalized": "printf",
+      "bind": "GLOBAL",
+      "type": "FUNC",
+      "defined": true
+    }
+  ],
+  "needed": [],
+  "ro_strings": [],
+  "warnings": [],
+  "stripped": false,
+  "static_linked": false
+}

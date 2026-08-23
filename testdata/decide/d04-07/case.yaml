@@ -1,0 +1,27 @@
+id: d04-07
+expect_rule: D04
+expect_verdict: AFFECTED
+finding:
+  cve: CVE-2023-0286
+  component_purl: pkg:generic/openssl@3.0.7
+manifest:
+  version: 0.1.0
+  component:
+    name: openssl
+    ecosystem: native
+    purls:
+    - pkg:generic/openssl@3.0.7
+    identity_symbols:
+    - OPENSSL_init_ssl
+    - GENERAL_NAME_cmp
+    - SSL_CTX_new
+  entry:
+    cve: CVE-2023-0286
+    affected_versions:
+    - 3.0.7
+    vulnerable_symbols:
+    - name: GENERAL_NAME_cmp
+      confidence: definitive
+    manifest_version: 0.1.0
+inventories:
+- file: inv.json

@@ -1,0 +1,3 @@
+path=crypto/asn1/tasn_dec.c
+side=old
+lines=57,858,869,870,888,967,970

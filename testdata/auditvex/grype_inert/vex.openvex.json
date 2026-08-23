@@ -1,0 +1,20 @@
+{
+  "@context": "https://openvex.dev/ns/v0.2.0",
+  "author": "lading-fixture",
+  "role": "document creator",
+  "timestamp": "2026-01-01T00:00:00Z",
+  "version": 1,
+  "statements": [
+    {
+      "vulnerability": { "name": "CVE-2022-99999" },
+      "products": [
+        {
+          "@id": "pkg:generic/commons-lang3@3.12.0",
+          "purl": "pkg:generic/commons-lang3@3.12.0"
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_present"
+    }
+  ]
+}

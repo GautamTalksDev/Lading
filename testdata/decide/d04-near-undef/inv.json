@@ -1,0 +1,39 @@
+{
+  "path": "bin/client.elf",
+  "sha256": "bin-client.elf",
+  "format": "ELF",
+  "arch": "x86_64",
+  "dyn_syms": [
+    {
+      "raw": "OPENSSL_init_ssl",
+      "demangled": "OPENSSL_init_ssl",
+      "normalized": "OPENSSL_init_ssl",
+      "bind": "GLOBAL",
+      "type": "FUNC",
+      "defined": true
+    },
+    {
+      "raw": "GENERAL_NAME_cmp",
+      "demangled": "GENERAL_NAME_cmp",
+      "normalized": "GENERAL_NAME_cmp",
+      "bind": "GLOBAL",
+      "type": "FUNC",
+      "defined": false
+    }
+  ],
+  "symtab": [
+    {
+      "raw": "main",
+      "demangled": "main",
+      "normalized": "main",
+      "bind": "GLOBAL",
+      "type": "FUNC",
+      "defined": true
+    }
+  ],
+  "needed": [],
+  "ro_strings": [],
+  "warnings": [],
+  "stripped": false,
+  "static_linked": false
+}

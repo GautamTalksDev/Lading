@@ -1,0 +1,6 @@
+Trying to pull public.ecr.aws/amazonlinux/amazonlinux:2023...
+Getting image source signatures
+Copying blob sha256:f206cad061713321049e1fe0c85223e018266fd8bccebf3156ef94c125bbd2e0
+Copying config sha256:2d4cb65c049d45c9f58c088deb1b2feb984fb4e338fa2d4ed461385d11af4e61
+Writing manifest to image destination
+2d4cb65c049d45c9f58c088deb1b2feb984fb4e338fa2d4ed461385d11af4e61

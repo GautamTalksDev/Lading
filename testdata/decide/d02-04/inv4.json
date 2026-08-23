@@ -1,0 +1,47 @@
+{
+  "path": "bin/ssl4.elf",
+  "sha256": "bin-ssl4.elf",
+  "format": "ELF",
+  "arch": "x86_64",
+  "dyn_syms": [
+    {
+      "raw": "OPENSSL_init_ssl",
+      "demangled": "OPENSSL_init_ssl",
+      "normalized": "OPENSSL_init_ssl",
+      "bind": "GLOBAL",
+      "type": "FUNC",
+      "defined": true
+    },
+    {
+      "raw": "SSL_CTX_new",
+      "demangled": "SSL_CTX_new",
+      "normalized": "SSL_CTX_new",
+      "bind": "GLOBAL",
+      "type": "FUNC",
+      "defined": true
+    },
+    {
+      "raw": "malloc",
+      "demangled": "malloc",
+      "normalized": "malloc",
+      "bind": "GLOBAL",
+      "type": "FUNC",
+      "defined": false
+    }
+  ],
+  "symtab": [
+    {
+      "raw": "main",
+      "demangled": "main",
+      "normalized": "main",
+      "bind": "GLOBAL",
+      "type": "FUNC",
+      "defined": true
+    }
+  ],
+  "needed": [],
+  "ro_strings": [],
+  "warnings": [],
+  "stripped": false,
+  "static_linked": false
+}

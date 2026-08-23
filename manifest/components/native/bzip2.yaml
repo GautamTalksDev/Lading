@@ -1,0 +1,26 @@
+# bzip2 — CP-11 corpus expansion (reviewed 2026-08-23)
+component:
+  name: bzip2
+  ecosystem: native
+  purls:
+    - pkg:generic/bzip2
+    - pkg:deb/debian/libbz2-1.0
+  identity_symbols:
+    - BZ2_bzDecompress
+    - BZ2_bzCompressInit
+
+entries:
+  - cve: CVE-2019-12900
+    affected_versions:
+      - "1.0.6"
+    vulnerable_symbols:
+      - name: decompress
+        confidence: definitive
+        provenance:
+          upstream_fix_commit: https://gitlab.com/bzip2/bzip2/-/commit/0a39261
+          derivation: patch-touched-function
+          reviewed_by: gautamtalksdev
+          reviewed_at: "2026-08-23"
+    notes: >
+      CP-11 seed entry for corpus kill tests. Symbol tied to public fix commit.
+    manifest_version: "0.2.0"

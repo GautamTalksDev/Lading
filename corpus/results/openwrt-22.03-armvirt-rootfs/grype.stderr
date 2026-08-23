@@ -1,0 +1,3 @@
+[0001]  WARN unable to create distro from linux distribution error=unable to determine distro type
+[0001]  WARN Unable to determine the OS distribution of some packages. This may result in missing vulnerabilities. You may specify a distro using: --distro <distro>:<version>
+[0001]  WARN distro detection failed: linux release info was present but distro type could not be determined

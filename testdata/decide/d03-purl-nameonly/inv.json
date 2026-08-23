@@ -1,0 +1,22 @@
+{
+  "path": "bin/x.elf",
+  "sha256": "bin-x.elf",
+  "format": "ELF",
+  "arch": "x86_64",
+  "dyn_syms": [
+    {
+      "raw": "inflate",
+      "demangled": "inflate",
+      "normalized": "inflate",
+      "bind": "GLOBAL",
+      "type": "FUNC",
+      "defined": true
+    }
+  ],
+  "symtab": [],
+  "needed": [],
+  "ro_strings": [],
+  "warnings": [],
+  "stripped": false,
+  "static_linked": false
+}

@@ -1,0 +1,6 @@
+Trying to pull docker.io/library/debian:bookworm-slim...
+Getting image source signatures
+Copying blob sha256:039e6f9f9752f74a3ff4a6a224f64c7c864da16ed98f882107704328f41b9c42
+Copying config sha256:9fff73c337b947e6e3120b8ce929c92a7c5820228fda7c163145954c31cd32ba
+Writing manifest to image destination
+9fff73c337b947e6e3120b8ce929c92a7c5820228fda7c163145954c31cd32ba

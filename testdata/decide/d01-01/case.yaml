@@ -1,0 +1,28 @@
+id: d01-01
+expect_rule: D01
+expect_verdict: NOT_AFFECTED
+expect_justification: component_not_present
+finding:
+  cve: CVE-2022-37434
+  component_purl: pkg:generic/zlib@1.2.12
+manifest:
+  version: 0.1.0
+  component:
+    name: zlib
+    ecosystem: native
+    purls:
+    - pkg:generic/zlib@1.2.12
+    identity_symbols:
+    - inflate
+    - deflate
+    - zlibVersion
+  entry:
+    cve: CVE-2022-37434
+    affected_versions:
+    - 1.2.12
+    vulnerable_symbols:
+    - name: inflate
+      confidence: definitive
+    manifest_version: 0.1.0
+inventories:
+- file: inv1.json

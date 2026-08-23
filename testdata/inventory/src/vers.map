@@ -1,0 +1,7 @@
+LADING_1.0 {
+  global: lading_ver_foo;
+  local: *;
+};
+LADING_2.0 {
+  global: lading_ver_bar;
+} LADING_1.0;

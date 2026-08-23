@@ -1,0 +1,27 @@
+# libpng — CP-11 corpus expansion (reviewed 2026-08-23)
+component:
+  name: libpng
+  ecosystem: native
+  purls:
+    - pkg:generic/libpng
+    - pkg:deb/debian/libpng16-16
+  identity_symbols:
+    - png_read_info
+    - png_create_read_struct
+    - png_sig_cmp
+
+entries:
+  - cve: CVE-2019-7317
+    affected_versions:
+      - "1.6.36"
+    vulnerable_symbols:
+      - name: png_set_PLTE
+        confidence: definitive
+        provenance:
+          upstream_fix_commit: https://github.com/glennrp/libpng/commit/1bec499
+          derivation: patch-touched-function
+          reviewed_by: gautamtalksdev
+          reviewed_at: "2026-08-23"
+    notes: >
+      CP-11 seed entry for corpus kill tests. Symbol tied to public fix commit.
+    manifest_version: "0.2.0"

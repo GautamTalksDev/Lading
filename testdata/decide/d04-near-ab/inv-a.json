@@ -1,0 +1,22 @@
+{
+  "path": "bin/nginx.elf",
+  "sha256": "bin-nginx.elf",
+  "format": "ELF",
+  "arch": "x86_64",
+  "dyn_syms": [
+    {
+      "raw": "main",
+      "demangled": "main",
+      "normalized": "main",
+      "bind": "GLOBAL",
+      "type": "FUNC",
+      "defined": true
+    }
+  ],
+  "symtab": [],
+  "needed": [],
+  "ro_strings": [],
+  "warnings": [],
+  "stripped": false,
+  "static_linked": false
+}

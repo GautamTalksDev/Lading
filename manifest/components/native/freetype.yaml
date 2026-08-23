@@ -1,0 +1,27 @@
+# freetype — CP-11 corpus expansion (reviewed 2026-08-23)
+component:
+  name: freetype
+  ecosystem: native
+  purls:
+    - pkg:generic/freetype
+    - pkg:deb/debian/libfreetype6
+  identity_symbols:
+    - FT_Init_FreeType
+    - FT_Load_Glyph
+    - FT_Done_FreeType
+
+entries:
+  - cve: CVE-2020-15999
+    affected_versions:
+      - "2.10.4"
+    vulnerable_symbols:
+      - name: Load_SBit_Png
+        confidence: definitive
+        provenance:
+          upstream_fix_commit: https://gitlab.freedesktop.org/freetype/freetype/-/commit/1da69a2c
+          derivation: patch-touched-function
+          reviewed_by: gautamtalksdev
+          reviewed_at: "2026-08-23"
+    notes: >
+      CP-11 seed entry for corpus kill tests. Symbol tied to public fix commit.
+    manifest_version: "0.2.0"

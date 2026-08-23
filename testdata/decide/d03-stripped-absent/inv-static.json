@@ -1,0 +1,15 @@
+{
+  "path": "bin/static-openssl.a",
+  "sha256": "static-openssl",
+  "format": "ELF",
+  "arch": "x86_64",
+  "dyn_syms": [],
+  "symtab": [
+    {"raw": "OPENSSL_init_ssl", "demangled": "OPENSSL_init_ssl", "normalized": "OPENSSL_init_ssl", "bind": "GLOBAL", "type": "FUNC", "defined": true}
+  ],
+  "needed": [],
+  "ro_strings": [],
+  "warnings": [],
+  "stripped": true,
+  "static_linked": true
+}

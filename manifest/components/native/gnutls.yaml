@@ -1,0 +1,27 @@
+# gnutls — CP-11 corpus expansion (reviewed 2026-08-23)
+component:
+  name: gnutls
+  ecosystem: native
+  purls:
+    - pkg:generic/gnutls
+    - pkg:deb/debian/libgnutls30
+  identity_symbols:
+    - gnutls_handshake
+    - gnutls_record_recv
+    - gnutls_global_init
+
+entries:
+  - cve: CVE-2024-0553
+    affected_versions:
+      - "3.8.3"
+    vulnerable_symbols:
+      - name: append_ciphertext
+        confidence: definitive
+        provenance:
+          upstream_fix_commit: https://gitlab.com/gnutls/gnutls/-/commit/72e4e71
+          derivation: patch-touched-function
+          reviewed_by: gautamtalksdev
+          reviewed_at: "2026-08-23"
+    notes: >
+      CP-11 seed entry for corpus kill tests. Symbol tied to public fix commit.
+    manifest_version: "0.2.0"

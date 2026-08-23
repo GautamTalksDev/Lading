@@ -1,0 +1,40 @@
+# libexpat — XML parser (libexpat/libexpat)
+component:
+  name: libexpat
+  ecosystem: native
+  purls:
+    - pkg:generic/libexpat
+    - pkg:generic/expat
+    - pkg:deb/debian/libexpat1
+  identity_symbols:
+    - XML_ParserCreate
+    - XML_Parse
+    - XML_GetCurrentLineNumber
+    - XML_ErrorString
+  identity_strings:
+    - "expat_[0-9]+\\.[0-9]+\\.[0-9]+"
+    - "libexpat\\.so\\.[0-9]+"
+
+entries:
+  - cve: CVE-2022-25315
+    affected_versions:
+      - "2.4.4"
+      - "2.4.3"
+      - "2.4.2"
+      - "2.4.1"
+      - "2.4.0"
+    vulnerable_symbols:
+      - name: storeRawNames
+        confidence: definitive
+        provenance:
+          # Opened and read: integer overflow in storeRawNames when summing
+          # buffer and tag-name lengths; enables OOB heap write (default build).
+          upstream_fix_commit: https://github.com/libexpat/libexpat/commit/eb0362808b4f9f1e2345a0cf203b8cc196d776d9
+          derivation: patch-touched-function
+          reviewed_by: gautamtalksdev
+          reviewed_at: "2026-08-22"
+    notes: >
+      Integer overflow in storeRawNames (xmlparse.c) prior to 2.4.5. The
+      symbol is internal; identity uses XML_* exports plus the provenance
+      commit naming storeRawNames as the patched function.
+    manifest_version: "0.2.0"

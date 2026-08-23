@@ -1,0 +1,27 @@
+# sqlite3 — CP-11 corpus expansion (reviewed 2026-08-23)
+component:
+  name: sqlite3
+  ecosystem: native
+  purls:
+    - pkg:generic/sqlite3
+    - pkg:deb/debian/libsqlite3-0
+  identity_symbols:
+    - sqlite3_open
+    - sqlite3_step
+    - sqlite3_finalize
+
+entries:
+  - cve: CVE-2022-35737
+    affected_versions:
+      - "3.39.4"
+    vulnerable_symbols:
+      - name: sqlite3_aggregate_context
+        confidence: definitive
+        provenance:
+          upstream_fix_commit: https://sqlite.org/src/info/ce3a8a6909
+          derivation: patch-touched-function
+          reviewed_by: gautamtalksdev
+          reviewed_at: "2026-08-23"
+    notes: >
+      CP-11 seed entry for corpus kill tests. Symbol tied to public fix commit.
+    manifest_version: "0.2.0"

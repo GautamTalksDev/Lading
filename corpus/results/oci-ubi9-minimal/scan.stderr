@@ -1,0 +1,6 @@
+Trying to pull registry.access.redhat.com/ubi9/ubi-minimal:latest...
+Getting image source signatures
+Copying blob sha256:c282501e7b1aa336a39e8eb09b91d97b94921c378c6a6fbfe7b56d2db572c305
+Copying config sha256:591c6dfb4400e422f10f911ff8d95aead6e1d80975bb11cfabd1ba918133f8c5
+Writing manifest to image destination
+591c6dfb4400e422f10f911ff8d95aead6e1d80975bb11cfabd1ba918133f8c5

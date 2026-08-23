@@ -1,0 +1,30 @@
+{
+  "path": "bin/plain.elf",
+  "sha256": "bin-plain.elf",
+  "format": "ELF",
+  "arch": "x86_64",
+  "dyn_syms": [],
+  "symtab": [
+    {
+      "raw": "main",
+      "demangled": "main",
+      "normalized": "main",
+      "bind": "GLOBAL",
+      "type": "FUNC",
+      "defined": true
+    },
+    {
+      "raw": "write",
+      "demangled": "write",
+      "normalized": "write",
+      "bind": "GLOBAL",
+      "type": "FUNC",
+      "defined": true
+    }
+  ],
+  "needed": [],
+  "ro_strings": [],
+  "warnings": [],
+  "stripped": false,
+  "static_linked": false
+}

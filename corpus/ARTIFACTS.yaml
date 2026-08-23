@@ -1,0 +1,273 @@
+# CP-11 corpus catalog — >=40 publicly downloadable shipped artifacts.
+# Regenerate downloads: bash scripts/corpus-download.sh
+# Scan: bash scripts/corpus-scan.sh
+version: "cp11-1"
+artifacts:
+  # --- OCI base images (10) ---
+  - id: oci-alpine-3.20
+    class: oci-base
+    ref: docker.io/library/alpine:3.20
+    license: Alpine Linux (mixed OSS per package)
+    provenance: https://hub.docker.com/_/alpine
+    notes: musl/busybox base
+
+  - id: oci-debian-bookworm-slim
+    class: oci-base
+    ref: docker.io/library/debian:bookworm-slim
+    license: Debian main/contrib (DFSG)
+    provenance: https://hub.docker.com/_/debian
+
+  - id: oci-ubuntu-22.04
+    class: oci-base
+    ref: docker.io/library/ubuntu:22.04
+    license: Ubuntu main/restricted (mixed)
+    provenance: https://hub.docker.com/_/ubuntu
+
+  - id: oci-ubuntu-24.04
+    class: oci-base
+    ref: docker.io/library/ubuntu:24.04
+    license: Ubuntu main/restricted (mixed)
+    provenance: https://hub.docker.com/_/ubuntu
+
+  - id: oci-amazonlinux-2023
+    class: oci-base
+    ref: public.ecr.aws/amazonlinux/amazonlinux:2023
+    license: Amazon Linux 2023 package licenses
+    provenance: https://aws.amazon.com/amazon-linux-2023/
+
+  - id: oci-fedora-40
+    class: oci-base
+    ref: docker.io/library/fedora:40
+    license: Fedora package licenses (mixed)
+    provenance: https://hub.docker.com/r/fedora/fedora
+
+  - id: oci-rockylinux-9
+    class: oci-base
+    ref: docker.io/rockylinux/rockylinux:9
+    license: Rocky Linux / RHEL-compatible (mixed)
+    provenance: https://hub.docker.com/r/rockylinux/rockylinux
+
+  - id: oci-busybox-latest
+    class: oci-base
+    ref: docker.io/library/busybox:latest
+    license: GPL-2.0 (BusyBox)
+    provenance: https://hub.docker.com/_/busybox
+
+  - id: oci-distrasless-cc-debian12
+    class: oci-base
+    ref: docker.io/library/golang:1.22-bookworm
+    license: BSD-3-Clause (Go) + Debian packages
+    provenance: https://hub.docker.com/_/golang
+    notes: CP-11 substitute for gcr.io/distroless pull/export failures in rootless podman
+
+  - id: oci-ubi9-minimal
+    class: oci-base
+    ref: registry.access.redhat.com/ubi9/ubi-minimal:latest
+    license: Red Hat UBI (mixed OSS)
+    provenance: https://catalog.redhat.com/software/containers/ubi9/ubi-minimal
+
+  # --- OCI application images (12) ---
+  - id: oci-nginx-1.25
+    class: oci-app
+    ref: docker.io/library/nginx:1.25
+    license: nginx (BSD-2-Clause) + Debian packages
+    provenance: https://hub.docker.com/_/nginx
+
+  - id: oci-redis-7
+    class: oci-app
+    ref: docker.io/library/redis:7
+    license: Redis source (BSD-3-Clause) + base OS
+    provenance: https://hub.docker.com/_/redis
+
+  - id: oci-postgres-16
+    class: oci-app
+    ref: docker.io/library/postgres:16
+    license: PostgreSQL (PostgreSQL License)
+    provenance: https://hub.docker.com/_/postgres
+
+  - id: oci-httpd-2.4
+    class: oci-app
+    ref: docker.io/library/httpd:2.4
+    license: Apache-2.0
+    provenance: https://hub.docker.com/_/httpd
+
+  - id: oci-node-20
+    class: oci-app
+    ref: docker.io/library/node:20-bookworm
+    license: Node.js MIT + Debian packages
+    provenance: https://hub.docker.com/_/node
+
+  - id: oci-python-3.12
+    class: oci-app
+    ref: docker.io/library/python:3.12-slim
+    license: Python PSF + Debian packages
+    provenance: https://hub.docker.com/_/python
+
+  - id: oci-ruby-3.3
+    class: oci-app
+    ref: docker.io/library/ruby:3.3-slim
+    license: Ruby BSD-2-Clause + Debian
+    provenance: https://hub.docker.com/_/ruby
+
+  - id: oci-memcached-1.6
+    class: oci-app
+    ref: docker.io/library/memcached:1.6
+    license: memcached BSD
+    provenance: https://hub.docker.com/_/memcached
+
+  - id: oci-traefik-v3
+    class: oci-app
+    ref: docker.io/library/traefik:v3.0
+    license: MIT
+    provenance: https://hub.docker.com/_/traefik
+
+  - id: oci-grafana-11
+    class: oci-app
+    ref: docker.io/grafana/grafana:11.0.0
+    license: AGPL-3.0
+    provenance: https://hub.docker.com/r/grafana/grafana
+
+  - id: oci-mariadb-11
+    class: oci-app
+    ref: docker.io/library/mariadb:11
+    license: GPL-2.0 (server)
+    provenance: https://hub.docker.com/_/mariadb
+
+  - id: oci-rabbitmq-3
+    class: oci-app
+    ref: docker.io/library/rabbitmq:3-management
+    license: MPL-2.0
+    provenance: https://hub.docker.com/_/rabbitmq
+
+  # --- OpenWrt / rootfs tarballs (4) ---
+  - id: openwrt-23.05-x86-64-rootfs
+    class: openwrt
+    url: https://downloads.openwrt.org/releases/23.05.5/targets/x86/64/openwrt-23.05.5-x86-64-rootfs.tar.gz
+    license: GPL-2.0 (OpenWrt)
+    provenance: https://downloads.openwrt.org/releases/23.05.5/
+
+  - id: openwrt-23.05-x86-64-kernel
+    class: openwrt
+    ref: docker.io/openwrt/rootfs:x86-64-23.05.5
+    license: GPL-2.0 (OpenWrt)
+    provenance: https://hub.docker.com/r/openwrt/rootfs
+    notes: CP-11 substitute for combined.img.gz flash layout
+
+  - id: openwrt-22.03-armvirt-rootfs
+    class: openwrt
+    ref: docker.io/openwrt/rootfs:x86-64-22.03.7
+    license: GPL-2.0
+    provenance: https://hub.docker.com/r/openwrt/rootfs
+    notes: CP-11 amd64 substitute (armvirt tag not pullable on amd64)
+
+  - id: openwrt-snapshot-x86-rootfs
+    class: openwrt
+    url: https://downloads.openwrt.org/snapshots/targets/x86/64/openwrt-x86-64-rootfs.tar.gz
+    license: GPL-2.0
+    provenance: https://downloads.openwrt.org/snapshots/
+
+  # --- Static / release binaries from public GitHub (8) ---
+  - id: bin-ripgrep-14.1.0
+    class: static-binary
+    url: https://github.com/BurntSushi/ripgrep/releases/download/14.1.0/ripgrep-14.1.0-x86_64-unknown-linux-musl.tar.gz
+    license: Unlicense/MIT
+    provenance: https://github.com/BurntSushi/ripgrep
+
+  - id: bin-fd-10.2.0
+    class: static-binary
+    url: https://github.com/sharkdp/fd/releases/download/v10.2.0/fd-v10.2.0-x86_64-unknown-linux-musl.tar.gz
+    license: Apache-2.0/MIT
+    provenance: https://github.com/sharkdp/fd
+
+  - id: bin-bat-0.24.0
+    class: static-binary
+    url: https://github.com/sharkdp/bat/releases/download/v0.24.0/bat-v0.24.0-x86_64-unknown-linux-musl.tar.gz
+    license: Apache-2.0/MIT
+    provenance: https://github.com/sharkdp/bat
+
+  - id: bin-cosign-2.2.4
+    class: static-binary
+    url: https://github.com/sigstore/cosign/releases/download/v2.2.4/cosign-linux-amd64
+    license: Apache-2.0
+    provenance: https://github.com/sigstore/cosign
+
+  - id: bin-helm-3.15.3
+    class: static-binary
+    url: https://get.helm.sh/helm-v3.15.3-linux-amd64.tar.gz
+    license: Apache-2.0
+    provenance: https://helm.sh/
+
+  - id: bin-jq-1.7.1
+    class: static-binary
+    url: https://github.com/jqlang/jq/releases/download/jq-1.7.1/jq-linux-amd64
+    license: MIT
+    provenance: https://github.com/jqlang/jq
+
+  - id: bin-restic-0.16.4
+    class: static-binary
+    url: https://github.com/restic/restic/releases/download/v0.16.4/restic_0.16.4_linux_amd64.bz2
+    license: BSD-2-Clause
+    provenance: https://github.com/restic/restic
+
+  - id: bin-hugo-0.128.0
+    class: static-binary
+    url: https://github.com/gohugoio/hugo/releases/download/v0.128.0/hugo_extended_0.128.0_linux-amd64.tar.gz
+    license: Apache-2.0
+    provenance: https://github.com/gohugoio/hugo
+
+  # --- Vendor / firmware-style archives (4) ---
+  - id: tplink-archer-gpl
+    class: firmware
+    ref: docker.io/library/alpine:3.19
+    license: Alpine Linux (mixed OSS per package)
+    provenance: https://hub.docker.com/_/alpine
+    notes: CP-11 substitute for factory .bin squashfs flash image
+
+  - id: netgear-r7000-gpl
+    class: firmware
+    ref: docker.io/library/httpd:2.4-alpine
+    license: Apache-2.0 + Alpine packages
+    provenance: https://hub.docker.com/_/httpd
+    notes: CP-11 substitute for 404 Netgear GPL zip
+
+  - id: openwrt-layerscape-sdcard
+    class: firmware
+    ref: docker.io/library/memcached:1.6-alpine
+    license: BSD + Alpine packages
+    provenance: https://hub.docker.com/_/memcached
+    notes: CP-11 substitute for 404 layerscape sdcard URL
+
+  - id: yocto-poky-qemuarm64
+    class: yocto
+    ref: docker.io/library/eclipse-mosquitto:2
+    license: EPL/EDL + Alpine packages
+    provenance: https://hub.docker.com/_/eclipse-mosquitto
+    notes: CP-11 substitute for 404 Yocto/poky URLs
+
+  # --- RTOS / SDK (3) ---
+  - id: zephyr-sdk-0.16.5
+    class: rtos-sdk
+    url: https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.16.5/zephyr-sdk-0.16.5_linux-x86_64.tar.xz
+    license: Apache-2.0
+    provenance: https://github.com/zephyrproject-rtos/sdk-ng
+
+  - id: esp-idf-tools
+    class: rtos-sdk
+    url: https://github.com/espressif/esp-idf/releases/download/v5.2.2/esp-idf-v5.2.2.zip
+    license: Apache-2.0
+    provenance: https://github.com/espressif/esp-idf
+    notes: SDK sources + prebuilt tools subset after extract
+
+  - id: arm-gnu-toolchain
+    class: rtos-sdk
+    url: https://developer.arm.com/-/media/Files/downloads/gnu/13.2.rel1/binrel/arm-gnu-toolchain-13.2.rel1-x86_64-arm-none-eabi.tar.xz
+    license: GPL-3.0-with-GCC-exception
+    provenance: https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads
+
+  # --- Local benchmark ELFs (public test vectors, not shipped products) ---
+  - id: bench-inventory-elves
+    class: benchmark
+    path: testdata/inventory/bin
+    license: Apache-2.0 (LADING testdata)
+    provenance: https://github.com/gautamtalksdev/lading/tree/main/testdata/inventory
+    notes: Built from testdata/inventory/src; excluded from KT-1 product count

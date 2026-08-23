@@ -1,0 +1,6 @@
+Trying to pull docker.io/rockylinux/rockylinux:9...
+Getting image source signatures
+Copying blob sha256:99c753a880cc03bbe9da8bf6e354c8ba2d99f19058e87b8a55b6487ffcf52f8a
+Copying config sha256:686e4558d0a5332a32cf8a4722fc4e3143bab0b6156e14792191161ae0bb78f4
+Writing manifest to image destination
+686e4558d0a5332a32cf8a4722fc4e3143bab0b6156e14792191161ae0bb78f4

@@ -34,3 +34,9 @@ credentials.json
 *.log
 tmp/
 .cache/
+
+# Local operator caches (git clones for manifest derive)
+.lading/
+
+# Corpus artifact binaries (regenerate: scripts/corpus-download.sh)
+corpus/downloads/

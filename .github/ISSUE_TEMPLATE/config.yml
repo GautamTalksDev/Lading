@@ -1,0 +1,8 @@
+blank_issues: false
+contact_links:
+  - name: Feature requests (Discussions)
+    url: https://github.com/gautamtalksdev/lading/discussions/new?category=ideas
+    about: Feature requests are reviewed monthly in batch — not via Issues.
+  - name: Security report (private)
+    url: https://github.com/gautamtalksdev/lading/blob/main/SECURITY.md
+    about: Do not file public issues for vulnerabilities.

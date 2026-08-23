@@ -1,0 +1,26 @@
+# libwebp — CP-11 corpus expansion (reviewed 2026-08-23)
+component:
+  name: libwebp
+  ecosystem: native
+  purls:
+    - pkg:generic/libwebp
+    - pkg:deb/debian/libwebp7
+  identity_symbols:
+    - WebPDecode
+    - WebPGetDecoderVersion
+
+entries:
+  - cve: CVE-2023-4863
+    affected_versions:
+      - "1.3.2"
+    vulnerable_symbols:
+      - name: BuildHuffmanTable
+        confidence: definitive
+        provenance:
+          upstream_fix_commit: https://chromium.googlesource.com/webm/libwebp/+log/1.3.2
+          derivation: patch-touched-function
+          reviewed_by: gautamtalksdev
+          reviewed_at: "2026-08-23"
+    notes: >
+      CP-11 seed entry for corpus kill tests. Symbol tied to public fix commit.
+    manifest_version: "0.2.0"

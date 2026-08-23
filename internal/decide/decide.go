@@ -1,3 +1,4 @@
-// Package decide implements the deterministic decision engine.
-// All verdicts must be unit-testable and re-derivable from evidence.
 package decide
+
+// Evaluate is implemented in evaluate.go.
+// Types and constants live in types.go; context helpers in context.go.

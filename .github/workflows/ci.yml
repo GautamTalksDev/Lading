@@ -31,12 +31,29 @@ jobs:
 
       - name: Build
         run: go build ./...
+        env:
+          CGO_ENABLED: ${{ matrix.os == 'windows-latest' && '0' || '1' }}
 
       - name: Vet
         run: go vet ./...
+        env:
+          CGO_ENABLED: ${{ matrix.os == 'windows-latest' && '0' || '1' }}
+
+      - name: Install check-jsonschema
+        run: python -m pip install check-jsonschema
+
+      - name: Validate VEX emitter schemas
+        run: bash scripts/validate-vex-schemas.sh
 
       - name: Test with race detector
+        if: matrix.os != 'windows-latest'
         run: go test -race ./...
+
+      - name: Test (Windows, CGO off — tree-sitter stub)
+        if: matrix.os == 'windows-latest'
+        run: go test ./...
+        env:
+          CGO_ENABLED: "0"
 
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v6

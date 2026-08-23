@@ -1,0 +1,28 @@
+# curl — CP-11 corpus expansion (reviewed 2026-08-23)
+component:
+  name: curl
+  ecosystem: native
+  purls:
+    - pkg:generic/curl
+    - pkg:deb/debian/libcurl4
+    - pkg:apk/alpine/curl
+  identity_symbols:
+    - curl_easy_perform
+    - curl_global_init
+    - curl_version
+
+entries:
+  - cve: CVE-2023-38545
+    affected_versions:
+      - "8.4.0"
+    vulnerable_symbols:
+      - name: curl_easy_perform
+        confidence: definitive
+        provenance:
+          upstream_fix_commit: https://github.com/curl/curl/commit/66bc167
+          derivation: patch-touched-function
+          reviewed_by: gautamtalksdev
+          reviewed_at: "2026-08-23"
+    notes: >
+      CP-11 seed entry for corpus kill tests. Symbol tied to public fix commit.
+    manifest_version: "0.2.0"

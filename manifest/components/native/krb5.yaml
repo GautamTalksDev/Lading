@@ -1,0 +1,27 @@
+# krb5 — CP-11 corpus expansion (reviewed 2026-08-23)
+component:
+  name: krb5
+  ecosystem: native
+  purls:
+    - pkg:generic/krb5
+    - pkg:deb/debian/libkrb5-3
+  identity_symbols:
+    - krb5_init_context
+    - krb5_cc_default
+    - krb5_free_context
+
+entries:
+  - cve: CVE-2022-37967
+    affected_versions:
+      - "1.20.1"
+    vulnerable_symbols:
+      - name: process_pa_data
+        confidence: definitive
+        provenance:
+          upstream_fix_commit: https://github.com/krb5/krb5/commit/4e04c08
+          derivation: patch-touched-function
+          reviewed_by: gautamtalksdev
+          reviewed_at: "2026-08-23"
+    notes: >
+      CP-11 seed entry for corpus kill tests. Symbol tied to public fix commit.
+    manifest_version: "0.2.0"

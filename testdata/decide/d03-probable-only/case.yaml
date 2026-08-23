@@ -1,0 +1,28 @@
+id: d03-probable-only
+expect_rule: D03
+expect_verdict: UNDER_INVESTIGATION
+expect_reason: manifest_probable_only
+finding:
+  cve: CVE-2022-37434
+  component_purl: pkg:generic/zlib@1.2.12
+manifest:
+  version: 0.1.0
+  component:
+    name: zlib
+    ecosystem: native
+    purls:
+    - pkg:generic/zlib@1.2.12
+    identity_symbols:
+    - inflate
+    - deflate
+    - zlibVersion
+  entry:
+    cve: CVE-2022-37434
+    affected_versions:
+    - 1.2.12
+    vulnerable_symbols:
+    - name: inflate
+      confidence: probable
+    manifest_version: 0.1.0
+inventories:
+- file: inv.json

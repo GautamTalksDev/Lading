@@ -1,0 +1,30 @@
+{
+  "path": "bin/xml.elf",
+  "sha256": "bin-xml.elf",
+  "format": "ELF",
+  "arch": "x86_64",
+  "dyn_syms": [
+    {
+      "raw": "XML_Parse",
+      "demangled": "XML_Parse",
+      "normalized": "XML_Parse",
+      "bind": "GLOBAL",
+      "type": "FUNC",
+      "defined": true
+    },
+    {
+      "raw": "XML_ParserCreate",
+      "demangled": "XML_ParserCreate",
+      "normalized": "XML_ParserCreate",
+      "bind": "GLOBAL",
+      "type": "FUNC",
+      "defined": true
+    }
+  ],
+  "symtab": [],
+  "needed": [],
+  "ro_strings": [],
+  "warnings": [],
+  "stripped": false,
+  "static_linked": false
+}

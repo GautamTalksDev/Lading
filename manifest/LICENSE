@@ -1,0 +1,14 @@
+# Lading Manifest — CC0 1.0 Universal
+
+To the extent possible under law, the author has waived all copyright and related
+or neighboring rights to the YAML files in `manifest/components/` and the generated
+`manifest/COVERAGE.md` table structure.
+
+This is a **CC0 1.0** dedication. You may copy, modify, and distribute manifest
+entries without attribution (though upstream fix-commit URLs and reviewer notes should
+be preserved for audit integrity).
+
+Full legal text: https://creativecommons.org/publicdomain/zero/1.0/
+
+**Note:** Third-party commit URLs and CVE descriptions remain governed by their
+respective upstream projects.

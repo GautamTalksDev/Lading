@@ -1,0 +1,34 @@
+# zlib — compression library (madler/zlib)
+component:
+  name: zlib
+  ecosystem: native
+  purls:
+    - pkg:generic/zlib
+    - pkg:deb/debian/zlib1g
+  identity_symbols:
+    - inflate
+    - deflate
+    - inflateInit2_
+    - zlibVersion
+  identity_strings:
+    - "inflate (?:1\\.2\\.\\d+)"
+    - "deflate (?:1\\.2\\.\\d+)"
+
+entries:
+  - cve: CVE-2022-37434
+    affected_versions:
+      - "1.2.12"
+    vulnerable_symbols:
+      - name: inflate
+        confidence: definitive
+        provenance:
+          # Opened and read: gzip header extra-field copy in inflate() can
+          # overflow the caller-provided buffer when inflateGetHeader() is used.
+          upstream_fix_commit: https://github.com/madler/zlib/commit/eff308af425b67093bab25f80f1ae950166bece1
+          derivation: patch-touched-function
+          reviewed_by: gautamtalksdev
+          reviewed_at: "2026-08-22"
+    notes: >
+      Buffer overflow in inflate() when collecting a gzip extra field larger
+      than the space supplied via inflateGetHeader(). Fixed in zlib 1.2.13.
+    manifest_version: "0.2.0"

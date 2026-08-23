@@ -1,0 +1,26 @@
+# busybox — CP-11 corpus expansion (reviewed 2026-08-23)
+component:
+  name: busybox
+  ecosystem: native
+  purls:
+    - pkg:generic/busybox
+    - pkg:deb/debian/busybox
+  identity_symbols:
+    - applet_main
+    - run_applet_no_and_exit
+
+entries:
+  - cve: CVE-2022-48174
+    affected_versions:
+      - "1.35.0"
+    vulnerable_symbols:
+      - name: ash_setvar
+        confidence: definitive
+        provenance:
+          upstream_fix_commit: https://git.busybox.net/busybox/commit/1c7863f
+          derivation: patch-touched-function
+          reviewed_by: gautamtalksdev
+          reviewed_at: "2026-08-23"
+    notes: >
+      CP-11 seed entry for corpus kill tests. Symbol tied to public fix commit.
+    manifest_version: "0.2.0"

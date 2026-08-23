@@ -1,0 +1,3 @@
+path=crypto/pkcs7/pk7_smime.c
+side=new
+lines=221,370,371,372,373

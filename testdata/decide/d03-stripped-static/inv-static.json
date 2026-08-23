@@ -1,0 +1,13 @@
+{
+  "path": "bin/z.a",
+  "sha256": "z-static",
+  "format": "ELF",
+  "arch": "x86_64",
+  "dyn_syms": [],
+  "symtab": [{"raw": "inflate", "demangled": "inflate", "normalized": "inflate", "bind": "GLOBAL", "type": "FUNC", "defined": true}],
+  "needed": [],
+  "ro_strings": [],
+  "warnings": [],
+  "stripped": true,
+  "static_linked": true
+}

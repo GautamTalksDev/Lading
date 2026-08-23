@@ -1,0 +1,122 @@
+name: LADING Scan and Verify
+description: Run lading scan on a release artifact, verify evidence, upload VEX + bundle
+branding:
+  icon: shield
+  color: blue
+
+inputs:
+  artifact-path:
+    description: Path to artifact (directory, binary, tarball, or image tar)
+    required: true
+  findings-path:
+    description: Scanner findings JSON (grype/trivy/cve-bin-tool)
+    required: true
+  manifest-path:
+    description: Lading manifest directory
+    required: false
+    default: manifest
+  lading-version:
+    description: Release tag to install (e.g. v0.1.0) or "latest"
+    required: false
+    default: latest
+  skip-install:
+    description: Skip go install (use when lading is already on PATH)
+    required: false
+    default: "false"
+  output-dir:
+    description: Directory for bundle and VEX outputs
+    required: false
+    default: lading-out
+  upload-release-assets:
+    description: Attach bundle + VEX to GitHub Release (requires release workflow token)
+    required: false
+    default: "false"
+
+outputs:
+  bundle-path:
+    description: Path to evidence-bundle directory
+    value: ${{ steps.paths.outputs.bundle }}
+  vex-openvex-path:
+    description: Path to vex.openvex.json
+    value: ${{ steps.paths.outputs.openvex }}
+  scan-json:
+    description: Scan summary JSON line
+    value: ${{ steps.scan.outputs.json }}
+
+runs:
+  using: composite
+  steps:
+    - name: Install LADING
+      if: inputs.skip-install != 'true'
+      shell: bash
+      run: |
+        set -euo pipefail
+        VERSION="${{ inputs.lading-version }}"
+        if [[ "${VERSION}" == "latest" ]]; then
+          go install github.com/gautamtalksdev/lading/cmd/lading@latest
+        else
+          go install github.com/gautamtalksdev/lading/cmd/lading@"${VERSION#v}"
+        fi
+        echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
+
+    - name: Scan
+      id: scan
+      shell: bash
+      run: |
+        set -euo pipefail
+        mkdir -p "${{ inputs.output-dir }}"
+        lading scan "${{ inputs.artifact-path }}" \
+          --findings "${{ inputs.findings-path }}" \
+          --manifest "${{ inputs.manifest-path }}" \
+          --out "${{ inputs.output-dir }}" \
+          --json | tee scan-summary.json
+        echo "json=$(cat scan-summary.json)" >> "$GITHUB_OUTPUT"
+
+    - name: Set output paths
+      id: paths
+      shell: bash
+      run: |
+        echo "bundle=${{ inputs.output-dir }}/evidence-bundle" >> "$GITHUB_OUTPUT"
+        echo "openvex=${{ inputs.output-dir }}/vex.openvex.json" >> "$GITHUB_OUTPUT"
+
+    - name: Verify
+      shell: bash
+      run: |
+        set -euo pipefail
+        lading verify \
+          "${{ inputs.artifact-path }}" \
+          "${{ inputs.output-dir }}/vex.openvex.json" \
+          "${{ inputs.output-dir }}/evidence-bundle"
+
+    - name: Upload workflow artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: lading-evidence
+        path: |
+          ${{ inputs.output-dir }}/evidence-bundle
+          ${{ inputs.output-dir }}/vex.openvex.json
+          ${{ inputs.output-dir }}/vex.cdx.json
+          ${{ inputs.output-dir }}/vex.csaf.json
+          ${{ inputs.output-dir }}/refusals.json
+        if-no-files-found: error
+
+    - name: Upload GitHub Release assets
+      if: inputs.upload-release-assets == 'true'
+      shell: bash
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        set -euo pipefail
+        TAG="${GITHUB_REF_NAME}"
+        if [[ "${TAG}" != v* ]]; then
+          echo "not a release tag; skipping asset upload" >&2
+          exit 0
+        fi
+        gh release upload "${TAG}" \
+          "${{ inputs.output-dir }}/vex.openvex.json" \
+          "${{ inputs.output-dir }}/vex.cdx.json" \
+          "${{ inputs.output-dir }}/vex.csaf.json" \
+          "${{ inputs.output-dir }}/refusals.json" \
+          --clobber
+        tar -czf lading-evidence-bundle.tar.gz -C "${{ inputs.output-dir }}" evidence-bundle
+        gh release upload "${TAG}" lading-evidence-bundle.tar.gz --clobber

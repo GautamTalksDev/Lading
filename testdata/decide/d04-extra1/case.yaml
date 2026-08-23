@@ -1,0 +1,26 @@
+id: d04-extra1
+expect_rule: D04
+expect_verdict: AFFECTED
+finding:
+  cve: CVE-2022-25315
+  component_purl: pkg:generic/libexpat@2.4.4
+manifest:
+  version: 0.1.0
+  component:
+    name: libexpat
+    ecosystem: native
+    purls:
+    - pkg:generic/libexpat@2.4.4
+    identity_symbols:
+    - XML_Parse
+    - XML_ParserCreate
+  entry:
+    cve: CVE-2022-25315
+    affected_versions:
+    - 2.4.4
+    vulnerable_symbols:
+    - name: storeRawNames
+      confidence: definitive
+    manifest_version: 0.1.0
+inventories:
+- file: inv.json

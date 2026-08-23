@@ -1,0 +1,26 @@
+# libxslt — CP-11 corpus expansion (reviewed 2026-08-23)
+component:
+  name: libxslt
+  ecosystem: native
+  purls:
+    - pkg:generic/libxslt
+    - pkg:deb/debian/libxslt1.1
+  identity_symbols:
+    - xsltApplyStylesheet
+    - xsltParseStylesheetFile
+
+entries:
+  - cve: CVE-2019-18197
+    affected_versions:
+      - "1.1.34"
+    vulnerable_symbols:
+      - name: xsltNumberFormatGetMultipleLevel
+        confidence: definitive
+        provenance:
+          upstream_fix_commit: https://gitlab.gnome.org/GNOME/libxslt/-/commit/5a4ab64
+          derivation: patch-touched-function
+          reviewed_by: gautamtalksdev
+          reviewed_at: "2026-08-23"
+    notes: >
+      CP-11 seed entry for corpus kill tests. Symbol tied to public fix commit.
+    manifest_version: "0.2.0"
