@@ -46,7 +46,7 @@ func attachHelpDisclaimer(cmd *cobra.Command) {
 	orig := cmd.HelpFunc()
 	cmd.SetHelpFunc(func(c *cobra.Command, args []string) {
 		orig(c, args)
-		fmt.Fprint(c.OutOrStdout(), helpDisclaimerBlock)
+		_, _ = fmt.Fprint(c.OutOrStdout(), helpDisclaimerBlock)
 	})
 	for _, sub := range cmd.Commands() {
 		attachHelpDisclaimer(sub)

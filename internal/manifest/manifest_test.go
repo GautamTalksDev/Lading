@@ -147,8 +147,8 @@ entries:
 	if err != nil {
 		t.Fatal(err)
 	}
-	if err := os.WriteFile(path, append(b, []byte("\n# touch\n")...), 0o600); err != nil {
-		t.Fatal(err)
+	if writeErr := os.WriteFile(path, append(b, []byte("\n# touch\n")...), 0o600); writeErr != nil {
+		t.Fatal(writeErr)
 	}
 	m2, err := manifest.Load(dir)
 	if err != nil {

@@ -104,8 +104,8 @@ func loadStatement(dir string) (evidence.StatementRecord, evidence.InputsRecord,
 	if err != nil {
 		return stmt, inputs, err
 	}
-	if err := json.Unmarshal(stmtData, &stmt); err != nil {
-		return stmt, inputs, err
+	if unmarshalErr := json.Unmarshal(stmtData, &stmt); unmarshalErr != nil {
+		return stmt, inputs, unmarshalErr
 	}
 	inData, err := os.ReadFile(inPath) // #nosec G304
 	if err != nil {

@@ -243,8 +243,8 @@ func Load(dir string) (*Manifest, error) {
 	}
 
 	schemaPath := filepath.Join(dir, "schema", "entry.schema.json")
-	if _, err := os.Stat(schemaPath); err != nil {
-		return nil, fmt.Errorf("manifest: schema: %w", err)
+	if _, statErr := os.Stat(schemaPath); statErr != nil {
+		return nil, fmt.Errorf("manifest: schema: %w", statErr)
 	}
 
 	compRoot := filepath.Join(dir, "components")
@@ -365,7 +365,7 @@ func validateAgainstSchema(doc any) error {
 		return fmt.Errorf("missing required property: component")
 	}
 	for _, k := range []string{"name", "ecosystem", "purls", "identity_symbols"} {
-		if _, ok := comp[k]; !ok {
+		if _, has := comp[k]; !has {
 			return fmt.Errorf("component: missing required property: %s", k)
 		}
 	}
@@ -381,7 +381,7 @@ func validateAgainstSchema(doc any) error {
 	if err := requireStringArray(comp, "identity_symbols", 1); err != nil {
 		return fmt.Errorf("component: %w", err)
 	}
-	if _, ok := comp["identity_strings"]; ok {
+	if _, has := comp["identity_strings"]; has {
 		if err := requireStringArray(comp, "identity_strings", 0); err != nil {
 			return fmt.Errorf("component: %w", err)
 		}
@@ -399,7 +399,7 @@ func validateAgainstSchema(doc any) error {
 			return fmt.Errorf("entries[%d]: must be an object", i)
 		}
 		for _, k := range []string{"cve", "affected_versions", "vulnerable_symbols", "manifest_version"} {
-			if _, ok := e[k]; !ok {
+			if _, has := e[k]; !has {
 				return fmt.Errorf("entries[%d]: missing required property: %s", i, k)
 			}
 		}
@@ -423,7 +423,7 @@ func validateAgainstSchema(doc any) error {
 				return fmt.Errorf("entries[%d].vulnerable_symbols[%d]: must be an object", i, j)
 			}
 			for _, k := range []string{"name", "confidence", "provenance"} {
-				if _, ok := s[k]; !ok {
+				if _, has := s[k]; !has {
 					return fmt.Errorf("entries[%d].vulnerable_symbols[%d]: missing required property: %s", i, j, k)
 				}
 			}

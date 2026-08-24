@@ -130,12 +130,12 @@ func Propose(in ProposeInput, opt ProposeOptions) (*ProposeResult, error) {
 	}
 
 	prPath := filepath.Join(proposalDir, "PULL_REQUEST.md")
-	if err := os.WriteFile(prPath, []byte(renderPRTemplate(in, comp, candidatePath)), 0o644); err != nil {
+	if err := os.WriteFile(prPath, []byte(renderPRTemplate(in, comp, candidatePath)), 0o600); err != nil {
 		return nil, err
 	}
 
 	checklistPath := filepath.Join(proposalDir, "CHECKLIST.md")
-	if err := os.WriteFile(checklistPath, []byte(proposeChecklist), 0o644); err != nil {
+	if err := os.WriteFile(checklistPath, []byte(proposeChecklist), 0o600); err != nil {
 		return nil, err
 	}
 

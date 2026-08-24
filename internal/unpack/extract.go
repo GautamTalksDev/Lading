@@ -55,7 +55,7 @@ func ExtractTar(r io.Reader, destDir string) error {
 			if err := os.MkdirAll(target, 0o750); err != nil {
 				return err
 			}
-		case tar.TypeReg, tar.TypeRegA:
+		case tar.TypeReg:
 			if hdr.Size < 0 {
 				return &LimitError{Entry: hdr.Name, Reason: "negative file size"}
 			}
