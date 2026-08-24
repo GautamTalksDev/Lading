@@ -214,6 +214,8 @@ func reasonLabel(code decide.ReasonCode) string {
 		return "mapping-probable-only"
 	case decide.ReasonVersionUnderivable:
 		return "version-underivable"
+	case decide.ReasonProvenanceUnverified:
+		return "provenance-unverified"
 	case decide.ReasonIdentityUnverified:
 		return "identity-unverified"
 	default:

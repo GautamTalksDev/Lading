@@ -1,5 +1,6 @@
 # sqlite3 — CP-11 corpus expansion (reviewed 2026-08-23)
 component:
+  provenance_status: verified
   name: sqlite3
   ecosystem: native
   purls:

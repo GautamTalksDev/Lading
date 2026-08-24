@@ -1,5 +1,6 @@
 # libexpat — XML parser (libexpat/libexpat)
 component:
+  provenance_status: verified
   name: libexpat
   ecosystem: native
   purls:

@@ -48,6 +48,7 @@ const (
 	ReasonSymbolTableUnusable         ReasonCode = "symbol_table_unusable"
 	ReasonStrippedStaticBinary        ReasonCode = "stripped_static_binary"
 	ReasonStrippedInsufficientDynsym  ReasonCode = "stripped_insufficient_dynsym"
+	ReasonProvenanceUnverified        ReasonCode = "provenance_unverified"
 	ReasonIdentityUnverified          ReasonCode = "identity_unverified"
 	ReasonDefaultInsufficient         ReasonCode = "default_insufficient"
 )

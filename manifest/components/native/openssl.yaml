@@ -1,5 +1,6 @@
 # OpenSSL — TLS/crypto library (openssl/openssl)
 component:
+  provenance_status: verified
   name: openssl
   ecosystem: native
   purls:

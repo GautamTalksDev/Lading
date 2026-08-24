@@ -1,5 +1,6 @@
 # zlib — compression library (madler/zlib)
 component:
+  provenance_status: verified
   name: zlib
   ecosystem: native
   purls:

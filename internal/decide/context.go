@@ -11,19 +11,20 @@ import (
 )
 
 type evalContext struct {
-	findingCVE          string
-	findingPURL         purl.PURL
-	matchPURL           purl.PURL
-	identityRefusal     ReasonCode
-	manifestVersion     string
-	manifestComponent   *manifest.Component
-	purlQuality         purl.MatchQuality
-	entry               *manifest.Entry
-	definitiveSymbols   []string
-	componentIdentified bool
-	componentInvIDs     []string
-	inventories         []*inventory.Inventory
-	inputsUsed          InputsUsed
+	findingCVE           string
+	findingPURL          purl.PURL
+	matchPURL            purl.PURL
+	identityRefusal      ReasonCode
+	provenanceVerified   bool
+	manifestVersion      string
+	manifestComponent    *manifest.Component
+	purlQuality          purl.MatchQuality
+	entry                *manifest.Entry
+	definitiveSymbols    []string
+	componentIdentified  bool
+	componentInvIDs      []string
+	inventories          []*inventory.Inventory
+	inputsUsed           InputsUsed
 }
 
 func buildContext(in Input) (evalContext, error) {
@@ -56,6 +57,7 @@ func buildContext(in Input) (evalContext, error) {
 	if comp != nil {
 		c := *comp
 		ctx.manifestComponent = &c
+		ctx.provenanceVerified = c.IsVerified()
 	}
 	if ctx.manifestComponent != nil {
 		ctx.entry = entryForCVE(in.Manifest, cve, ctx.manifestComponent.Name)
@@ -284,6 +286,9 @@ func checkD03(ctx evalContext) (ReasonCode, bool) {
 	}
 	if !ctx.anyUsableSymbolTable() {
 		return ReasonSymbolTableUnusable, true
+	}
+	if !ctx.provenanceVerified {
+		return ReasonProvenanceUnverified, true
 	}
 
 	for _, id := range ctx.componentInvIDs {

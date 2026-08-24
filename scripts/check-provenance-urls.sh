@@ -29,6 +29,11 @@ fi
 fail=0
 for f in "${files[@]}"; do
   [[ -f "${f}" ]] || continue
+  # Determine if this component is provenance_status: verified
+  is_verified=false
+  if grep -qE '^[[:space:]]*provenance_status:[[:space:]]*verified' "${f}"; then
+    is_verified=true
+  fi
   while IFS= read -r url; do
     url="${url#"${url%%[![:space:]]*}"}"
     url="${url%"${url##*[![:space:]]}"}"
@@ -39,8 +44,12 @@ for f in "${files[@]}"; do
     fi
     echo "HEAD ${url}"
     if ! curl -fsI --max-time 25 --retry 2 --retry-delay 2 "${url}" >/dev/null; then
-      echo "${f}: unreachable upstream_fix_commit ${url}" >&2
-      fail=1
+      if [[ "${is_verified}" == "true" ]]; then
+        echo "HARD FAIL: ${f}: verified component has unreachable upstream_fix_commit ${url}" >&2
+        fail=1
+      else
+        echo "WARN: ${f}: unverified component has unreachable upstream_fix_commit ${url}" >&2
+      fi
     fi
   done < <(grep -E '^[[:space:]]*upstream_fix_commit:[[:space:]]*https://' "${f}" \
     | sed -E 's/^[[:space:]]*upstream_fix_commit:[[:space:]]*//' \

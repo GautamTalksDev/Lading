@@ -65,6 +65,7 @@ entries:
 | `purls` | yes (≥1) | Canonical PURLs this entry covers |
 | `identity_symbols` | yes (≥1) | Normalized symbols indicating the component is present |
 | `identity_strings` | no | Rodata regexes indicating component / version |
+| `provenance_status` | no (default: `unverified`) | `verified` or `unverified`. Components whose `upstream_fix_commit` URLs have been machine-checked (HTTP 200) are `verified`. **Only verified components may produce D01/D02 verdicts.** Unverified components are retained for refusal narrowing but cannot clear findings. |
 
 ### `entries[]` fields
 

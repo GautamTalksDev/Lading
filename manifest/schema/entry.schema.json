@@ -12,6 +12,12 @@
       "additionalProperties": false,
       "required": ["name", "ecosystem", "purls", "identity_symbols"],
       "properties": {
+        "provenance_status": {
+          "type": "string",
+          "enum": ["verified", "unverified"],
+          "default": "unverified",
+          "description": "Whether upstream_fix_commit URLs have been machine-verified (HTTP 200). Components marked unverified cannot produce D01/D02 verdicts."
+        },
         "name": {
           "type": "string",
           "minLength": 1,

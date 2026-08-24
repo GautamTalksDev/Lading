@@ -8,6 +8,9 @@ import (
 // It skips filesystem I/O and uses a fixed content hash suffix "test".
 func BuildForTest(version string, comp Component, entries []Entry) (*Manifest, error) {
 	compCopy := comp
+	if compCopy.ProvenanceStatus == "" {
+		compCopy.ProvenanceStatus = ProvenanceVerified
+	}
 	if err := compileIdentity(&compCopy); err != nil {
 		return nil, err
 	}

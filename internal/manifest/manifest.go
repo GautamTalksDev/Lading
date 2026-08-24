@@ -79,15 +79,30 @@ func (e Entry) AllowsNotAffected() bool {
 	return true
 }
 
+// ProvenanceStatus indicates whether a component's upstream_fix_commit URLs
+// have been machine-verified as reachable (HTTP 200).
+type ProvenanceStatus string
+
+const (
+	ProvenanceVerified   ProvenanceStatus = "verified"
+	ProvenanceUnverified ProvenanceStatus = "unverified"
+)
+
 // Component describes one software component and its CVE entries.
 type Component struct {
-	Name            string   `json:"name" yaml:"name"`
-	Ecosystem       string   `json:"ecosystem" yaml:"ecosystem"`
-	PURLs           []string `json:"purls" yaml:"purls"`
-	IdentitySymbols []string `json:"identity_symbols" yaml:"identity_symbols"`
-	IdentityStrings []string `json:"identity_strings,omitempty" yaml:"identity_strings,omitempty"`
-	SourceFile      string   `json:"-" yaml:"-"`
-	identityRegexps []*regexp.Regexp
+	ProvenanceStatus ProvenanceStatus `json:"provenance_status,omitempty" yaml:"provenance_status,omitempty"`
+	Name             string           `json:"name" yaml:"name"`
+	Ecosystem        string           `json:"ecosystem" yaml:"ecosystem"`
+	PURLs            []string         `json:"purls" yaml:"purls"`
+	IdentitySymbols  []string         `json:"identity_symbols" yaml:"identity_symbols"`
+	IdentityStrings  []string         `json:"identity_strings,omitempty" yaml:"identity_strings,omitempty"`
+	SourceFile       string           `json:"-" yaml:"-"`
+	identityRegexps  []*regexp.Regexp
+}
+
+// IsVerified reports whether this component's provenance has been machine-checked.
+func (c Component) IsVerified() bool {
+	return c.ProvenanceStatus == ProvenanceVerified
 }
 
 // fileDoc is the on-disk document shape.
@@ -282,6 +297,9 @@ func Load(dir string) (*Manifest, error) {
 			return nil, err
 		}
 		doc.Component.SourceFile = filepath.ToSlash(rel)
+		if doc.Component.ProvenanceStatus == "" {
+			doc.Component.ProvenanceStatus = ProvenanceUnverified
+		}
 		if err := compileIdentity(&doc.Component); err != nil {
 			return nil, fmt.Errorf("manifest: %s: %w", path, err)
 		}

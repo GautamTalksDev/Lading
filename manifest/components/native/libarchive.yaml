@@ -1,5 +1,6 @@
 # libarchive — CP-11 corpus expansion (reviewed 2026-08-23)
 component:
+  provenance_status: unverified
   name: libarchive
   ecosystem: native
   purls:
