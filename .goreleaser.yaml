@@ -45,36 +45,18 @@ archives:
       - DISCLAIMER.md
       - docs/
 
-nfpms:
-  - id: lading
-    package_name: lading
-    vendor: LADING
-    homepage: https://github.com/gautamtalksdev/lading
-    maintainer: LADING Contributors
-    description: Deterministic compliance evidence for binary vulnerability triage
-    license: Apache-2.0
-    formats:
-      - deb
-    bindir: /usr/bin
-    contents:
-      - src: lading
-        dst: /usr/bin/lading
-    file_name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
-
-brews:
+homebrew_casks:
   - name: lading
     repository:
       owner: gautamtalksdev
       name: homebrew-tap
       token: "{{ .Env.GITHUB_TOKEN }}"
-    directory: Formula
+    directory: Casks
     homepage: https://github.com/gautamtalksdev/lading
     description: Deterministic compliance evidence for binary vulnerability triage
     license: Apache-2.0
-    install: |
-      bin.install "lading"
-    test: |
-      system "#{bin}/lading", "scan", "--help"
+    binaries:
+      - lading
 
 checksum:
   name_template: SHA256SUMS
