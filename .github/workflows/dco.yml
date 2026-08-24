@@ -1,13 +1,10 @@
 name: DCO
-
 on:
   pull_request:
   push:
     branches: [main]
-
 permissions:
   contents: read
-
 jobs:
   dco:
     name: sign-off
@@ -16,4 +13,22 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: DCOBot/dco-action@1.0.0
+      - name: Check Signed-off-by on new commits
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            range="${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}"
+          else
+            range="${{ github.event.before }}..${{ github.sha }}"
+            git cat-file -e "${{ github.event.before }}^{commit}" 2>/dev/null || range="HEAD~1..HEAD"
+          fi
+          fail=0
+          for c in $(git rev-list --no-merges "$range"); do
+            author="$(git log -1 --format='%an <%ae>' "$c")"
+            if git log -1 --format='%B' "$c" | grep -qiF "Signed-off-by: $author"; then
+              echo "ok   $c"
+            else
+              echo "FAIL $c — missing 'Signed-off-by: $author'"; fail=1
+            fi
+          done
+          exit $fail
