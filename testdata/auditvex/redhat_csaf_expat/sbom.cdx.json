@@ -1,0 +1,27 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "version": 1,
+  "metadata": {
+    "component": {
+      "type": "container",
+      "name": "rockylinux:9",
+      "bom-ref": "root",
+      "purl": "pkg:oci/rockylinux@9"
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "name": "expat",
+      "bom-ref": "expat",
+      "purl": "pkg:rpm/redhat/expat@2.5.0-2.el9_4?arch=x86_64"
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "root",
+      "dependsOn": ["expat"]
+    }
+  ]
+}

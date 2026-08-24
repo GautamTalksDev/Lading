@@ -64,6 +64,11 @@ func Run(opts Options) (Result, error) {
 		return Result{}, fmt.Errorf("scan: manifest: %w", err)
 	}
 
+	aliases, err := manifest.LoadIdentityAliases("")
+	if err != nil {
+		return Result{}, fmt.Errorf("scan: identity aliases: %w", err)
+	}
+
 	artifactPath := opts.ArtifactPath
 	if artifactPath == "" {
 		artifactPath = unpacked.Root
@@ -93,9 +98,10 @@ func Run(opts Options) (Result, error) {
 
 	for _, finding := range findings {
 		result, err := decide.Evaluate(decide.Input{
-			Inventories: inventories,
-			Finding:     finding,
-			Manifest:    m,
+			Inventories:     inventories,
+			Finding:         finding,
+			Manifest:        m,
+			IdentityAliases: aliases,
 		})
 		if err != nil {
 			return Result{}, fmt.Errorf("scan: decide %s: %w", finding.CVE, err)
@@ -202,6 +208,12 @@ func reasonLabel(code decide.ReasonCode) string {
 		return "symtab-unusable"
 	case decide.ReasonPURLMatchInsufficient:
 		return "purl-insufficient"
+	case decide.ReasonNoIdentityMapping:
+		return "no-identity-mapping"
+	case decide.ReasonMappingProbableOnly:
+		return "mapping-probable-only"
+	case decide.ReasonVersionUnderivable:
+		return "version-underivable"
 	case decide.ReasonIdentityUnverified:
 		return "identity-unverified"
 	default:

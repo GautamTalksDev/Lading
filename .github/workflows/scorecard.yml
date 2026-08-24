@@ -7,15 +7,18 @@ on:
   push:
     branches: [main]
 
-permissions:
-  contents: read
-  id-token: write
-  security-events: write
+# Scorecard publish_results rejects workflow-level write permissions.
+# See: https://github.com/ossf/scorecard-action#publishing-results
+permissions: read-all
 
 jobs:
   analysis:
     name: scorecard
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+      security-events: write
     steps:
       - uses: actions/checkout@v4
         with:

@@ -1,5 +1,7 @@
 # LADING
 
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/GautamTalksDev/Lading/badge)](https://scorecard.dev/viewer/?uri=github.com/GautamTalksDev/Lading)
+
 **Deterministic compliance evidence for binary vulnerability triage.**
 
 You do not need to trust the maintainer. [`lading verify`](VERIFY.md) re-derives every
@@ -177,12 +179,12 @@ CRA mapping (factual, not legal advice): [docs/CRA.md](docs/CRA.md)
 
 ## Kill tests
 
-| ID | Gate |
-|----|------|
-| KT-1 | <30% decided coverage on 5 real artifacts → project stops |
-| KT-2 | One wrong `not_affected` in 100 hand-verified cases → unsound |
-| KT-3 | No inbound commercial interest by month 8 → no business |
-| CP-14 | 3 unprompted inbound → revenue gate opens ([launch/revenue/CP-14-GATE.md](launch/revenue/CP-14-GATE.md)); product build waits for 2× paid same ask |
+| ID | Gate | Status |
+|----|------|--------|
+| KT-1 | <30% decided coverage on 5 real artifacts → project stops | NOT EVALUABLE |
+| KT-2 | One wrong `not_affected` in 100 hand-verified cases → unsound | PASS (synthetic fixtures only) |
+| KT-3 | No inbound commercial interest by month 8 → no business | |
+| CP-14 | 3 unprompted inbound → revenue gate opens ([launch/revenue/CP-14-GATE.md](launch/revenue/CP-14-GATE.md)); product build waits for 2× paid same ask | |
 
 ---
 

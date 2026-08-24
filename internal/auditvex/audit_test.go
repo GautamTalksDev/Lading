@@ -3,6 +3,7 @@ package auditvex_test
 import (
 	"path/filepath"
 	"runtime"
+	"strings"
 	"testing"
 
 	"github.com/gautamtalksdev/lading/internal/auditvex"
@@ -78,5 +79,68 @@ func TestAudit_TrivyOverbroad(t *testing.T) {
 	}
 	if !sawSub {
 		t.Fatal("expected Exact match on non-root subcomponent")
+	}
+}
+
+// TestAudit_RedHatCSAF_Expat exercises real Red Hat CSAF shapes: composite
+// product IDs via relationships, product_status keys, and versionless PURLs.
+func TestAudit_RedHatCSAF_Expat(t *testing.T) {
+	dir := fixtureDir(t, "redhat_csaf_expat")
+	rep, err := auditvex.Audit(
+		filepath.Join(dir, "sbom.cdx.json"),
+		[]string{filepath.Join(dir, "vex.csaf.json")},
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rep.Results) != 3 {
+		t.Fatalf("results=%d want 3 (2 known_not_affected + 1 fixed)", len(rep.Results))
+	}
+
+	var notAffected, fixed int
+	var versionless *auditvex.StatementResult
+	for i := range rep.Results {
+		r := rep.Results[i]
+		switch r.VEXStatus {
+		case "known_not_affected":
+			notAffected++
+			if r.ProductIDs[0] != "red_hat_enterprise_linux_6:expat" &&
+				r.ProductIDs[0] != "red_hat_enterprise_linux_7:expat" {
+				t.Fatalf("unexpected composite product_id %q", r.ProductIDs[0])
+			}
+			if r.Products[0] != "pkg:rpm/redhat/expat" {
+				t.Fatalf("composite %q resolved to %q want pkg:rpm/redhat/expat", r.ProductIDs[0], r.Products[0])
+			}
+			if r.Justification != "vulnerable_code_not_present" {
+				t.Fatalf("justification=%q want vulnerable_code_not_present", r.Justification)
+			}
+			if r.Status == auditvex.StatusVersionless {
+				copy := r
+				versionless = &copy
+			}
+		case "fixed":
+			fixed++
+			if r.Products[0] != "pkg:rpm/redhat/expat@2.5.0-2.el9_4?arch=x86_64" {
+				t.Fatalf("fixed resolved to %q", r.Products[0])
+			}
+			if r.Status != auditvex.StatusOK {
+				t.Fatalf("fixed statement status=%s want ok (must not be overbroad)", r.Status)
+			}
+		default:
+			t.Fatalf("unexpected vex_status=%q", r.VEXStatus)
+		}
+	}
+	if notAffected != 2 || fixed != 1 {
+		t.Fatalf("known_not_affected=%d fixed=%d", notAffected, fixed)
+	}
+	if versionless == nil {
+		t.Fatal("expected VERSIONLESS on bare pkg:rpm/redhat/expat known_not_affected")
+	}
+	if !strings.Contains(versionless.Detail, "red_hat_enterprise_linux_6") &&
+		!strings.Contains(versionless.Detail, "red_hat_enterprise_linux_7") {
+		t.Fatalf("versionless detail missing platform: %s", versionless.Detail)
+	}
+	if !rep.HasFailures() {
+		t.Fatal("expected HasFailures for versionless statements")
 	}
 }

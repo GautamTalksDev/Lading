@@ -39,6 +39,9 @@ const (
 type ReasonCode string
 
 const (
+	ReasonNoIdentityMapping         ReasonCode = "no_identity_mapping"
+	ReasonMappingProbableOnly       ReasonCode = "mapping_probable_only"
+	ReasonVersionUnderivable        ReasonCode = "version_underivable"
 	ReasonPURLMatchInsufficient     ReasonCode = "purl_match_insufficient"
 	ReasonManifestNoEntry             ReasonCode = "manifest_no_entry"
 	ReasonManifestProbableOnly        ReasonCode = "manifest_probable_only"
@@ -80,7 +83,8 @@ type Result struct {
 
 // Input is the full evaluation tuple.
 type Input struct {
-	Inventories []*inventory.Inventory
-	Finding     Finding
-	Manifest    *manifest.Manifest
+	Inventories     []*inventory.Inventory
+	Finding         Finding
+	Manifest        *manifest.Manifest
+	IdentityAliases *manifest.IdentityAliases
 }

@@ -18,9 +18,10 @@ For each statement, report which SBOM components matched and at what
 MatchQuality.
 
 Exit 1 if any statement is:
-  - inert:     no Exact/TypeNormalized match (Grype-class silent miss)
-  - overbroad: Exact/TypeNormalized match on a subcomponent only
-               (Trivy-class cross-product suppression)
+  - inert:       no Exact/TypeNormalized match (Grype-class silent miss)
+  - overbroad:   Exact/TypeNormalized match on a subcomponent only
+                 (Trivy-class cross-product suppression)
+  - versionless: known_not_affected on a PURL with no version
 
 MatchQuality is always reported — never a bare boolean.`,
 		Args: cobra.MinimumNArgs(2),
@@ -41,7 +42,7 @@ MatchQuality is always reported — never a bare boolean.`,
 	}
 }
 
-var errAuditFailed = fmt.Errorf("audit-vex: inert or over-broad statements present")
+var errAuditFailed = fmt.Errorf("audit-vex: inert, over-broad, or versionless statements present")
 
 func printAuditReport(rep auditvex.Report) {
 	w := tabwriter.NewWriter(os.Stdout, 0, 0, 2, ' ', 0)

@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"os"
 	"sort"
+	"strings"
 
 	"github.com/gautamtalksdev/lading/internal/purl"
 )
@@ -14,9 +15,10 @@ import (
 type Status string
 
 const (
-	StatusOK        Status = "ok"
-	StatusInert     Status = "inert"     // Grype failure mode
-	StatusOverbroad Status = "overbroad" // Trivy failure mode
+	StatusOK          Status = "ok"
+	StatusInert       Status = "inert"       // Grype failure mode
+	StatusOverbroad   Status = "overbroad"   // Trivy failure mode
+	StatusVersionless Status = "versionless" // unversioned not_affected PURL
 )
 
 // Component is one SBOM package identity.
@@ -38,6 +40,10 @@ type StatementResult struct { //nolint:govet // exported report shape preferred 
 	Vulnerability string
 	Detail        string
 	Products      []string // raw product PURLs from the statement
+	ProductIDs    []string
+	Platforms     []string
+	VEXStatus     string // CSAF product_status key
+	Justification string
 	Matches       []Match
 	Best          purl.MatchQuality
 	Status        Status
@@ -48,10 +54,10 @@ type Report struct {
 	Results []StatementResult
 }
 
-// HasFailures reports whether any statement is inert or over-broad.
+// HasFailures reports whether any statement is inert, over-broad, or versionless.
 func (r Report) HasFailures() bool {
 	for _, s := range r.Results {
-		if s.Status == StatusInert || s.Status == StatusOverbroad {
+		if s.Status == StatusInert || s.Status == StatusOverbroad || s.Status == StatusVersionless {
 			return true
 		}
 	}
@@ -93,8 +99,30 @@ func evaluate(st vexStatement, comps []Component) StatementResult {
 		Document:      st.Document,
 		Vulnerability: st.Vulnerability,
 		Products:      append([]string(nil), st.ProductPURLs...),
+		ProductIDs:    append([]string(nil), st.ProductIDs...),
+		Platforms:     append([]string(nil), st.Platforms...),
+		VEXStatus:     st.Status,
+		Justification: st.Justification,
 		Best:          purl.None,
 		Status:        StatusOK,
+	}
+
+	if !isSuppressionStatement(st) {
+		res.Detail = fmt.Sprintf("ok: %s statement (does not suppress findings)", st.Status)
+		return res
+	}
+
+	for _, raw := range st.ProductPURLs {
+		if !purlHasVersion(raw) {
+			res.Status = StatusVersionless
+			res.Detail = fmt.Sprintf(
+				"versionless: purl=%s platforms=[%s] justification=%q",
+				raw,
+				strings.Join(st.Platforms, ", "),
+				st.Justification,
+			)
+			return res
+		}
 	}
 
 	var matches []Match
@@ -122,18 +150,12 @@ func evaluate(st vexStatement, comps []Component) StatementResult {
 	})
 	res.Matches = matches
 
-	// Grype failure mode: no Exact (or TypeNormalized) identity — the VEX
-	// statement would be silently ignored by tools that require string-equal
-	// / same-type PURL identity.
 	if res.Best < purl.TypeNormalized {
 		res.Status = StatusInert
 		res.Detail = "inert: no Exact/TypeNormalized SBOM match (Grype-class silent miss)"
 		return res
 	}
 
-	// Trivy failure mode: statement lands on a subcomponent (dependency),
-	// so applying it would suppress findings across unrelated root products
-	// that share that dependency.
 	subHits := 0
 	rootHits := 0
 	for _, m := range matches {

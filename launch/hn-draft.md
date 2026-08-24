@@ -1,3 +1,5 @@
+> **HOLD — DO NOT PUBLISH.** See [DO-NOT-PUBLISH.md](DO-NOT-PUBLISH.md).
+
 # Hacker News — DO NOT POST until steps 1–6 complete
 
 **Target window:** Tuesday, 9:00–11:00 US Eastern  

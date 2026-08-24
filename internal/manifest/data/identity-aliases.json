@@ -1,0 +1,49 @@
+{
+  "aliases": [
+    {
+      "source_name": "expat",
+      "component": "pkg:generic/libexpat",
+      "status": "probable",
+      "provenance_url": "https://sources.debian.org/src/expat/",
+      "verified_artifact_sha256": "",
+      "reviewed_by": "cp-15a-seed",
+      "reviewed_at": "2026-08-24"
+    },
+    {
+      "source_name": "glibc",
+      "component": "pkg:generic/glibc",
+      "status": "probable",
+      "provenance_url": "https://sources.debian.org/src/glibc/",
+      "verified_artifact_sha256": "",
+      "reviewed_by": "cp-15a-seed",
+      "reviewed_at": "2026-08-24"
+    },
+    {
+      "source_name": "openssl",
+      "component": "pkg:generic/openssl",
+      "status": "probable",
+      "provenance_url": "https://sources.debian.org/src/openssl/",
+      "verified_artifact_sha256": "",
+      "reviewed_by": "cp-15a-seed",
+      "reviewed_at": "2026-08-24"
+    },
+    {
+      "source_name": "curl",
+      "component": "pkg:generic/curl",
+      "status": "probable",
+      "provenance_url": "https://sources.debian.org/src/curl/",
+      "verified_artifact_sha256": "",
+      "reviewed_by": "cp-15a-seed",
+      "reviewed_at": "2026-08-24"
+    },
+    {
+      "source_name": "util-linux",
+      "component": "pkg:generic/util-linux",
+      "status": "probable",
+      "provenance_url": "https://sources.debian.org/src/util-linux/",
+      "verified_artifact_sha256": "",
+      "reviewed_by": "cp-15a-seed",
+      "reviewed_at": "2026-08-24"
+    }
+  ]
+}

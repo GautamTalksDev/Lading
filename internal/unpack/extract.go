@@ -21,8 +21,8 @@ func ExtractTar(r io.Reader, destDir string) error {
 
 	tr := tar.NewReader(r)
 	var (
-		entries       int
-		decompressed  int64
+		entries      int
+		decompressed int64
 	)
 	for {
 		hdr, err := tr.Next()

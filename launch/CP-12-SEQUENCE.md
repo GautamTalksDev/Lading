@@ -1,3 +1,5 @@
+> **HOLD — DO NOT PUBLISH.** KT-1 is NOT EVALUABLE; nothing in `launch/` ships until CP-15 lands and CP-11 is re-run. See [DO-NOT-PUBLISH.md](DO-NOT-PUBLISH.md).
+
 # CP-12 — Launch sequence (execute in order)
 
 Do not skip steps. Do not publish post 2 or HN until vendor notice periods elapse.

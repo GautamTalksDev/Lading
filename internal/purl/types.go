@@ -24,6 +24,9 @@ const (
 	// type-specific normalization. Qualifiers/subpath may differ, but digests
 	// do not conflict.
 	TypeNormalized
+	// IdentityMapped — distro finding resolved to an upstream component via a
+	// definitive identity alias; stronger than type_normalized but not exact.
+	IdentityMapped
 	// Exact — canonical forms are identical (type, namespace, name, version,
 	// sorted qualifiers, subpath).
 	Exact
@@ -39,6 +42,8 @@ func (q MatchQuality) String() string {
 		return "name_version_only"
 	case TypeNormalized:
 		return "type_normalized"
+	case IdentityMapped:
+		return "identity_mapped"
 	case Exact:
 		return "exact"
 	default:

@@ -13,6 +13,8 @@ import (
 type evalContext struct {
 	findingCVE          string
 	findingPURL         purl.PURL
+	matchPURL           purl.PURL
+	identityRefusal     ReasonCode
 	manifestVersion     string
 	manifestComponent   *manifest.Component
 	purlQuality         purl.MatchQuality
@@ -32,18 +34,24 @@ func buildContext(in Input) (evalContext, error) {
 	if err != nil {
 		return evalContext{}, fmt.Errorf("decide: finding PURL: %w", err)
 	}
+
+	idRes := resolveIdentity(findingPURL, in.IdentityAliases)
+	matchPURL := idRes.matchPURL
 	cve := strings.ToUpper(strings.TrimSpace(in.Finding.CVE))
 	if cve == "" {
 		return evalContext{}, fmt.Errorf("decide: empty CVE")
 	}
 
-	comp, quality := bestManifestMatch(in.Manifest, findingPURL)
+	comp, quality := bestManifestMatch(in.Manifest, matchPURL)
+	quality = applyIdentityMappedQuality(quality, idRes.identityMapped)
 	ctx := evalContext{
-		findingCVE:      cve,
-		findingPURL:     findingPURL,
-		manifestVersion: in.Manifest.Version(),
-		purlQuality:     quality,
-		inventories:     in.Inventories,
+		findingCVE:        cve,
+		findingPURL:       findingPURL,
+		matchPURL:         matchPURL,
+		identityRefusal:   idRes.refusal,
+		manifestVersion:   in.Manifest.Version(),
+		purlQuality:       quality,
+		inventories:       in.Inventories,
 	}
 	if comp != nil {
 		c := *comp
@@ -259,6 +267,9 @@ func (ctx evalContext) inventoryByID(id string) *inventory.Inventory {
 }
 
 func checkD03(ctx evalContext) (ReasonCode, bool) {
+	if ctx.identityRefusal != "" {
+		return ctx.identityRefusal, true
+	}
 	if ctx.purlQuality <= purl.NameOnly {
 		return ReasonPURLMatchInsufficient, true
 	}

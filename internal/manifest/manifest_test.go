@@ -3,6 +3,7 @@ package manifest_test
 import (
 	"os"
 	"path/filepath"
+	"regexp"
 	"strings"
 	"testing"
 
@@ -24,8 +25,10 @@ func TestLoad_SeedEntries(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(m.Components()) != 3 {
-		t.Fatalf("components=%d want 3", len(m.Components()))
+	// Lower bound, not equality: the Manifest grows as components are added.
+	// The seed CVEs asserted below are the invariant this test protects.
+	if len(m.Components()) < 3 {
+		t.Fatalf("components=%d want >=3", len(m.Components()))
 	}
 	for _, cve := range []string{"CVE-2022-37434", "CVE-2022-25315", "CVE-2023-0286"} {
 		ents, ok := m.LookupCVE(cve)
@@ -46,9 +49,11 @@ func TestLoad_SeedEntries(t *testing.T) {
 			}
 		}
 	}
+	// Assert the shape (semver + 64-hex content hash), not a frozen version
+	// literal: the Manifest version moves whenever content changes.
 	v := m.Version()
-	if !strings.HasPrefix(v, "0.1.0+") || len(v) < 20 {
-		t.Fatalf("Version()=%q", v)
+	if !regexp.MustCompile(`^\d+\.\d+\.\d+\+[0-9a-f]{64}$`).MatchString(v) {
+		t.Fatalf("Version()=%q want <semver>+<64-hex>", v)
 	}
 }
 
