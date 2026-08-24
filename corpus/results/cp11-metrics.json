@@ -1,0 +1,738 @@
+{
+  "kt1": {
+    "cves_in": 15641,
+    "artifacts_scanned": 55,
+    "not_affected": 0,
+    "not_affected_with_evidence_bundle": 0,
+    "affected": 5,
+    "decided": 5,
+    "refused": 15636,
+    "decided_coverage_pct": 0.032,
+    "decided_ci_low_pct": 0.0137,
+    "decided_ci_high_pct": 0.0748,
+    "na_bundle_coverage_pct": 0.0,
+    "na_bundle_ci_low_pct": 0.0,
+    "na_bundle_ci_high_pct": 0.0246,
+    "threshold_pct": 30.0,
+    "evaluable": false,
+    "verdict": "NOT EVALUABLE",
+    "firmware": {
+      "artifacts": 12,
+      "cves_in": 5553,
+      "decided": 1,
+      "coverage_pct": 0.018
+    },
+    "substitute_container": {
+      "artifacts": 7,
+      "cves_in": 1566,
+      "decided": 0,
+      "coverage_pct": 0.0
+    }
+  },
+  "kt2": {
+    "label_count": 100,
+    "empty_labels": 0,
+    "soundness_evaluable": true,
+    "full_evaluable": true,
+    "evaluable": true,
+    "not_affected_labeled": 20,
+    "not_affected_total": 20,
+    "source": "corpus/groundtruth/real-100.yaml",
+    "seed": 20260824,
+    "false_not_affected": 20,
+    "false_clearances": [
+      {
+        "id": "real-002",
+        "cve": "CVE-2026-42767",
+        "artifact": "oci-redis-7",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "justification": "vulnerable_code_not_present",
+        "rule_id": "D02",
+        "evidence_bundle": "corpus/results/oci-redis-7/evidence-bundle/statements/cve-2026-42767",
+        "human_notes": "FINDING-002: D02 on OSSL_CRMF_ENCRYPTEDVALUE_decrypt unsound \u2014 internal symbol absent from .dynsym while OSSL_CRMF_* API is exported and objdump shows 597 CRMF references on oci-redis-7 libcrypto.so.3.",
+        "finding": "FINDING-002: D02 on OSSL_CRMF_ENCRYPTEDVALUE_decrypt unsound \u2014 internal symbol absent from .dynsym while OSSL_CRMF_* API is exported and objdump shows 597 CRMF references on oci-redis-7 libcrypto.so.3."
+      },
+      {
+        "id": "real-008",
+        "cve": "CVE-2026-14456",
+        "artifact": "oci-redis-7",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "justification": "vulnerable_code_not_present",
+        "rule_id": "D02",
+        "evidence_bundle": "corpus/results/oci-redis-7/evidence-bundle/statements/cve-2026-14456",
+        "human_notes": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).",
+        "finding": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library)."
+      },
+      {
+        "id": "real-010",
+        "cve": "CVE-2026-14456",
+        "artifact": "oci-python-3.12",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "justification": "vulnerable_code_not_present",
+        "rule_id": "D02",
+        "evidence_bundle": "corpus/results/oci-python-3.12/evidence-bundle/statements/cve-2026-14456",
+        "human_notes": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).",
+        "finding": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library)."
+      },
+      {
+        "id": "real-011",
+        "cve": "CVE-2026-14456",
+        "artifact": "subst-mosquitto",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "justification": "vulnerable_code_not_present",
+        "rule_id": "D02",
+        "evidence_bundle": "corpus/results/subst-mosquitto/evidence-bundle/statements/cve-2026-14456",
+        "human_notes": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).",
+        "finding": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library)."
+      },
+      {
+        "id": "real-013",
+        "cve": "CVE-2026-45445",
+        "artifact": "subst-golang-bookworm",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "justification": "vulnerable_code_not_present",
+        "rule_id": "D02",
+        "evidence_bundle": "corpus/results/subst-golang-bookworm/evidence-bundle/statements/cve-2026-45445",
+        "human_notes": "FINDING-002: D02 clearance unsound \u2014 vulnerable symbol not observable in .dynsym on dynamically-linked libcrypto.so.3; symbol absence is guaranteed a priori for internal functions.",
+        "finding": "FINDING-002: D02 clearance unsound \u2014 vulnerable symbol not observable in .dynsym on dynamically-linked libcrypto.so.3; symbol absence is guaranteed a priori for internal functions."
+      },
+      {
+        "id": "real-015",
+        "cve": "CVE-2026-42767",
+        "artifact": "oci-node-20",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "justification": "vulnerable_code_not_present",
+        "rule_id": "D02",
+        "evidence_bundle": "corpus/results/oci-node-20/evidence-bundle/statements/cve-2026-42767",
+        "human_notes": "FINDING-002: D02 clearance unsound \u2014 vulnerable symbol not observable in .dynsym on dynamically-linked libcrypto.so.3; symbol absence is guaranteed a priori for internal functions.",
+        "finding": "FINDING-002: D02 clearance unsound \u2014 vulnerable symbol not observable in .dynsym on dynamically-linked libcrypto.so.3; symbol absence is guaranteed a priori for internal functions."
+      },
+      {
+        "id": "real-016",
+        "cve": "CVE-2026-42767",
+        "artifact": "oci-nginx-1.25",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "justification": "vulnerable_code_not_present",
+        "rule_id": "D02",
+        "evidence_bundle": "corpus/results/oci-nginx-1.25/evidence-bundle/statements/cve-2026-42767",
+        "human_notes": "FINDING-002: D02 clearance unsound \u2014 vulnerable symbol not observable in .dynsym on dynamically-linked libcrypto.so.3; symbol absence is guaranteed a priori for internal functions.",
+        "finding": "FINDING-002: D02 clearance unsound \u2014 vulnerable symbol not observable in .dynsym on dynamically-linked libcrypto.so.3; symbol absence is guaranteed a priori for internal functions."
+      },
+      {
+        "id": "real-021",
+        "cve": "CVE-2026-14456",
+        "artifact": "subst-httpd-alpine",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "justification": "vulnerable_code_not_present",
+        "rule_id": "D02",
+        "evidence_bundle": "corpus/results/subst-httpd-alpine/evidence-bundle/statements/cve-2026-14456",
+        "human_notes": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).",
+        "finding": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library)."
+      },
+      {
+        "id": "real-022",
+        "cve": "CVE-2026-42767",
+        "artifact": "oci-rabbitmq-3",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "justification": "vulnerable_code_not_present",
+        "rule_id": "D02",
+        "evidence_bundle": "corpus/results/oci-rabbitmq-3/evidence-bundle/statements/cve-2026-42767",
+        "human_notes": "FINDING-002: D02 clearance unsound \u2014 vulnerable symbol not observable in .dynsym on dynamically-linked libcrypto.so.3; symbol absence is guaranteed a priori for internal functions.",
+        "finding": "FINDING-002: D02 clearance unsound \u2014 vulnerable symbol not observable in .dynsym on dynamically-linked libcrypto.so.3; symbol absence is guaranteed a priori for internal functions."
+      },
+      {
+        "id": "real-024",
+        "cve": "CVE-2026-14456",
+        "artifact": "subst-httpd-alpine",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "justification": "vulnerable_code_not_present",
+        "rule_id": "D02",
+        "evidence_bundle": "corpus/results/subst-httpd-alpine/evidence-bundle/statements/cve-2026-14456",
+        "human_notes": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).",
+        "finding": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library)."
+      },
+      {
+        "id": "real-031",
+        "cve": "CVE-2026-14456",
+        "artifact": "oci-node-20",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "justification": "vulnerable_code_not_present",
+        "rule_id": "D02",
+        "evidence_bundle": "corpus/results/oci-node-20/evidence-bundle/statements/cve-2026-14456",
+        "human_notes": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).",
+        "finding": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library)."
+      },
+      {
+        "id": "real-035",
+        "cve": "CVE-2026-14456",
+        "artifact": "oci-nginx-1.25",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "justification": "vulnerable_code_not_present",
+        "rule_id": "D02",
+        "evidence_bundle": "corpus/results/oci-nginx-1.25/evidence-bundle/statements/cve-2026-14456",
+        "human_notes": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).",
+        "finding": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library)."
+      },
+      {
+        "id": "real-043",
+        "cve": "CVE-2026-14456",
+        "artifact": "oci-postgres-16",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "justification": "vulnerable_code_not_present",
+        "rule_id": "D02",
+        "evidence_bundle": "corpus/results/oci-postgres-16/evidence-bundle/statements/cve-2026-14456",
+        "human_notes": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).",
+        "finding": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library)."
+      },
+      {
+        "id": "real-055",
+        "cve": "CVE-2026-42767",
+        "artifact": "subst-golang-bookworm",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "justification": "vulnerable_code_not_present",
+        "rule_id": "D02",
+        "evidence_bundle": "corpus/results/subst-golang-bookworm/evidence-bundle/statements/cve-2026-42767",
+        "human_notes": "FINDING-002: D02 clearance unsound \u2014 vulnerable symbol not observable in .dynsym on dynamically-linked libcrypto.so.3; symbol absence is guaranteed a priori for internal functions.",
+        "finding": "FINDING-002: D02 clearance unsound \u2014 vulnerable symbol not observable in .dynsym on dynamically-linked libcrypto.so.3; symbol absence is guaranteed a priori for internal functions."
+      },
+      {
+        "id": "real-063",
+        "cve": "CVE-2026-14456",
+        "artifact": "oci-python-3.12",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "justification": "vulnerable_code_not_present",
+        "rule_id": "D02",
+        "evidence_bundle": "corpus/results/oci-python-3.12/evidence-bundle/statements/cve-2026-14456",
+        "human_notes": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).",
+        "finding": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library)."
+      },
+      {
+        "id": "real-065",
+        "cve": "CVE-2026-42767",
+        "artifact": "oci-nginx-1.25",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "justification": "vulnerable_code_not_present",
+        "rule_id": "D02",
+        "evidence_bundle": "corpus/results/oci-nginx-1.25/evidence-bundle/statements/cve-2026-42767",
+        "human_notes": "FINDING-002: D02 clearance unsound \u2014 vulnerable symbol not observable in .dynsym on dynamically-linked libcrypto.so.3; symbol absence is guaranteed a priori for internal functions.",
+        "finding": "FINDING-002: D02 clearance unsound \u2014 vulnerable symbol not observable in .dynsym on dynamically-linked libcrypto.so.3; symbol absence is guaranteed a priori for internal functions."
+      },
+      {
+        "id": "real-068",
+        "cve": "CVE-2026-14456",
+        "artifact": "oci-postgres-16",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "justification": "vulnerable_code_not_present",
+        "rule_id": "D02",
+        "evidence_bundle": "corpus/results/oci-postgres-16/evidence-bundle/statements/cve-2026-14456",
+        "human_notes": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).",
+        "finding": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library)."
+      },
+      {
+        "id": "real-074",
+        "cve": "CVE-2026-14456",
+        "artifact": "oci-ruby-3.3",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "justification": "vulnerable_code_not_present",
+        "rule_id": "D02",
+        "evidence_bundle": "corpus/results/oci-ruby-3.3/evidence-bundle/statements/cve-2026-14456",
+        "human_notes": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).",
+        "finding": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library)."
+      },
+      {
+        "id": "real-086",
+        "cve": "CVE-2026-14456",
+        "artifact": "subst-golang-bookworm",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "justification": "vulnerable_code_not_present",
+        "rule_id": "D02",
+        "evidence_bundle": "corpus/results/subst-golang-bookworm/evidence-bundle/statements/cve-2026-14456",
+        "human_notes": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).",
+        "finding": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library)."
+      },
+      {
+        "id": "real-088",
+        "cve": "CVE-2026-14456",
+        "artifact": "oci-memcached-1.6",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "justification": "vulnerable_code_not_present",
+        "rule_id": "D02",
+        "evidence_bundle": "corpus/results/oci-memcached-1.6/evidence-bundle/statements/cve-2026-14456",
+        "human_notes": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).",
+        "finding": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library)."
+      }
+    ],
+    "agreement_count": 80,
+    "agreement_rate_pct": 80.0,
+    "precision_recall_by_reason": [
+      {
+        "reason_code": "(none)",
+        "tp": 0,
+        "fp": 0,
+        "fn": 20,
+        "precision": null,
+        "recall": 0.0
+      },
+      {
+        "reason_code": "manifest_no_entry",
+        "tp": 8,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      {
+        "reason_code": "mapping_probable_only",
+        "tp": 13,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      {
+        "reason_code": "no_identity_mapping",
+        "tp": 9,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      {
+        "reason_code": "purl_match_insufficient",
+        "tp": 50,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0
+      }
+    ],
+    "disagreements": [
+      {
+        "id": "real-002",
+        "cve": "CVE-2026-42767",
+        "artifact": "oci-redis-7",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "reason_code": "",
+        "justification": "vulnerable_code_not_present",
+        "human_notes": "FINDING-002: D02 on OSSL_CRMF_ENCRYPTEDVALUE_decrypt unsound \u2014 internal symbol absent from .dynsym while OSSL_CRMF_* API is exported and objdump shows 597 CRMF references on oci-redis-7 libcrypto.so.3."
+      },
+      {
+        "id": "real-008",
+        "cve": "CVE-2026-14456",
+        "artifact": "oci-redis-7",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "reason_code": "",
+        "justification": "vulnerable_code_not_present",
+        "human_notes": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library)."
+      },
+      {
+        "id": "real-010",
+        "cve": "CVE-2026-14456",
+        "artifact": "oci-python-3.12",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "reason_code": "",
+        "justification": "vulnerable_code_not_present",
+        "human_notes": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library)."
+      },
+      {
+        "id": "real-011",
+        "cve": "CVE-2026-14456",
+        "artifact": "subst-mosquitto",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "reason_code": "",
+        "justification": "vulnerable_code_not_present",
+        "human_notes": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library)."
+      },
+      {
+        "id": "real-013",
+        "cve": "CVE-2026-45445",
+        "artifact": "subst-golang-bookworm",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "reason_code": "",
+        "justification": "vulnerable_code_not_present",
+        "human_notes": "FINDING-002: D02 clearance unsound \u2014 vulnerable symbol not observable in .dynsym on dynamically-linked libcrypto.so.3; symbol absence is guaranteed a priori for internal functions."
+      },
+      {
+        "id": "real-015",
+        "cve": "CVE-2026-42767",
+        "artifact": "oci-node-20",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "reason_code": "",
+        "justification": "vulnerable_code_not_present",
+        "human_notes": "FINDING-002: D02 clearance unsound \u2014 vulnerable symbol not observable in .dynsym on dynamically-linked libcrypto.so.3; symbol absence is guaranteed a priori for internal functions."
+      },
+      {
+        "id": "real-016",
+        "cve": "CVE-2026-42767",
+        "artifact": "oci-nginx-1.25",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "reason_code": "",
+        "justification": "vulnerable_code_not_present",
+        "human_notes": "FINDING-002: D02 clearance unsound \u2014 vulnerable symbol not observable in .dynsym on dynamically-linked libcrypto.so.3; symbol absence is guaranteed a priori for internal functions."
+      },
+      {
+        "id": "real-021",
+        "cve": "CVE-2026-14456",
+        "artifact": "subst-httpd-alpine",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "reason_code": "",
+        "justification": "vulnerable_code_not_present",
+        "human_notes": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library)."
+      },
+      {
+        "id": "real-022",
+        "cve": "CVE-2026-42767",
+        "artifact": "oci-rabbitmq-3",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "reason_code": "",
+        "justification": "vulnerable_code_not_present",
+        "human_notes": "FINDING-002: D02 clearance unsound \u2014 vulnerable symbol not observable in .dynsym on dynamically-linked libcrypto.so.3; symbol absence is guaranteed a priori for internal functions."
+      },
+      {
+        "id": "real-024",
+        "cve": "CVE-2026-14456",
+        "artifact": "subst-httpd-alpine",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "reason_code": "",
+        "justification": "vulnerable_code_not_present",
+        "human_notes": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library)."
+      },
+      {
+        "id": "real-031",
+        "cve": "CVE-2026-14456",
+        "artifact": "oci-node-20",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "reason_code": "",
+        "justification": "vulnerable_code_not_present",
+        "human_notes": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library)."
+      },
+      {
+        "id": "real-035",
+        "cve": "CVE-2026-14456",
+        "artifact": "oci-nginx-1.25",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "reason_code": "",
+        "justification": "vulnerable_code_not_present",
+        "human_notes": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library)."
+      },
+      {
+        "id": "real-043",
+        "cve": "CVE-2026-14456",
+        "artifact": "oci-postgres-16",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "reason_code": "",
+        "justification": "vulnerable_code_not_present",
+        "human_notes": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library)."
+      },
+      {
+        "id": "real-055",
+        "cve": "CVE-2026-42767",
+        "artifact": "subst-golang-bookworm",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "reason_code": "",
+        "justification": "vulnerable_code_not_present",
+        "human_notes": "FINDING-002: D02 clearance unsound \u2014 vulnerable symbol not observable in .dynsym on dynamically-linked libcrypto.so.3; symbol absence is guaranteed a priori for internal functions."
+      },
+      {
+        "id": "real-063",
+        "cve": "CVE-2026-14456",
+        "artifact": "oci-python-3.12",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "reason_code": "",
+        "justification": "vulnerable_code_not_present",
+        "human_notes": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library)."
+      },
+      {
+        "id": "real-065",
+        "cve": "CVE-2026-42767",
+        "artifact": "oci-nginx-1.25",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "reason_code": "",
+        "justification": "vulnerable_code_not_present",
+        "human_notes": "FINDING-002: D02 clearance unsound \u2014 vulnerable symbol not observable in .dynsym on dynamically-linked libcrypto.so.3; symbol absence is guaranteed a priori for internal functions."
+      },
+      {
+        "id": "real-068",
+        "cve": "CVE-2026-14456",
+        "artifact": "oci-postgres-16",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "reason_code": "",
+        "justification": "vulnerable_code_not_present",
+        "human_notes": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library)."
+      },
+      {
+        "id": "real-074",
+        "cve": "CVE-2026-14456",
+        "artifact": "oci-ruby-3.3",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "reason_code": "",
+        "justification": "vulnerable_code_not_present",
+        "human_notes": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library)."
+      },
+      {
+        "id": "real-086",
+        "cve": "CVE-2026-14456",
+        "artifact": "subst-golang-bookworm",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "reason_code": "",
+        "justification": "vulnerable_code_not_present",
+        "human_notes": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library)."
+      },
+      {
+        "id": "real-088",
+        "cve": "CVE-2026-14456",
+        "artifact": "oci-memcached-1.6",
+        "component": "openssl",
+        "pipeline_verdict": "NOT_AFFECTED",
+        "human_label": "UNDER_INVESTIGATION",
+        "reason_code": "",
+        "justification": "vulnerable_code_not_present",
+        "human_notes": "FINDING-002: D02 on port_default_packet_handler unsound \u2014 handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library)."
+      }
+    ],
+    "verdict": "FAIL"
+  },
+  "refusals": {
+    "total_refusals": 15380,
+    "by_reason_code": {
+      "purl_match_insufficient": 6591,
+      "mapping_probable_only": 4183,
+      "no_identity_mapping": 3370,
+      "manifest_no_entry": 1180,
+      "symbol_not_observable": 35,
+      "provenance_unverified": 21
+    }
+  },
+  "refusal_stages": {
+    "decisions_jsonl_total": 15385,
+    "by_stage": {
+      "S1": 14144,
+      "S2": 1180,
+      "S3": 0,
+      "S4": 21,
+      "S5": 0,
+      "S5b": 35,
+      "S6": 0,
+      "S7": 5
+    },
+    "symbol_refusals": 0,
+    "upstream_terminations": 15324,
+    "upstream_termination_pct": 99.6035,
+    "reached_symbol_stage_or_later": 61,
+    "decided_s7": 5
+  },
+  "by_class": {
+    "rtos-sdk": {
+      "artifacts": 3,
+      "cves_in": 124,
+      "decided": 0,
+      "coverage_percent": 0
+    },
+    "static-binary": {
+      "artifacts": 8,
+      "cves_in": 487,
+      "decided": 0,
+      "coverage_percent": 0
+    },
+    "unknown": {
+      "artifacts": 2,
+      "cves_in": 253,
+      "decided": 0,
+      "coverage_percent": 0
+    },
+    "firmware": {
+      "artifacts": 12,
+      "cves_in": 5553,
+      "decided": 1,
+      "coverage_percent": 0
+    },
+    "oci-base": {
+      "artifacts": 9,
+      "cves_in": 1130,
+      "decided": 0,
+      "coverage_percent": 0
+    },
+    "oci-app": {
+      "artifacts": 12,
+      "cves_in": 6498,
+      "decided": 4,
+      "coverage_percent": 0
+    },
+    "substitute-container": {
+      "artifacts": 7,
+      "cves_in": 1566,
+      "decided": 0,
+      "coverage_percent": 0
+    },
+    "openwrt": {
+      "artifacts": 2,
+      "cves_in": 30,
+      "decided": 0,
+      "coverage_percent": 0
+    }
+  },
+  "corpus": {
+    "catalog_version": "cp11-3",
+    "product_artifacts": 53,
+    "present_with_sha256": 53,
+    "by_class": {
+      "firmware": 12,
+      "oci-app": 12,
+      "oci-base": 9,
+      "openwrt": 2,
+      "rtos-sdk": 3,
+      "static-binary": 8,
+      "substitute-container": 7
+    }
+  },
+  "inventory": {
+    "binaries_scanned": 27670,
+    "stripped": 22971,
+    "static_linked": 5194
+  },
+  "tools": {
+    "git_commit": "97eca4038f5d2e7ff6a4e053c01a1a0841671eb1",
+    "go": "go version go1.23.6 linux/amd64",
+    "grype": "Application:         grype\nVersion:             0.115.0\nBuildDate:           2026-06-26T11:33:27Z\nGitCommit:           fa8b7e2a528cf1f8b098123f256c61db9e5df69c\nGitDescription:      v0.115.0",
+    "lading": "bin/lading (evidence-v1 / decide.ToolVersion)",
+    "manifest_version": "0.2.0",
+    "manifest_components": 25,
+    "identity_aliases": 10,
+    "identity_aliases_definitive": 1,
+    "corpus_catalog": "cp11-3",
+    "computed_at": "2026-08-24T21:44:35Z"
+  },
+  "d01_corpus_absence": {
+    "find_command": "find <rootfs> -name 'libssl.so*' -o -name 'libcrypto.so*'",
+    "artifacts_scanned": 59,
+    "selection_criterion": "grype.json has \u22651 match where package name or PURL contains openssl, libssl, or libcrypto",
+    "artifacts_with_openssl_grype_package_match": 22,
+    "artifacts_with_openssl_grype_package_match_ids": [
+      "fw-netgear-r7000-firmware-1.0.12.216",
+      "oci-fedora-40",
+      "oci-grafana-11",
+      "oci-httpd-2.4",
+      "oci-mariadb-11",
+      "oci-memcached-1.6",
+      "oci-nginx-1.25",
+      "oci-node-20",
+      "oci-postgres-16",
+      "oci-python-3.12",
+      "oci-rabbitmq-3",
+      "oci-redis-7",
+      "oci-rockylinux-9",
+      "oci-ruby-3.3",
+      "oci-traefik-v3",
+      "oci-ubi9-minimal",
+      "oci-ubuntu-22.04",
+      "oci-ubuntu-24.04",
+      "subst-golang-bookworm",
+      "subst-httpd-alpine",
+      "subst-memcached-alpine",
+      "subst-mosquitto"
+    ],
+    "artifacts_with_openssl_component_in_decisions": 19,
+    "artifacts_with_openssl_component_in_decisions_ids": [
+      "fw-netgear-r7000-firmware-1.0.12.216",
+      "oci-grafana-11",
+      "oci-httpd-2.4",
+      "oci-mariadb-11",
+      "oci-memcached-1.6",
+      "oci-nginx-1.25",
+      "oci-node-20",
+      "oci-postgres-16",
+      "oci-python-3.12",
+      "oci-rabbitmq-3",
+      "oci-redis-7",
+      "oci-ruby-3.3",
+      "oci-traefik-v3",
+      "oci-ubuntu-22.04",
+      "oci-ubuntu-24.04",
+      "subst-golang-bookworm",
+      "subst-httpd-alpine",
+      "subst-memcached-alpine",
+      "subst-mosquitto"
+    ],
+    "artifacts_with_openssl_so": 22,
+    "artifacts_without_openssl_so": 0,
+    "artifacts_without_openssl_so_ids": []
+  }
+}

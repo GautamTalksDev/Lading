@@ -1,0 +1,1 @@
+Yes: the firmware stratum is materially less stripped and/or more static than the container stratum (firmware stripped 75% / static 43% vs containers stripped 97% / static 3%), so the symbol-evidence thesis is well-placed.

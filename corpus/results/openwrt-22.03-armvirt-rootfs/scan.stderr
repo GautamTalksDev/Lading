@@ -1,6 +1,0 @@
-Trying to pull docker.io/openwrt/rootfs:x86-64-22.03.7...
-Getting image source signatures
-Copying blob sha256:690670c818a48b46c66bd70b2329294752705001c3086989f010f226006f17df
-Copying config sha256:5b7810868dfca16b2af3da60f3fa26b98df8a3da455dca951882dc80d41350df
-Writing manifest to image destination
-5b7810868dfca16b2af3da60f3fa26b98df8a3da455dca951882dc80d41350df

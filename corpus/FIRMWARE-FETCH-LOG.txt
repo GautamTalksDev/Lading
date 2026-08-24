@@ -1,0 +1,135 @@
+=== fw-openwrt-23.05.5-x86-64-squashfs ===
+url: https://downloads.openwrt.org/releases/23.05.5/targets/x86/64/openwrt-23.05.5-x86-64-generic-squashfs-combined.img.gz
+fetched_at_attempt: 2026-08-24T18:46:33Z
+http_head: 200
+status: downloaded
+path: /home/gautamtalksdev/projects/Lading/corpus/downloads/fw-openwrt-23.05.5-x86-64-squashfs/openwrt-23.05.5-x86-64-generic-squashfs-combined.img.gz
+sha256: 788a786a7c2692cce1ac8922b71c4030958cb8ddd7f6b507fbba79c757a04fdf
+size: 10485443
+=== fw-openwrt-23.05.5-armsr-armv8-squashfs ===
+url: https://downloads.openwrt.org/releases/23.05.5/targets/armsr/armv8/openwrt-23.05.5-armsr-armv8-generic-squashfs-combined.img.gz
+fetched_at_attempt: 2026-08-24T18:46:34Z
+http_head: 200
+status: downloaded
+path: /home/gautamtalksdev/projects/Lading/corpus/downloads/fw-openwrt-23.05.5-armsr-armv8-squashfs/openwrt-23.05.5-armsr-armv8-generic-squashfs-combined.img.gz
+sha256: d0cbe4c44b0b1857e2d42f947fbee064d71b996f7fec9c5a6cef224c210262ad
+size: 11582548
+=== fw-openwrt-22.03.7-x86-64-squashfs ===
+url: https://downloads.openwrt.org/releases/22.03.7/targets/x86/64/openwrt-22.03.7-x86-64-generic-squashfs-combined.img.gz
+fetched_at_attempt: 2026-08-24T18:46:37Z
+http_head: 200
+status: downloaded
+path: /home/gautamtalksdev/projects/Lading/corpus/downloads/fw-openwrt-22.03.7-x86-64-squashfs/openwrt-22.03.7-x86-64-generic-squashfs-combined.img.gz
+sha256: 7647a98cdea956cc076bea35dcea2b054e51ff2efac93e2643362116b8e6eb77
+size: 10423537
+=== fw-openwrt-22.03.7-ath79-archer-c7-v5 ===
+url: https://downloads.openwrt.org/releases/22.03.7/targets/ath79/generic/openwrt-22.03.7-ath79-generic-tplink_archer-c7-v5-squashfs-sysupgrade.bin
+fetched_at_attempt: 2026-08-24T18:46:39Z
+http_head: 200
+status: downloaded
+path: /home/gautamtalksdev/projects/Lading/corpus/downloads/fw-openwrt-22.03.7-ath79-archer-c7-v5/openwrt-22.03.7-ath79-generic-tplink_archer-c7-v5-squashfs-sysupgrade.bin
+sha256: 7ebdce0efa1671e32b9ff682122f5b50185864283df973a8d7b13444696ea373
+size: 6488392
+=== fw-openwrt-24.10.2-x86-64-squashfs ===
+url: https://downloads.openwrt.org/releases/24.10.2/targets/x86/64/openwrt-24.10.2-x86-64-generic-squashfs-combined.img.gz
+fetched_at_attempt: 2026-08-24T18:46:41Z
+http_head: 200
+status: downloaded
+path: /home/gautamtalksdev/projects/Lading/corpus/downloads/fw-openwrt-24.10.2-x86-64-squashfs/openwrt-24.10.2-x86-64-generic-squashfs-combined.img.gz
+sha256: 2bceffbdba4563374ae7412553b1c8b8c5394225dc38fbf3c6a33a4649811158
+size: 12210491
+=== fw-openwrt-24.10.0-ramips-netgear-r6220 ===
+url: https://downloads.openwrt.org/releases/24.10.0/targets/ramips/mt7621/openwrt-24.10.0-ramips-mt7621-netgear_r6220-squashfs-sysupgrade.bin
+fetched_at_attempt: 2026-08-24T18:46:45Z
+http_head: 200
+status: downloaded
+path: /home/gautamtalksdev/projects/Lading/corpus/downloads/fw-openwrt-24.10.0-ramips-netgear-r6220/openwrt-24.10.0-ramips-mt7621-netgear_r6220-squashfs-sysupgrade.bin
+sha256: 0c6ff4722676cc5bd98170e6c1e918cb3bd895aa1e916e68093655e519a71d23
+size: 7311952
+=== fw-openwrt-23.05.5-ath79-archer-c7-v5 ===
+url: https://downloads.openwrt.org/releases/23.05.5/targets/ath79/generic/openwrt-23.05.5-ath79-generic-tplink_archer-c7-v5-squashfs-sysupgrade.bin
+fetched_at_attempt: 2026-08-24T18:46:46Z
+http_head: 200
+status: downloaded
+path: /home/gautamtalksdev/projects/Lading/corpus/downloads/fw-openwrt-23.05.5-ath79-archer-c7-v5/openwrt-23.05.5-ath79-generic-tplink_archer-c7-v5-squashfs-sysupgrade.bin
+sha256: facfda629ba2da591ad60f2542e004600fdcc84550376ecefbda02f12dad1268
+size: 6422856
+=== fw-openwrt-23.05.5-ramips-netgear-r6220 ===
+url: https://downloads.openwrt.org/releases/23.05.5/targets/ramips/mt7621/openwrt-23.05.5-ramips-mt7621-netgear_r6220-squashfs-sysupgrade.bin
+fetched_at_attempt: 2026-08-24T18:46:48Z
+http_head: 200
+status: downloaded
+path: /home/gautamtalksdev/projects/Lading/corpus/downloads/fw-openwrt-23.05.5-ramips-netgear-r6220/openwrt-23.05.5-ramips-mt7621-netgear_r6220-squashfs-sysupgrade.bin
+sha256: 3a4e8c24ae62540aa18843efb96f99b188bba0efd8be5d255b12c0a373cd8390
+size: 6677072
+=== fw-yocto-5.0.9-genericx86-64-minimal-wic ===
+url: https://downloads.yoctoproject.org/releases/yocto/yocto-5.0.9/machines/genericx86-64/core-image-minimal-genericx86-64.rootfs.wic
+fetched_at_attempt: 2026-08-24T18:46:50Z
+http_head: 200
+status: downloaded
+path: /home/gautamtalksdev/projects/Lading/corpus/downloads/fw-yocto-5.0.9-genericx86-64-minimal-wic/core-image-minimal-genericx86-64.rootfs.wic
+sha256: b13ff8719106dc2291a3f5804c95bd15d5dcdb500df274d7d08b43cee20fce6a
+size: 165517312
+qemuarm64 candidate: core-image-minimal-qemuarm64.rootfs-20250419215510.ext4
+=== fw-yocto-5.0.9-qemuarm64-minimal ===
+url: https://downloads.yoctoproject.org/releases/yocto/yocto-5.0.9/machines/qemu/qemuarm64/core-image-minimal-qemuarm64.rootfs-20250419215510.ext4
+fetched_at_attempt: 2026-08-24T18:48:51Z
+http_head: 200
+status: downloaded
+path: /home/gautamtalksdev/projects/Lading/corpus/downloads/fw-yocto-5.0.9-qemuarm64-minimal/core-image-minimal-qemuarm64.rootfs-20250419215510.ext4
+sha256: d8e3b8d75af8ad947a5e8cbab405692b76bcc0f31bfefd2b2bcbbab8688e6c33
+size: 22151168
+=== fw-netgear-r7000-gpl-1.0.11.100 ===
+url: https://www.downloads.netgear.com/files/GPL/R7000-V1.0.11.100_10.2.100_src.tar.zip
+fetched_at_attempt: 2026-08-24T18:49:10Z
+http_head: 404
+status: FAILED-no-download
+=== fw-netgear-r6220-gpl-1.1.0.106 ===
+url: https://www.downloads.netgear.com/files/GPL/R6220_V1.1.0.106_gpl.tgz
+fetched_at_attempt: 2026-08-24T18:49:11Z
+http_head: 404
+status: FAILED-no-download
+=== fw-netgear-r7000-firmware-1.0.12.216 ===
+url: https://www.downloads.netgear.com/files/GDC/R7000/R7000-V1.0.12.216.zip
+fetched_at_attempt: 2026-08-24T18:49:11Z
+http_head: 200
+status: downloaded
+path: /home/gautamtalksdev/projects/Lading/corpus/downloads/fw-netgear-r7000-firmware-1.0.12.216/R7000-V1.0.12.216.zip
+sha256: b405d2c73809986ed32b412af0ba28daa195bca9f80f582c8c3b35e5d2545772
+size: 30669108
+=== fw-tplink-archer-c7-v5-gpl ===
+url: https://static.tp-link.com/upload/firmware/gpl/Archer_C7_V5_GPL.zip
+fetched_at_attempt: 2026-08-24T18:49:12Z
+http_head: 404
+status: FAILED-no-download
+=== fw-tplink-gpl-portal-probe ===
+url: https://www.tp-link.com/us/support/gpl-code/download/Archer%20C7%20V5.zip
+fetched_at_attempt: 2026-08-24T18:49:13Z
+http_head: 404
+status: FAILED-no-download
+=== fw-buildroot-2024.02-nitrogen8mm ===
+url: https://boundarydevices.com/runtimes/buildroot/20240522-br2024.02-nitrogen8mm_qt5_gst1.img.gz
+fetched_at_attempt: 2026-08-24T18:49:13Z
+http_head: 000ERR
+status: FAILED-no-download
+==== SUMMARY ===
+11
+5
+=== fw-netgear-r7000-gpl-1.0.12.216 ===
+url: https://www.downloads.netgear.com/files/GPL/R7000-V1.0.12.216_10.2.122_src.tgz
+http_head: 404
+status: FAILED-no-download
+=== fw-netgear-r6220-gpl-1.1.0.104 ===
+url: https://www.downloads.netgear.com/files/GPL/R6220_V1.1.0.104_gpl.tgz
+http_head: 404
+status: FAILED-no-download
+=== fw-openwrt-22.03.7-ramips-netgear-r6220 ===
+url: https://downloads.openwrt.org/releases/22.03.7/targets/ramips/mt7621/openwrt-22.03.7-ramips-mt7621-netgear_r6220-squashfs-sysupgrade.bin
+http_head: 200
+sha256: 1280e8a618fd7488ec51a80ea065bbdb3a77b8dcdf9fb6797bd484e34a7bf89a
+==== S-08 FINAL SUMMARY 2026-08-24T18:52:07Z ====
+success_provenance=12
+failures=7
+catalog_firmware=12
+no_substitutes_for_failures=true
+gaps: TP-Link GPL 404; Netgear GPL src 404; Buildroot/boundarydevices unreachable

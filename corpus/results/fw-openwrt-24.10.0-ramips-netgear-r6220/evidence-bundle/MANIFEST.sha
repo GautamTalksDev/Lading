@@ -1,0 +1,6 @@
+# evidence-bundle-v1 MANIFEST.sha
+0b7cb0c74471c88c14714607959bd2d09bacfbafc8f722a687617a720e99d3b0  statements/cve-2022-48174/statement.json
+393ece41f92f1e51bb014a359b9cbe5110f0edfc72ff695b950241dcfbd9ea31  statements/cve-2022-48174/observations.json
+ad25e40a553740c9b4b903a5fae3c8603f5f00ac1898899af9a0d18bd51a29c1  statements/cve-2022-48174/inputs.json
+e645a93be962058eee6c65f1b2bbef06afb333c1299805bae973c532bf14f425  statements/cve-2022-48174/manifest-slice.json
+fd4371acfb966f3a8dbdb95cb560d409db88bef96fdf165a31a30cfc3bd5a70d  statements/cve-2022-48174/versions.json

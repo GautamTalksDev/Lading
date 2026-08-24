@@ -22,6 +22,7 @@ manifest:
     vulnerable_symbols:
     - name: storeRawNames
       confidence: definitive
+      dynsym_export_verified: true
     manifest_version: 0.1.0
 inventories:
 - file: inv.json

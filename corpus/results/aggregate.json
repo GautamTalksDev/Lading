@@ -1,11 +1,11 @@
 {
   "totals": {
-    "artifacts": 43,
-    "cves_in": 10088,
+    "artifacts": 55,
+    "cves_in": 15641,
     "not_affected": 0,
-    "affected": 0,
-    "refused": 10088,
-    "decided": 0,
+    "affected": 5,
+    "refused": 15636,
+    "decided": 5,
     "coverage_percent": 0
   },
   "by_class": {
@@ -28,32 +28,32 @@
       "coverage_percent": 0
     },
     "firmware": {
-      "artifacts": 3,
-      "cves_in": 72,
-      "decided": 0,
+      "artifacts": 12,
+      "cves_in": 5553,
+      "decided": 1,
       "coverage_percent": 0
     },
     "oci-base": {
-      "artifacts": 10,
-      "cves_in": 2597,
+      "artifacts": 9,
+      "cves_in": 1130,
       "decided": 0,
       "coverage_percent": 0
     },
     "oci-app": {
       "artifacts": 12,
       "cves_in": 6498,
+      "decided": 4,
+      "coverage_percent": 0
+    },
+    "substitute-container": {
+      "artifacts": 7,
+      "cves_in": 1566,
       "decided": 0,
       "coverage_percent": 0
     },
     "openwrt": {
-      "artifacts": 4,
-      "cves_in": 44,
-      "decided": 0,
-      "coverage_percent": 0
-    },
-    "yocto": {
-      "artifacts": 1,
-      "cves_in": 13,
+      "artifacts": 2,
+      "cves_in": 30,
       "decided": 0,
       "coverage_percent": 0
     }
@@ -168,12 +168,111 @@
       "coverage_percent": 0
     },
     {
-      "id": "netgear-r7000-gpl",
+      "id": "fw-netgear-r7000-firmware-1.0.12.216",
       "class": "firmware",
-      "cves_in": 53,
+      "cves_in": 168,
+      "not_affected": 0,
+      "affected": 1,
+      "refused": 167,
+      "coverage_percent": 0
+    },
+    {
+      "id": "fw-openwrt-22.03.7-ath79-archer-c7-v5",
+      "class": "firmware",
+      "cves_in": 6,
       "not_affected": 0,
       "affected": 0,
-      "refused": 53,
+      "refused": 6,
+      "coverage_percent": 0
+    },
+    {
+      "id": "fw-openwrt-22.03.7-ramips-netgear-r6220",
+      "class": "firmware",
+      "cves_in": 6,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 6,
+      "coverage_percent": 0
+    },
+    {
+      "id": "fw-openwrt-22.03.7-x86-64-squashfs",
+      "class": "firmware",
+      "cves_in": 6,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 6,
+      "coverage_percent": 0
+    },
+    {
+      "id": "fw-openwrt-23.05.5-armsr-armv8-squashfs",
+      "class": "firmware",
+      "cves_in": 8,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 8,
+      "coverage_percent": 0
+    },
+    {
+      "id": "fw-openwrt-23.05.5-ath79-archer-c7-v5",
+      "class": "firmware",
+      "cves_in": 8,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 8,
+      "coverage_percent": 0
+    },
+    {
+      "id": "fw-openwrt-23.05.5-ramips-netgear-r6220",
+      "class": "firmware",
+      "cves_in": 8,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 8,
+      "coverage_percent": 0
+    },
+    {
+      "id": "fw-openwrt-23.05.5-x86-64-squashfs",
+      "class": "firmware",
+      "cves_in": 8,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 8,
+      "coverage_percent": 0
+    },
+    {
+      "id": "fw-openwrt-24.10.0-ramips-netgear-r6220",
+      "class": "firmware",
+      "cves_in": 8,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 8,
+      "coverage_percent": 0
+    },
+    {
+      "id": "fw-openwrt-24.10.2-x86-64-squashfs",
+      "class": "firmware",
+      "cves_in": 8,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 8,
+      "coverage_percent": 0
+    },
+    {
+      "id": "fw-yocto-5.0.9-genericx86-64-minimal-wic",
+      "class": "firmware",
+      "cves_in": 5311,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 5311,
+      "coverage_percent": 0
+    },
+    {
+      "id": "fw-yocto-5.0.9-qemuarm64-minimal",
+      "class": "firmware",
+      "cves_in": 8,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 8,
       "coverage_percent": 0
     },
     {
@@ -210,15 +309,6 @@
       "not_affected": 0,
       "affected": 0,
       "refused": 167,
-      "coverage_percent": 0
-    },
-    {
-      "id": "oci-distrasless-cc-debian12",
-      "class": "oci-base",
-      "cves_in": 1467,
-      "not_affected": 0,
-      "affected": 0,
-      "refused": 1467,
       "coverage_percent": 0
     },
     {
@@ -280,8 +370,8 @@
       "class": "oci-app",
       "cves_in": 2922,
       "not_affected": 0,
-      "affected": 0,
-      "refused": 2922,
+      "affected": 2,
+      "refused": 2920,
       "coverage_percent": 0
     },
     {
@@ -307,8 +397,8 @@
       "class": "oci-app",
       "cves_in": 479,
       "not_affected": 0,
-      "affected": 0,
-      "refused": 479,
+      "affected": 2,
+      "refused": 477,
       "coverage_percent": 0
     },
     {
@@ -375,21 +465,12 @@
       "coverage_percent": 0
     },
     {
-      "id": "openwrt-22.03-armvirt-rootfs",
-      "class": "openwrt",
+      "id": "openwrt-22.03-x86-64-rootfs",
+      "class": "substitute-container",
       "cves_in": 6,
       "not_affected": 0,
       "affected": 0,
       "refused": 6,
-      "coverage_percent": 0
-    },
-    {
-      "id": "openwrt-23.05-x86-64-kernel",
-      "class": "openwrt",
-      "cves_in": 8,
-      "not_affected": 0,
-      "affected": 0,
-      "refused": 8,
       "coverage_percent": 0
     },
     {
@@ -402,12 +483,12 @@
       "coverage_percent": 0
     },
     {
-      "id": "openwrt-layerscape-sdcard",
-      "class": "firmware",
-      "cves_in": 5,
+      "id": "openwrt-23.05-x86-64-rootfs-oci",
+      "class": "substitute-container",
+      "cves_in": 8,
       "not_affected": 0,
       "affected": 0,
-      "refused": 5,
+      "refused": 8,
       "coverage_percent": 0
     },
     {
@@ -420,8 +501,8 @@
       "coverage_percent": 0
     },
     {
-      "id": "tplink-archer-gpl",
-      "class": "firmware",
+      "id": "subst-alpine-319",
+      "class": "substitute-container",
       "cves_in": 14,
       "not_affected": 0,
       "affected": 0,
@@ -429,8 +510,35 @@
       "coverage_percent": 0
     },
     {
-      "id": "yocto-poky-qemuarm64",
-      "class": "yocto",
+      "id": "subst-golang-bookworm",
+      "class": "substitute-container",
+      "cves_in": 1467,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 1467,
+      "coverage_percent": 0
+    },
+    {
+      "id": "subst-httpd-alpine",
+      "class": "substitute-container",
+      "cves_in": 53,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 53,
+      "coverage_percent": 0
+    },
+    {
+      "id": "subst-memcached-alpine",
+      "class": "substitute-container",
+      "cves_in": 5,
+      "not_affected": 0,
+      "affected": 0,
+      "refused": 5,
+      "coverage_percent": 0
+    },
+    {
+      "id": "subst-mosquitto",
+      "class": "substitute-container",
       "cves_in": 13,
       "not_affected": 0,
       "affected": 0,

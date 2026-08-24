@@ -49,9 +49,10 @@ type Provenance struct {
 
 // VulnerableSymbol names a symbol tied to a CVE with graded confidence.
 type VulnerableSymbol struct {
-	Name       string     `json:"name" yaml:"name"`
-	Confidence Confidence `json:"confidence" yaml:"confidence"`
-	Provenance Provenance `json:"provenance" yaml:"provenance"`
+	Name                  string     `json:"name" yaml:"name"`
+	Confidence            Confidence `json:"confidence" yaml:"confidence"`
+	Provenance            Provenance `json:"provenance" yaml:"provenance"`
+	DynsymExportVerified  bool       `json:"dynsym_export_verified,omitempty" yaml:"dynsym_export_verified,omitempty"`
 }
 
 // Entry is one CVE record inside a component file.

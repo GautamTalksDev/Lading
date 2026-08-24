@@ -1,0 +1,40 @@
+{
+  "path": "usr/lib/x86_64-linux-gnu/libcrypto.so.3",
+  "sha256": "libcrypto.so.3",
+  "format": "ELF",
+  "arch": "x86_64",
+  "dyn_syms": [
+    {
+      "raw": "OPENSSL_init_ssl",
+      "demangled": "OPENSSL_init_ssl",
+      "normalized": "OPENSSL_init_ssl",
+      "bind": "GLOBAL",
+      "type": "FUNC",
+      "defined": true
+    },
+    {
+      "raw": "GENERAL_NAME_cmp@@OPENSSL_3.0.0",
+      "demangled": "GENERAL_NAME_cmp",
+      "normalized": "GENERAL_NAME_cmp",
+      "bind": "GLOBAL",
+      "type": "FUNC",
+      "defined": true
+    },
+    {
+      "raw": "SSL_CTX_new",
+      "demangled": "SSL_CTX_new",
+      "normalized": "SSL_CTX_new",
+      "bind": "GLOBAL",
+      "type": "FUNC",
+      "defined": true
+    }
+  ],
+  "symtab": [],
+  "needed": [],
+  "ro_strings": [
+    "OpenSSL 3.0.20"
+  ],
+  "warnings": [],
+  "stripped": true,
+  "static_linked": false
+}

@@ -1,154 +1,285 @@
-# CP-11 Kill Test Results (evidence-v1 / manifest 0.2.0)
+# CP-11 Kill Test Results (S-15 re-run)
 
-**Correction (2026-08-23):** The original v1 reading of **KT-1: FAIL** is **withdrawn**. That label treated an instrument defect (PURL identity resolution never engaged) as a scientific finding about firmware. It is retracted here; the original FAIL record is preserved below as part of the evidence trail.
+**Date:** 2026-08-24 · **Git:** `97eca4038f5d2e7ff6a4e053c01a1a0841671eb1` · **Engine:** `evidence-v1` · **Manifest:** `0.2.0`
 
-**KT-1 is NOT EVALUABLE** against the pre-registered 30% bar — the decision engine never evaluated a single real CVE on corpus scanner input.
+Pre-registered thresholds unchanged: **KT-1** ≥30% scanner CVEs decided with evidence; **KT-2** zero false `not_affected` in 100 hand-labeled real-corpus statements.
 
-Date: 2026-08-23 · Tool: `lading` built from this repo (`evidence-v1`, manifest `0.2.0`).
+**Correction (2026-08-24, CP-A3):** The S-15 reading of **KT-1: FAIL** (0.2557% decided ≪ 30%) is **withdrawn**. That label treated a measured decided rate as an answer to the pre-registered question even though **99.6%** of findings (`decisions.jsonl`) terminated at identity resolution or manifest lookup — before symbol-table evaluation — and **zero** refusals cite a symbol-table cause. The FAIL line is preserved below as part of the evidence trail; the corrected verdict is **NOT EVALUABLE**.
+
+**Correction (2026-08-24, post-FINDING-002 guard):** `bash scripts/corpus-redecide.sh` re-ran decide after `symbol_not_observable`. The **35** unsound D02 `NOT_AFFECTED` rows are now S5b refusals. Current measured decided rate is **5 / 15,641 = 0.032%** (all `AFFECTED`). The pre-guard **40 / 0.2557%** figure remains the snapshot that KT-2 scored (`real-100.yaml` is frozen). KT-1 stays **NOT EVALUABLE**: **99.60%** still terminate at S1/S2; S3/S5 symbol-table refusals remain **0**.
+
+**Gate decision:** **Stop.** KT-1 **NOT EVALUABLE**. KT-2 **FAIL** — **20** false `not_affected` clearances in the hand-labeled soundness subset ([FINDING-002.md](FINDING-002.md); corpus-wide **35** D02 clearances unsound, now refused at S5b). KT-1 remains the **third consecutive** NOT EVALUABLE on instrument reachability (see §11). No threshold or rule refitting was performed.
+
+Canonical figures: `corpus/results/cp11-metrics.json` · Re-derive: `bash scripts/rederive-results.sh`
+
+---
 
 ## 1. Method
 
 | Item | Value |
 |------|--------|
-| **Corpus** | `corpus/ARTIFACTS.yaml` (version `cp11-1`) — 41 product artifacts across OCI base/app, OpenWrt, static binaries, firmware-class substitutes, Yocto-class substitute, RTOS/SDK archives. Provenance and license recorded per row. |
-| **Manifest** | `manifest/VERSION` `0.2.0` — 25 native components, each with one manually reviewed definitive CVE entry (`reviewed_by` / `reviewed_at` on every seed). `manifest/COVERAGE.md` generated via `lading manifest coverage`. |
-| **Tool** | `bin/lading` from `go build ./cmd/lading`; decision rules `evidence-v1` (D01–D04 unchanged). |
-| **Scan procedure** | `bash scripts/corpus-download.sh` then `bash scripts/corpus-scan.sh`: grype JSON → `lading scan` → `corpus/results/<id>/` (grype.json, scan-summary.json, evidence-bundle when applicable). Rollup: `scripts/corpus-aggregate.py` → `corpus/results/aggregate.json`. |
-| **Ground truth** | `corpus/groundtruth/statements.yaml` — 100 statements (40 decide fixtures + 60 inventory binaries). Hand verification via `readelf -sW` / `nm -D` on `testdata/inventory/bin/*`. Repro: `go test ./corpus/groundtruth/`. |
-| **Thresholds** | From README (unchanged): **KT-1** ≥30% of scanner-reported CVEs decided with evidence; **KT-2** zero false `not_affected` in 100 hand-verified cases. |
+| **Corpus catalog** | `corpus/ARTIFACTS.yaml` version **`cp11-3`** — **53** product artifacts (+1 benchmark excluded from kill tests) |
+| **Class composition** | firmware **12** · oci-app **12** · oci-base **9** · static-binary **8** · substitute-container **7** · rtos-sdk **3** · openwrt **2** |
+| **Hashes verified** | **53/53** product rows `status: present` with non-null `sha256` (`bash scripts/verify-corpus-hashes.sh`; 12 firmware-class rows checked) |
+| **Artifacts scanned** | **55** result directories with `scan-summary.json` (includes 2 auxiliary single-binary re-scan dirs) |
+| **Manifest** | `manifest/VERSION` **`0.2.0`** — **25** native component YAMLs, one definitive CVE entry each (seed coverage) |
+| **Identity aliases** | `manifest/data/identity-aliases.json` — **10** rows (**1** `definitive`: expat; **9** `probable`) |
+| **PURL / evidence taxonomy** | CP-3 graded equivalence (`none` … `exact`); SPEC-IDENTITY §2.1 `debian_upstream_from_version` derivation in engine; decision rules **`evidence-v1`** (D01–D04) |
+| **Ground truth (KT-2)** | `corpus/groundtruth/real-100.yaml` — seed **20260824**, sampled from `corpus/results/*/decisions.jsonl` |
+| **Scan procedure** | `bash scripts/corpus-download.sh` → profile extract (`.lading/profile-rootfs/`) → grype JSON → `lading scan` → `decisions.jsonl` + optional `evidence-bundle/` → `scripts/corpus-aggregate.py` |
+| **Tool versions** | Go **`go1.23.6`** · grype **`0.115.0`** (embedded Syft **v1.46.0**, DB schema **6**) · `bin/lading` built from this commit |
+| **Scanner binary provenance** | Verified **2026-08-24** against official release tarballs (see below). CP-11 corpus numbers flow through **grype** only; **trivy** / standalone **syft** used in FINDING-001 / pairing-matrix work. |
+| **Refusal-stage attribution** | `bash scripts/refusal-stages.sh` → `results/refusal-stages.csv`, `REFUSAL-STAGES.md` |
 
-**Corpus notes:** Several original vendor/firmware URLs returned HTTP 404 at fetch time; substitutes are documented inline in `ARTIFACTS.yaml` (OpenWrt rootfs OCI tags, Hub images for firmware/Yocto class rows). All 41 catalog IDs produced non-empty `scan-summary.json` after unpack/findings fixes below.
+### Tool binary SHA256 (verified 2026-08-24)
 
-**Correctness fixes during CP-11 (no rule/threshold changes):**
+| Tool | Version | Path | SHA256 | Official source | Match |
+|------|---------|------|--------|-----------------|-------|
+| **grype** | 0.115.0 | `/home/gautamtalksdev/bin/grype` | `05ffd2c28a607e48fb2269d9aac5b3d53e8a51bbac501946644745eae2119907` | [grype_0.115.0_linux_amd64.tar.gz](https://github.com/anchore/grype/releases/download/v0.115.0/grype_0.115.0_linux_amd64.tar.gz) (`3fad9294…` tarball) | **yes** — binary extracted from tarball matches installed file |
+| **trivy** | 0.72.0 | `/home/gautamtalksdev/bin/trivy` | `0e69edd134a3c338baa1a6806920773615d682b18cbc6a0cba2a3b658ef9b63e` | [trivy_0.72.0_Linux-64bit.tar.gz](https://github.com/aquasecurity/trivy/releases/download/v0.72.0/trivy_0.72.0_Linux-64bit.tar.gz) (`bbb64b96…` tarball) | **yes** — post-dates Feb/Mar 2026 compromise window; not used for CP-11 corpus scan |
+| **syft** | 1.51.0 | `.lading/tools/syft-1.51.0` | `5a8b71e94f4607973145f02e27e01d50b9f7c7bc41e38d40b39606ad138b43b5` | [syft_1.51.0_linux_amd64.tar.gz](https://github.com/anchore/syft/releases/download/v1.51.0/syft_1.51.0_linux_amd64.tar.gz) | **yes** — tarball checksum verified 2026-08-24 against `syft_1.51.0_checksums.txt`; binary hash matches an independent re-download to `~/bin/syft-1.51.0`. Used for FINDING-001 currency claim, `ANALYSIS-spdx`, `PAIRING-MATRIX`. |
+| **syft** | 1.22.0 | `/home/gautamtalksdev/bin/syft` | `b94458fcc8d2b96320e40832a566d5a5fdfb9b8a7f8f9c9535cb699c5fd83d5a` | [syft_1.22.0_linux_amd64.tar.gz](https://github.com/anchore/syft/releases/download/v1.22.0/syft_1.22.0_linux_amd64.tar.gz) (`90ac44b1…` tarball) | **yes** — not used for CP-11 corpus scan (grype bundles Syft 1.46.0) |
 
-- `OpenArchive` double-wrapped tar streams (empty OCI unpacks).
-- Container rootfs tar: absolute and `..` symlink/hardlink targets.
-- `LoadFindings` accepts empty grype match lists; `matchesToFindings` returns empty slice instead of error.
-- `corpus-scan.sh`: grype `file:` for single binaries; resilient download/scan skips.
+**Note:** syft **1.22.0** is installed at two paths — `~/bin/syft` (table above) and `.lading/tools/syft-1.22.0` — with identical SHA256 `b94458fcc8d2b96320e40832a566d5a5fdfb9b8a7f8f9c9535cb699c5fd83d5a`.
+
+**Install method:** manual extract to `~/bin/` (mtime grype/trivy **2026-07-15**, syft 1.22.0 **2025-04-01**); syft 1.51.0 under `.lading/tools/`. No `trivy-action` / cached Docker image on this host for CP-11. Re-verify before publication if binaries are refreshed.
+
+**Inventory telemetry (all scans):** **27,670** binaries inventoried · **22,971** stripped (**83.0%**) · **5,194** static-linked (**18.8%** of inventoried).
 
 ---
 
 ## 2. KT-1 — Corpus decided coverage
 
-**Aggregate:** 10,088 grype-reported CVEs across 41 scanned artifacts → **0 decided** (0 `not_affected`, 0 `affected`, 10,088 `refused`).
+**Observed:** **15,641** grype-reported CVE rows across **55** scanned artifacts (`scan-summary.json` aggregate).
 
-**KT-1: NOT EVALUABLE** — The pre-registered 30% bar cannot be applied to this run. Zero decided coverage does not measure how often vulnerable code is absent from shipped binaries; it measures that identity resolution never engaged.
+**Decided with evidence:** **5** total (**0** `NOT_AFFECTED` with re-derivable evidence bundle · **5** `AFFECTED`). Pre-guard snapshot (S-15, frozen in `real-100.yaml`): **40** decided (**35** `NOT_AFFECTED` + **5** `AFFECTED`); those **35** D02 rows are now `symbol_not_observable` (S5b).
 
-**Original v1 label (withdrawn):** KT-1 was initially recorded as **FAIL** (0% vs. 30% bar). That reading is retracted in the correction above.
+| Metric | Count | Rate | 95% Wilson CI |
+|--------|------:|-----:|---------------|
+| **`NOT_AFFECTED` + evidence bundle** | **0** / 15,641 | **0.0%** | **0.0%** – **0.0246%** |
+| **Decided (NA + affected)** | **5** / 15,641 | **0.032%** | **0.0137%** – **0.0748%** |
+| **Refused** | **15,636** | 99.97% | — |
 
-**Why NOT EVALUABLE, not FAIL:**
+**Measured decided rate:** **0.032%** — reported as observed pipeline output after the FINDING-002 guard, **not** as a PASS/FAIL answer to KT-1 (see refusal-stage table below). The pre-guard **0.2557%** (40 rows) is retained as the KT-2 scoring snapshot.
 
-1. **10,088 grype findings** across **41 corpus artifacts**.
-2. **100% refused** with reason code **`purl-insufficient`** (10,088 / 10,088).
-3. **Cause:** grype emits **distro PURLs** (`pkg:deb/...`, `pkg:apk/...`, `pkg:rpm/...`) while the Manifest carries **upstream PURLs** (`pkg:generic/...`). Per CP-3, cross-type equivalence caps at `NameVersionOnly`, which D03 correctly refuses — it will not treat a distro package identity as equivalent to an upstream generic identity for symbol-level clearance.
-4. **Therefore** the decision engine never evaluated a single real CVE on corpus input. Zero decisions is the signature of an instrument that never fired, not a genuine negative result about firmware reachability. A real negative on this bar would look like 2% or 7% decided — not exactly 0 / 10,088.
-5. **KT-1 re-runs unchanged** against the 30% bar once distro-to-upstream identity resolution exists (CP-15).
+**KT-1: NOT EVALUABLE** — KT-1 asks whether ≥30% of scanner-reported CVEs resolve to a decidable `not_affected` with a re-derivable evidence bundle. The measured **0.032%** cannot be read as an answer to that question: on **`decisions.jsonl`** (**15,385** rows), **14,144 + 1,180 = 15,324** findings (**99.60%**) terminate at **S1 identity resolution** or **S2 manifest lookup** before any symbol-table gate fires; **zero** refusals cite `symbol_table_unusable`, `stripped_static_binary`, or `stripped_insufficient_dynsym`. The **35** S5b `symbol_not_observable` refusals are the FINDING-002 guard on internal OpenSSL symbols — they do not make symbol-evidence clearance evaluable at corpus scale. The pre-registered **30%** threshold is unchanged and was not tested.
 
-| Artifact class | Artifacts | CVEs in | Decided | Coverage |
-|----------------|-----------|---------|---------|----------|
-| oci-app | 12 | 6,498 | 0 | 0% |
-| oci-base | 9 | 1,130 | 0 | 0% |
-| static-binary | 8 | ~900 | 0 | 0% |
-| openwrt | 4 | varies | 0 | 0% |
-| rtos-sdk | 3 | varies | 0 | 0% |
-| firmware / yocto (substitute OCI) | 4 | varies | 0 | 0% |
+**Withdrawn reading (evidence trail):** S-15 initially labeled **KT-1: FAIL** because 0.2557% < 30%. That comparison is retracted under CP-A3 / README §11.
 
-The 0% figure is reported as raw instrument output, not as a pass/fail verdict against the 30% threshold.
+### Refusal-stage termination (`decisions.jsonl`, n=15,385)
+
+Re-derived: `bash scripts/refusal-stages.sh`. Stage order follows `internal/decide/context.go` `checkD03()` then `evaluate.go` (S5b after S5).
+
+| Stage | Termination count | % of `decisions.jsonl` | Cumulative % |
+|-------|------------------:|-----------------------:|-------------:|
+| S1 identity_resolution | 14,144 | 91.93% | 91.93% |
+| S2 manifest_lookup | 1,180 | 7.67% | 99.60% |
+| S3 symbol_table_usability | **0** | 0.00% | 99.60% |
+| S4 provenance_gate | 21 | 0.14% | 99.74% |
+| S5 symbol_stripped_gates | **0** | 0.00% | 99.74% |
+| S5b symbol_observability | 35 | 0.23% | 99.97% |
+| S6 identity_unverified | 0 | 0.00% | 99.97% |
+| S7 evidence_evaluation (decided) | 5 | 0.03% | 100.00% |
+
+**Reached symbol evaluation (S3 or later):** **61** (21 provenance refusals + 35 S5b observability refusals + 5 decided). **Symbol-stage refusals (S3 or S5):** **0**.
+
+### By stratum (decided / CVEs in)
+
+| Stratum | Artifacts | CVEs in | Decided | Coverage |
+|---------|----------:|--------:|--------:|---------:|
+| **Combined (all classes)** | 55 | **15641** | **5** | **0.032%** |
+| **`firmware` class** | 12 | **5553** | **1** | **0.018%** |
+| **`substitute-container` class** | 7 | **1566** | **0** | **0.0%** |
+| oci-app | 12 | 6498 | 4 | 0.0616% |
+| oci-base | 9 | 1130 | 0 | 0% |
+| static-binary | 8 | 487 | 0 | 0% |
+| openwrt | 2 | 30 | 0 | 0% |
+| rtos-sdk | 3 | 124 | 0 | 0% |
+
+Firmware stratum: **0** `NOT_AFFECTED` with bundle; the single decided row is **`AFFECTED`**. Substitute-container stratum's pre-guard **12** D02 clears are now S5b refusals.
 
 ---
 
 ## 3. KT-2 — Ground truth soundness
 
-**100-statement sample:** stratified D01=33, D02=31, D03=20, D04=16; weighted toward `NOT_AFFECTED` (64/100).
+**Evidence set:** `corpus/groundtruth/real-100.yaml` (100 real pipeline statements; synthetic `statements.yaml` is unit-test only).
 
-Independent binary review + `go test ./corpus/groundtruth/` → **0 false `not_affected`** (no case where engine emitted `NOT_AFFECTED` contradicting hand-verified ground truth).
+**Frozen pipeline snapshot (pre-guard):** Each row's `pipeline_verdict` is copied from the S-15 `decisions.jsonl` emitted **before** the FINDING-002 `symbol_not_observable` guard. KT-2 scores whether those clearances were **sound when emitted** — not whether the post-fix engine would re-emit them. Rescoring `real-100.yaml` against the guarded instrument would test a different pipeline in response to the finding and void the pre-registered kill test. The guard is reported separately under §2 (post-guard re-decide: **0** `NOT_AFFECTED`, **5** `AFFECTED`, **0.032%** decided).
 
-**KT-2: PASS WITH LIMITATION** — zero false `not_affected` in the 100-statement hand-verified set. That result stands.
+**Hand labels:** **100/100** filled (`seed: 20260824`).
 
-**Limitation (explicit):** Because no corpus grype finding reached a decided verdict, **none** of the 100 ground-truth statements came from live scanner-fed corpus input. All 100 are constructed benchmark fixtures (40 from `testdata/decide/`, 60 from hand-verified inventory binaries). Soundness against **real-world scanner input is UNTESTED**. This PASS must not be read as end-to-end validation on grype-fed production triage.
+**Supporting analysis:** [FINDING-002.md](FINDING-002.md) — measured soundness failure on internal OpenSSL symbols (35 corpus D02 clearances; 22× CVE-2026-14456, 9× CVE-2026-42767, 4× CVE-2026-45445).
+
+**KT-2 is FAIL (unsound):** the pipeline emitted **20** false `not_affected` clearance(s) in the hand-labeled soundness subset — each listed below; one false clearance violates the pre-registered kill criterion.
+
+### False `not_affected` clearances (pipeline claimed NOT_AFFECTED; hand-check disagreed)
+
+**By CVE (real-100 sample):** CVE-2026-14456 ×13, CVE-2026-42767 ×6, CVE-2026-45445 ×1.
+
+- **real-002** — **CVE-2026-42767** on **`oci-redis-7`** / component **`openssl`**: pipeline claimed **`NOT_AFFECTED`** (`vulnerable_code_not_present`); hand-check found **`UNDER_INVESTIGATION`**. FINDING-002: D02 on OSSL_CRMF_ENCRYPTEDVALUE_decrypt unsound — internal symbol absent from .dynsym while OSSL_CRMF_* API is exported and objdump shows 597 CRMF references on oci-redis-7 libcrypto.so.3.
+- **real-008** — **CVE-2026-14456** on **`oci-redis-7`** / component **`openssl`**: pipeline claimed **`NOT_AFFECTED`** (`vulnerable_code_not_present`); hand-check found **`UNDER_INVESTIGATION`**. FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).
+- **real-010** — **CVE-2026-14456** on **`oci-python-3.12`** / component **`openssl`**: pipeline claimed **`NOT_AFFECTED`** (`vulnerable_code_not_present`); hand-check found **`UNDER_INVESTIGATION`**. FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).
+- **real-011** — **CVE-2026-14456** on **`subst-mosquitto`** / component **`openssl`**: pipeline claimed **`NOT_AFFECTED`** (`vulnerable_code_not_present`); hand-check found **`UNDER_INVESTIGATION`**. FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).
+- **real-013** — **CVE-2026-45445** on **`subst-golang-bookworm`** / component **`openssl`**: pipeline claimed **`NOT_AFFECTED`** (`vulnerable_code_not_present`); hand-check found **`UNDER_INVESTIGATION`**. FINDING-002: D02 clearance unsound — vulnerable symbol not observable in .dynsym on dynamically-linked libcrypto.so.3; symbol absence is guaranteed a priori for internal functions.
+- **real-015** — **CVE-2026-42767** on **`oci-node-20`** / component **`openssl`**: pipeline claimed **`NOT_AFFECTED`** (`vulnerable_code_not_present`); hand-check found **`UNDER_INVESTIGATION`**. FINDING-002: D02 clearance unsound — vulnerable symbol not observable in .dynsym on dynamically-linked libcrypto.so.3; symbol absence is guaranteed a priori for internal functions.
+- **real-016** — **CVE-2026-42767** on **`oci-nginx-1.25`** / component **`openssl`**: pipeline claimed **`NOT_AFFECTED`** (`vulnerable_code_not_present`); hand-check found **`UNDER_INVESTIGATION`**. FINDING-002: D02 clearance unsound — vulnerable symbol not observable in .dynsym on dynamically-linked libcrypto.so.3; symbol absence is guaranteed a priori for internal functions.
+- **real-021** — **CVE-2026-14456** on **`subst-httpd-alpine`** / component **`openssl`**: pipeline claimed **`NOT_AFFECTED`** (`vulnerable_code_not_present`); hand-check found **`UNDER_INVESTIGATION`**. FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).
+- **real-022** — **CVE-2026-42767** on **`oci-rabbitmq-3`** / component **`openssl`**: pipeline claimed **`NOT_AFFECTED`** (`vulnerable_code_not_present`); hand-check found **`UNDER_INVESTIGATION`**. FINDING-002: D02 clearance unsound — vulnerable symbol not observable in .dynsym on dynamically-linked libcrypto.so.3; symbol absence is guaranteed a priori for internal functions.
+- **real-024** — **CVE-2026-14456** on **`subst-httpd-alpine`** / component **`openssl`**: pipeline claimed **`NOT_AFFECTED`** (`vulnerable_code_not_present`); hand-check found **`UNDER_INVESTIGATION`**. FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).
+- **real-031** — **CVE-2026-14456** on **`oci-node-20`** / component **`openssl`**: pipeline claimed **`NOT_AFFECTED`** (`vulnerable_code_not_present`); hand-check found **`UNDER_INVESTIGATION`**. FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).
+- **real-035** — **CVE-2026-14456** on **`oci-nginx-1.25`** / component **`openssl`**: pipeline claimed **`NOT_AFFECTED`** (`vulnerable_code_not_present`); hand-check found **`UNDER_INVESTIGATION`**. FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).
+- **real-043** — **CVE-2026-14456** on **`oci-postgres-16`** / component **`openssl`**: pipeline claimed **`NOT_AFFECTED`** (`vulnerable_code_not_present`); hand-check found **`UNDER_INVESTIGATION`**. FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).
+- **real-055** — **CVE-2026-42767** on **`subst-golang-bookworm`** / component **`openssl`**: pipeline claimed **`NOT_AFFECTED`** (`vulnerable_code_not_present`); hand-check found **`UNDER_INVESTIGATION`**. FINDING-002: D02 clearance unsound — vulnerable symbol not observable in .dynsym on dynamically-linked libcrypto.so.3; symbol absence is guaranteed a priori for internal functions.
+- **real-063** — **CVE-2026-14456** on **`oci-python-3.12`** / component **`openssl`**: pipeline claimed **`NOT_AFFECTED`** (`vulnerable_code_not_present`); hand-check found **`UNDER_INVESTIGATION`**. FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).
+- **real-065** — **CVE-2026-42767** on **`oci-nginx-1.25`** / component **`openssl`**: pipeline claimed **`NOT_AFFECTED`** (`vulnerable_code_not_present`); hand-check found **`UNDER_INVESTIGATION`**. FINDING-002: D02 clearance unsound — vulnerable symbol not observable in .dynsym on dynamically-linked libcrypto.so.3; symbol absence is guaranteed a priori for internal functions.
+- **real-068** — **CVE-2026-14456** on **`oci-postgres-16`** / component **`openssl`**: pipeline claimed **`NOT_AFFECTED`** (`vulnerable_code_not_present`); hand-check found **`UNDER_INVESTIGATION`**. FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).
+- **real-074** — **CVE-2026-14456** on **`oci-ruby-3.3`** / component **`openssl`**: pipeline claimed **`NOT_AFFECTED`** (`vulnerable_code_not_present`); hand-check found **`UNDER_INVESTIGATION`**. FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).
+- **real-086** — **CVE-2026-14456** on **`subst-golang-bookworm`** / component **`openssl`**: pipeline claimed **`NOT_AFFECTED`** (`vulnerable_code_not_present`); hand-check found **`UNDER_INVESTIGATION`**. FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).
+- **real-088** — **CVE-2026-14456** on **`oci-memcached-1.6`** / component **`openssl`**: pipeline claimed **`NOT_AFFECTED`** (`vulnerable_code_not_present`); hand-check found **`UNDER_INVESTIGATION`**. FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).
+
+**KT-2: FAIL** — false `not_affected` count **20** (pre-registered bar: zero).
+
+**Pipeline–human agreement:** **80/100** (**80.00%**).
+
+### Precision / recall per pipeline `reason_code` (refusal rows only)
+
+Computed on statements where the pipeline emitted `UNDER_INVESTIGATION`; precision = TP/(TP+FP), recall = TP/(TP+FN) vs hand `UNDER_INVESTIGATION`.
+
+| reason_code | precision | recall | tp | fp | fn |
+|-------------|----------:|-------:|---:|---:|---:|
+| `(none)` | — | 0.000 | 0 | 0 | 20 |
+| `manifest_no_entry` | 1.000 | 1.000 | 8 | 0 | 0 |
+| `mapping_probable_only` | 1.000 | 1.000 | 13 | 0 | 0 |
+| `no_identity_mapping` | 1.000 | 1.000 | 9 | 0 | 0 |
+| `purl_match_insufficient` | 1.000 | 1.000 | 50 | 0 | 0 |
+
+The four labeled `reason_code` rows show precision and recall **1.000 on refusal rows only**; the `(none)` row (recall **0.000**, fn=**20**) is the **20** false `not_affected` clearances excluded from that denominator.
+
+### Pipeline vs hand label (all disagreements)
+
+- **real-002** **CVE-2026-42767** **`oci-redis-7`** (component `openssl`): pipeline **`NOT_AFFECTED`** → hand **`UNDER_INVESTIGATION`** — FINDING-002: D02 on OSSL_CRMF_ENCRYPTEDVALUE_decrypt unsound — internal symbol absent from .dynsym while OSSL_CRMF_* API is exported and objdump shows 597 CRMF references on oci-redis-7 libcrypto.so.3.
+- **real-008** **CVE-2026-14456** **`oci-redis-7`** (component `openssl`): pipeline **`NOT_AFFECTED`** → hand **`UNDER_INVESTIGATION`** — FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).
+- **real-010** **CVE-2026-14456** **`oci-python-3.12`** (component `openssl`): pipeline **`NOT_AFFECTED`** → hand **`UNDER_INVESTIGATION`** — FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).
+- **real-011** **CVE-2026-14456** **`subst-mosquitto`** (component `openssl`): pipeline **`NOT_AFFECTED`** → hand **`UNDER_INVESTIGATION`** — FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).
+- **real-013** **CVE-2026-45445** **`subst-golang-bookworm`** (component `openssl`): pipeline **`NOT_AFFECTED`** → hand **`UNDER_INVESTIGATION`** — FINDING-002: D02 clearance unsound — vulnerable symbol not observable in .dynsym on dynamically-linked libcrypto.so.3; symbol absence is guaranteed a priori for internal functions.
+- **real-015** **CVE-2026-42767** **`oci-node-20`** (component `openssl`): pipeline **`NOT_AFFECTED`** → hand **`UNDER_INVESTIGATION`** — FINDING-002: D02 clearance unsound — vulnerable symbol not observable in .dynsym on dynamically-linked libcrypto.so.3; symbol absence is guaranteed a priori for internal functions.
+- **real-016** **CVE-2026-42767** **`oci-nginx-1.25`** (component `openssl`): pipeline **`NOT_AFFECTED`** → hand **`UNDER_INVESTIGATION`** — FINDING-002: D02 clearance unsound — vulnerable symbol not observable in .dynsym on dynamically-linked libcrypto.so.3; symbol absence is guaranteed a priori for internal functions.
+- **real-021** **CVE-2026-14456** **`subst-httpd-alpine`** (component `openssl`): pipeline **`NOT_AFFECTED`** → hand **`UNDER_INVESTIGATION`** — FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).
+- **real-022** **CVE-2026-42767** **`oci-rabbitmq-3`** (component `openssl`): pipeline **`NOT_AFFECTED`** → hand **`UNDER_INVESTIGATION`** — FINDING-002: D02 clearance unsound — vulnerable symbol not observable in .dynsym on dynamically-linked libcrypto.so.3; symbol absence is guaranteed a priori for internal functions.
+- **real-024** **CVE-2026-14456** **`subst-httpd-alpine`** (component `openssl`): pipeline **`NOT_AFFECTED`** → hand **`UNDER_INVESTIGATION`** — FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).
+- **real-031** **CVE-2026-14456** **`oci-node-20`** (component `openssl`): pipeline **`NOT_AFFECTED`** → hand **`UNDER_INVESTIGATION`** — FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).
+- **real-035** **CVE-2026-14456** **`oci-nginx-1.25`** (component `openssl`): pipeline **`NOT_AFFECTED`** → hand **`UNDER_INVESTIGATION`** — FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).
+- **real-043** **CVE-2026-14456** **`oci-postgres-16`** (component `openssl`): pipeline **`NOT_AFFECTED`** → hand **`UNDER_INVESTIGATION`** — FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).
+- **real-055** **CVE-2026-42767** **`subst-golang-bookworm`** (component `openssl`): pipeline **`NOT_AFFECTED`** → hand **`UNDER_INVESTIGATION`** — FINDING-002: D02 clearance unsound — vulnerable symbol not observable in .dynsym on dynamically-linked libcrypto.so.3; symbol absence is guaranteed a priori for internal functions.
+- **real-063** **CVE-2026-14456** **`oci-python-3.12`** (component `openssl`): pipeline **`NOT_AFFECTED`** → hand **`UNDER_INVESTIGATION`** — FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).
+- **real-065** **CVE-2026-42767** **`oci-nginx-1.25`** (component `openssl`): pipeline **`NOT_AFFECTED`** → hand **`UNDER_INVESTIGATION`** — FINDING-002: D02 clearance unsound — vulnerable symbol not observable in .dynsym on dynamically-linked libcrypto.so.3; symbol absence is guaranteed a priori for internal functions.
+- **real-068** **CVE-2026-14456** **`oci-postgres-16`** (component `openssl`): pipeline **`NOT_AFFECTED`** → hand **`UNDER_INVESTIGATION`** — FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).
+- **real-074** **CVE-2026-14456** **`oci-ruby-3.3`** (component `openssl`): pipeline **`NOT_AFFECTED`** → hand **`UNDER_INVESTIGATION`** — FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).
+- **real-086** **CVE-2026-14456** **`subst-golang-bookworm`** (component `openssl`): pipeline **`NOT_AFFECTED`** → hand **`UNDER_INVESTIGATION`** — FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).
+- **real-088** **CVE-2026-14456** **`oci-memcached-1.6`** (component `openssl`): pipeline **`NOT_AFFECTED`** → hand **`UNDER_INVESTIGATION`** — FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).
 
 ---
 
-## 4. Per-rule precision (ground truth)
+## 4. Refusal breakdown (reason codes)
 
-On the pre-registered 100-statement set (not corpus grype findings):
+From **`corpus/results/*/decisions.jsonl`** (**15,380** refusal rows; **256** CVE rows on **10** zero/low-finding artifacts lack `decisions.jsonl` from pre-`decisions.jsonl` scans — aggregate refused total **15,636** includes those via `scan-summary.json`).
 
-| Rule | Statements | Engine agreement |
-|------|------------|------------------|
-| D01 | 33 | 33/33 |
-| D02 | 31 | 31/31 |
-| D03 | 20 | 20/20 |
-| D04 | 16 | 16/16 |
+| Reason code | Count |
+|-------------|------:|
+| `purl_match_insufficient` | 6591 |
+| `mapping_probable_only` | 4183 |
+| `no_identity_mapping` | 3370 |
+| `manifest_no_entry` | 1180 |
+| `symbol_not_observable` | 35 |
+| `provenance_unverified` | 21 |
 
-**Precision:** 100/100 verdicts match ground truth (100%). This measures the decision engine against controlled fixtures, not grype recall on the corpus.
-
-**Coverage limits by artifact class:**
-
-- **OCI / OpenWrt rootfs:** Dynamic ELF with dynsym — symbol rules apply when PURL + manifest entry align; corpus scans did not reach that gate in v1 (identity resolution blocked first).
-- **Static release binaries (musl/go):** Often stripped; D03 `symbol_table_unusable` / `stripped_static_binary` dominates when statements reach the engine.
-- **Flash/combined images / factory `.bin`:** Not inventoryable as ELF collections without filesystem extraction; substitutes used OCI rootfs scans for CP-11 throughput.
-- **RTOS/SDK archives:** Mix of host tools + bare-metal objects; grype noise high, manifest coverage low.
+**0** `NOT_AFFECTED` verdicts after the FINDING-002 guard. The pre-guard **35** D02 `vulnerable_code_not_present` clearances now refuse with `symbol_not_observable`. **5** `AFFECTED` (D04) remain; each has an on-disk evidence bundle.
 
 ---
 
-## 5. Method defects
+## 5. What this result is
 
-This study's end-to-end instrument had a **PURL identity gap** between scanner output and manifest seeds. It is a defect in the pipeline under test, not a finding about shipped firmware.
+We measured **where** a refusal-first, binary-grounded VEX clearance pipeline fails on real shipped artifacts — not whether symbol-table evidence is sufficient in the abstract.
 
-| Evidence | Value |
-|----------|-------|
-| Corpus CVE rows in | 10,088 |
-| Decided | 0 |
-| Refused | 10,088 |
-| Refusal reason `purl-insufficient` | **10,088 (100%)** |
-| Other refusal reasons on corpus | 0 |
+The pipeline **terminates at identity resolution** for **91.9%** of scanner findings and at **manifest lookup** for another **7.7%**. **Zero** findings terminate at S3/S5 symbol-table stages. **35** terminate at S5b (`symbol_not_observable`) — the FINDING-002 guard, not a corpus-scale symbol-evidence test. The binding constraint on binary-grounded VEX clearance at v1 integration is **CVE-to-component identity** (PURL match, distro upstream mapping, manifest coverage) — not evidence availability or stripped-binary limits. The symbol-evidence question is **not yet reachable** in practice for 99.6% of scanner output; that is a different and more useful claim than “symbols don't work.”
 
-**Mechanism:** grype reports distro-scoped package identities; the v1 Manifest lists upstream `pkg:generic/...` identities. CP-3 cross-type matching stops at `NameVersionOnly`; D03 refuses rather than infer upstream equivalence. The engine behaved correctly — the integration layer never supplied matchable identities.
+The **0.032%** decided rate is real (**5** `AFFECTED` rows with re-derivable bundles). The pre-guard **0.2557%** (40 rows) is the snapshot KT-2 scored. Neither is a corpus-scale answer to KT-1.
 
-**Consequence:** KT-1 corpus numbers are **instrument telemetry**, not corpus-scale clearance rates. Publishing them as FAIL implied a scientific negative about firmware CVE reachability; that implication is withdrawn.
+### D01 — no natural corpus instance
 
----
+Corpus scan produced **zero** D01 (`component_not_present`) rows.
 
-## 6. What this study does not show
+| Count | Criterion |
+|------:|-----------|
+| **55** | Scanned artifacts (`scan-summary.json`) |
+| **22** | Grype match where package **name or PURL** names `openssl` / `libssl` / `libcrypto` |
+| **19** | `decisions.jsonl` row with `component=openssl` (identity bound) |
+| **0** | Grype package-match artifacts with no `libssl.so*` / `libcrypto.so*` on rootfs |
 
-Stated plainly:
+Selection criterion and IDs: `cp11-metrics.json` → `d01_corpus_absence` (re-derive:
+`bash scripts/rederive-results.sh`). Path-agnostic check:
 
-- This study does **NOT** show that firmware CVEs are mostly unreachable in shipped binaries.
-- This study does **NOT** show that LADING cannot decide real scanner findings when identity resolution aligns.
-- This study does **NOT** support any public claim about corpus-scale clearance rates, exoneration rates, or “most scanner CVEs are irrelevant.”
-- The 0 / 10,088 decided figure is consistent with a broken identity bridge, not with a measured absence of vulnerable code.
+```bash
+find <rootfs> -name 'libssl.so*' -o -name 'libcrypto.so*'
+```
 
----
+locates OpenSSL shared objects on **all 22** grype package-match artifacts. D01 had no
+natural corpus instance. The busybox probe (`go test ./corpus/groundtruth/ -run TestD01Probe -v`)
+is synthetic only.
 
-## 7. Notable findings
-
-**Over-reported components (corpus):** Grype reports large CVE counts for `oci-node-20` (2,922), `oci-nginx-1.25` (626), `oci-mariadb-11` (582), `oci-rockylinux-9` (607) — none reached manifest PURL alignment sufficient to invoke symbol rules in v1; refusal at the identity gate is expected, not exoneration.
-
-**audit-vex / public VEX shapes (`testdata/auditvex/`):**
-
-- **Grype-class inert:** VEX for `CVE-2022-99999` on `commons-lang3@3.12.0` matches SBOM only at `name_version_only` → **inert** (would silently miss in production VEX).
-- **Trivy-class overbroad:** VEX for `CVE-2023-88888` with **exact** match on subcomponent `openssl@3.0.2` → **overbroad** (cross-product suppression risk).
-
-These are deterministic PURL match-quality failures, not scanner CVE truth claims.
+**Interpretation:** grype package presence was correct in every testable case; the open
+question was always vulnerable **code** (D02), not component absence (D01). Only **19 / 55**
+artifacts ever bound a finding to `component=openssl` — identity resolution limits how
+often the pipeline reaches even manifest lookup for OpenSSL CVEs.
 
 ---
 
-## 8. Limitations (full)
+## 6. Third consecutive NOT EVALUABLE (README §11)
 
-1. **Manifest v1 is a 25-component seed**, not production-complete NVD coverage; even with identity resolution, most corpus CVEs would lack manifest entries.
-2. **Distro-to-upstream PURL harmonization** was not in CP-11 scope; KT-1 is not evaluable until CP-15 provides that layer.
-3. **Corpus substitutes** replace unavailable vendor GPL/flash URLs; class labels are preserved but bytes differ from original product intent.
-4. **No threshold or rule refitting** was performed; pre-registered bars in README are unchanged.
-5. **Scan environment:** rootless podman on WSL2; sandbox unpack uses Debian bookworm-slim helper image.
-6. **Grype version** pinned by local install (`0.115.0` at run time); results are not grype-version invariant.
-7. **Evidence bundles** were emitted only when manifest slice + decided path existed; corpus runs produced refusals without VEX for all grype findings.
-8. **KT-1 and KT-2 measure different things:** KT-2 validates engine soundness on controlled fixtures; KT-1 validates end-to-end usefulness on scanner-fed corpus — v1 KT-1 is **not evaluable**, not failed.
+Pre-registered decision rule ([README.md](README.md) **§11**, CP-0), quoted verbatim:
+
+> **§11 — Kill-test evaluability.** KT-1 tests whether ≥30% of scanner-reported CVEs resolve to a decidable `not_affected` with a re-derivable evidence bundle. If refusal-stage attribution shows the instrument did not reach symbol-table or evidence evaluation — zero symbol-table refusals and ≥99% of findings terminate at identity resolution or manifest lookup — KT-1 is **NOT EVALUABLE**, not FAIL; the measured decided rate must not be read as an answer to the pre-registered question. Three consecutive NOT EVALUABLE results on the same corpus after instrument passes intended to restore evaluability constitute a **pattern**; the pre-registered action is **stop**.
+
+**Instrument passes on this corpus (all NOT EVALUABLE when correctly read):**
+
+| Pass | Date | Instrument state | Decided | Correct KT-1 verdict |
+|------|------|------------------|--------:|----------------------|
+| 1 | 2026-08-23 | Pre-identity layer; 100% `purl_match_insufficient` | 0 / 10,088 | NOT EVALUABLE (RP-1) |
+| 2 | 2026-08-24 | Identity aliases + partial manifest; mislabeled | 40 / 15,641 | NOT EVALUABLE (this correction) |
+| 3 | 2026-08-24 | S-15 re-run confirms refusal-stage histogram | 40 / 15,641 | NOT EVALUABLE |
+
+**Pattern met → stop.** Do not publish the 0.2557% rate as a scientific negative about firmware or symbols. Do not lower the 30% threshold. Do not claim corpus-scale clearance or its absence until evaluability is restored and KT-1 is re-run.
+
+---
+
+## 7. Limitations
+
+1. **Manifest seed (25 components, ~29 CVE entries after OpenSSL expansion)** — most scanner CVE/component pairs have no manifest entry (`manifest_no_entry`: **1180** refusals on decided-path artifacts).
+2. **Identity layer immature** — **9/10** aliases remain `probable`; only **expat** is hand-verified `definitive`. **`mapping_probable_only`** (**4183**) and **`no_identity_mapping`** (**3370**) dominate refusals.
+3. **Firmware extraction** — flash images scanned via **profile-rootfs** extraction (binwalk/unsquashfs); **83%** stripped binaries corpus-wide; symbol rules rarely reachable on firmware stratum (**1/5553** decided).
+4. **Unreachable / failed fetches** — TP-Link GPL portal, Netgear GPL source zips, Buildroot prebuilt (recorded in `corpus/FIRMWARE-FETCH-LOG.txt`); **7** `substitute-container` stand-ins retained with honest class labels.
+5. **Static / musl release binaries** — **8** static-binary artifacts: **0** decided; grype Go/stdlib noise without manifest alignment.
+6. **Rules not exercised at scale** — D01 had **no natural corpus instance** (see §5); D04 (`AFFECTED`) fired **5** times (OpenSSL symbol-present paths on OCI apps).
+7. **KT-2 FAIL (soundness)** — [FINDING-002.md](FINDING-002.md): **35** corpus D02 clearances on internal OpenSSL symbols unsound; **20/20** labeled `NOT_AFFECTED` rows in `real-100.yaml` disagree with pipeline. **80/80** refusal rows agree (`UNDER_INVESTIGATION`). Post-guard re-decide converted the 35 D02 rows to `symbol_not_observable`.
+8. **Frozen KT-2 snapshot** — `real-100.yaml` scores the pre-guard S-15 pipeline (see §3); not rescored after the guard (deliberate pre-registration discipline).
+9. **D01: no corpus instance; one synthetic probe** — **22 / 55** grype package-match;
+   **19 / 55** `component=openssl` in `decisions.jsonl`; `.so` on **all 22** (see §5);
+   **zero** D01 rows; busybox probe did not fail but is not KT evidence.
+10. **OpenSSL-only soundness path** — All **35** pre-guard D02 clearances and all **20** KT-2 false NAs are OpenSSL internal-symbol CVEs; other components untested at the evidence stage.
+11. **Layout assumptions** — Engine and analysis scripts initially assumed Debian multiarch paths (`usr/lib/*/`); three false D01 candidates (including Netgear) cleared only after path-agnostic search — same defect class as FINDING-002 wrong-library check.
+12. **Firmware stratum size** — **12** firmware-class artifacts; **1/5,553** decided post-guard.
+13. **No refitting** — taxonomy, alias promotion, and manifest expansion needed for v2 are **future work** (`IDEAS.md`, SPEC-IDENTITY §10); this document reports v1 honest output only.
+14. **FINDING-001 / pairing-matrix tool paths** — Tool binaries used for the FINDING-001 and pairing-matrix work live in `.lading/tools/`, which is gitignored. They are therefore not independently verifiable from the repository; recording their SHA-256 hashes against official release checksums is the mitigation. The SPDX and pairing-matrix figures reported here were computed from cached SBOMs under `.lading/spdx-anomaly/` rather than regenerated at write time.
 
 ---
 
 ## Decision
 
-**Do not launch** on v1 for scanner-driven compliance claims at corpus scale. The engine appears **sound on NOT_AFFECTED** within the 100-statement fixture benchmark (KT-2 pass with limitation) but **did not evaluate real scanner output** on the corpus (KT-1 not evaluable). Next work (v2 spec, not built here): distro-to-upstream PURL normalization (CP-15), manifest expansion from corpus-driven CVE/component pairs, and filesystem extraction for flash images — see `IDEAS.md`.
+| Outcome | Result | Action |
+|---------|--------|--------|
+| KT-1 ≥30% | **NOT EVALUABLE** (0.032% measured after guard; 0.2557% pre-guard snapshot; instrument did not reach evidence stage at corpus scale) | Stop per README §11; do not publish as FAIL or as corpus-scale negative |
+| KT-2 zero false NA | **FAIL** | **20/20** false clearances in labeled soundness subset; engine guard `symbol_not_observable` added |
+| **Combined gate** | **Stop** | KT-2 unsound; KT-1 third consecutive NOT EVALUABLE (§11) |
 
 ---
 
@@ -156,9 +287,9 @@ These are deterministic PURL match-quality failures, not scanner CVE truth claim
 
 ```bash
 go build -o bin/lading ./cmd/lading
-bash scripts/corpus-download.sh
-bash scripts/corpus-scan.sh
-go test ./corpus/groundtruth/ -count=1
-python3 scripts/corpus-aggregate.py
-cat corpus/results/aggregate.json
+bash scripts/corpus-download.sh          # if payloads absent
+bash scripts/corpus-scan.sh              # or scripts/corpus-redecide.sh for re-eval only
+python3 scripts/sample-real-groundtruth.py
+bash scripts/rederive-results.sh
+grep -nE 'KT-1: NOT EVALUABLE|KT-2: (PASS|FAIL|NOT EVALUABLE)|third consecutive' RESULTS.md
 ```

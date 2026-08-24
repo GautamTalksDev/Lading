@@ -60,5 +60,9 @@ ed25519*
 corpus/downloads/
 corpus/tmp/
 
-# Test fixtures are intentionally committed (see testdata/inventory/Makefile)
+# Test fixtures are intentionally committed (see testdata/inventory/Makefile).
+# *.exe above would otherwise drop sample_pe.exe on Windows checkouts — the
+# directory un-ignore alone does not override the extension rule.
 !testdata/inventory/bin/
+!testdata/inventory/bin/**
+!testdata/inventory/bin/*.exe

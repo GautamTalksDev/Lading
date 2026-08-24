@@ -1,0 +1,1435 @@
+version: real-100-v1
+seed: 20260824
+source: corpus/results/*/decisions.jsonl
+notes: 'S-14 KT-2 ground truth drawn from real corpus pipeline verdicts. human_label is hand-filled (2026-08-24).
+  Synthetic statements.yaml remains unit-test fixtures only and is not KT-2 evidence. 20/20 pipeline NOT_AFFECTED
+  rows are FINDING-002 false clearances; 80/80 pipeline refusals confirmed UNDER_INVESTIGATION.'
+stratification:
+  firmware_min: 40
+  not_affected_min: 20
+  refusals_min: 20
+  firmware: 50
+  not_affected: 20
+  refusals: 80
+  refusal_reason_codes:
+  - manifest_no_entry
+  - mapping_probable_only
+  - no_identity_mapping
+  - purl_match_insufficient
+statements:
+- id: real-001
+  cve: CVE-2016-4606
+  component: curl
+  component_purl: pkg:generic/curl@7.36.0
+  artifact: fw-netgear-r7000-firmware-1.0.12.216
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: manifest_no_entry
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: `curl` is in the seed Manifest; seed CVE is CVE-2023-38545; this finding
+    is CVE-2016-4606 (no entry). No re-derivable vulnerable-symbol mapping → cannot decide.'
+- id: real-002
+  cve: CVE-2026-42767
+  component: openssl
+  component_purl: pkg:deb/debian/libssl3@3.0.20-1~deb12u2?arch=amd64&distro=debian-12&upstream=openssl
+  artifact: oci-redis-7
+  artifact_class: oci-app
+  pipeline_verdict: NOT_AFFECTED
+  rule_id: D02
+  reason_code: ''
+  justification: vulnerable_code_not_present
+  evidence_bundle: corpus/results/oci-redis-7/evidence-bundle/statements/cve-2026-42767
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'FINDING-002: D02 on OSSL_CRMF_ENCRYPTEDVALUE_decrypt unsound — internal symbol absent
+    from .dynsym while OSSL_CRMF_* API is exported and objdump shows 597 CRMF references on oci-redis-7
+    libcrypto.so.3.'
+- id: real-003
+  cve: CVE-2026-22801
+  component: libpng
+  component_purl: pkg:deb/debian/libpng16-16@1.6.39-2?arch=amd64&distro=debian-12&upstream=libpng1.6
+  artifact: oci-nginx-1.25
+  artifact_class: oci-app
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: manifest_no_entry
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: `libpng` is in the seed Manifest; seed CVE is CVE-2019-7317; this finding
+    is CVE-2026-22801 (no entry). No re-derivable vulnerable-symbol mapping → cannot decide.'
+- id: real-004
+  cve: CVE-2024-56650
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-005
+  cve: CVE-2026-15806
+  component: ''
+  component_purl: 'pkg:deb/ubuntu/python3.12-minimal@3.12.3-1ubuntu0.9?arch=amd64&distro=ubuntu-24.04&upstream=python3.12'
+  artifact: oci-rabbitmq-3
+  artifact_class: oci-app
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: no_identity_mapping
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL has no identity alias and does not type-match a Manifest
+    component. Cannot bind CVE to a curated component.'
+- id: real-006
+  cve: CVE-2025-39862
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-007
+  cve: CVE-2024-43851
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-008
+  cve: CVE-2026-14456
+  component: openssl
+  component_purl: pkg:deb/debian/libssl3@3.0.20-1~deb12u2?arch=amd64&distro=debian-12&upstream=openssl
+  artifact: oci-redis-7
+  artifact_class: oci-app
+  pipeline_verdict: NOT_AFFECTED
+  rule_id: D02
+  reason_code: ''
+  justification: vulnerable_code_not_present
+  evidence_bundle: corpus/results/oci-redis-7/evidence-bundle/statements/cve-2026-14456
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym
+    (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on
+    oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).'
+- id: real-009
+  cve: CVE-2025-66863
+  component: ''
+  component_purl: pkg:deb/debian/libbinutils@2.40-2?arch=amd64&distro=debian-12&upstream=binutils
+  artifact: oci-node-20
+  artifact_class: oci-app
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: mapping_probable_only
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: identity alias status is probable (identity-aliases.json). SPEC-IDENTITY:
+    probable aliases must not clear.'
+- id: real-010
+  cve: CVE-2026-14456
+  component: openssl
+  component_purl: pkg:deb/debian/libssl3t64@3.5.6-1~deb13u2?arch=amd64&distro=debian-13&upstream=openssl
+  artifact: oci-python-3.12
+  artifact_class: oci-app
+  pipeline_verdict: NOT_AFFECTED
+  rule_id: D02
+  reason_code: ''
+  justification: vulnerable_code_not_present
+  evidence_bundle: corpus/results/oci-python-3.12/evidence-bundle/statements/cve-2026-14456
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym
+    (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on
+    oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).'
+- id: real-011
+  cve: CVE-2026-14456
+  component: openssl
+  component_purl: pkg:apk/alpine/libssl3@3.5.7-r0?arch=x86_64&distro=alpine-3.23.5&upstream=openssl
+  artifact: subst-mosquitto
+  artifact_class: substitute-container
+  pipeline_verdict: NOT_AFFECTED
+  rule_id: D02
+  reason_code: ''
+  justification: vulnerable_code_not_present
+  evidence_bundle: corpus/results/subst-mosquitto/evidence-bundle/statements/cve-2026-14456
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym
+    (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on
+    oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).'
+- id: real-012
+  cve: CVE-2025-1179
+  component: ''
+  component_purl: pkg:deb/debian/libgprofng0@2.40-2?arch=amd64&distro=debian-12&upstream=binutils
+  artifact: subst-golang-bookworm
+  artifact_class: substitute-container
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: mapping_probable_only
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: identity alias status is probable (identity-aliases.json). SPEC-IDENTITY:
+    probable aliases must not clear.'
+- id: real-013
+  cve: CVE-2026-45445
+  component: openssl
+  component_purl: pkg:deb/debian/openssl@3.0.15-1~deb12u1?arch=amd64&distro=debian-12
+  artifact: subst-golang-bookworm
+  artifact_class: substitute-container
+  pipeline_verdict: NOT_AFFECTED
+  rule_id: D02
+  reason_code: ''
+  justification: vulnerable_code_not_present
+  evidence_bundle: corpus/results/subst-golang-bookworm/evidence-bundle/statements/cve-2026-45445
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'FINDING-002: D02 clearance unsound — vulnerable symbol not observable in .dynsym on dynamically-linked
+    libcrypto.so.3; symbol absence is guaranteed a priori for internal functions.'
+- id: real-014
+  cve: CVE-2026-53802
+  component: ''
+  component_purl: pkg:deb/ubuntu/rsync@3.2.7-1ubuntu1.5?arch=amd64&distro=ubuntu-24.04
+  artifact: oci-mariadb-11
+  artifact_class: oci-app
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: no_identity_mapping
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL has no identity alias and does not type-match a Manifest
+    component. Cannot bind CVE to a curated component.'
+- id: real-015
+  cve: CVE-2026-42767
+  component: openssl
+  component_purl: pkg:deb/debian/openssl@3.0.19-1~deb12u2?arch=amd64&distro=debian-12
+  artifact: oci-node-20
+  artifact_class: oci-app
+  pipeline_verdict: NOT_AFFECTED
+  rule_id: D02
+  reason_code: ''
+  justification: vulnerable_code_not_present
+  evidence_bundle: corpus/results/oci-node-20/evidence-bundle/statements/cve-2026-42767
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'FINDING-002: D02 clearance unsound — vulnerable symbol not observable in .dynsym on dynamically-linked
+    libcrypto.so.3; symbol absence is guaranteed a priori for internal functions.'
+- id: real-016
+  cve: CVE-2026-42767
+  component: openssl
+  component_purl: pkg:deb/debian/libssl3@3.0.11-1~deb12u2?arch=amd64&distro=debian-12&upstream=openssl
+  artifact: oci-nginx-1.25
+  artifact_class: oci-app
+  pipeline_verdict: NOT_AFFECTED
+  rule_id: D02
+  reason_code: ''
+  justification: vulnerable_code_not_present
+  evidence_bundle: corpus/results/oci-nginx-1.25/evidence-bundle/statements/cve-2026-42767
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'FINDING-002: D02 clearance unsound — vulnerable symbol not observable in .dynsym on dynamically-linked
+    libcrypto.so.3; symbol absence is guaranteed a priori for internal functions.'
+- id: real-017
+  cve: CVE-2023-2898
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-018
+  cve: CVE-2024-39468
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-019
+  cve: CVE-2026-45965
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-020
+  cve: CVE-2024-35905
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-021
+  cve: CVE-2026-14456
+  component: openssl
+  component_purl: pkg:apk/alpine/libssl3@3.5.7-r0?arch=x86_64&distro=alpine-3.24.1&upstream=openssl
+  artifact: subst-httpd-alpine
+  artifact_class: substitute-container
+  pipeline_verdict: NOT_AFFECTED
+  rule_id: D02
+  reason_code: ''
+  justification: vulnerable_code_not_present
+  evidence_bundle: corpus/results/subst-httpd-alpine/evidence-bundle/statements/cve-2026-14456
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym
+    (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on
+    oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).'
+- id: real-022
+  cve: CVE-2026-42767
+  component: openssl
+  component_purl: pkg:deb/ubuntu/libssl3t64@3.0.13-0ubuntu3.6?arch=amd64&distro=ubuntu-24.04&upstream=openssl
+  artifact: oci-rabbitmq-3
+  artifact_class: oci-app
+  pipeline_verdict: NOT_AFFECTED
+  rule_id: D02
+  reason_code: ''
+  justification: vulnerable_code_not_present
+  evidence_bundle: corpus/results/oci-rabbitmq-3/evidence-bundle/statements/cve-2026-42767
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'FINDING-002: D02 clearance unsound — vulnerable symbol not observable in .dynsym on dynamically-linked
+    libcrypto.so.3; symbol absence is guaranteed a priori for internal functions.'
+- id: real-023
+  cve: CVE-2024-41004
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-024
+  cve: CVE-2026-14456
+  component: openssl
+  component_purl: pkg:apk/alpine/libcrypto3@3.5.7-r0?arch=x86_64&distro=alpine-3.24.1&upstream=openssl
+  artifact: subst-httpd-alpine
+  artifact_class: substitute-container
+  pipeline_verdict: NOT_AFFECTED
+  rule_id: D02
+  reason_code: ''
+  justification: vulnerable_code_not_present
+  evidence_bundle: corpus/results/subst-httpd-alpine/evidence-bundle/statements/cve-2026-14456
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym
+    (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on
+    oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).'
+- id: real-025
+  cve: CVE-2026-52942
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-026
+  cve: CVE-2024-56627
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-027
+  cve: CVE-2025-38676
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-028
+  cve: CVE-2026-34180
+  component: ''
+  component_purl: 'pkg:rpm/rocky/openssl-libs@3.5.5-2.el9_8?arch=x86_64&distro=rocky-9.8&epoch=1&upstream=openssl-3.5.5-2.el9_8.src.rpm'
+  artifact: oci-rockylinux-9
+  artifact_class: oci-base
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: mapping_probable_only
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: Rocky openssl-libs PURL reaches openssl only via probable alias (identity-aliases.json
+    status=probable). SPEC-IDENTITY: probable aliases must not clear. CVE CVE-2026-34180 is also absent
+    from openssl.yaml.'
+- id: real-029
+  cve: CVE-2025-38293
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-030
+  cve: CVE-2026-19582
+  component: ''
+  component_purl: pkg:deb/debian/libctf-nobfd0@2.40-2?arch=amd64&distro=debian-12&upstream=binutils
+  artifact: subst-golang-bookworm
+  artifact_class: substitute-container
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: mapping_probable_only
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: identity alias status is probable (identity-aliases.json). SPEC-IDENTITY:
+    probable aliases must not clear.'
+- id: real-031
+  cve: CVE-2026-14456
+  component: openssl
+  component_purl: pkg:deb/debian/openssl@3.0.19-1~deb12u2?arch=amd64&distro=debian-12
+  artifact: oci-node-20
+  artifact_class: oci-app
+  pipeline_verdict: NOT_AFFECTED
+  rule_id: D02
+  reason_code: ''
+  justification: vulnerable_code_not_present
+  evidence_bundle: corpus/results/oci-node-20/evidence-bundle/statements/cve-2026-14456
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym
+    (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on
+    oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).'
+- id: real-032
+  cve: CVE-2026-28418
+  component: ''
+  component_purl: 'pkg:rpm/rocky/vim-minimal@8.2.2637-26.el9_8.4?arch=x86_64&distro=rocky-9.8&epoch=2&upstream=vim-8.2.2637-26.el9_8.4.src.rpm'
+  artifact: oci-rockylinux-9
+  artifact_class: oci-base
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: no_identity_mapping
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL has no identity alias and does not type-match a Manifest
+    component. Cannot bind CVE to a curated component.'
+- id: real-033
+  cve: CVE-2026-48994
+  component: ''
+  component_purl: 'pkg:deb/debian/libmagickwand-6-headers@8%3A6.9.11.60%2Bdfsg-1.6%2Bdeb12u8?arch=all&distro=debian-12&upstream=imagemagick'
+  artifact: oci-node-20
+  artifact_class: oci-app
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: mapping_probable_only
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: identity alias status is probable (identity-aliases.json). SPEC-IDENTITY:
+    probable aliases must not clear.'
+- id: real-034
+  cve: CVE-2026-23307
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-035
+  cve: CVE-2026-14456
+  component: openssl
+  component_purl: pkg:deb/debian/libssl3@3.0.11-1~deb12u2?arch=amd64&distro=debian-12&upstream=openssl
+  artifact: oci-nginx-1.25
+  artifact_class: oci-app
+  pipeline_verdict: NOT_AFFECTED
+  rule_id: D02
+  reason_code: ''
+  justification: vulnerable_code_not_present
+  evidence_bundle: corpus/results/oci-nginx-1.25/evidence-bundle/statements/cve-2026-14456
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym
+    (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on
+    oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).'
+- id: real-036
+  cve: CVE-2026-31699
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-037
+  cve: CVE-2026-27142
+  component: ''
+  component_purl: pkg:generic/go@1.22.12
+  artifact: subst-golang-bookworm
+  artifact_class: substitute-container
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-038
+  cve: CVE-2022-0563
+  component: ''
+  component_purl: pkg:deb/debian/mount@2.41-5?arch=amd64&distro=debian-13&upstream=util-linux
+  artifact: oci-httpd-2.4
+  artifact_class: oci-app
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: mapping_probable_only
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: identity alias status is probable (identity-aliases.json). SPEC-IDENTITY:
+    probable aliases must not clear.'
+- id: real-039
+  cve: CVE-2026-61866
+  component: ''
+  component_purl: 'pkg:deb/debian/libmagickcore-6.q16-6@8%3A6.9.11.60%2Bdfsg-1.6%2Bdeb12u8?arch=amd64&distro=debian-12&upstream=imagemagick'
+  artifact: oci-node-20
+  artifact_class: oci-app
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: mapping_probable_only
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: identity alias status is probable (identity-aliases.json). SPEC-IDENTITY:
+    probable aliases must not clear.'
+- id: real-040
+  cve: CVE-2024-36959
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-041
+  cve: CVE-2026-46198
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-042
+  cve: CVE-2026-53086
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-043
+  cve: CVE-2026-14456
+  component: openssl
+  component_purl: pkg:deb/debian/openssl@3.5.6-1~deb13u2?arch=amd64&distro=debian-13
+  artifact: oci-postgres-16
+  artifact_class: oci-app
+  pipeline_verdict: NOT_AFFECTED
+  rule_id: D02
+  reason_code: ''
+  justification: vulnerable_code_not_present
+  evidence_bundle: corpus/results/oci-postgres-16/evidence-bundle/statements/cve-2026-14456
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym
+    (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on
+    oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).'
+- id: real-044
+  cve: CVE-2026-45983
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-045
+  cve: CVE-2025-61985
+  component: openssh
+  component_purl: pkg:deb/debian/openssh-client@1%3A9.2p1-2%2Bdeb12u4?arch=amd64&distro=debian-12&upstream=openssh
+  artifact: subst-golang-bookworm
+  artifact_class: substitute-container
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: manifest_no_entry
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: `openssh` is in the seed Manifest; seed CVE is CVE-2023-38408; this
+    finding is CVE-2025-61985 (no entry). No re-derivable vulnerable-symbol mapping → cannot decide.'
+- id: real-046
+  cve: CVE-2016-3739
+  component: curl
+  component_purl: pkg:generic/curl@7.36.0
+  artifact: fw-netgear-r7000-firmware-1.0.12.216
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: manifest_no_entry
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: `curl` is in the seed Manifest; seed CVE is CVE-2023-38545; this finding
+    is CVE-2016-3739 (no entry). No re-derivable vulnerable-symbol mapping → cannot decide.'
+- id: real-047
+  cve: CVE-2026-53393
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-048
+  cve: GO-2026-6089
+  component: ''
+  component_purl: pkg:golang/stdlib@1.22.12
+  artifact: subst-golang-bookworm
+  artifact_class: substitute-container
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-049
+  cve: CVE-2026-23286
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-050
+  cve: CVE-2024-38546
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-051
+  cve: CVE-2024-50028
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-052
+  cve: CVE-2026-7168
+  component: ''
+  component_purl: 'pkg:rpm/rocky/curl-minimal@7.76.1-40.el9?arch=x86_64&distro=rocky-9.8&upstream=curl-7.76.1-40.el9.src.rpm'
+  artifact: oci-rockylinux-9
+  artifact_class: oci-base
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: mapping_probable_only
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: identity alias status is probable (identity-aliases.json). SPEC-IDENTITY:
+    probable aliases must not clear.'
+- id: real-053
+  cve: CVE-2024-27390
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-054
+  cve: CVE-2025-38204
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-055
+  cve: CVE-2026-42767
+  component: openssl
+  component_purl: pkg:deb/debian/libssl3@3.0.15-1~deb12u1?arch=amd64&distro=debian-12&upstream=openssl
+  artifact: subst-golang-bookworm
+  artifact_class: substitute-container
+  pipeline_verdict: NOT_AFFECTED
+  rule_id: D02
+  reason_code: ''
+  justification: vulnerable_code_not_present
+  evidence_bundle: corpus/results/subst-golang-bookworm/evidence-bundle/statements/cve-2026-42767
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'FINDING-002: D02 clearance unsound — vulnerable symbol not observable in .dynsym on dynamically-linked
+    libcrypto.so.3; symbol absence is guaranteed a priori for internal functions.'
+- id: real-056
+  cve: CVE-2024-42137
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-057
+  cve: CVE-2026-31655
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-058
+  cve: CVE-2025-11731
+  component: libxslt
+  component_purl: pkg:deb/debian/libxslt1.1@1.1.35-1%2Bdeb12u3?arch=amd64&distro=debian-12&upstream=libxslt
+  artifact: oci-node-20
+  artifact_class: oci-app
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: manifest_no_entry
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: `libxslt` is in the seed Manifest; seed CVE is CVE-2019-18197; this
+    finding is CVE-2025-11731 (no entry). No re-derivable vulnerable-symbol mapping → cannot decide.'
+- id: real-059
+  cve: CVE-2026-7010
+  component: ''
+  component_purl: pkg:deb/debian/libperl5.36@5.36.0-7%2Bdeb12u1?arch=amd64&distro=debian-12&upstream=perl
+  artifact: subst-golang-bookworm
+  artifact_class: substitute-container
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: no_identity_mapping
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL has no identity alias and does not type-match a Manifest
+    component. Cannot bind CVE to a curated component.'
+- id: real-060
+  cve: CVE-2025-39923
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-061
+  cve: CVE-2026-32777
+  component: libexpat
+  component_purl: pkg:rpm/rocky/expat@2.5.0-6.el9?arch=x86_64&distro=rocky-9.8&upstream=expat-2.5.0-6.el9.src.rpm
+  artifact: oci-rockylinux-9
+  artifact_class: oci-base
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: manifest_no_entry
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: `libexpat` is in the seed Manifest; seed CVE is CVE-2022-25315; this
+    finding is CVE-2026-32777 (no entry). No re-derivable vulnerable-symbol mapping → cannot decide.'
+- id: real-062
+  cve: CVE-2026-63381
+  component: ''
+  component_purl: pkg:deb/debian/libevent-openssl-2.1-7@2.1.12-stable-8?arch=amd64&distro=debian-12&upstream=libevent
+  artifact: oci-node-20
+  artifact_class: oci-app
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: no_identity_mapping
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL has no identity alias and does not type-match a Manifest
+    component. Cannot bind CVE to a curated component.'
+- id: real-063
+  cve: CVE-2026-14456
+  component: openssl
+  component_purl: pkg:deb/debian/openssl@3.5.6-1~deb13u2?arch=amd64&distro=debian-13
+  artifact: oci-python-3.12
+  artifact_class: oci-app
+  pipeline_verdict: NOT_AFFECTED
+  rule_id: D02
+  reason_code: ''
+  justification: vulnerable_code_not_present
+  evidence_bundle: corpus/results/oci-python-3.12/evidence-bundle/statements/cve-2026-14456
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym
+    (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on
+    oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).'
+- id: real-064
+  cve: CVE-2024-13176
+  component: openssl
+  component_purl: pkg:generic/openssl@1.0.2h
+  artifact: fw-netgear-r7000-firmware-1.0.12.216
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: manifest_no_entry
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: `openssl` is in the seed Manifest; seed CVE is CVE-2023-0286 + CVE-2026-14456/45445/42767
+    (not this CVE); this finding is CVE-2024-13176 (no entry). No re-derivable vulnerable-symbol mapping
+    → cannot decide.'
+- id: real-065
+  cve: CVE-2026-42767
+  component: openssl
+  component_purl: pkg:deb/debian/openssl@3.0.11-1~deb12u2?arch=amd64&distro=debian-12
+  artifact: oci-nginx-1.25
+  artifact_class: oci-app
+  pipeline_verdict: NOT_AFFECTED
+  rule_id: D02
+  reason_code: ''
+  justification: vulnerable_code_not_present
+  evidence_bundle: corpus/results/oci-nginx-1.25/evidence-bundle/statements/cve-2026-42767
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'FINDING-002: D02 clearance unsound — vulnerable symbol not observable in .dynsym on dynamically-linked
+    libcrypto.so.3; symbol absence is guaranteed a priori for internal functions.'
+- id: real-066
+  cve: CVE-2024-26885
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-067
+  cve: CVE-2024-38570
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-068
+  cve: CVE-2026-14456
+  component: openssl
+  component_purl: pkg:deb/debian/libssl3t64@3.5.6-1~deb13u2?arch=amd64&distro=debian-13&upstream=openssl
+  artifact: oci-postgres-16
+  artifact_class: oci-app
+  pipeline_verdict: NOT_AFFECTED
+  rule_id: D02
+  reason_code: ''
+  justification: vulnerable_code_not_present
+  evidence_bundle: corpus/results/oci-postgres-16/evidence-bundle/statements/cve-2026-14456
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym
+    (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on
+    oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).'
+- id: real-069
+  cve: CVE-2024-57360
+  component: ''
+  component_purl: pkg:deb/debian/binutils-common@2.40-2?arch=amd64&distro=debian-12&upstream=binutils
+  artifact: subst-golang-bookworm
+  artifact_class: substitute-container
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: mapping_probable_only
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: identity alias status is probable (identity-aliases.json). SPEC-IDENTITY:
+    probable aliases must not clear.'
+- id: real-070
+  cve: CVE-2024-26861
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-071
+  cve: CVE-2025-11414
+  component: ''
+  component_purl: pkg:deb/debian/binutils@2.40-2?arch=amd64&distro=debian-12
+  artifact: subst-golang-bookworm
+  artifact_class: substitute-container
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: no_identity_mapping
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL has no identity alias and does not type-match a Manifest
+    component. Cannot bind CVE to a curated component.'
+- id: real-072
+  cve: CVE-2025-69652
+  component: ''
+  component_purl: pkg:deb/debian/libctf-nobfd0@2.40-2?arch=amd64&distro=debian-12&upstream=binutils
+  artifact: subst-golang-bookworm
+  artifact_class: substitute-container
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: mapping_probable_only
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: identity alias status is probable (identity-aliases.json). SPEC-IDENTITY:
+    probable aliases must not clear.'
+- id: real-073
+  cve: CVE-2024-55639
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-074
+  cve: CVE-2026-14456
+  component: openssl
+  component_purl: pkg:deb/debian/openssl@3.5.6-1~deb13u2?arch=amd64&distro=debian-13
+  artifact: oci-ruby-3.3
+  artifact_class: oci-app
+  pipeline_verdict: NOT_AFFECTED
+  rule_id: D02
+  reason_code: ''
+  justification: vulnerable_code_not_present
+  evidence_bundle: corpus/results/oci-ruby-3.3/evidence-bundle/statements/cve-2026-14456
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym
+    (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on
+    oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).'
+- id: real-075
+  cve: CVE-2026-43289
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-076
+  cve: CVE-2024-46852
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-077
+  cve: CVE-2026-15806
+  component: ''
+  component_purl: 'pkg:deb/debian/libpython3.11-stdlib@3.11.2-6%2Bdeb12u6?arch=amd64&distro=debian-12&upstream=python3.11'
+  artifact: oci-node-20
+  artifact_class: oci-app
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: no_identity_mapping
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL has no identity alias and does not type-match a Manifest
+    component. Cannot bind CVE to a curated component.'
+- id: real-078
+  cve: CVE-2025-71232
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-079
+  cve: CVE-2026-53463
+  component: ''
+  component_purl: 'pkg:deb/debian/imagemagick-6.q16@8%3A6.9.11.60%2Bdfsg-1.6%2Bdeb12u8?arch=amd64&distro=debian-12&upstream=imagemagick'
+  artifact: oci-node-20
+  artifact_class: oci-app
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: mapping_probable_only
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: identity alias status is probable (identity-aliases.json). SPEC-IDENTITY:
+    probable aliases must not clear.'
+- id: real-080
+  cve: CVE-2026-43152
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-081
+  cve: CVE-2025-38310
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-082
+  cve: CVE-2025-7424
+  component: libxslt
+  component_purl: pkg:deb/debian/libxslt1.1@1.1.35-1?arch=amd64&distro=debian-12&upstream=libxslt
+  artifact: oci-nginx-1.25
+  artifact_class: oci-app
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: manifest_no_entry
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: `libxslt` is in the seed Manifest; seed CVE is CVE-2019-18197; this
+    finding is CVE-2025-7424 (no entry). No re-derivable vulnerable-symbol mapping → cannot decide.'
+- id: real-083
+  cve: CVE-2026-57432
+  component: ''
+  component_purl: pkg:deb/debian/perl-base@5.36.0-7%2Bdeb12u3?arch=amd64&distro=debian-12&upstream=perl
+  artifact: oci-redis-7
+  artifact_class: oci-app
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: no_identity_mapping
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL has no identity alias and does not type-match a Manifest
+    component. Cannot bind CVE to a curated component.'
+- id: real-084
+  cve: CVE-2026-53613
+  component: ''
+  component_purl: pkg:deb/debian/mount@2.38.1-5%2Bdeb12u3?arch=amd64&distro=debian-12&upstream=util-linux
+  artifact: oci-redis-7
+  artifact_class: oci-app
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: mapping_probable_only
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: identity alias status is probable (identity-aliases.json). SPEC-IDENTITY:
+    probable aliases must not clear.'
+- id: real-085
+  cve: CVE-2024-49950
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-086
+  cve: CVE-2026-14456
+  component: openssl
+  component_purl: pkg:deb/debian/openssl@3.0.15-1~deb12u1?arch=amd64&distro=debian-12
+  artifact: subst-golang-bookworm
+  artifact_class: substitute-container
+  pipeline_verdict: NOT_AFFECTED
+  rule_id: D02
+  reason_code: ''
+  justification: vulnerable_code_not_present
+  evidence_bundle: corpus/results/subst-golang-bookworm/evidence-bundle/statements/cve-2026-14456
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym
+    (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on
+    oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).'
+- id: real-087
+  cve: CVE-2026-31723
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-088
+  cve: CVE-2026-14456
+  component: openssl
+  component_purl: pkg:deb/debian/libssl3t64@3.5.6-1~deb13u2?arch=amd64&distro=debian-13&upstream=openssl
+  artifact: oci-memcached-1.6
+  artifact_class: oci-app
+  pipeline_verdict: NOT_AFFECTED
+  rule_id: D02
+  reason_code: ''
+  justification: vulnerable_code_not_present
+  evidence_bundle: corpus/results/oci-memcached-1.6/evidence-bundle/statements/cve-2026-14456
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym
+    (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on
+    oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).'
+- id: real-089
+  cve: CVE-2024-27025
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-090
+  cve: CVE-2025-71088
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-091
+  cve: CVE-2026-46003
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-092
+  cve: CVE-2026-46136
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-093
+  cve: CVE-2026-43020
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-094
+  cve: CVE-2024-46763
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-095
+  cve: CVE-2024-38384
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-096
+  cve: CVE-2026-6653
+  component: ''
+  component_purl: pkg:deb/debian/libxml2-dev@2.9.14%2Bdfsg-1.3~deb12u5?arch=amd64&distro=debian-12&upstream=libxml2
+  artifact: oci-node-20
+  artifact_class: oci-app
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: no_identity_mapping
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL has no identity alias and does not type-match a Manifest
+    component. Cannot bind CVE to a curated component.'
+- id: real-097
+  cve: GO-2026-4337
+  component: ''
+  component_purl: pkg:golang/stdlib@1.22.2
+  artifact: oci-rabbitmq-3
+  artifact_class: oci-app
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-098
+  cve: CVE-2025-37878
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'
+- id: real-099
+  cve: CVE-2025-5245
+  component: ''
+  component_purl: pkg:deb/debian/libbinutils@2.40-2?arch=amd64&distro=debian-12&upstream=binutils
+  artifact: oci-node-20
+  artifact_class: oci-app
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: mapping_probable_only
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: identity alias status is probable (identity-aliases.json). SPEC-IDENTITY:
+    probable aliases must not clear.'
+- id: real-100
+  cve: CVE-2024-26807
+  component: ''
+  component_purl: pkg:generic/linux-kernel@6.6.21-yocto-standard
+  artifact: fw-yocto-5.0.9-genericx86-64-minimal-wic
+  artifact_class: firmware
+  pipeline_verdict: UNDER_INVESTIGATION
+  rule_id: D03
+  reason_code: purl_match_insufficient
+  justification: ''
+  evidence_bundle: ''
+  human_label: UNDER_INVESTIGATION
+  human_notes: 'Refusal confirmed: finding PURL does not reach TypeNormalized against any of the 25 seed
+    components (typically linux-kernel or golang/stdlib). No binary-grounded decision is possible.'

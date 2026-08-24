@@ -61,6 +61,13 @@ func Equivalent(a, b PURL) MatchQuality {
 		return TypeNormalized
 	}
 
+	// Unversioned template PURL (manifest component) vs concrete versioned
+	// finding — same type/ns/name. Stronger than name_only: the empty side
+	// asserts identity without pinning a version.
+	if nsMatch && (verA == "" || verB == "") {
+		return TypeNormalized
+	}
+
 	return NameOnly
 }
 

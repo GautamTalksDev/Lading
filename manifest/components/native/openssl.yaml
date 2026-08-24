@@ -6,7 +6,14 @@ component:
   purls:
     - pkg:generic/openssl
     - pkg:deb/debian/libssl3
+    - pkg:deb/debian/libssl3t64
+    - pkg:deb/ubuntu/libssl3
+    - pkg:deb/ubuntu/libssl3t64
+    - pkg:deb/debian/openssl
+    - pkg:deb/ubuntu/openssl
     - pkg:apk/alpine/openssl
+    - pkg:apk/alpine/libssl3
+    - pkg:apk/alpine/libcrypto3
   identity_symbols:
     - OPENSSL_init_ssl
     - SSL_CTX_new
@@ -30,6 +37,7 @@ entries:
     vulnerable_symbols:
       - name: GENERAL_NAME_cmp
         confidence: definitive
+        dynsym_export_verified: true
         provenance:
           # Opened and read: GEN_X400 branch compared ASN1_TYPE instead of
           # ASN1_STRING for x400Address (type confusion → arbitrary memcmp).
@@ -41,4 +49,74 @@ entries:
       Type confusion in GENERAL_NAME_cmp for X.400 addresses (CVE-2023-0286).
       Fixed in OpenSSL 3.0.8 / 1.1.1t / 1.0.2u lineages; this entry lists
       exact 3.0.x strings known affected before the fix.
+    manifest_version: "0.2.0"
+
+  - cve: CVE-2026-14456
+    affected_versions:
+      - "3.5.0"
+      - "3.5.6"
+      - "3.5.7"
+      - "3.6.0"
+      - "4.0.0"
+    vulnerable_symbols:
+      - name: port_default_packet_handler
+        confidence: definitive
+        provenance:
+          # Opened and read: unbounded pending QUIC channel queue in
+          # ssl/quic/quic_port.c port_default_packet_handler (static).
+          upstream_fix_commit: https://github.com/openssl/openssl/commit/08e7756c3900bcfd77a720e7b74e27d6e4ed01a9
+          derivation: patch-touched-function
+          reviewed_by: gautamtalksdev
+          reviewed_at: "2026-08-24"
+    notes: >
+      QUIC server pending-channel DoS (CVE-2026-14456). Vulnerable handler is
+      file-static; absence from dynsym is expected on non-QUIC / pre-3.5 builds.
+    manifest_version: "0.2.0"
+
+  - cve: CVE-2026-45445
+    affected_versions:
+      - "3.0.0"
+      - "3.0.11"
+      - "3.0.15"
+      - "3.0.19"
+      - "3.0.20"
+      - "3.5.6"
+      - "3.5.7"
+    vulnerable_symbols:
+      - name: aes_ocb_cipher
+        confidence: definitive
+        provenance:
+          # Opened and read: AES-OCB one-shot EVP_Cipher path omitted update_iv
+          # in providers/.../cipher_aes_ocb.c aes_ocb_cipher (static).
+          upstream_fix_commit: https://github.com/openssl/openssl/commit/843c9b94ca9c2ed248bb30127bb4f3d7af0d607c
+          derivation: patch-touched-function
+          reviewed_by: gautamtalksdev
+          reviewed_at: "2026-08-24"
+    notes: >
+      AES-OCB one-shot IV discard (CVE-2026-45445). Symbol is provider-internal;
+      not exported on libssl/libcrypto dynsym.
+    manifest_version: "0.2.0"
+
+  - cve: CVE-2026-42767
+    affected_versions:
+      - "3.0.0"
+      - "3.0.11"
+      - "3.0.15"
+      - "3.0.19"
+      - "3.0.20"
+      - "3.5.6"
+      - "3.5.7"
+    vulnerable_symbols:
+      - name: OSSL_CRMF_ENCRYPTEDVALUE_decrypt
+        confidence: definitive
+        provenance:
+          # Opened and read: NULL deref on missing symmAlg parameter in
+          # crypto/crmf/crmf_lib.c OSSL_CRMF_ENCRYPTEDVALUE_decrypt.
+          upstream_fix_commit: https://github.com/openssl/openssl/commit/810b722f772652ad48042bcc7ab07e3414b11d0f
+          derivation: patch-touched-function
+          reviewed_by: gautamtalksdev
+          reviewed_at: "2026-08-24"
+    notes: >
+      CMP/CRMF NULL deref (CVE-2026-42767). Function is not exported on the
+      corpus libcrypto.so.3 builds checked 2026-08-24 (dynsym absence → D02).
     manifest_version: "0.2.0"

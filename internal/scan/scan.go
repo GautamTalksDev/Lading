@@ -1,6 +1,7 @@
 package scan
 
 import (
+	"encoding/json"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -25,6 +26,9 @@ type Options struct {
 	OutDir       string
 	Timestamp    string
 	EmitVEX      bool
+	// Integrity, when non-nil, verifies on-disk bytes against the catalogue
+	// before any unpack/scan work (Principle 1 — fail closed).
+	Integrity *IntegrityExpectation
 }
 
 // Result is the full scan outcome.
@@ -41,6 +45,19 @@ func Run(opts Options) (Result, error) {
 	}
 	if opts.OutDir == "" {
 		opts.OutDir = "."
+	}
+
+	if opts.Integrity != nil {
+		checkPath := opts.ArtifactPath
+		if checkPath == "" {
+			checkPath = opts.ImageRef
+		}
+		if err := VerifyArtifactIntegrity(checkPath, *opts.Integrity); err != nil {
+			if ie := IntegrityErrorOf(err); ie != nil {
+				return Result{Report: IntegrityRefusalReport(ie)}, err
+			}
+			return Result{}, err
+		}
 	}
 
 	unpacked, err := unpack.Unpack(opts.ArtifactPath, unpack.Options{ImageRef: opts.ImageRef})
@@ -81,6 +98,7 @@ func Run(opts Options) (Result, error) {
 		ArtifactDescription: SanitizeForTerminal(unpacked.Description),
 		NotAffectedByJust:   map[string]int{},
 		RefusedByReason:     map[string]int{},
+		IntegrityRefusals:   map[string]int{},
 	}
 	for _, inv := range inventories {
 		report.BinariesScanned++
@@ -94,7 +112,9 @@ func Run(opts Options) (Result, error) {
 	report.CVEsIn = len(findings)
 
 	var bundleInputs []evidence.BuildInput
+	var decisions []decisionRecord
 	hasAffected := false
+	bundleDir := filepath.Join(opts.OutDir, "evidence-bundle")
 
 	for _, finding := range findings {
 		result, err := decide.Evaluate(decide.Input{
@@ -111,32 +131,49 @@ func Run(opts Options) (Result, error) {
 		}
 		accumulateVerdict(&report, result)
 
+		sid := statementID(finding)
+		rec := decisionRecord{
+			CVE:           finding.CVE,
+			ComponentPURL: finding.ComponentPURL,
+			Verdict:       string(result.Verdict),
+			RuleID:        string(result.RuleID),
+			ReasonCode:    string(result.ReasonCode),
+			Justification: string(result.Justification),
+			Component:     result.InputsUsed.ManifestComponent,
+			StatementID:   sid,
+		}
+
 		comp := result.InputsUsed.ManifestComponent
 		if comp == "" {
 			comp = "unknown"
 		}
 		slice, err := manifest.SliceFromManifest(m, comp, finding.CVE)
 		if err != nil {
-			// Refusals without manifest slice still appear in summary; skip bundle row.
+			decisions = append(decisions, rec)
 			continue
 		}
 		bundleInputs = append(bundleInputs, evidence.BuildInput{
 			ArtifactPath: artifactPath,
-			StatementID:  statementID(finding),
+			StatementID:  sid,
 			Finding:      finding,
 			Result:       result,
 			Inventories:  inventories,
 			Slice:        slice,
 		})
+		rec.EvidenceBundle = filepath.Join(bundleDir, "statements", sid)
+		decisions = append(decisions, rec)
 	}
 
 	report.ComputeCoverage()
+	report.MarkComplete()
 
-	bundleDir := filepath.Join(opts.OutDir, "evidence-bundle")
 	if len(bundleInputs) > 0 {
 		if _, err := evidence.WriteBundleDir(bundleDir, bundleInputs); err != nil {
 			return Result{}, fmt.Errorf("scan: bundle: %w", err)
 		}
+	}
+	if err := writeDecisionsJSONL(filepath.Join(opts.OutDir, "decisions.jsonl"), decisions); err != nil {
+		return Result{}, fmt.Errorf("scan: decisions: %w", err)
 	}
 
 	if opts.EmitVEX && len(bundleInputs) > 0 {
@@ -230,6 +267,34 @@ func statementID(f Finding) string {
 	s := strings.ToLower(strings.TrimSpace(f.CVE))
 	s = strings.ReplaceAll(s, ":", "-")
 	return s
+}
+
+// decisionRecord is one persisted per-finding verdict for corpus ground-truth sampling.
+type decisionRecord struct {
+	CVE            string `json:"cve"`
+	ComponentPURL  string `json:"component_purl"`
+	Verdict        string `json:"verdict"`
+	RuleID         string `json:"rule_id"`
+	ReasonCode     string `json:"reason_code,omitempty"`
+	Justification  string `json:"justification,omitempty"`
+	Component      string `json:"component,omitempty"`
+	StatementID    string `json:"statement_id"`
+	EvidenceBundle string `json:"evidence_bundle,omitempty"`
+}
+
+func writeDecisionsJSONL(path string, rows []decisionRecord) error {
+	f, err := os.OpenFile(path, os.O_CREATE|os.O_TRUNC|os.O_WRONLY, 0o600)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+	enc := json.NewEncoder(f)
+	for _, row := range rows {
+		if err := enc.Encode(row); err != nil {
+			return err
+		}
+	}
+	return nil
 }
 
 func writeVEXOutputs(dir string, out vexout.Output) {

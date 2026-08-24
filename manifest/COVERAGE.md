@@ -29,7 +29,7 @@ Manifest version: `0.2.0+a1b2d83ed93321d5a416c884996aebf869878d33234dbf57c3f0012
 | mbedtls | native | 1 | 0 | 0 |
 | nghttp2 | native | 1 | 0 | 0 |
 | openssh | native | 1 | 0 | 0 |
-| openssl | native | 1 | 0 | 0 |
+| openssl | native | 4 | 0 | 0 |
 | pcre2 | native | 1 | 0 | 0 |
 | sqlite3 | native | 1 | 0 | 0 |
 | zlib | native | 1 | 0 | 0 |
@@ -124,6 +124,9 @@ Manifest version: `0.2.0+a1b2d83ed93321d5a416c884996aebf869878d33234dbf57c3f0012
 ### openssl (native)
 
 - `CVE-2023-0286`: **definitive**
+- `CVE-2026-14456`: **definitive**
+- `CVE-2026-45445`: **definitive**
+- `CVE-2026-42767`: **definitive**
 
 ### pcre2 (native)
 

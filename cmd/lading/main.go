@@ -31,6 +31,7 @@ It does not give legal advice.
 	root.AddCommand(newSignCmd())
 	root.AddCommand(newScanCmd())
 	root.AddCommand(newExplainCmd())
+	root.AddCommand(newEvidenceCmd())
 	root.AddCommand(newUnpackInternalCmd())
 	if err := root.Execute(); err != nil {
 		fmt.Fprintln(os.Stderr, err)

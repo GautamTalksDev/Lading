@@ -42,8 +42,9 @@ type statement struct {
 			CVE               string `yaml:"cve"`
 			AffectedVersions  []string `yaml:"affected_versions"`
 			VulnerableSymbols []struct {
-				Name       string `yaml:"name"`
-				Confidence string `yaml:"confidence"`
+				Name                 string `yaml:"name"`
+				Confidence           string `yaml:"confidence"`
+				DynsymExportVerified bool   `yaml:"dynsym_export_verified"`
 			} `yaml:"vulnerable_symbols"`
 			ManifestVersion string `yaml:"manifest_version"`
 		} `yaml:"entry"`
@@ -128,7 +129,7 @@ func TestGroundTruth_100Statements(t *testing.T) {
 		t.Errorf("NOT_AFFECTED count=%d want >=50 (weighted toward NA)", countVerdict["NOT_AFFECTED"])
 	}
 	if falseNA > 0 {
-		t.Fatalf("KT-2 violation: %d false not_affected disagreements", falseNA)
+		t.Fatalf("synthetic fixture mismatch: %d false not_affected disagreements (unit test only — not KT-2)", falseNA)
 	}
 }
 
@@ -181,8 +182,9 @@ func buildManifest(st statement) (*manifest.Manifest, error) {
 			conf = manifest.ConfidenceDefinitive
 		}
 		vulnSyms = append(vulnSyms, manifest.VulnerableSymbol{
-			Name:       vs.Name,
-			Confidence: conf,
+			Name:                 vs.Name,
+			Confidence:           conf,
+			DynsymExportVerified: vs.DynsymExportVerified,
 			Provenance: manifest.Provenance{
 				UpstreamFixCommit: "https://example.com/commit/fix",
 				Derivation:        manifest.DerivationManual,

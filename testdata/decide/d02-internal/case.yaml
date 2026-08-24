@@ -1,0 +1,28 @@
+id: d02-internal
+expect_rule: D03
+expect_verdict: UNDER_INVESTIGATION
+expect_reason: symbol_not_observable
+finding:
+  cve: CVE-2026-14456
+  component_purl: pkg:deb/debian/libssl3@3.0.20-1~deb12u2?arch=amd64&distro=debian-12&upstream=openssl
+manifest:
+  version: 0.2.0
+  component:
+    name: openssl
+    ecosystem: native
+    purls:
+    - pkg:deb/debian/libssl3@3.0.20-1~deb12u2?arch=amd64&distro=debian-12&upstream=openssl
+    identity_symbols:
+    - OPENSSL_init_ssl
+    - GENERAL_NAME_cmp
+    - SSL_CTX_new
+  entry:
+    cve: CVE-2026-14456
+    affected_versions:
+    - 3.0.20
+    vulnerable_symbols:
+    - name: port_default_packet_handler
+      confidence: definitive
+    manifest_version: 0.2.0
+inventories:
+- file: inv.json

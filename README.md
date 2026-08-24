@@ -181,10 +181,14 @@ CRA mapping (factual, not legal advice): [docs/CRA.md](docs/CRA.md)
 
 | ID | Gate | Status |
 |----|------|--------|
-| KT-1 | <30% decided coverage on 5 real artifacts → project stops | NOT EVALUABLE |
-| KT-2 | One wrong `not_affected` in 100 hand-verified cases → unsound | PASS (synthetic fixtures only) |
+| KT-1 | ≥30% decided coverage on corpus → project stops | **NOT EVALUABLE** (0.032% measured after guard; instrument did not reach evidence stage) — see [RESULTS.md](RESULTS.md) |
+| KT-2 | One wrong `not_affected` in 100 hand-verified cases → unsound | **FAIL** — 20 false clearances in labeled soundness subset ([FINDING-002](FINDING-002.md)) |
 | KT-3 | No inbound commercial interest by month 8 → no business | |
 | CP-14 | 3 unprompted inbound → revenue gate opens ([launch/revenue/CP-14-GATE.md](launch/revenue/CP-14-GATE.md)); product build waits for 2× paid same ask | |
+
+### §11. Kill-test evaluability rule (pre-registered at CP-0)
+
+> **§11 — Kill-test evaluability.** KT-1 tests whether ≥30% of scanner-reported CVEs resolve to a decidable `not_affected` with a re-derivable evidence bundle. If refusal-stage attribution shows the instrument did not reach symbol-table or evidence evaluation — zero symbol-table refusals and ≥99% of findings terminate at identity resolution or manifest lookup — KT-1 is **NOT EVALUABLE**, not FAIL; the measured decided rate must not be read as an answer to the pre-registered question. Three consecutive NOT EVALUABLE results on the same corpus after instrument passes intended to restore evaluability constitute a **pattern**; the pre-registered action is **stop**.
 
 ---
 

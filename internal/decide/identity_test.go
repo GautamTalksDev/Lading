@@ -18,17 +18,17 @@ func TestIdentity_ProbableNeverClears(t *testing.T) {
 	}
 
 	m, err := manifest.BuildForTest("0.2.0", manifest.Component{
-		Name:      "libexpat",
+		Name:      "curl",
 		Ecosystem: "native",
-		PURLs:     []string{"pkg:generic/libexpat@2.5.0"},
+		PURLs:     []string{"pkg:generic/curl@8.4.0"},
 		IdentitySymbols: []string{
-			"XML_ParserCreate",
+			"curl_easy_perform",
 		},
 	}, []manifest.Entry{{
-		CVE:              "CVE-2022-25315",
-		AffectedVersions: []string{"2.5.0"},
+		CVE:              "CVE-2023-38545",
+		AffectedVersions: []string{"8.4.0"},
 		VulnerableSymbols: []manifest.VulnerableSymbol{{
-			Name:       "storeRawNames",
+			Name:       "Curl_cookie",
 			Confidence: manifest.ConfidenceDefinitive,
 			Provenance: manifest.Provenance{
 				UpstreamFixCommit: "https://example.com/commit/fix",
@@ -43,19 +43,19 @@ func TestIdentity_ProbableNeverClears(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	// Distro finding with upstream=expat hits probable alias — must refuse, never clear.
+	// Distro finding with upstream=curl hits probable alias — must refuse, never clear.
 	got, err := decide.Evaluate(decide.Input{
-		Manifest: m,
+		Manifest:        m,
 		IdentityAliases: aliases,
 		Finding: decide.Finding{
-			CVE:           "CVE-2022-25315",
-			ComponentPURL: "pkg:deb/debian/libexpat1@2.5.0-1%2Bdeb12u1?arch=amd64&distro=debian-12&upstream=expat",
+			CVE:           "CVE-2023-38545",
+			ComponentPURL: "pkg:deb/debian/curl@8.4.0-1?arch=amd64&distro=debian-12&upstream=curl",
 		},
 		Inventories: []*inventory.Inventory{{
 			Path:   "clean",
 			Format: inventory.FormatELF,
 			DynSyms: []inventory.Symbol{
-				{Normalized: "XML_ParserCreate"},
+				{Normalized: "curl_easy_perform"},
 			},
 		}},
 	})
@@ -73,16 +73,89 @@ func TestIdentity_ProbableNeverClears(t *testing.T) {
 	}
 }
 
+func TestIdentity_DirectDistroMatchIgnoresProbableUpstream(t *testing.T) {
+	t.Parallel()
+
+	aliases, err := manifest.LoadIdentityAliases("")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	m, err := manifest.BuildForTest("0.2.0", manifest.Component{
+		ProvenanceStatus: manifest.ProvenanceVerified,
+		Name:             "openssl",
+		Ecosystem:        "native",
+		PURLs:            []string{"pkg:deb/debian/libssl3"},
+		IdentitySymbols:  []string{"OPENSSL_init_ssl"},
+	}, []manifest.Entry{{
+		CVE:              "CVE-2026-14456",
+		AffectedVersions: []string{"3.0.11"},
+		VulnerableSymbols: []manifest.VulnerableSymbol{{
+			Name:       "port_default_packet_handler",
+			Confidence: manifest.ConfidenceDefinitive,
+			Provenance: manifest.Provenance{
+				UpstreamFixCommit: "https://example.com/commit/fix",
+				Derivation:        manifest.DerivationManual,
+				ReviewedBy:        "test",
+				ReviewedAt:        "2026-08-24",
+			},
+		}},
+		ManifestVersion: "0.2.0",
+	}})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// upstream=openssl is probable, but pkg:deb/debian/libssl3 already
+	// type-matches the Manifest — must not refuse via mapping_probable_only.
+	got, err := decide.Evaluate(decide.Input{
+		Manifest:        m,
+		IdentityAliases: aliases,
+		Finding: decide.Finding{
+			CVE:           "CVE-2026-14456",
+			ComponentPURL: "pkg:deb/debian/libssl3@3.0.11-1?arch=amd64&distro=debian-12&upstream=openssl",
+		},
+		Inventories: []*inventory.Inventory{{
+			Path:   "libssl.so",
+			Format: inventory.FormatELF,
+			DynSyms: []inventory.Symbol{
+				{Normalized: "OPENSSL_init_ssl"},
+			},
+		}},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got.ReasonCode == decide.ReasonMappingProbableOnly {
+		t.Fatal("direct TypeNormalized match must not be blocked by probable upstream alias")
+	}
+	if got.Verdict != decide.VerdictUnderInvestigation {
+		t.Fatalf("verdict=%s reason=%s want UNDER_INVESTIGATION", got.Verdict, got.ReasonCode)
+	}
+	if got.ReasonCode != decide.ReasonSymbolNotObservable {
+		t.Fatalf("reason=%s want symbol_not_observable for internal QUIC handler", got.ReasonCode)
+	}
+}
+
 func TestIdentity_DefinitiveProducesIdentityMapped(t *testing.T) {
 	t.Parallel()
 
 	aliases, err := manifest.BuildIdentityAliasesForTest(manifest.IdentityAlias{
-		SourceName:    "expat",
-		Component:     "pkg:generic/libexpat",
-		Status:        manifest.AliasStatusDefinitive,
-		ProvenanceURL: "https://sources.debian.org/src/expat/",
-		ReviewedBy:    "test",
-		ReviewedAt:    "2026-08-24",
+		SourceName: "expat",
+		Component:  "pkg:generic/libexpat",
+		Status:     manifest.AliasStatusDefinitive,
+		Provenance: manifest.AliasProvenance{
+			ArtifactSHA256:          "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+			Distro:                  "debian",
+			PackageName:             "libexpat1",
+			PackageVersion:          "2.5.0-1+deb12u1",
+			VerifiedAt:              "2026-08-24",
+			BinaryPath:              "usr/lib/x86_64-linux-gnu/libexpat.so.1.8.10",
+			IdentitySymbolsVerified: []string{"XML_ParserCreate"},
+			ExtractionMethod:        "dpkg-deb-extract",
+			ReviewedBy:              "test",
+			URL:                     "https://sources.debian.org/src/expat/",
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -256,8 +329,9 @@ func TestProvenance_VerifiedCanClear(t *testing.T) {
 		CVE:              "CVE-2023-0286",
 		AffectedVersions: []string{"3.0.7"},
 		VulnerableSymbols: []manifest.VulnerableSymbol{{
-			Name:       "GENERAL_NAME_cmp",
-			Confidence: manifest.ConfidenceDefinitive,
+			Name:                 "GENERAL_NAME_cmp",
+			Confidence:           manifest.ConfidenceDefinitive,
+			DynsymExportVerified: true,
 			Provenance: manifest.Provenance{
 				UpstreamFixCommit: "https://example.com/commit/fix",
 				Derivation:        manifest.DerivationManual,

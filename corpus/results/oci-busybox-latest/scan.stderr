@@ -1,6 +1,0 @@
-Trying to pull docker.io/library/busybox:latest...
-Getting image source signatures
-Copying blob sha256:b05093807bb0294152bb9cf86d64da722732dddaf7f8882fa1f120477dbc4db3
-Copying config sha256:c6348fa86ba0fb2108c9334f5fe913ddc6d853313e655891f133a0127c30099f
-Writing manifest to image destination
-c6348fa86ba0fb2108c9334f5fe913ddc6d853313e655891f133a0127c30099f

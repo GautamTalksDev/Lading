@@ -24,6 +24,7 @@ manifest:
     vulnerable_symbols:
     - name: GENERAL_NAME_cmp
       confidence: definitive
+      dynsym_export_verified: true
     manifest_version: 0.1.0
 inventories:
 - file: inv6.json

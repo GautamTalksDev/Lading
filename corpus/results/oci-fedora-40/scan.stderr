@@ -1,6 +1,0 @@
-Trying to pull docker.io/library/fedora:40...
-Getting image source signatures
-Copying blob sha256:fc4518b6c5f9e0c324f6bf7560838f41686f372c2ee74a7e5771a6ac36069c45
-Copying config sha256:b368d29df3b50e2acc0d6622493a29dafedbbc5a58ad03cab73bddca16c23858
-Writing manifest to image destination
-b368d29df3b50e2acc0d6622493a29dafedbbc5a58ad03cab73bddca16c23858

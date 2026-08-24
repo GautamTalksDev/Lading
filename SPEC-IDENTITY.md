@@ -71,12 +71,18 @@ distro_package: libssl3           # binary package name as scanners emit it
 source_package: openssl           # distro source package name (from control/APKBUILD/spec)
 upstream_purl: pkg:generic/openssl
 version_relationship: debian_upstream_from_version
-confidence: definitive            # definitive | probable
-provenance:
-  url: https://sources.debian.org/src/openssl/3.0.17-1~deb12u2/debian/copyright
-  derivation: debian-control      # debian-control | apkbuild | rpm-spec | manual
+confidence: definitive            # definitive | probable — see §4 for promotion
+provenance:                       # schema in §4.2; definitive requires full block
+  artifact_sha256: "<64-hex of extracted package binary>"
+  distro: debian
+  package_name: libssl3
+  package_version: "3.0.17-1~deb12u2"
+  verified_at: "2026-08-24"
+  binary_path: "usr/lib/x86_64-linux-gnu/libssl.so.3"
+  identity_symbols_verified: ["SSL_CTX_new"]
+  extraction_method: dpkg-deb-extract
   reviewed_by: your-handle
-  reviewed_at: "2026-08-23"
+  url: https://sources.debian.org/src/openssl/   # locator only — not evidence (§4.1)
 notes: >
   Optional free text (e.g. "libssl3 is the OpenSSL 3.x userspace ABI package on Debian 12+").
 identity_version: "1.0.0"
@@ -92,21 +98,22 @@ identity_version: "1.0.0"
 | `upstream_purl` | yes | Canonical upstream identity **without version** (`pkg:generic/<name>`) or with a pinned template version when the mapping is version-specific (see §2). |
 | `version_relationship` | yes | Algorithm ID for deriving upstream version from distro version (§2). |
 | `confidence` | yes | `definitive` or `probable` (§4). |
-| `provenance.url` | **yes** | `http(s)` URL to distro source metadata proving the binary→source→upstream link (Debian source page, `debian/control`, APKBUILD, RPM spec, etc.). |
-| `provenance.derivation` | yes | How the link was established. |
-| `provenance.reviewed_by` | yes | Human reviewer handle. |
-| `provenance.reviewed_at` | yes | ISO date `YYYY-MM-DD`. |
+| `provenance` | yes (object) | Provenance block (§4.2). Probable may be partial; definitive MUST be complete. |
 | `identity_version` | yes | Semver of the identity release when the record was written. |
+
+**Definitive provenance fields** (required only when `confidence: definitive` — full table in §4.2):
+`artifact_sha256`, `distro`, `package_name`, `package_version`, `verified_at`,
+`binary_path`, `identity_symbols_verified`, `extraction_method`, `reviewed_by`.
 
 ### 1.4 Validation rules (same spirit as Manifest)
 
-1. **No provenance URL → schema invalid.** Loader refuses to load the file (fail closed).
+1. **Definitive without complete provenance → schema invalid.** Loader refuses the entry (§4.3).
 2. **Nothing automated may write `confidence: definitive`.** CI MUST reject PRs where
-   `reviewed_by` is a bot account or `derivation` is `automated-scrape`.
-3. **Probable records are loadable** but MUST NOT enable clearance (§4).
-4. `Identity.Version()` returns `semver+contentHash` over `VERSION` and all mapping files.
-5. Duplicate `(distro, distro_package)` keys across files → load error.
-
+   `reviewed_by` is a bot account or `extraction_method` is denylisted (§4.2).
+3. **Probable records are loadable** but MUST NOT enable clearance (§4.4).
+4. `debian/control`, changelogs, and `upstream=` are **not** promotion evidence (§4.1).
+5. `Identity.Version()` returns `semver+contentHash` over `VERSION` and all mapping files.
+6. Duplicate `(distro, distro_package)` keys across files → load error.
 ### 1.5 Lookup key
 
 Given finding PURL `F`:
@@ -216,23 +223,131 @@ to the derived upstream version only.
 
 ---
 
-## 4. The central safety question
+## 4. Promoting an alias from `probable` to `definitive`
+
+This section is the **promotion standard**. Another engineer MUST be able to
+apply it without inventing rules to suit a particular dataset. CP-15b MUST NOT
+land until this section is satisfied in both the written schema and the loader
+validation tests.
+
+### 4.1 Requirement (apply in order; all five are mandatory)
+
+To set `status: definitive` (or YAML `confidence: definitive`) on an identity
+alias, **all** of the following MUST be true:
+
+1. **Real distro package binary.** A real binary MUST be extracted from the
+   **actual distro package** named by the mapping (the `.deb` / `.apk` / `.rpm`
+   / equivalent that scanners name). A container layer export, a source tree,
+   an upstream tarball, or a hand-built object is **not** acceptable.
+2. **Symbol verification.** Every entry in the mapping's
+   `identity_symbols` / `identity_symbols_verified` list MUST be verified
+   present in that binary's symbol table (`.dynsym` and/or `.symtab`, as
+   observed by LADING inventory — not by reading package metadata).
+3. **Recorded provenance.** The alias entry's `provenance` block MUST record
+   the artifact `sha256`, the distro, the package name, the package version,
+   and the verification date (`verified_at`, ISO `YYYY-MM-DD`).
+4. **Metadata is not evidence.** A `debian/control` file, a changelog, a
+   copyright file, an APKBUILD/`Source0` line, or **any third-party assertion**
+   (advisory text, SBOM property, wiki page, mailing-list claim) is
+   **explicitly NOT sufficient** to promote. Those documents may help a
+   reviewer *locate* the right package; they never substitute for steps 1–3.
+5. **`upstream=` is never evidence.** The grype-supplied `upstream=` PURL
+   qualifier is a **third-party assertion**. It MAY only narrow which Manifest
+   component to consult when choosing a candidate mapping. It is **never**
+   evidence that the mapping is correct and **MUST NOT** appear as the sole
+   or decisive basis for `definitive`.
+
+If any of (1)–(5) cannot be met, the alias remains `probable` (or is refused
+as a candidate). There is no partial-definitive status.
+
+### 4.2 Provenance block schema
+
+Every identity alias record carries a `provenance` object. **Probable**
+aliases MAY leave verification fields empty. **Definitive** aliases MUST
+populate every required field below; the loader fails closed otherwise.
+
+```yaml
+provenance:
+  # Required for status: definitive (all of these):
+  artifact_sha256: "<64-hex SHA-256 of the extracted binary file>"
+  distro: debian                    # distro family key (debian|ubuntu|alpine|rhel|…)
+  package_name: libexpat1           # binary package name as scanners emit it
+  package_version: "2.5.0-1+deb12u1"
+  verified_at: "2026-08-24"         # ISO date YYYY-MM-DD of the binary verification
+  binary_path: "usr/lib/x86_64-linux-gnu/libexpat.so.1.8.10"
+  identity_symbols_verified:        # non-empty; each present in that binary's symbol table
+    - XML_ParserCreate
+  extraction_method: dpkg-deb-extract   # see allowlist below
+  reviewed_by: your-handle
+
+  # Optional (never sufficient alone):
+  url: https://sources.debian.org/src/expat/   # locator only — not evidence
+  notes: "optional free text"
+```
+
+**JSON field names** (loader / `identity-aliases.json`):
+
+| Field | Type | Definitive required |
+|-------|------|---------------------|
+| `artifact_sha256` | string, 64 lowercase hex | yes |
+| `distro` | non-empty string | yes |
+| `package_name` | non-empty string | yes |
+| `package_version` | non-empty string | yes |
+| `verified_at` | `YYYY-MM-DD` | yes |
+| `binary_path` | non-empty path relative to package root | yes |
+| `identity_symbols_verified` | non-empty string array | yes |
+| `extraction_method` | allowlisted string (below) | yes |
+| `reviewed_by` | non-empty string | yes |
+| `url` | optional `http(s)` locator | no |
+| `notes` | optional string | no |
+
+**`extraction_method` allowlist** (definitive only):
+
+| Value | Meaning |
+|-------|---------|
+| `dpkg-deb-extract` | Binary taken from a `.deb` via `dpkg-deb -x` (or equivalent unpack of that `.deb`) |
+| `apk-extract` | Binary taken from an Alpine `.apk` package archive |
+| `rpm2cpio-extract` | Binary taken from an `.rpm` via `rpm2cpio` / `rpm -qp --filesbypkg` unpack |
+| `pacman-extract` | Binary taken from an Arch `.pkg.tar.*` package |
+
+**`extraction_method` denylist** (always invalid for `definitive`):
+
+| Value / pattern | Why |
+|-----------------|-----|
+| `debian-control`, `control-file`, `changelog`, `copyright` | Package metadata — not a binary |
+| `apkbuild`, `rpm-spec`, `source-tree` | Build recipe / source — not the shipped binary |
+| `container-layer`, `oci-export`, `docker-save` | Container layer — not the named distro package |
+| `grype-upstream`, `upstream-qualifier`, `sbom-assertion`, `third-party` | Third-party assertion — never evidence |
+| `automated-scrape` | Automation MUST NOT write definitive |
+
+Unknown methods → load error (fail closed). Extend the allowlist only by
+spec amendment, never by silent loader tolerance.
+
+### 4.3 Loader validation (fail closed)
+
+1. `status` / `confidence` MUST be `definitive` or `probable`.
+2. If `probable`: provenance may be partial; missing verification fields are OK.
+3. If `definitive`: **every** required provenance field in §4.2 MUST be present
+   and well-formed; `extraction_method` MUST be allowlisted; denylisted methods
+   MUST reject. Incomplete provenance → **schema invalid** (loader refuses the
+   file / entry).
+4. Nothing automated may write `status: definitive`. CI MUST reject PRs where
+   `reviewed_by` is a bot account or `extraction_method` is denylisted.
+5. `provenance.url` alone NEVER upgrades probable → definitive.
+
+### 4.4 What definitive enables (clearance safety)
 
 > Can a distro-mapped identity reach a `NOT_AFFECTED` verdict (D01 or D02) on
 > weaker evidence than a direct PURL match?
 
-### 4.1 Decision (adopted)
-
 **No.** A distro-mapped identity may feed D01/D02 **only** when:
 
-1. The mapping record has `confidence: definitive`, **and**
-2. The mapping record passed schema validation including human `reviewed_by` /
-   `reviewed_at`, **and**
-3. Upstream version derivation succeeded (not `version_underivable`), **and**
-4. All existing evidence-v1 gates still pass (Manifest entry, definitive symbols,
+1. The mapping record has `status: definitive` (and therefore satisfied §4.1–§4.3), **and**
+2. Upstream version derivation succeeded (not `version_underivable`), **and**
+3. All existing evidence-v1 gates still pass (Manifest entry, definitive symbols,
    stripped/static gates, D03g identity verification).
 
-`confidence: probable` mappings **must never** enable D01, D02, or D04. They may
+`status: probable` mappings **must never** enable D01, D02, or D04. They may
 only replace a coarse refusal with a **more specific refusal reason**
 (`mapping_probable_only`) for reporting clarity.
 
@@ -240,7 +355,7 @@ Direct PURL match at `type_normalized` or `exact` without a mapping hop is
 unchanged. A mapping hop MUST NOT produce a **stronger** match quality than
 `identity_mapped` (§5).
 
-### 4.2 Reasoning
+### 4.5 Reasoning
 
 KT-2 proves the engine does not emit false `not_affected` when given **controlled
 fixtures with explicit PURLs**. The dominant failure mode of a loose identity
@@ -250,9 +365,10 @@ each turns D01/D02 into a guess.
 
 Probable mappings are useful for prioritizing curator work ("this refusal is
 likely openssl, not truly unknown") but must not shorten the evidence path to
-clearance.
+clearance. Promotion without a verified package binary would recreate that
+failure mode under a different name.
 
-### 4.3 False-negative risk (plain language)
+### 4.6 False-negative risk (plain language)
 
 **False negative** here means: a CVE is actually exploitable in the shipped
 binary, but LADING emits `NOT_AFFECTED`.
@@ -260,7 +376,8 @@ binary, but LADING emits `NOT_AFFECTED`.
 Under this spec, the false-negative risk from identity mapping is:
 
 - **Low for wrong-package mapping leading to clearance:** blocked — definitive
-  human-reviewed mapping required; wrong mapping is a curator error, not automation.
+  requires human-reviewed binary+symbol provenance (§4.1); wrong mapping is a
+  curator error, not automation.
 - **Non-zero for correct-package mapping:** if upstream version is derived as
   `3.0.7`, Manifest lists that version affected, but the **distro backport removed
   the bug while symbols unchanged**, D02 could still clear on absent symbols
@@ -269,9 +386,10 @@ Under this spec, the false-negative risk from identity mapping is:
 - **Higher if probable mappings were allowed to clear:** **rejected by this spec.**
   That would let "likely openssl" become `component_not_present` without proving
   component absence — the primary KT-2 failure mode.
+- **Higher if metadata/`upstream=` could promote:** **rejected by §4.1 items 4–5.**
 
 **Net:** identity-v1 trades "refuse everything" for "ask symbol questions on
-curated mappings." It does **not** trade clearance rigor for coverage.
+curated, binary-verified mappings." It does **not** trade clearance rigor for coverage.
 
 ---
 
@@ -356,10 +474,16 @@ blurs audit boundaries and complicates Manifest CC0 / identity licensing.
     "derived_upstream_version": "3.0.17",
     "confidence": "definitive",
     "provenance": {
-      "url": "https://sources.debian.org/src/openssl/3.0.17-1~deb12u2/debian/copyright",
-      "derivation": "debian-control",
+      "artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "distro": "debian",
+      "package_name": "libssl3",
+      "package_version": "3.0.17-1~deb12u2",
+      "verified_at": "2026-08-23",
+      "binary_path": "usr/lib/x86_64-linux-gnu/libssl.so.3",
+      "identity_symbols_verified": ["SSL_CTX_new"],
+      "extraction_method": "dpkg-deb-extract",
       "reviewed_by": "…",
-      "reviewed_at": "2026-08-23"
+      "url": "https://sources.debian.org/src/openssl/3.0.17-1~deb12u2/"
     }
   },
   "purl_match_quality": "identity_mapped"
@@ -570,4 +694,6 @@ Incompatible mapping schema or MatchQuality ordering changes require a new spec 
 ---
 
 **STOP:** Review this document — especially **§4** — before any implementation.
-Section 4 decides whether KT-2 continues to mean anything after CP-15 lands.
+Section 4 defines the probable→definitive promotion bar (binary + symbols +
+recorded provenance; metadata/`upstream=` are not evidence). Without it, CP-15b
+has no standard and clearance after mapping cannot stay KT-2-safe.

@@ -1,0 +1,4 @@
+[0000]  WARN no explicit name and version provided for directory source, deriving artifact ID from the given path (which is not ideal) from=syft
+[0000]  WARN unable to create distro from linux distribution error=unable to determine distro type
+[0000]  WARN Unable to determine the OS distribution of some packages. This may result in missing vulnerabilities. You may specify a distro using: --distro <distro>:<version>
+[0000]  WARN distro detection failed: linux release info was present but distro type could not be determined

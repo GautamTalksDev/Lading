@@ -41,8 +41,12 @@ func resolveIdentity(finding purl.PURL, aliases *manifest.IdentityAliases) ident
 	}
 
 	if strings.TrimSpace(upstreamVer) == "" {
-		res.refusal = ReasonVersionUnderivable
-		return res
+		derived, ok := purl.DeriveUpstreamVersion(finding)
+		if !ok {
+			res.refusal = ReasonVersionUnderivable
+			return res
+		}
+		upstreamVer = derived
 	}
 
 	component := strings.TrimSpace(alias.Component)

@@ -81,6 +81,15 @@ func TestEquivalent_NameOnly(t *testing.T) {
 	}
 }
 
+func TestEquivalent_UnversionedTemplate_TypeNormalized(t *testing.T) {
+	a, _ := purl.Canonicalize("pkg:deb/debian/libssl3@3.0.19-1")
+	b, _ := purl.Canonicalize("pkg:deb/debian/libssl3")
+	q := purl.Equivalent(a, b)
+	if q != purl.TypeNormalized {
+		t.Fatalf("got %v want TypeNormalized", q)
+	}
+}
+
 func TestMatchQuality_NoBareBoolean(t *testing.T) {
 	// Public API surface check: Equivalent returns MatchQuality, not bool.
 	a, _ := purl.Canonicalize("pkg:generic/foo@1")

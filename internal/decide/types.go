@@ -50,6 +50,7 @@ const (
 	ReasonStrippedInsufficientDynsym  ReasonCode = "stripped_insufficient_dynsym"
 	ReasonProvenanceUnverified        ReasonCode = "provenance_unverified"
 	ReasonIdentityUnverified          ReasonCode = "identity_unverified"
+	ReasonSymbolNotObservable         ReasonCode = "symbol_not_observable"
 	ReasonDefaultInsufficient         ReasonCode = "default_insufficient"
 )
 

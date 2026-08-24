@@ -1,0 +1,3 @@
+{"cve":"CVE-2026-38754","component_purl":"pkg:generic/busybox@1.38.0","verdict":"UNDER_INVESTIGATION","rule_id":"D03","reason_code":"manifest_no_entry","component":"busybox","statement_id":"cve-2026-38754"}
+{"cve":"CVE-2026-38755","component_purl":"pkg:generic/busybox@1.38.0","verdict":"UNDER_INVESTIGATION","rule_id":"D03","reason_code":"manifest_no_entry","component":"busybox","statement_id":"cve-2026-38755"}
+{"cve":"CVE-2026-38753","component_purl":"pkg:generic/busybox@1.38.0","verdict":"UNDER_INVESTIGATION","rule_id":"D03","reason_code":"manifest_no_entry","component":"busybox","statement_id":"cve-2026-38753"}

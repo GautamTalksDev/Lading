@@ -36,23 +36,37 @@ func buildContext(in Input) (evalContext, error) {
 		return evalContext{}, fmt.Errorf("decide: finding PURL: %w", err)
 	}
 
-	idRes := resolveIdentity(findingPURL, in.IdentityAliases)
-	matchPURL := idRes.matchPURL
 	cve := strings.ToUpper(strings.TrimSpace(in.Finding.CVE))
 	if cve == "" {
 		return evalContext{}, fmt.Errorf("decide: empty CVE")
 	}
 
-	comp, quality := bestManifestMatch(in.Manifest, matchPURL)
-	quality = applyIdentityMappedQuality(quality, idRes.identityMapped)
+	// Prefer a direct Manifest hit on the finding PURL. Identity aliases are
+	// only required when the distro finding does not already type-match a
+	// component (SPEC-IDENTITY: probable aliases must not clear — but a
+	// direct TypeNormalized+ match does not use the alias).
+	comp, quality := bestManifestMatch(in.Manifest, findingPURL)
+	matchPURL := findingPURL
+	var identityRefusal ReasonCode
+
+	if !quality.AtLeast(purl.TypeNormalized) {
+		idRes := resolveIdentity(findingPURL, in.IdentityAliases)
+		identityRefusal = idRes.refusal
+		matchPURL = idRes.matchPURL
+		if idRes.identityMapped || idRes.matchPURL.Canonical() != findingPURL.Canonical() {
+			comp, quality = bestManifestMatch(in.Manifest, matchPURL)
+		}
+		quality = applyIdentityMappedQuality(quality, idRes.identityMapped)
+	}
+
 	ctx := evalContext{
-		findingCVE:        cve,
-		findingPURL:       findingPURL,
-		matchPURL:         matchPURL,
-		identityRefusal:   idRes.refusal,
-		manifestVersion:   in.Manifest.Version(),
-		purlQuality:       quality,
-		inventories:       in.Inventories,
+		findingCVE:      cve,
+		findingPURL:     findingPURL,
+		matchPURL:       matchPURL,
+		identityRefusal: identityRefusal,
+		manifestVersion: in.Manifest.Version(),
+		purlQuality:     quality,
+		inventories:     in.Inventories,
 	}
 	if comp != nil {
 		c := *comp
@@ -311,4 +325,19 @@ func checkD03(ctx evalContext) (ReasonCode, bool) {
 	}
 
 	return "", false
+}
+
+func (ctx evalContext) allDefinitiveSymbolsDynsymExportVerified() bool {
+	if ctx.entry == nil || len(ctx.definitiveSymbols) == 0 {
+		return false
+	}
+	for _, vs := range ctx.entry.VulnerableSymbols {
+		if vs.Confidence != manifest.ConfidenceDefinitive {
+			continue
+		}
+		if !vs.DynsymExportVerified {
+			return false
+		}
+	}
+	return true
 }

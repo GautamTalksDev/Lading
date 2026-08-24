@@ -20,7 +20,13 @@ type Report struct {
 	Affected            int
 	RefusedTotal        int
 	RefusedByReason     map[string]int
-	CoveragePercent     int
+	// IntegrityRefusals counts fail-closed catalogue refusals by typed reason
+	// (artifact-hash-mismatch, artifact-absent, artifact-unhashed).
+	IntegrityRefusals map[string]int
+	// Success is false when the run refused the artifact before scanning
+	// or when integrity refusals are present. Omitted from older callers as true default via ComputeSuccess.
+	Success         bool
+	CoveragePercent int
 }
 
 // ComputeCoverage sets CoveragePercent from decided / total findings.
@@ -33,6 +39,15 @@ func (r *Report) ComputeCoverage() {
 	r.CoveragePercent = (decided * 100) / r.CVEsIn
 }
 
+// MarkComplete sets Success when no integrity refusals blocked the run.
+func (r *Report) MarkComplete() {
+	if len(r.IntegrityRefusals) > 0 {
+		r.Success = false
+		return
+	}
+	r.Success = true
+}
+
 // WriteHuman prints the 7am-readable summary.
 func (r Report) WriteHuman(w io.Writer, color bool) {
 	if r.NotAffectedByJust == nil {
@@ -41,11 +56,18 @@ func (r Report) WriteHuman(w io.Writer, color bool) {
 	if r.RefusedByReason == nil {
 		r.RefusedByReason = map[string]int{}
 	}
+	if r.IntegrityRefusals == nil {
+		r.IntegrityRefusals = map[string]int{}
+	}
 	paint := func(code, s string) string {
 		if !color {
 			return s
 		}
 		return "\033[" + code + "m" + s + "\033[0m"
+	}
+	if !r.Success && len(r.IntegrityRefusals) > 0 {
+		_, _ = fmt.Fprintln(w, paint("31", "Result:       REFUSED (artifact integrity)"))
+		_, _ = fmt.Fprintf(w, "Integrity:    %s\n", breakdownDetail(r.IntegrityRefusals))
 	}
 	_, _ = fmt.Fprintf(w, "Scanned:      %d binaries (%d stripped, %d static)\n",
 		r.BinariesScanned, r.Stripped, r.StaticLinked)
@@ -62,15 +84,23 @@ func (r Report) WriteHuman(w io.Writer, color bool) {
 	}
 	_, _ = fmt.Fprintln(w, paint("33", ref))
 	_, _ = fmt.Fprintf(w, "Coverage:     %d%% of reported CVEs decided with evidence\n", r.CoveragePercent)
+	if !r.Success {
+		_, _ = fmt.Fprintln(w, paint("31", "Success:      false (refusals present — not a clean run)"))
+	}
 }
 
 // WriteJSON prints a minimal JSON summary.
 func (r Report) WriteJSON(w io.Writer) {
 	just := sortedMap(r.NotAffectedByJust)
 	refused := sortedMap(r.RefusedByReason)
-	_, _ = fmt.Fprintf(w, `{"binaries_scanned":%d,"stripped":%d,"static_linked":%d,"cves_in":%d,"not_affected":%d,"not_affected_breakdown":%s,"affected":%d,"refused":%d,"refused_breakdown":%s,"coverage_percent":%d}`+"\n",
+	integrity := sortedMap(r.IntegrityRefusals)
+	success := "true"
+	if !r.Success {
+		success = "false"
+	}
+	_, _ = fmt.Fprintf(w, `{"binaries_scanned":%d,"stripped":%d,"static_linked":%d,"cves_in":%d,"not_affected":%d,"not_affected_breakdown":%s,"affected":%d,"refused":%d,"refused_breakdown":%s,"integrity_refusals":%s,"success":%s,"coverage_percent":%d}`+"\n",
 		r.BinariesScanned, r.Stripped, r.StaticLinked, r.CVEsIn,
-		r.NotAffectedTotal, just, r.Affected, r.RefusedTotal, refused, r.CoveragePercent)
+		r.NotAffectedTotal, just, r.Affected, r.RefusedTotal, refused, integrity, success, r.CoveragePercent)
 }
 
 func breakdownDetail(parts map[string]int) string {

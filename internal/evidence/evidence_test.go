@@ -44,8 +44,9 @@ func testFixture(t *testing.T) (artifact, bundleDir, vexPath string, cleanup fun
 		CVE:              "CVE-2023-0286",
 		AffectedVersions: []string{"3.0.7"},
 		VulnerableSymbols: []manifest.VulnerableSymbol{{
-			Name:       "GENERAL_NAME_cmp",
-			Confidence: manifest.ConfidenceDefinitive,
+			Name:                 "GENERAL_NAME_cmp",
+			Confidence:           manifest.ConfidenceDefinitive,
+			DynsymExportVerified: true,
 			Provenance: manifest.Provenance{
 				UpstreamFixCommit: "https://github.com/openssl/openssl/commit/2f7530077e0ef79d98718138716bc51ca0cad658",
 				Derivation:        manifest.DerivationPatchTouched,

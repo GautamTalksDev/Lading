@@ -1,8 +1,0 @@
-Trying to pull docker.io/library/eclipse-mosquitto:2...
-Getting image source signatures
-Copying blob sha256:9d7cd47effe2f8c6a3d95385e470bd130bb232d0bc17a62da9d7962b34886f19
-Copying blob sha256:e6f31ffc071e5560b82a8685fba8214954e5721e3e49269d00958316edbe89fe
-Copying blob sha256:386c64987679d3a8eaf9cc7d3698f3eda684e6126e8e0c50d4227add3552dc0b
-Copying config sha256:4725ea7590a578122675b1fdd242b94e5034885cfd0806045b25d700f5498ef5
-Writing manifest to image destination
-4725ea7590a578122675b1fdd242b94e5034885cfd0806045b25d700f5498ef5

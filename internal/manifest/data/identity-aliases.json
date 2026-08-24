@@ -3,47 +3,116 @@
     {
       "source_name": "expat",
       "component": "pkg:generic/libexpat",
-      "status": "probable",
-      "provenance_url": "https://sources.debian.org/src/expat/",
-      "verified_artifact_sha256": "",
-      "reviewed_by": "cp-15a-seed",
-      "reviewed_at": "2026-08-24"
+      "status": "definitive",
+      "provenance": {
+        "artifact_sha256": "a9a60cb5308ca1054427e2973b021ea63c2c801c71d8c0dc9d33218fee1d976a",
+        "distro": "debian",
+        "package_name": "libexpat1",
+        "package_version": "2.5.0-1+deb12u2",
+        "verified_at": "2026-08-24",
+        "binary_path": "lib/x86_64-linux-gnu/libexpat.so.1.8.10",
+        "identity_symbols_verified": [
+          "XML_ParserCreate",
+          "XML_Parse",
+          "XML_SetElementHandler",
+          "XML_ErrorString"
+        ],
+        "extraction_method": "dpkg-deb-extract",
+        "reviewed_by": "hand",
+        "verified_by": "hand",
+        "url": "https://deb.debian.org/debian/pool/main/e/expat/libexpat1_2.5.0-1+deb12u2_amd64.deb",
+        "notes": "Hand-verified 2026-08-24T19:27:10Z. Extracted from real .deb (sha256 2255e62fc22a86d2c544b8a3f516da9aee19383ad5742722ab4ce7f66a30dbc8). artifact_sha256 is the extracted libexpat.so.1.8.10 binary. XML_GetCurrentLineNumber absent from .dynsym on this stripped build — not claimed."
+      }
     },
     {
-      "source_name": "glibc",
-      "component": "pkg:generic/glibc",
+      "source_name": "imagemagick",
+      "component": "pkg:generic/imagemagick",
       "status": "probable",
-      "provenance_url": "https://sources.debian.org/src/glibc/",
-      "verified_artifact_sha256": "",
-      "reviewed_by": "cp-15a-seed",
-      "reviewed_at": "2026-08-24"
+      "provenance": {
+        "url": "https://sources.debian.org/src/imagemagick/",
+        "reviewed_by": "cp-15b-seed",
+        "verified_at": "2026-08-24"
+      }
     },
     {
-      "source_name": "openssl",
-      "component": "pkg:generic/openssl",
+      "source_name": "binutils",
+      "component": "pkg:generic/binutils",
       "status": "probable",
-      "provenance_url": "https://sources.debian.org/src/openssl/",
-      "verified_artifact_sha256": "",
-      "reviewed_by": "cp-15a-seed",
-      "reviewed_at": "2026-08-24"
-    },
-    {
-      "source_name": "curl",
-      "component": "pkg:generic/curl",
-      "status": "probable",
-      "provenance_url": "https://sources.debian.org/src/curl/",
-      "verified_artifact_sha256": "",
-      "reviewed_by": "cp-15a-seed",
-      "reviewed_at": "2026-08-24"
+      "provenance": {
+        "url": "https://sources.debian.org/src/binutils/",
+        "reviewed_by": "cp-15b-seed",
+        "verified_at": "2026-08-24"
+      }
     },
     {
       "source_name": "util-linux",
       "component": "pkg:generic/util-linux",
       "status": "probable",
-      "provenance_url": "https://sources.debian.org/src/util-linux/",
-      "verified_artifact_sha256": "",
-      "reviewed_by": "cp-15a-seed",
-      "reviewed_at": "2026-08-24"
+      "provenance": {
+        "url": "https://sources.debian.org/src/util-linux/",
+        "reviewed_by": "cp-15b-seed",
+        "verified_at": "2026-08-24"
+      }
+    },
+    {
+      "source_name": "glibc",
+      "component": "pkg:generic/glibc",
+      "status": "probable",
+      "provenance": {
+        "url": "https://sources.debian.org/src/glibc/",
+        "reviewed_by": "cp-15b-seed",
+        "verified_at": "2026-08-24"
+      }
+    },
+    {
+      "source_name": "mariadb",
+      "component": "pkg:generic/mariadb",
+      "status": "probable",
+      "provenance": {
+        "url": "https://sources.debian.org/src/mariadb/",
+        "reviewed_by": "cp-15b-seed",
+        "verified_at": "2026-08-24"
+      }
+    },
+    {
+      "source_name": "curl",
+      "component": "pkg:generic/curl",
+      "status": "probable",
+      "provenance": {
+        "url": "https://sources.debian.org/src/curl/",
+        "reviewed_by": "cp-15b-seed",
+        "verified_at": "2026-08-24"
+      }
+    },
+    {
+      "source_name": "openssl",
+      "component": "pkg:generic/openssl",
+      "status": "probable",
+      "provenance": {
+        "url": "https://sources.debian.org/src/openssl/",
+        "reviewed_by": "cp-15b-seed",
+        "verified_at": "2026-08-24"
+      }
+    },
+    {
+      "source_name": "systemd",
+      "component": "pkg:generic/systemd",
+      "status": "probable",
+      "provenance": {
+        "url": "https://sources.debian.org/src/systemd/",
+        "reviewed_by": "cp-15b-seed",
+        "verified_at": "2026-08-24"
+      }
+    },
+    {
+      "source_name": "krb5",
+      "component": "pkg:generic/krb5",
+      "status": "probable",
+      "provenance": {
+        "url": "https://sources.debian.org/src/krb5/",
+        "reviewed_by": "cp-15b-seed",
+        "verified_at": "2026-08-24"
+      }
     }
   ]
 }

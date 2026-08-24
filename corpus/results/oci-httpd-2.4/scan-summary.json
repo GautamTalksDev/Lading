@@ -1,1 +1,1 @@
-{"binaries_scanned":949,"stripped":807,"static_linked":10,"cves_in":254,"not_affected":0,"not_affected_breakdown":{},"affected":0,"refused":254,"refused_breakdown":{"purl-insufficient":254},"coverage_percent":0}
+{"binaries_scanned":949,"stripped":807,"static_linked":10,"cves_in":254,"not_affected":0,"not_affected_breakdown":{},"affected":0,"refused":254,"refused_breakdown":{"mapping-probable-only":143,"no manifest entry":22,"no-identity-mapping":85,"purl-insufficient":2,"symbol_not_observable":2},"integrity_refusals":{},"success":true,"coverage_percent":0}

@@ -1,6 +1,6 @@
 # FINDING-001 — Source-package attribution is lost between Syft and Trivy, hiding up to 92% of Debian vulnerabilities
 
-**Status:** Draft. Not published. Not yet filed upstream.
+**Status:** Draft. Not published. Trivy CycloneDX filing live (2026-08-24); SPDX and Syft pending.
 **Date of experiment:** 2026-08-24
 **Author:** Gautam Khosla
 **Reproduction:** five commands, public images, no credentials required.
@@ -143,11 +143,16 @@ are recorded because they are the reason the surviving explanation is believable
    this describes a fixed bug. **This must be checked against the latest syft before
    anything is filed or published.** It is the single largest threat to this finding.
 2. **One Trivy version.** 0.72.0 only. Not tested across the Trivy release range.
-3. **node:20's 4007 is unexplained.** Almost certainly `node_modules` npm packages
-   surfacing through source attribution. It is reported separately and should not be
-   used as the headline until understood.
-4. **SPDX path is a separate anomaly.** `syft -o spdx-json` fed to Trivy yields 1
-   package and 0 vulnerabilities. Not investigated. Not part of this finding.
+3. ~~**node:20's 4007 is unexplained.**~~ **RESOLVED 2026-08-24:** see `ANALYSIS-node20.md`.
+   All 3,672 newly-surfaced IDs are `pkg:deb` (npm unchanged at 27). Same Debian
+   `SrcName` mechanism as nginx:1.25; magnitude dominated by `linux-libc-dev` (3,319).
+   Keep as headline.
+4. ~~**SPDX path is a separate anomaly.**~~ **RESOLVED 2026-08-24:** see `ANALYSIS-spdx.md`.
+   Loss is at **Trivy ingestion**, not Syft generation. Syft SPDX for nginx:1.25 has
+   ~151 packages with PURLs; `trivy sbom` retains 1 package (`libintl:libintl` as jar)
+   and 0 vulns. Same pattern on debian:bookworm-slim (89 → 0). Reproduced on syft
+   1.22.0 and 1.51.0 with trivy 0.72.0. Second Trivy finding; larger than CycloneDX
+   under-count. Not fixed here.
 5. **Direction of correctness is not asserted.** This documents that the two paths
    disagree and why. Whether 415 or 137 is the "right" answer for a given compliance
    purpose is a separate question involving distro triage status (`no-dsa`,
@@ -180,9 +185,36 @@ vulnerabilities" records neither which tools produced it nor that the pairing ma
 
 ## 9. Next actions
 
+### Upstream filing status
+
+- **Trivy — CycloneDX Debian source-package attribution.** Filed **2026-08-24** as a
+  False Detection discussion:
+  https://github.com/aquasecurity/trivy/discussions/11139  
+  Mechanism credited to discussion [#7850](https://github.com/aquasecurity/trivy/discussions/7850)
+  (DmitriyLewen, Nov 2024) for Alpine. Our contribution is the effect size on Debian
+  images, not the cause.  
+  Reported: `nginx:1.25` gives **137** unique CVEs via `trivy sbom` on a Syft CycloneDX
+  SBOM and **409** via `trivy image` on the same tar. **278** missed, including **13**
+  CRITICAL and **63** HIGH by unique CVE ID.  
+  Image digest
+  `sha256:a484819eb60211f5299034ac80f6a681b06f89e65866ce91f356ed7c72af059c`.  
+  Reproduced on a freshly pulled image **2026-08-24**, trivy **0.72.0**, syft **1.51.0**
+  and **1.22.0**.
+
+- **Trivy — SPDX ingestion package loss.** **NOT YET FILED.** Draft at
+  `launch/issues/trivy-002-spdx-ingest-package-loss.md`.
+
+- **Syft — source-package property emission.** **NOT YET FILED.** Decide after Trivy
+  responds, since the fix may belong on only one side.
+
+### Checklist
+
 - [x] **Re-test with current syft.** Done 2026-08-24: 1.51.0 still affected.
 - [ ] Re-test across 2–3 Trivy versions.
-- [ ] Explain node:20's 4007 separately.
+- [x] **Explain node:20's 4007.** Done 2026-08-24: deb-only; same mechanism (`ANALYSIS-node20.md`).
 - [ ] File an issue with the Syft project proposing the property mapping.
-- [ ] File an issue with the Trivy project proposing it read `upstream=` from the PURL.
+- [x] **File with Trivy** (CycloneDX / `upstream=` read path). Done 2026-08-24:
+  [discussion #11139](https://github.com/aquasecurity/trivy/discussions/11139) (False
+  Detection; mechanism credited to #7850).
+- [ ] File Trivy SPDX ingestion issue (`launch/issues/trivy-002-spdx-ingest-package-loss.md`).
 - [ ] Only then: publish.

@@ -1,0 +1,6 @@
+# evidence-bundle-v1 MANIFEST.sha
+918411d27e1a04660251c7b1af524eef7367d3ffb53d1ba1d2c8f285eb614310  statements/cve-2024-2236/observations.json
+b3a29ea124cfcacb427509d6a5b1c9d97ab7edb91afe5e908d23b3d411db7765  statements/cve-2024-2236/manifest-slice.json
+c2c01dedd113b33aca4a6ce08742ee0603d7f5ac3c6828f25372661f22344474  statements/cve-2024-2236/statement.json
+fd4371acfb966f3a8dbdb95cb560d409db88bef96fdf165a31a30cfc3bd5a70d  statements/cve-2024-2236/versions.json
+fe7aca1bc9b84ae339e4c7c49d8bfeb302fc07d254f4eceb9558a284c3c92963  statements/cve-2024-2236/inputs.json

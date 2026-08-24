@@ -23,6 +23,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Guard inventory fixtures (tracked + hash)
+        shell: bash
+        run: bash .github/scripts/check-fixtures.sh --hash
+
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
@@ -54,6 +58,20 @@ jobs:
         run: go test ./...
         env:
           CGO_ENABLED: "0"
+
+      - name: Evidence pack determinism
+        shell: bash
+        run: |
+          go test -run TestRenderDeterministic ./internal/evidencehtml/
+          go build -o bin/lading ./cmd/lading/
+          TS=2026-08-24T00:00:00Z
+          ART=testdata/evidence-pack/artifact
+          SCAN=testdata/evidence-pack/scan
+          KEY=testdata/evidence-pack/test-sign.key
+          ./bin/lading evidence --artifact "$ART" --scan-dir "$SCAN" --timestamp "$TS" --sign-key "$KEY" --out /tmp/e1.html
+          ./bin/lading evidence --artifact "$ART" --scan-dir "$SCAN" --timestamp "$TS" --sign-key "$KEY" --out /tmp/e2.html
+          cmp /tmp/e1.html /tmp/e2.html
+          echo DETERMINISTIC
 
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v6

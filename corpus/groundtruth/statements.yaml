@@ -396,6 +396,7 @@ statements:
       vulnerable_symbols:
       - name: GENERAL_NAME_cmp
         confidence: definitive
+        dynsym_export_verified: true
       manifest_version: 0.1.0
   inventories:
   - file: inv1.json
@@ -433,6 +434,7 @@ statements:
       vulnerable_symbols:
       - name: GENERAL_NAME_cmp
         confidence: definitive
+        dynsym_export_verified: true
       manifest_version: 0.1.0
   inventories:
   - file: inv2.json
@@ -470,6 +472,7 @@ statements:
       vulnerable_symbols:
       - name: GENERAL_NAME_cmp
         confidence: definitive
+        dynsym_export_verified: true
       manifest_version: 0.1.0
   inventories:
   - file: inv3.json
@@ -507,6 +510,7 @@ statements:
       vulnerable_symbols:
       - name: GENERAL_NAME_cmp
         confidence: definitive
+        dynsym_export_verified: true
       manifest_version: 0.1.0
   inventories:
   - file: inv4.json
@@ -544,6 +548,7 @@ statements:
       vulnerable_symbols:
       - name: GENERAL_NAME_cmp
         confidence: definitive
+        dynsym_export_verified: true
       manifest_version: 0.1.0
   inventories:
   - file: inv5.json
@@ -581,6 +586,7 @@ statements:
       vulnerable_symbols:
       - name: GENERAL_NAME_cmp
         confidence: definitive
+        dynsym_export_verified: true
       manifest_version: 0.1.0
   inventories:
   - file: inv6.json
@@ -618,6 +624,7 @@ statements:
       vulnerable_symbols:
       - name: GENERAL_NAME_cmp
         confidence: definitive
+        dynsym_export_verified: true
       manifest_version: 0.1.0
   inventories:
   - file: inv7.json
@@ -655,6 +662,7 @@ statements:
       vulnerable_symbols:
       - name: GENERAL_NAME_cmp
         confidence: definitive
+        dynsym_export_verified: true
       manifest_version: 0.1.0
   inventories:
   - file: inv8.json
@@ -690,6 +698,7 @@ statements:
       vulnerable_symbols:
       - name: storeRawNames
         confidence: definitive
+        dynsym_export_verified: true
       manifest_version: 0.1.0
   inventories:
   - file: inv.json
@@ -726,6 +735,7 @@ statements:
       vulnerable_symbols:
       - name: storeRawNames
         confidence: definitive
+        dynsym_export_verified: true
       manifest_version: 0.1.0
   inventories:
   - file: inv.json
@@ -1749,6 +1759,7 @@ statements:
       vulnerable_symbols:
       - name: GENERAL_NAME_cmp
         confidence: definitive
+        dynsym_export_verified: true
       manifest_version: 0.2.0
   inventories:
   - file: symver_ssl_elf
@@ -2106,6 +2117,7 @@ statements:
       vulnerable_symbols:
       - name: GENERAL_NAME_cmp
         confidence: definitive
+        dynsym_export_verified: true
       manifest_version: 0.2.0
   inventories:
   - file: symver_ssl_elf
@@ -2157,6 +2169,7 @@ statements:
       vulnerable_symbols:
       - name: GENERAL_NAME_cmp
         confidence: definitive
+        dynsym_export_verified: true
       manifest_version: 0.2.0
   inventories:
   - file: symver_ssl_elf
@@ -2208,6 +2221,7 @@ statements:
       vulnerable_symbols:
       - name: GENERAL_NAME_cmp
         confidence: definitive
+        dynsym_export_verified: true
       manifest_version: 0.2.0
   inventories:
   - file: symver_ssl_elf
@@ -2259,6 +2273,7 @@ statements:
       vulnerable_symbols:
       - name: GENERAL_NAME_cmp
         confidence: definitive
+        dynsym_export_verified: true
       manifest_version: 0.2.0
   inventories:
   - file: symver_ssl_elf
@@ -2310,6 +2325,7 @@ statements:
       vulnerable_symbols:
       - name: GENERAL_NAME_cmp
         confidence: definitive
+        dynsym_export_verified: true
       manifest_version: 0.2.0
   inventories:
   - file: symver_ssl_elf
@@ -2361,6 +2377,7 @@ statements:
       vulnerable_symbols:
       - name: GENERAL_NAME_cmp
         confidence: definitive
+        dynsym_export_verified: true
       manifest_version: 0.2.0
   inventories:
   - file: symver_ssl_elf
@@ -2412,6 +2429,7 @@ statements:
       vulnerable_symbols:
       - name: GENERAL_NAME_cmp
         confidence: definitive
+        dynsym_export_verified: true
       manifest_version: 0.2.0
   inventories:
   - file: symver_ssl_elf
@@ -2463,6 +2481,7 @@ statements:
       vulnerable_symbols:
       - name: GENERAL_NAME_cmp
         confidence: definitive
+        dynsym_export_verified: true
       manifest_version: 0.2.0
   inventories:
   - file: symver_ssl_elf
@@ -2514,6 +2533,7 @@ statements:
       vulnerable_symbols:
       - name: GENERAL_NAME_cmp
         confidence: definitive
+        dynsym_export_verified: true
       manifest_version: 0.2.0
   inventories:
   - file: symver_ssl_elf
@@ -2565,6 +2585,7 @@ statements:
       vulnerable_symbols:
       - name: GENERAL_NAME_cmp
         confidence: definitive
+        dynsym_export_verified: true
       manifest_version: 0.2.0
   inventories:
   - file: symver_ssl_elf
@@ -2616,6 +2637,7 @@ statements:
       vulnerable_symbols:
       - name: GENERAL_NAME_cmp
         confidence: definitive
+        dynsym_export_verified: true
       manifest_version: 0.2.0
   inventories:
   - file: symver_ssl_elf
@@ -2667,6 +2689,7 @@ statements:
       vulnerable_symbols:
       - name: GENERAL_NAME_cmp
         confidence: definitive
+        dynsym_export_verified: true
       manifest_version: 0.2.0
   inventories:
   - file: symver_ssl_elf
@@ -2718,6 +2741,7 @@ statements:
       vulnerable_symbols:
       - name: GENERAL_NAME_cmp
         confidence: definitive
+        dynsym_export_verified: true
       manifest_version: 0.2.0
   inventories:
   - file: symver_ssl_elf
@@ -2769,6 +2793,7 @@ statements:
       vulnerable_symbols:
       - name: GENERAL_NAME_cmp
         confidence: definitive
+        dynsym_export_verified: true
       manifest_version: 0.2.0
   inventories:
   - file: symver_ssl_elf
@@ -2820,6 +2845,7 @@ statements:
       vulnerable_symbols:
       - name: GENERAL_NAME_cmp
         confidence: definitive
+        dynsym_export_verified: true
       manifest_version: 0.2.0
   inventories:
   - file: symver_ssl_elf
@@ -2871,6 +2897,7 @@ statements:
       vulnerable_symbols:
       - name: GENERAL_NAME_cmp
         confidence: definitive
+        dynsym_export_verified: true
       manifest_version: 0.2.0
   inventories:
   - file: symver_ssl_elf
@@ -2922,6 +2949,7 @@ statements:
       vulnerable_symbols:
       - name: GENERAL_NAME_cmp
         confidence: definitive
+        dynsym_export_verified: true
       manifest_version: 0.2.0
   inventories:
   - file: symver_ssl_elf
@@ -2973,6 +3001,7 @@ statements:
       vulnerable_symbols:
       - name: GENERAL_NAME_cmp
         confidence: definitive
+        dynsym_export_verified: true
       manifest_version: 0.2.0
   inventories:
   - file: symver_ssl_elf
@@ -3024,6 +3053,7 @@ statements:
       vulnerable_symbols:
       - name: GENERAL_NAME_cmp
         confidence: definitive
+        dynsym_export_verified: true
       manifest_version: 0.2.0
   inventories:
   - file: symver_ssl_elf
@@ -3075,6 +3105,7 @@ statements:
       vulnerable_symbols:
       - name: GENERAL_NAME_cmp
         confidence: definitive
+        dynsym_export_verified: true
       manifest_version: 0.2.0
   inventories:
   - file: symver_ssl_elf

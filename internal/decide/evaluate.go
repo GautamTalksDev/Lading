@@ -31,6 +31,12 @@ func Evaluate(in Input) (Result, error) {
 	}
 
 	if ctx.componentIdentified && len(ctx.definitiveSymbols) > 0 {
+		if !ctx.allDefinitiveSymbolsDynsymExportVerified() {
+			base.Verdict = VerdictUnderInvestigation
+			base.RuleID = RuleD03
+			base.ReasonCode = ReasonSymbolNotObservable
+			return base, nil
+		}
 		base.Verdict = VerdictNotAffected
 		base.Justification = JustificationVulnerableCodeNotPresent
 		base.RuleID = RuleD02

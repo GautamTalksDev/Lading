@@ -1,14 +1,43 @@
 # CP-11 corpus catalog — >=40 publicly downloadable shipped artifacts.
 # Regenerate downloads: bash scripts/corpus-download.sh
 # Scan: bash scripts/corpus-scan.sh
-version: "cp11-1"
+# Honesty pass (RP-6 / S-06): substitute-container class; sha256/source_url/fetched_at required.
+version: "cp11-3"
+schema:
+  required_fields:
+    - id
+    - class
+    - license
+    - provenance
+    - sha256
+    - source_url
+    - fetched_at
+    - status
+  class_enum:
+    - benchmark
+    - firmware
+    - oci-app
+    - oci-base
+    - openwrt
+    - rtos-sdk
+    - static-binary
+    - substitute-container
+  status_enum:
+    - present
+    - missing
+  notes: >
+    class substitute-container requires field substitutes (what failed download this container stands in for). sha256 is null when status is missing.
 artifacts:
-  # --- OCI base images (10) ---
+  # --- OCI base images ---
   - id: oci-alpine-3.20
     class: oci-base
     ref: docker.io/library/alpine:3.20
     license: Alpine Linux (mixed OSS per package)
     provenance: https://hub.docker.com/_/alpine
+    source_url: docker://docker.io/library/alpine:3.20
+    sha256: 527edb14229452c06aa04c93d6fdbc17e1c4ea0ab18a6cff793318e2c4a258c1
+    fetched_at: "2026-08-23T17:10:01Z"
+    status: present
     notes: musl/busybox base
 
   - id: oci-debian-bookworm-slim
@@ -16,246 +45,412 @@ artifacts:
     ref: docker.io/library/debian:bookworm-slim
     license: Debian main/contrib (DFSG)
     provenance: https://hub.docker.com/_/debian
+    source_url: docker://docker.io/library/debian:bookworm-slim
+    sha256: 6a573924cd73ac628a5179db1dd2b9588e4bdc19f3b32af51fd04289184f0462
+    fetched_at: "2026-08-23T17:10:04Z"
+    status: present
 
   - id: oci-ubuntu-22.04
     class: oci-base
     ref: docker.io/library/ubuntu:22.04
     license: Ubuntu main/restricted (mixed)
     provenance: https://hub.docker.com/_/ubuntu
+    source_url: docker://docker.io/library/ubuntu:22.04
+    sha256: 76164d2ab447b3a8d2a556f67dd9398e33d6e91234acb630ff83f13ac8c7a20b
+    fetched_at: "2026-08-23T17:10:07Z"
+    status: present
 
   - id: oci-ubuntu-24.04
     class: oci-base
     ref: docker.io/library/ubuntu:24.04
     license: Ubuntu main/restricted (mixed)
     provenance: https://hub.docker.com/_/ubuntu
+    source_url: docker://docker.io/library/ubuntu:24.04
+    sha256: 1cc40862552327efdb567a7af2b35c1575350fb77e95a7c31e4a936e74df9532
+    fetched_at: "2026-08-23T17:10:14Z"
+    status: present
 
   - id: oci-amazonlinux-2023
     class: oci-base
     ref: public.ecr.aws/amazonlinux/amazonlinux:2023
     license: Amazon Linux 2023 package licenses
     provenance: https://aws.amazon.com/amazon-linux-2023/
+    source_url: docker://public.ecr.aws/amazonlinux/amazonlinux:2023
+    sha256: 0e5bd592565b308de45904328bf628d1aa72fc8ac709c33d6264b240ae5b9f9e
+    fetched_at: "2026-08-23T17:10:22Z"
+    status: present
 
   - id: oci-fedora-40
     class: oci-base
     ref: docker.io/library/fedora:40
     license: Fedora package licenses (mixed)
     provenance: https://hub.docker.com/r/fedora/fedora
+    source_url: docker://docker.io/library/fedora:40
+    sha256: 77c7eedf94d42f457db80499acb197935736b28f3c22f88476d58d51b534c8ec
+    fetched_at: "2026-08-23T17:10:33Z"
+    status: present
 
   - id: oci-rockylinux-9
     class: oci-base
     ref: docker.io/rockylinux/rockylinux:9
     license: Rocky Linux / RHEL-compatible (mixed)
     provenance: https://hub.docker.com/r/rockylinux/rockylinux
+    source_url: docker://docker.io/rockylinux/rockylinux:9
+    sha256: cf3e175056e676eac851f4af8928e58358fbd168f9dcf7cdd74c56999f6223e7
+    fetched_at: "2026-08-23T17:10:42Z"
+    status: present
 
   - id: oci-busybox-latest
     class: oci-base
     ref: docker.io/library/busybox:latest
     license: GPL-2.0 (BusyBox)
     provenance: https://hub.docker.com/_/busybox
-
-  - id: oci-distrasless-cc-debian12
-    class: oci-base
-    ref: docker.io/library/golang:1.22-bookworm
-    license: BSD-3-Clause (Go) + Debian packages
-    provenance: https://hub.docker.com/_/golang
-    notes: CP-11 substitute for gcr.io/distroless pull/export failures in rootless podman
+    source_url: docker://docker.io/library/busybox:latest
+    sha256: 928b8007c5b3490a69eb417f0bcde05e45852acfe397e22ad3d617f048897b39
+    fetched_at: "2026-08-23T17:10:44Z"
+    status: present
 
   - id: oci-ubi9-minimal
     class: oci-base
     ref: registry.access.redhat.com/ubi9/ubi-minimal:latest
     license: Red Hat UBI (mixed OSS)
     provenance: https://catalog.redhat.com/software/containers/ubi9/ubi-minimal
+    source_url: docker://registry.access.redhat.com/ubi9/ubi-minimal:latest
+    sha256: dda5cc748683cb0ea609fa45788f25d1f35a86ae9776fd92112f0f27e47a319d
+    fetched_at: "2026-08-23T17:10:55Z"
+    status: present
 
-  # --- OCI application images (12) ---
+  # --- OCI application images ---
   - id: oci-nginx-1.25
     class: oci-app
     ref: docker.io/library/nginx:1.25
     license: nginx (BSD-2-Clause) + Debian packages
     provenance: https://hub.docker.com/_/nginx
+    source_url: docker://docker.io/library/nginx:1.25
+    sha256: 79d423153403dc5bfed697044259934d591fd1cd08d2f04cef6228ef6ae801cb
+    fetched_at: "2026-08-23T17:11:06Z"
+    status: present
 
   - id: oci-redis-7
     class: oci-app
     ref: docker.io/library/redis:7
     license: Redis source (BSD-3-Clause) + base OS
     provenance: https://hub.docker.com/_/redis
+    source_url: docker://docker.io/library/redis:7
+    sha256: afd5ad345c29c62e397ea7d5b08097808ee71d1f97f5b8a736da888c9b5cecea
+    fetched_at: "2026-08-23T17:11:12Z"
+    status: present
 
   - id: oci-postgres-16
     class: oci-app
     ref: docker.io/library/postgres:16
     license: PostgreSQL (PostgreSQL License)
     provenance: https://hub.docker.com/_/postgres
+    source_url: docker://docker.io/library/postgres:16
+    sha256: f87e68944b02a2a4e4bec34034eeb4dbdee5770ffac5807078f29746a4550d8f
+    fetched_at: "2026-08-23T17:11:26Z"
+    status: present
 
   - id: oci-httpd-2.4
     class: oci-app
     ref: docker.io/library/httpd:2.4
     license: Apache-2.0
     provenance: https://hub.docker.com/_/httpd
+    source_url: docker://docker.io/library/httpd:2.4
+    sha256: e100a463a8e4f1aa571eb6df28208a7d43dc398b897b4d0783818b8c57358898
+    fetched_at: "2026-08-23T17:11:31Z"
+    status: present
 
   - id: oci-node-20
     class: oci-app
     ref: docker.io/library/node:20-bookworm
     license: Node.js MIT + Debian packages
     provenance: https://hub.docker.com/_/node
+    source_url: docker://docker.io/library/node:20-bookworm
+    sha256: 27b6d0cd04aeedfde0d15ac08bfbc97550d39dae6845f2bfa84f4b1ccd42e3fc
+    fetched_at: "2026-08-23T17:12:19Z"
+    status: present
 
   - id: oci-python-3.12
     class: oci-app
     ref: docker.io/library/python:3.12-slim
     license: Python PSF + Debian packages
     provenance: https://hub.docker.com/_/python
+    source_url: docker://docker.io/library/python:3.12-slim
+    sha256: 36fb9faa02f038f48c4c49407b45b934db303ac0b539d61883568d0e0dbf6ea9
+    fetched_at: "2026-08-23T17:12:23Z"
+    status: present
 
   - id: oci-ruby-3.3
     class: oci-app
     ref: docker.io/library/ruby:3.3-slim
     license: Ruby BSD-2-Clause + Debian
     provenance: https://hub.docker.com/_/ruby
+    source_url: docker://docker.io/library/ruby:3.3-slim
+    sha256: e6c2c16bcd920ffac7a1d661746df772baa7d6bff10211b74da55b6305e13fc5
+    fetched_at: "2026-08-23T17:12:29Z"
+    status: present
 
   - id: oci-memcached-1.6
     class: oci-app
     ref: docker.io/library/memcached:1.6
     license: memcached BSD
     provenance: https://hub.docker.com/_/memcached
+    source_url: docker://docker.io/library/memcached:1.6
+    sha256: f8c190c557a4372a8f7dc26d7d216911d25d3b6b68182204f2910b236e9d8967
+    fetched_at: "2026-08-23T17:12:33Z"
+    status: present
 
   - id: oci-traefik-v3
     class: oci-app
     ref: docker.io/library/traefik:v3.0
     license: MIT
     provenance: https://hub.docker.com/_/traefik
+    source_url: docker://docker.io/library/traefik:v3.0
+    sha256: 1b74077a0e091205c2836ee823817ca0d5814d4d885c1df6752b3fbfa64ae7f8
+    fetched_at: "2026-08-23T17:12:40Z"
+    status: present
 
   - id: oci-grafana-11
     class: oci-app
     ref: docker.io/grafana/grafana:11.0.0
     license: AGPL-3.0
     provenance: https://hub.docker.com/r/grafana/grafana
+    source_url: docker://docker.io/grafana/grafana:11.0.0
+    sha256: 59f7b591c7a5dd075c3fb04840d66347df2a27cc9d5466f2cee031a2b128cf80
+    fetched_at: "2026-08-23T17:12:56Z"
+    status: present
 
   - id: oci-mariadb-11
     class: oci-app
     ref: docker.io/library/mariadb:11
     license: GPL-2.0 (server)
     provenance: https://hub.docker.com/_/mariadb
+    source_url: docker://docker.io/library/mariadb:11
+    sha256: 9564f570784504b0d37f6d53a60e6c86b4b9209a446938e3c7659019644589fd
+    fetched_at: "2026-08-23T17:13:05Z"
+    status: present
 
   - id: oci-rabbitmq-3
     class: oci-app
     ref: docker.io/library/rabbitmq:3-management
     license: MPL-2.0
     provenance: https://hub.docker.com/_/rabbitmq
+    source_url: docker://docker.io/library/rabbitmq:3-management
+    sha256: 6ec4ac64bc653409610327660a6a767e0aaa50008c529fb7c0e8312055cd4812
+    fetched_at: "2026-08-23T17:13:18Z"
+    status: present
 
-  # --- OpenWrt / rootfs tarballs (4) ---
+  # --- OpenWrt / rootfs tarballs ---
   - id: openwrt-23.05-x86-64-rootfs
     class: openwrt
     url: https://downloads.openwrt.org/releases/23.05.5/targets/x86/64/openwrt-23.05.5-x86-64-rootfs.tar.gz
     license: GPL-2.0 (OpenWrt)
     provenance: https://downloads.openwrt.org/releases/23.05.5/
-
-  - id: openwrt-23.05-x86-64-kernel
-    class: openwrt
-    ref: docker.io/openwrt/rootfs:x86-64-23.05.5
-    license: GPL-2.0 (OpenWrt)
-    provenance: https://hub.docker.com/r/openwrt/rootfs
-    notes: CP-11 substitute for combined.img.gz flash layout
-
-  - id: openwrt-22.03-armvirt-rootfs
-    class: openwrt
-    ref: docker.io/openwrt/rootfs:x86-64-22.03.7
-    license: GPL-2.0
-    provenance: https://hub.docker.com/r/openwrt/rootfs
-    notes: CP-11 amd64 substitute (armvirt tag not pullable on amd64)
+    source_url: https://downloads.openwrt.org/releases/23.05.5/targets/x86/64/openwrt-23.05.5-x86-64-rootfs.tar.gz
+    sha256: 383311300e1fd796f5a39bf09ad87bcedec61a7f09263f79cd1352757a3573a9
+    fetched_at: "2026-08-23T17:13:18Z"
+    status: present
 
   - id: openwrt-snapshot-x86-rootfs
     class: openwrt
     url: https://downloads.openwrt.org/snapshots/targets/x86/64/openwrt-x86-64-rootfs.tar.gz
     license: GPL-2.0
     provenance: https://downloads.openwrt.org/snapshots/
+    source_url: https://downloads.openwrt.org/snapshots/targets/x86/64/openwrt-x86-64-rootfs.tar.gz
+    sha256: d9de63da7e8926000607e218b8a525ce40c764f3fb9d9359228d0bf06a6049f0
+    fetched_at: "2026-08-23T17:18:51Z"
+    status: present
 
-  # --- Static / release binaries from public GitHub (8) ---
+  # --- Static / release binaries from public GitHub ---
   - id: bin-ripgrep-14.1.0
     class: static-binary
     url: https://github.com/BurntSushi/ripgrep/releases/download/14.1.0/ripgrep-14.1.0-x86_64-unknown-linux-musl.tar.gz
     license: Unlicense/MIT
     provenance: https://github.com/BurntSushi/ripgrep
+    source_url: https://github.com/BurntSushi/ripgrep/releases/download/14.1.0/ripgrep-14.1.0-x86_64-unknown-linux-musl.tar.gz
+    sha256: f84757b07f425fe5cf11d87df6644691c644a5cd2348a2c670894272999d3ba7
+    fetched_at: "2026-08-23T17:18:52Z"
+    status: present
 
   - id: bin-fd-10.2.0
     class: static-binary
     url: https://github.com/sharkdp/fd/releases/download/v10.2.0/fd-v10.2.0-x86_64-unknown-linux-musl.tar.gz
     license: Apache-2.0/MIT
     provenance: https://github.com/sharkdp/fd
+    source_url: https://github.com/sharkdp/fd/releases/download/v10.2.0/fd-v10.2.0-x86_64-unknown-linux-musl.tar.gz
+    sha256: d9bfa25ec28624545c222992e1b00673b7c9ca5eb15393c40369f10b28f9c932
+    fetched_at: "2026-08-23T17:18:52Z"
+    status: present
 
   - id: bin-bat-0.24.0
     class: static-binary
     url: https://github.com/sharkdp/bat/releases/download/v0.24.0/bat-v0.24.0-x86_64-unknown-linux-musl.tar.gz
     license: Apache-2.0/MIT
     provenance: https://github.com/sharkdp/bat
+    source_url: https://github.com/sharkdp/bat/releases/download/v0.24.0/bat-v0.24.0-x86_64-unknown-linux-musl.tar.gz
+    sha256: d39a21e3da57fe6a3e07184b3c1dc245f8dba379af569d3668b6dcdfe75e3052
+    fetched_at: "2026-08-23T17:18:52Z"
+    status: present
 
   - id: bin-cosign-2.2.4
     class: static-binary
     url: https://github.com/sigstore/cosign/releases/download/v2.2.4/cosign-linux-amd64
     license: Apache-2.0
     provenance: https://github.com/sigstore/cosign
+    source_url: https://github.com/sigstore/cosign/releases/download/v2.2.4/cosign-linux-amd64
+    sha256: 97a6a1e15668a75fc4ff7a4dc4cb2f098f929cbea2f12faa9de31db6b42b17d7
+    fetched_at: "2026-08-23T17:18:58Z"
+    status: present
 
   - id: bin-helm-3.15.3
     class: static-binary
     url: https://get.helm.sh/helm-v3.15.3-linux-amd64.tar.gz
     license: Apache-2.0
     provenance: https://helm.sh/
+    source_url: https://get.helm.sh/helm-v3.15.3-linux-amd64.tar.gz
+    sha256: ad871aecb0c9fd96aa6702f6b79e87556c8998c2e714a4959bf71ee31282ac9c
+    fetched_at: "2026-08-23T17:18:59Z"
+    status: present
 
   - id: bin-jq-1.7.1
     class: static-binary
     url: https://github.com/jqlang/jq/releases/download/jq-1.7.1/jq-linux-amd64
     license: MIT
     provenance: https://github.com/jqlang/jq
+    source_url: https://github.com/jqlang/jq/releases/download/jq-1.7.1/jq-linux-amd64
+    sha256: 5942c9b0934e510ee61eb3e30273f1b3fe2590df93933a93d7c58b81d19c8ff5
+    fetched_at: "2026-08-23T17:19:00Z"
+    status: present
 
   - id: bin-restic-0.16.4
     class: static-binary
     url: https://github.com/restic/restic/releases/download/v0.16.4/restic_0.16.4_linux_amd64.bz2
     license: BSD-2-Clause
     provenance: https://github.com/restic/restic
+    source_url: https://github.com/restic/restic/releases/download/v0.16.4/restic_0.16.4_linux_amd64.bz2
+    sha256: 22d49f5309e1f846f728b512069de25584bf7163dc2ebcda872ff2ad642a1995
+    fetched_at: "2026-08-23T17:19:00Z"
+    status: present
 
   - id: bin-hugo-0.128.0
     class: static-binary
     url: https://github.com/gohugoio/hugo/releases/download/v0.128.0/hugo_extended_0.128.0_linux-amd64.tar.gz
     license: Apache-2.0
     provenance: https://github.com/gohugoio/hugo
+    source_url: https://github.com/gohugoio/hugo/releases/download/v0.128.0/hugo_extended_0.128.0_linux-amd64.tar.gz
+    sha256: a39cd72eff188f8596f09f3a7db9195477c4ce21072d286832f9fde15ba5d336
+    fetched_at: "2026-08-23T17:19:02Z"
+    status: present
 
-  # --- Vendor / firmware-style archives (4) ---
-  - id: tplink-archer-gpl
-    class: firmware
+  # --- Substitute containers (failed firmware / flash / distroless / openwrt fetches) ---
+  # Additional substitutes beyond the five named firmware rows (found via notes:):
+  #   openwrt-23.05-x86-64-rootfs-oci  (was mislabeled *-kernel; OCI stand-in for combined.img.gz)
+  #   openwrt-22.03-x86-64-rootfs      (was mislabeled *-armvirt-*; amd64 OCI stand-in)
+  - id: subst-golang-bookworm
+    class: substitute-container
+    substitutes: firmware
+    ref: docker.io/library/golang:1.22-bookworm
+    license: BSD-3-Clause (Go) + Debian packages
+    provenance: https://hub.docker.com/_/golang
+    source_url: SUBSTITUTE
+    sha256: 696cc1e6390a8ad96b14a26e75ee5c62d603e33f680db2952b16901cc5689ec2
+    fetched_at: "2026-08-23T17:10:49Z"
+    status: present
+    notes: "CP-11 substitute for gcr.io/distroless pull/export failures in rootless podman (id was oci-distrasless-cc-debian12)"
+
+  - id: openwrt-23.05-x86-64-rootfs-oci
+    class: substitute-container
+    substitutes: openwrt
+    ref: docker.io/openwrt/rootfs:x86-64-23.05.5
+    license: GPL-2.0 (OpenWrt)
+    provenance: https://hub.docker.com/r/openwrt/rootfs
+    source_url: SUBSTITUTE
+    sha256: 6155f520533dc01b7e0d1e84ed72d67b26424a2dbef6f049e485ceb548ea6660
+    fetched_at: "2026-08-23T18:10:39Z"
+    status: present
+    notes: CP-11 substitute for combined.img.gz flash layout
+
+  - id: openwrt-22.03-x86-64-rootfs
+    class: substitute-container
+    substitutes: openwrt
+    ref: docker.io/openwrt/rootfs:x86-64-22.03.7
+    license: GPL-2.0
+    provenance: https://hub.docker.com/r/openwrt/rootfs
+    source_url: SUBSTITUTE
+    sha256: 4e9e5f0c0690185592cc888a0af76c6ddff471afad9c6f4835144a4201f85aff
+    fetched_at: "2026-08-23T18:20:47Z"
+    status: present
+    notes: CP-11 amd64 substitute (armvirt tag not pullable on amd64)
+
+  - id: subst-alpine-319
+    class: substitute-container
+    substitutes: firmware
     ref: docker.io/library/alpine:3.19
     license: Alpine Linux (mixed OSS per package)
     provenance: https://hub.docker.com/_/alpine
+    source_url: SUBSTITUTE
+    sha256: bb4b9429d6ecb315ab86e074fd572fdae7005d36575cd76768dfc59744388ba0
+    fetched_at: "2026-08-23T18:20:50Z"
+    status: present
     notes: CP-11 substitute for factory .bin squashfs flash image
 
-  - id: netgear-r7000-gpl
-    class: firmware
+  - id: subst-httpd-alpine
+    class: substitute-container
+    substitutes: firmware
     ref: docker.io/library/httpd:2.4-alpine
     license: Apache-2.0 + Alpine packages
     provenance: https://hub.docker.com/_/httpd
+    source_url: SUBSTITUTE
+    sha256: fde8b2ac67c2819f27cc685c87124cd52eb41bdc95c781ce306dcb6b5f7231aa
+    fetched_at: "2026-08-23T18:20:56Z"
+    status: present
     notes: CP-11 substitute for 404 Netgear GPL zip
 
-  - id: openwrt-layerscape-sdcard
-    class: firmware
+  - id: subst-memcached-alpine
+    class: substitute-container
+    substitutes: firmware
     ref: docker.io/library/memcached:1.6-alpine
     license: BSD + Alpine packages
     provenance: https://hub.docker.com/_/memcached
+    source_url: SUBSTITUTE
+    sha256: 063660ebda13f6ef84890860861381e40979b543e6423e5fb6a83c3b238fc015
+    fetched_at: "2026-08-23T18:21:02Z"
+    status: present
     notes: CP-11 substitute for 404 layerscape sdcard URL
 
-  - id: yocto-poky-qemuarm64
-    class: yocto
+  - id: subst-mosquitto
+    class: substitute-container
+    substitutes: firmware
     ref: docker.io/library/eclipse-mosquitto:2
     license: EPL/EDL + Alpine packages
     provenance: https://hub.docker.com/_/eclipse-mosquitto
+    source_url: SUBSTITUTE
+    sha256: 5d8b9facc17ff6d8f94f1001cd6a7caf1c814f580359259b1f0a58203f844cac
+    fetched_at: "2026-08-23T18:21:05Z"
+    status: present
     notes: CP-11 substitute for 404 Yocto/poky URLs
 
-  # --- RTOS / SDK (3) ---
+  # --- RTOS / SDK ---
   - id: zephyr-sdk-0.16.5
     class: rtos-sdk
     url: https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.16.5/zephyr-sdk-0.16.5_linux-x86_64.tar.xz
     license: Apache-2.0
     provenance: https://github.com/zephyrproject-rtos/sdk-ng
+    source_url: https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.16.5/zephyr-sdk-0.16.5_linux-x86_64.tar.xz
+    sha256: eb4495e2e04387c822f8482be116a8f4ab3d1d2bfc1c1aeb53ca67937acf0009
+    fetched_at: "2026-08-23T17:20:15Z"
+    status: present
 
   - id: esp-idf-tools
     class: rtos-sdk
     url: https://github.com/espressif/esp-idf/releases/download/v5.2.2/esp-idf-v5.2.2.zip
     license: Apache-2.0
     provenance: https://github.com/espressif/esp-idf
+    source_url: https://github.com/espressif/esp-idf/releases/download/v5.2.2/esp-idf-v5.2.2.zip
+    sha256: 068b5d8e92cb3ffed572b8e6db5c10ba10dc7b989e7febcc89ce455515f1e1ca
+    fetched_at: "2026-08-23T17:21:34Z"
+    status: present
     notes: SDK sources + prebuilt tools subset after extract
 
   - id: arm-gnu-toolchain
@@ -263,6 +458,10 @@ artifacts:
     url: https://developer.arm.com/-/media/Files/downloads/gnu/13.2.rel1/binrel/arm-gnu-toolchain-13.2.rel1-x86_64-arm-none-eabi.tar.xz
     license: GPL-3.0-with-GCC-exception
     provenance: https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads
+    source_url: https://developer.arm.com/-/media/Files/downloads/gnu/13.2.rel1/binrel/arm-gnu-toolchain-13.2.rel1-x86_64-arm-none-eabi.tar.xz
+    sha256: 6cd1bbc1d9ae57312bcd169ae283153a9572bd6a8e4eeae2fedfbc33b115fdbb
+    fetched_at: "2026-08-23T17:23:53Z"
+    status: present
 
   # --- Local benchmark ELFs (public test vectors, not shipped products) ---
   - id: bench-inventory-elves
@@ -270,4 +469,155 @@ artifacts:
     path: testdata/inventory/bin
     license: Apache-2.0 (LADING testdata)
     provenance: https://github.com/gautamtalksdev/lading/tree/main/testdata/inventory
+    source_url: path://testdata/inventory/bin
+    sha256: 5ce4ea9b07b09258e9b417bb9f5e02e20f44ce81d323c2704b9f12815ff67818
+    fetched_at: "2026-08-23T00:47:13Z"
+    status: present
     notes: Built from testdata/inventory/src; excluded from KT-1 product count
+
+  # --- Real firmware stratum (S-08) ---
+  # 12 real firmware artifacts with recorded hashes. Failed portal fetches logged in corpus/FIRMWARE-FETCH-LOG.txt (no substitutes).
+  - id: fw-netgear-r7000-firmware-1.0.12.216
+    class: firmware
+    path: corpus/downloads/fw-netgear-r7000-firmware-1.0.12.216/R7000-V1.0.12.216.zip
+    url: https://www.downloads.netgear.com/files/GDC/R7000/R7000-V1.0.12.216.zip
+    license: Netgear proprietary + GPL components
+    provenance: https://www.netgear.com/support/product/r7000
+    source_url: https://www.downloads.netgear.com/files/GDC/R7000/R7000-V1.0.12.216.zip
+    sha256: b405d2c73809986ed32b412af0ba28daa195bca9f80f582c8c3b35e5d2545772
+    fetched_at: "2026-08-24T18:49:12Z"
+    status: present
+    notes: "Netgear R7000 shipped firmware zip V1.0.12.216 from downloads.netgear.com (not a container substitute)"
+
+  - id: fw-openwrt-22.03.7-ath79-archer-c7-v5
+    class: firmware
+    path: corpus/downloads/fw-openwrt-22.03.7-ath79-archer-c7-v5/openwrt-22.03.7-ath79-generic-tplink_archer-c7-v5-squashfs-sysupgrade.bin
+    url: https://downloads.openwrt.org/releases/22.03.7/targets/ath79/generic/openwrt-22.03.7-ath79-generic-tplink_archer-c7-v5-squashfs-sysupgrade.bin
+    license: GPL-2.0 (OpenWrt)
+    provenance: https://downloads.openwrt.org/releases/22.03.7/
+    source_url: https://downloads.openwrt.org/releases/22.03.7/targets/ath79/generic/openwrt-22.03.7-ath79-generic-tplink_archer-c7-v5-squashfs-sysupgrade.bin
+    sha256: 7ebdce0efa1671e32b9ff682122f5b50185864283df973a8d7b13444696ea373
+    fetched_at: "2026-08-24T18:46:41Z"
+    status: present
+    notes: "OpenWrt 22.03.7 ath79 TP-Link Archer C7 v5 sysupgrade.bin"
+
+  - id: fw-openwrt-22.03.7-ramips-netgear-r6220
+    class: firmware
+    path: corpus/downloads/fw-openwrt-22.03.7-ramips-netgear-r6220/openwrt-22.03.7-ramips-mt7621-netgear_r6220-squashfs-sysupgrade.bin
+    url: https://downloads.openwrt.org/releases/22.03.7/targets/ramips/mt7621/openwrt-22.03.7-ramips-mt7621-netgear_r6220-squashfs-sysupgrade.bin
+    license: GPL-2.0 (OpenWrt)
+    provenance: https://downloads.openwrt.org/releases/22.03.7/
+    source_url: https://downloads.openwrt.org/releases/22.03.7/targets/ramips/mt7621/openwrt-22.03.7-ramips-mt7621-netgear_r6220-squashfs-sysupgrade.bin
+    sha256: 1280e8a618fd7488ec51a80ea065bbdb3a77b8dcdf9fb6797bd484e34a7bf89a
+    fetched_at: "2026-08-24T18:50:19Z"
+    status: present
+    notes: "OpenWrt 22.03.7 ramips/mt7621 Netgear R6220 sysupgrade.bin"
+
+  - id: fw-openwrt-22.03.7-x86-64-squashfs
+    class: firmware
+    path: corpus/downloads/fw-openwrt-22.03.7-x86-64-squashfs/openwrt-22.03.7-x86-64-generic-squashfs-combined.img.gz
+    url: https://downloads.openwrt.org/releases/22.03.7/targets/x86/64/openwrt-22.03.7-x86-64-generic-squashfs-combined.img.gz
+    license: GPL-2.0 (OpenWrt)
+    provenance: https://downloads.openwrt.org/releases/22.03.7/
+    source_url: https://downloads.openwrt.org/releases/22.03.7/targets/x86/64/openwrt-22.03.7-x86-64-generic-squashfs-combined.img.gz
+    sha256: 7647a98cdea956cc076bea35dcea2b054e51ff2efac93e2643362116b8e6eb77
+    fetched_at: "2026-08-24T18:46:39Z"
+    status: present
+    notes: "OpenWrt 22.03.7 x86/64 squashfs-combined flash image"
+
+  - id: fw-openwrt-23.05.5-armsr-armv8-squashfs
+    class: firmware
+    path: corpus/downloads/fw-openwrt-23.05.5-armsr-armv8-squashfs/openwrt-23.05.5-armsr-armv8-generic-squashfs-combined.img.gz
+    url: https://downloads.openwrt.org/releases/23.05.5/targets/armsr/armv8/openwrt-23.05.5-armsr-armv8-generic-squashfs-combined.img.gz
+    license: GPL-2.0 (OpenWrt)
+    provenance: https://downloads.openwrt.org/releases/23.05.5/
+    source_url: https://downloads.openwrt.org/releases/23.05.5/targets/armsr/armv8/openwrt-23.05.5-armsr-armv8-generic-squashfs-combined.img.gz
+    sha256: d0cbe4c44b0b1857e2d42f947fbee064d71b996f7fec9c5a6cef224c210262ad
+    fetched_at: "2026-08-24T18:46:37Z"
+    status: present
+    notes: "OpenWrt 23.05.5 armsr/armv8 squashfs-combined flash image"
+
+  - id: fw-openwrt-23.05.5-ath79-archer-c7-v5
+    class: firmware
+    path: corpus/downloads/fw-openwrt-23.05.5-ath79-archer-c7-v5/openwrt-23.05.5-ath79-generic-tplink_archer-c7-v5-squashfs-sysupgrade.bin
+    url: https://downloads.openwrt.org/releases/23.05.5/targets/ath79/generic/openwrt-23.05.5-ath79-generic-tplink_archer-c7-v5-squashfs-sysupgrade.bin
+    license: GPL-2.0 (OpenWrt)
+    provenance: https://downloads.openwrt.org/releases/23.05.5/
+    source_url: https://downloads.openwrt.org/releases/23.05.5/targets/ath79/generic/openwrt-23.05.5-ath79-generic-tplink_archer-c7-v5-squashfs-sysupgrade.bin
+    sha256: facfda629ba2da591ad60f2542e004600fdcc84550376ecefbda02f12dad1268
+    fetched_at: "2026-08-24T18:46:48Z"
+    status: present
+    notes: "OpenWrt 23.05.5 ath79 TP-Link Archer C7 v5 sysupgrade.bin"
+
+  - id: fw-openwrt-23.05.5-ramips-netgear-r6220
+    class: firmware
+    path: corpus/downloads/fw-openwrt-23.05.5-ramips-netgear-r6220/openwrt-23.05.5-ramips-mt7621-netgear_r6220-squashfs-sysupgrade.bin
+    url: https://downloads.openwrt.org/releases/23.05.5/targets/ramips/mt7621/openwrt-23.05.5-ramips-mt7621-netgear_r6220-squashfs-sysupgrade.bin
+    license: GPL-2.0 (OpenWrt)
+    provenance: https://downloads.openwrt.org/releases/23.05.5/
+    source_url: https://downloads.openwrt.org/releases/23.05.5/targets/ramips/mt7621/openwrt-23.05.5-ramips-mt7621-netgear_r6220-squashfs-sysupgrade.bin
+    sha256: 3a4e8c24ae62540aa18843efb96f99b188bba0efd8be5d255b12c0a373cd8390
+    fetched_at: "2026-08-24T18:46:50Z"
+    status: present
+    notes: "OpenWrt 23.05.5 ramips/mt7621 Netgear R6220 sysupgrade.bin"
+
+  - id: fw-openwrt-23.05.5-x86-64-squashfs
+    class: firmware
+    path: corpus/downloads/fw-openwrt-23.05.5-x86-64-squashfs/openwrt-23.05.5-x86-64-generic-squashfs-combined.img.gz
+    url: https://downloads.openwrt.org/releases/23.05.5/targets/x86/64/openwrt-23.05.5-x86-64-generic-squashfs-combined.img.gz
+    license: GPL-2.0 (OpenWrt)
+    provenance: https://downloads.openwrt.org/releases/23.05.5/
+    source_url: https://downloads.openwrt.org/releases/23.05.5/targets/x86/64/openwrt-23.05.5-x86-64-generic-squashfs-combined.img.gz
+    sha256: 788a786a7c2692cce1ac8922b71c4030958cb8ddd7f6b507fbba79c757a04fdf
+    fetched_at: "2026-08-24T18:46:34Z"
+    status: present
+    notes: "OpenWrt 23.05.5 x86/64 squashfs-combined flash image"
+
+  - id: fw-openwrt-24.10.0-ramips-netgear-r6220
+    class: firmware
+    path: corpus/downloads/fw-openwrt-24.10.0-ramips-netgear-r6220/openwrt-24.10.0-ramips-mt7621-netgear_r6220-squashfs-sysupgrade.bin
+    url: https://downloads.openwrt.org/releases/24.10.0/targets/ramips/mt7621/openwrt-24.10.0-ramips-mt7621-netgear_r6220-squashfs-sysupgrade.bin
+    license: GPL-2.0 (OpenWrt)
+    provenance: https://downloads.openwrt.org/releases/24.10.0/
+    source_url: https://downloads.openwrt.org/releases/24.10.0/targets/ramips/mt7621/openwrt-24.10.0-ramips-mt7621-netgear_r6220-squashfs-sysupgrade.bin
+    sha256: 0c6ff4722676cc5bd98170e6c1e918cb3bd895aa1e916e68093655e519a71d23
+    fetched_at: "2026-08-24T18:46:46Z"
+    status: present
+    notes: "OpenWrt 24.10.0 ramips/mt7621 Netgear R6220 sysupgrade.bin"
+
+  - id: fw-openwrt-24.10.2-x86-64-squashfs
+    class: firmware
+    path: corpus/downloads/fw-openwrt-24.10.2-x86-64-squashfs/openwrt-24.10.2-x86-64-generic-squashfs-combined.img.gz
+    url: https://downloads.openwrt.org/releases/24.10.2/targets/x86/64/openwrt-24.10.2-x86-64-generic-squashfs-combined.img.gz
+    license: GPL-2.0 (OpenWrt)
+    provenance: https://downloads.openwrt.org/releases/24.10.2/
+    source_url: https://downloads.openwrt.org/releases/24.10.2/targets/x86/64/openwrt-24.10.2-x86-64-generic-squashfs-combined.img.gz
+    sha256: 2bceffbdba4563374ae7412553b1c8b8c5394225dc38fbf3c6a33a4649811158
+    fetched_at: "2026-08-24T18:46:45Z"
+    status: present
+    notes: "OpenWrt 24.10.2 x86/64 squashfs-combined flash image"
+
+  - id: fw-yocto-5.0.9-genericx86-64-minimal-wic
+    class: firmware
+    path: corpus/downloads/fw-yocto-5.0.9-genericx86-64-minimal-wic/core-image-minimal-genericx86-64.rootfs.wic
+    url: https://downloads.yoctoproject.org/releases/yocto/yocto-5.0.9/machines/genericx86-64/core-image-minimal-genericx86-64.rootfs.wic
+    license: MIT / various (Yocto/OE)
+    provenance: https://downloads.yoctoproject.org/releases/yocto/yocto-5.0.9/
+    source_url: https://downloads.yoctoproject.org/releases/yocto/yocto-5.0.9/machines/genericx86-64/core-image-minimal-genericx86-64.rootfs.wic
+    sha256: b13ff8719106dc2291a3f5804c95bd15d5dcdb500df274d7d08b43cee20fce6a
+    fetched_at: "2026-08-24T18:48:48Z"
+    status: present
+    notes: "Yocto scarthgap 5.0.9 poky core-image-minimal genericx86-64 .wic rootfs"
+
+  - id: fw-yocto-5.0.9-qemuarm64-minimal
+    class: firmware
+    path: corpus/downloads/fw-yocto-5.0.9-qemuarm64-minimal/core-image-minimal-qemuarm64.rootfs-20250419215510.ext4
+    url: https://downloads.yoctoproject.org/releases/yocto/yocto-5.0.9/machines/qemu/qemuarm64/core-image-minimal-qemuarm64.rootfs-20250419215510.ext4
+    license: MIT / various (Yocto/OE)
+    provenance: https://downloads.yoctoproject.org/releases/yocto/yocto-5.0.9/
+    source_url: https://downloads.yoctoproject.org/releases/yocto/yocto-5.0.9/machines/qemu/qemuarm64/core-image-minimal-qemuarm64.rootfs-20250419215510.ext4
+    sha256: d8e3b8d75af8ad947a5e8cbab405692b76bcc0f31bfefd2b2bcbbab8688e6c33
+    fetched_at: "2026-08-24T18:49:10Z"
+    status: present
+    notes: "Yocto scarthgap 5.0.9 poky core-image-minimal qemuarm64 .ext4 rootfs"
+
