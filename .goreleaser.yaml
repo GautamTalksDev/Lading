@@ -45,18 +45,21 @@ archives:
       - DISCLAIMER.md
       - docs/
 
-homebrew_casks:
-  - name: lading
-    repository:
-      owner: gautamtalksdev
-      name: homebrew-tap
-      token: "{{ .Env.GITHUB_TOKEN }}"
-    directory: Casks
-    homepage: https://github.com/gautamtalksdev/lading
-    description: Deterministic compliance evidence for binary vulnerability triage
-    license: Apache-2.0
-    binaries:
-      - lading
+# homebrew_casks: disabled until the tap repo exists and a PAT with write
+# access to gautamtalksdev/homebrew-tap is added as a secret. GITHUB_TOKEN
+# cannot write to another repository. Distribution is a CP-12 concern.
+# homebrew_casks:
+#   - name: lading
+#     repository:
+#       owner: gautamtalksdev
+#       name: homebrew-tap
+#       token: "{{ .Env.GITHUB_TOKEN }}"
+#     directory: Casks
+#     homepage: https://github.com/gautamtalksdev/lading
+#     description: Deterministic compliance evidence for binary vulnerability triage
+#     license: Apache-2.0
+#     binaries:
+#       - lading
 
 checksum:
   name_template: SHA256SUMS
