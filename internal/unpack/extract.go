@@ -63,7 +63,7 @@ func ExtractTar(r io.Reader, destDir string) error {
 			if decompressed > MaxDecompressedSize {
 				return &LimitError{Entry: hdr.Name, Reason: fmt.Sprintf("decompressed size exceeds %d bytes", MaxDecompressedSize)}
 			}
-			if err := writeRegularFile(target, tr, hdr.Size); err != nil {
+			if err := writeRegularFile(destDir, target, tr, hdr.Size); err != nil {
 				if le, ok := err.(*LimitError); ok {
 					le.Entry = hdr.Name
 					return le
@@ -183,10 +183,24 @@ func resolveLinkPath(root, linkPath, target string) (string, error) {
 	return resolved, nil
 }
 
-func writeRegularFile(path string, r io.Reader, size int64) error {
+// PathEscapeError is returned when a write target escapes the extraction root.
+type PathEscapeError struct {
+	Root string
+	Path string
+}
+
+func (e *PathEscapeError) Error() string {
+	return fmt.Sprintf("unpack: path %q escapes root %q", e.Path, e.Root)
+}
+
+func writeRegularFile(root, path string, r io.Reader, size int64) error {
+	if !pathWithinRoot(root, path) {
+		return &PathEscapeError{Root: root, Path: path}
+	}
 	if err := os.MkdirAll(filepath.Dir(path), 0o750); err != nil {
 		return err
 	}
+	//nolint:gosec // G304: path re-validated against root at function entry (L197)
 	f, err := os.OpenFile(path, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0o600)
 	if err != nil {
 		return err

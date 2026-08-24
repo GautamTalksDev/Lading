@@ -8,6 +8,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"regexp"
 	"strings"
 	"time"
 )
@@ -32,8 +33,8 @@ func extractSandboxed(archivePath, outDir string) error {
 
 func unpackImageRef(ref string) (Result, error) {
 	ref = strings.TrimSpace(ref)
-	if ref == "" {
-		return Result{}, fmt.Errorf("unpack: empty image ref")
+	if err := validateImageRef(ref); err != nil {
+		return Result{}, err
 	}
 	rt, err := containerRuntime()
 	if err != nil {
@@ -46,28 +47,36 @@ func unpackImageRef(ref string) (Result, error) {
 	tmpPath := tmpTar.Name()
 	_ = tmpTar.Close()
 
-	pull := exec.Command(rt, "pull", ref)
+	//nolint:gosec // G204: rt allowlisted to podman/docker in containerRuntime(); ref validated by validateImageRef
+	pull := exec.Command(rt, "pull", "--", ref)
 	pull.Stdout = os.Stderr
 	pull.Stderr = os.Stderr
-	if err := pull.Run(); err != nil {
+	if pullErr := pull.Run(); pullErr != nil {
 		_ = os.Remove(tmpPath)
-		return Result{}, fmt.Errorf("unpack: pull %q: %w", ref, err)
+		return Result{}, fmt.Errorf("unpack: pull %q: %w", ref, pullErr)
 	}
-	create := exec.Command(rt, "create", ref)
+	//nolint:gosec // G204: rt allowlisted to podman/docker in containerRuntime(); ref validated by validateImageRef
+	create := exec.Command(rt, "create", "--", ref)
 	out, err := create.Output()
 	if err != nil {
 		_ = os.Remove(tmpPath)
 		return Result{}, fmt.Errorf("unpack: create container: %w", err)
 	}
 	cid := strings.TrimSpace(string(out))
-	defer func() { _ = exec.Command(rt, "rm", cid).Run() }()
+	if cidErr := validateContainerID(cid); cidErr != nil {
+		_ = os.Remove(tmpPath)
+		return Result{}, cidErr
+	}
+	//nolint:gosec // G204: rt allowlisted to podman/docker in containerRuntime(); cid validated by validateContainerID
+	defer func() { _ = exec.Command(rt, "rm", "--", cid).Run() }()
 
-	export := exec.Command(rt, "export", cid, "-o", tmpPath)
+	//nolint:gosec // G204: rt allowlisted to podman/docker in containerRuntime(); cid validated by validateContainerID; tmpPath is CreateTemp
+	export := exec.Command(rt, "export", "-o", tmpPath, "--", cid)
 	export.Stdout = os.Stderr
 	export.Stderr = os.Stderr
-	if err := export.Run(); err != nil {
+	if exportErr := export.Run(); exportErr != nil {
 		_ = os.Remove(tmpPath)
-		return Result{}, fmt.Errorf("unpack: export image: %w", err)
+		return Result{}, fmt.Errorf("unpack: export image: %w", exportErr)
 	}
 
 	outDir, err := os.MkdirTemp("", "lading-unpack-*")
@@ -116,17 +125,19 @@ func runPodmanExtract(rt, archivePath, outDir string) error {
 		"--security-opt", "no-new-privileges",
 		"--read-only",
 		"--tmpfs", "/tmp:rw,size=10g,mode=1777",
+		// absIn/absOut are Abs of CreateTemp/MkdirTemp paths — cannot begin with '-'.
 		"-v", absIn + ":/input:ro",
 		"-v", absOut + ":/output:rw",
 		"-v", absExe + ":/lading:ro",
 		"-e", "_LADING_UNPACK_CHILD=1",
-		sandboxImage,
+		sandboxImage, // constant
 		"/lading", "__unpack-internal",
 		"--input", "/input",
 		"--output", "/output",
 	}
 	ctx, cancel := context.WithTimeout(context.Background(), sandboxWall)
 	defer cancel()
+	//nolint:gosec // G204: rt allowlisted to podman/docker in containerRuntime(); sandboxImage is a const; volume paths are Abs of CreateTemp/MkdirTemp
 	cmd := exec.CommandContext(ctx, rt, args...)
 	cmd.Stdout = os.Stderr
 	cmd.Stderr = os.Stderr
@@ -152,14 +163,17 @@ func runUnshareExtract(archivePath, outDir string) error {
 
 	inner := []string{
 		exe, "__unpack-internal",
+		// archivePath/outDir are CreateTemp/MkdirTemp values in flag-argument position after --input/--output.
 		"--input", archivePath,
 		"--output", outDir,
 	}
 	var cmd *exec.Cmd
 	if prlimit, err := exec.LookPath("prlimit"); err == nil {
 		args := append([]string{"--as=2147483648", "--", "unshare", "-rn", "--map-root-user"}, inner...)
+		//nolint:gosec // G204: prlimit from LookPath("prlimit"); unshare args after --; archivePath/outDir are CreateTemp/MkdirTemp in flag-argument position
 		cmd = exec.CommandContext(ctx, prlimit, args...)
 	} else {
+		//nolint:gosec // G204: unshare is a literal; LookPath verified earlier; archivePath/outDir are CreateTemp/MkdirTemp in flag-argument position
 		cmd = exec.CommandContext(ctx, "unshare", append([]string{"-rn", "--map-root-user"}, inner...)...)
 	}
 	cmd.Env = append(os.Environ(), "_LADING_UNPACK_CHILD=1")
@@ -181,4 +195,61 @@ func containerRuntime() (string, error) {
 		}
 	}
 	return "", fmt.Errorf("unpack: podman or docker required for sandboxed unpacking on Linux")
+}
+
+// InvalidImageRefError is returned when an OCI image reference fails validation.
+type InvalidImageRefError struct {
+	Ref    string
+	Reason string
+}
+
+func (e *InvalidImageRefError) Error() string {
+	if e.Ref == "" {
+		return fmt.Sprintf("unpack: invalid image ref: %s", e.Reason)
+	}
+	return fmt.Sprintf("unpack: invalid image ref %q: %s", e.Ref, e.Reason)
+}
+
+// InvalidContainerIDError is returned when a container ID fails validation.
+type InvalidContainerIDError struct {
+	ID     string
+	Reason string
+}
+
+func (e *InvalidContainerIDError) Error() string {
+	if e.ID == "" {
+		return fmt.Sprintf("unpack: invalid container id: %s", e.Reason)
+	}
+	return fmt.Sprintf("unpack: invalid container id %q: %s", e.ID, e.Reason)
+}
+
+var (
+	imageRefAllowed = regexp.MustCompile(`^[a-zA-Z0-9._/:@-]+$`)
+	containerIDRe   = regexp.MustCompile(`^[0-9a-f]{12,64}$`)
+)
+
+func validateImageRef(ref string) error {
+	if ref == "" {
+		return &InvalidImageRefError{Reason: "empty"}
+	}
+	if strings.HasPrefix(ref, "--") {
+		return &InvalidImageRefError{Ref: ref, Reason: "must not begin with --"}
+	}
+	if strings.HasPrefix(ref, "-") {
+		return &InvalidImageRefError{Ref: ref, Reason: "must not begin with -"}
+	}
+	if !imageRefAllowed.MatchString(ref) {
+		return &InvalidImageRefError{Ref: ref, Reason: "contains characters outside OCI grammar [a-zA-Z0-9._/:@-]"}
+	}
+	return nil
+}
+
+func validateContainerID(cid string) error {
+	if cid == "" {
+		return &InvalidContainerIDError{Reason: "empty"}
+	}
+	if !containerIDRe.MatchString(cid) {
+		return &InvalidContainerIDError{ID: cid, Reason: "must be 12-64 lowercase hex characters"}
+	}
+	return nil
 }

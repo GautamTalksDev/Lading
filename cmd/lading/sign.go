@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"strings"
 
 	"github.com/spf13/cobra"
 )
@@ -48,16 +49,46 @@ Examples:
 	return cmd
 }
 
+// SignArgError is returned when a sign CLI argument would be parsed as a flag.
+type SignArgError struct {
+	Arg   string // path | key | output
+	Value string
+}
+
+func (e *SignArgError) Error() string {
+	return fmt.Sprintf("sign: %s %q must not begin with -", e.Arg, e.Value)
+}
+
+func validateSignArgs(path, key, output string) error {
+	for _, a := range []struct {
+		name  string
+		value string
+	}{
+		{"path", path},
+		{"key", key},
+		{"output", output},
+	} {
+		if a.value != "" && strings.HasPrefix(a.value, "-") {
+			return &SignArgError{Arg: a.name, Value: a.value}
+		}
+	}
+	return nil
+}
+
 func signFile(path string, keyless bool, key, output string) error {
 	if output == "" {
 		output = path + ".sig"
 	}
+	if err := validateSignArgs(path, key, output); err != nil {
+		return err
+	}
 	var args []string
 	if keyless {
-		args = []string{"sign-blob", "--yes", "--output-signature", output, path}
+		args = []string{"sign-blob", "--yes", "--output-signature", output, "--", path}
 	} else {
-		args = []string{"sign-blob", "--key", key, "--output-signature", output, path}
+		args = []string{"sign-blob", "--key", key, "--output-signature", output, "--", path}
 	}
+	//nolint:gosec // G204: cosign is a literal; path/key/output validated by validateSignArgs
 	cmd := exec.Command("cosign", args...)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
