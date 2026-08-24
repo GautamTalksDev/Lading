@@ -59,4 +59,4 @@ done
 if [[ "${fail}" -ne 0 ]]; then
   exit 1
 fi
-echo "ok: provenance URLs reachable"
+echo "ok: no verified component has an unreachable provenance URL"
