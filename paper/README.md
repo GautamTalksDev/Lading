@@ -1,6 +1,6 @@
 # Paper source
 
-`body.tex` holds the full text and is shared by both wrappers.
+`body.tex` holds the full text and is used by the wrapper below.
 
 `lading-paper-acmart.tex` is the submission wrapper, ACM sigconf. Compile
 this one. It requires `acmart.cls`, which is available on Overleaf and in
