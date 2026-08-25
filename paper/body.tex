@@ -1,0 +1,1026 @@
+\section{Introduction}
+
+A vulnerability scanner pointed at a shipped firmware image returns hundreds of
+CVE rows. Most are irrelevant to the binary that actually ships: the affected
+code was compiled out, never linked, or belongs to a subsystem the product does
+not use. Under the EU Cyber Resilience Act, and under the customer security
+questionnaires that already function as de facto regulation, somebody must
+justify each row. The Vulnerability Exploitability eXchange (VEX) formats carry
+those justifications in machine readable form, and one of the permitted
+justifications, \texttt{vulnerable\_code\_not\_present}, is a claim about the
+artifact rather than about its dependency graph.
+
+That claim invites automation. If the vulnerable function is named and the
+shipped binary is on disk, the question looks mechanical: is the function there
+or not. This paper reports what happened when we built that tool and measured it
+against thresholds fixed in advance.
+
+We built \textsc{Lading}, a refusal first pipeline that emits a VEX statement
+only when it can point at specific bytes on disk and re derive the reasoning
+offline. Anything short of that produces \texttt{under\_investigation}. There is
+no scoring, no heuristic, and no model in the decision path. Two kill tests were
+written into the repository README before any application code existed, and
+neither threshold moved at any point across three instrument passes.
+
+Both resolved against the tool.
+
+\subsection{Contributions}
+
+\textbf{A stage attributed termination map.} We instrument every refusal with the
+pipeline stage that produced it and report the histogram over 15,385 attributed
+findings on 55 scanned directories covering 53 catalogued shipped artifacts.
+99.60\% of findings terminate at identity resolution or manifest lookup. Zero
+terminate at a symbol table stage. The literature establishes that identity and
+naming are hard; we locate where that hardness stops a binary grounded pipeline,
+and show it stops upstream of the evidence question entirely.
+
+\textbf{A named, reproducible soundness failure for symbol based clearance.}
+Symbol table absence is a natural justification for
+\texttt{vulnerable\_code\_not\_present}. It is unsound for internal functions in
+a way that is invisible from outside: the check returns absent on every build
+regardless of whether the code ships. We found this by hand verifying our own
+tool's output, and nothing in the tool was capable of detecting it. We give the
+mechanism, the disassembly evidence, and a contrast case where the same check is
+sound.
+
+\textbf{A published, hand labelled ground truth.} One hundred statements sampled
+from real pipeline output on real artifacts, each labelled by hand against the
+binary. We are not aware of an equivalent labelled set published for binary
+grounded VEX clearance.
+
+We also report a secondary interoperability result encountered while building the
+corpus (Section~\ref{sec:interop}), in which one scanner reading one image
+through two input paths disagrees in both directions with no error emitted.
+
+\subsection{What this paper does not claim}
+
+It is not a claim that scanners disagree, which is established. It is not a claim
+that SBOM naming loses vulnerabilities, which is quantified elsewhere. It is not
+a corpus scale demonstration that symbol evidence is insufficient, because we
+never ran symbol rules at corpus scale. Section~\ref{sec:related} states these
+non claims explicitly and Section~\ref{sec:limits} bounds what we did measure.
+
+\section{Background}
+
+\subsection{Reachability as a regulatory object}
+
+The Cyber Resilience Act obliges manufacturers to document vulnerabilities in
+products placed on the EU market and to report actively exploited vulnerabilities
+on a fixed clock. A vulnerability present in a bundled component but not
+reachable in the product does not carry the same obligation. The consequence is
+economic: for a firmware vendor whose scanner emits hundreds of findings per
+release, the difference between justifying each by hand and justifying them
+automatically is a line item.
+
+Among the permitted \texttt{not\_affected} justifications, most are claims about
+program behaviour: that the code cannot be reached in execution, that an
+adversary cannot control it, that mitigations exist. Those are hard to establish
+and harder to audit. One justification is different in kind:
+\texttt{vulnerable\_code\_not\_present} asserts a fact about the artifact, and is
+the only one a deterministic inspection of the shipped bytes could hope to
+settle.
+
+\subsection{The design we tested}
+
+\textsc{Lading} takes a scanner finding and walks a chain. \emph{Identity
+resolution} maps the scanner's package reference to an upstream component; a
+Debian scanner reports \texttt{libssl3} while the advisory is filed against
+\texttt{openssl}. The match is graded from \texttt{none} to \texttt{exact} and
+only sufficient matches proceed. \emph{Manifest lookup} consults a curated
+manifest tying the CVE to the upstream functions the vulnerability lives in, each
+with a reviewed provenance URL for the fix commit. \emph{Symbol evidence} locates
+the shipped binaries and determines whether the named symbols are present.
+Finally the pipeline \emph{decides or refuses}, emitting
+\texttt{not\_affected} with a content addressed evidence bundle, emitting
+\texttt{affected}, or refusing with a reason code.
+
+Two rules can clear a finding. \textbf{D01} (\texttt{component\_not\_present})
+fires when the SBOM names a component whose identity symbols and library
+dependencies are absent from the artifact. \textbf{D02}
+(\texttt{vulnerable\_code\_not\_present}) fires when the component is present but
+the manifest named vulnerable symbol is not. A third rule, \textbf{D04}, emits
+\texttt{affected} when a vulnerable symbol is observed.
+
+The design is deliberately refusal biased. Three VEX justifications are forbidden
+in source and enforced by a CI check that greps for them: the tool will not claim
+non reachability in an execute path, non controllability by an adversary, or the
+presence of inline mitigations. None can be established from deterministic
+inventory.
+
+\subsection{Pre registration}
+
+Two kill tests were written into the repository README at the first commit,
+before any application logic existed.
+
+\textbf{KT-1 (coverage).} Across at least 40 real shipped artifacts, if fewer than
+30\% of scanner reported CVEs resolve to a decidable \texttt{not\_affected} with
+a re derivable evidence bundle, the approach does not work at usable scale.
+
+\textbf{KT-2 (soundness).} In 100 hand verified statements, even one false
+\texttt{not\_affected} means the tool is unsound. Not a rate. One.
+
+The asymmetry is deliberate. A false refusal costs a reviewer time. A false
+clearance removes a real vulnerability from somebody's radar and hands them a
+document asserting it was checked.
+
+A third clause governs how KT-1 may be read. It matters enough to quote in full,
+because Section~\ref{sec:kt1} turns on it.
+
+\begin{quote}
+\textbf{\S11, Kill test evaluability.} KT-1 tests whether $\geq$30\% of scanner
+reported CVEs resolve to a decidable \texttt{not\_affected} with a re derivable
+evidence bundle. If refusal stage attribution shows the instrument did not reach
+symbol table or evidence evaluation, that is zero symbol table refusals and
+$\geq$99\% of findings terminating at identity resolution or manifest lookup,
+KT-1 is \textbf{not evaluable}, not fail; the measured decided rate must not be
+read as an answer to the pre registered question. Three consecutive not evaluable
+results on the same corpus after instrument passes intended to restore
+evaluability constitute a pattern; the pre registered action is stop.
+\end{quote}
+
+This clause prevents a specific self deception: reporting a low decided rate as a
+finding about symbols when the pipeline never evaluated a symbol. It also caps
+how many times the instrument may be repaired before the result is the repair
+record rather than the measurement.
+
+\section{Related work}
+\label{sec:related}
+
+\paragraph{Cross tool VEX consistency.} Churakova et al.~\cite{churakova} measure
+agreement among seven VEX generation tools across 48 Docker Hub images, comparing
+reported vulnerability sets with Jaccard and Tversky overlap and running input
+type controls for direct image scanning against native SBOM ingestion. They
+attribute most divergence to differences in vulnerability database coverage,
+reporting a Pearson correlation of 0.88 between database overlap and report
+overlap. Their design measures disagreement between tools. It does not score
+false \texttt{not\_affected} claims, does not inspect shipped binaries, and by
+construction cannot isolate one tool disagreeing with itself across two ingestion
+paths, which is the shape of the result in Section~\ref{sec:interop}.
+
+\paragraph{VEX scope and component variants.} Rasheed et al.~\cite{rasheed} study
+two mismatch patterns in SBOM based composition analysis on four hand built Java
+and Maven fixtures. In their first study, Grype and CVE-Bin-Tool apply no
+suppression relative to the fixture VEX while Trivy suppresses all four cases
+including reachable ones. In their second, scanners largely ignore CycloneDX
+\texttt{pedigree.variants} lineage metadata. \textbf{We cite that inert versus
+overbroad split; we do not claim it.} Their work sits one layer above ours: they
+measure whether a scanner honours a VEX statement's scope. We measure whether the
+evidence behind such a statement can be produced at all, on native binaries
+rather than Java, and where the attempt terminates.
+
+\paragraph{Identity and naming as a known bottleneck.} That SBOM identity is
+lossy is established. As surveyed by Churakova et al.~\cite{churakova}: Cofano et
+al.~\cite{cofano} report that low SBOM precision can lose on the order of 80\% of
+vulnerabilities relative to ground truth in the Python ecosystem; Benedetti et
+al.~\cite{benedetti} estimate that roughly 20\% of vulnerabilities may be
+identifiable from generated SBOMs at current generator precision; and Dann et
+al.~\cite{dann} report a true positive rate near 34\% on a Java oriented scanner
+evaluation. We report these figures as characterised in that survey rather than
+as our own reading of the primary sources. Our contribution is not the discovery
+that
+identity is hard. It is the measurement of \emph{where} identity terminates a
+pipeline that would demand binary proof if it ever arrived there, and the
+observation that it terminates so far upstream that the binary question never
+arises.
+
+\paragraph{Non claims.} Explicitly, this paper does not claim: first report that
+scanners or VEX tools disagree; discovery of the Grype inert and Trivy overbroad
+split; discovery that SBOM naming loses vulnerabilities; corpus scale proof that
+symbol evidence is insufficient; a positive clearance rate or a KT-1 pass or fail
+verdict; general superiority of any scanner; or soundness results beyond OpenSSL
+D02 clearances.
+
+\section{Method}
+
+\subsection{Corpus}
+
+The catalogue (\texttt{ARTIFACTS.yaml}, version \texttt{cp11-3}) holds 53 product
+artifacts, all present with a recorded SHA-256, source URL and fetch timestamp.
+Artifacts that could not be obtained are recorded as absent rather than replaced
+silently; where a stand in was used it carries an explicit
+\texttt{substitute-container} class label so that no result attributes a
+container measurement to firmware. Table~\ref{tab:corpus} gives the composition.
+
+\begin{table}[t]
+\caption{Catalogued corpus composition, 53 product artifacts. Scanning covers 55
+result directories: these 53 plus two auxiliary single binary rescan directories
+discussed in Section~\ref{sec:denominator}.}
+\label{tab:corpus}
+\centering
+\begin{tabular}{lr}
+\toprule
+Class & Artifacts \\
+\midrule
+firmware & 12 \\
+oci-app & 12 \\
+oci-base & 9 \\
+static-binary & 8 \\
+substitute-container & 7 \\
+rtos-sdk & 3 \\
+openwrt & 2 \\
+\midrule
+Total & 53 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The 12 firmware class artifacts were obtained by hand: nine OpenWrt release
+images across four release series, two Yocto reference builds, and one Netgear
+consumer router image, each with a recorded hash and fetch log. Several vendor
+sources could not be retrieved at all, including a TP-Link GPL portal and Netgear
+GPL source archives; those failures are recorded in the fetch log.
+
+\paragraph{The corpus is not version uniform.} Every component version claim in
+this paper is per artifact, established from the version string in the shipped
+shared object and corroborated by package metadata. This needs stating because
+an earlier draft of our own analysis treated the corpus as carrying a single
+OpenSSL version, and it does not. Across the artifacts that produced a decision
+on the four manifest CVEs we observe seven distinct versions: 1.0.2h on the
+Netgear firmware, 3.0.11, 3.0.13, 3.0.19 and 3.0.20 across Debian and Ubuntu
+based images, and 3.5.6 and 3.5.7 on newer Debian and Alpine images. One
+artifact additionally ships a second, differently versioned copy of the library
+under a separate prefix. Section~\ref{sec:version} reports what followed from
+not having measured this earlier.
+
+\subsection{Pipeline and tool versions}
+
+Each artifact is extracted to a profile rootfs, scanned with Grype 0.115.0, and
+the findings passed to \textsc{Lading}, which emits one row per finding to
+\texttt{decisions.jsonl} together with an evidence bundle for decided rows.
+Aggregation and re derivation run from a single script. Corpus numbers flow
+through Grype only.
+
+All tool binaries were verified against official release checksums. One note on
+provenance hygiene: Trivy, used in the interoperability measurement of
+Section~\ref{sec:interop} but not in the corpus scan, was compromised twice in
+2026. The version used post dates that window and its hash matches the official
+tarball.
+
+\subsection{Two traversals of the corpus}
+\label{sec:traversals}
+
+The instrument computes corpus figures by two distinct traversals, and every
+count in this paper is labelled with the one that produced it. The
+\emph{catalogue traversal} walks \texttt{ARTIFACTS.yaml} and writes the per
+artifact binary profile. The \emph{results traversal} walks the scan result
+directories and writes the aggregate telemetry. They do not cover the same set,
+and summing one will not reproduce the other. Section~\ref{sec:denominator}
+reports the difference and its consequences rather than reconciling it, because
+the two answer different questions and both are published.
+
+\subsection{Refusal stages}
+
+Every refusal carries a reason code and every reason code maps to exactly one
+pipeline stage. The stage order in Table~\ref{tab:stages} is read from the
+implementation rather than assumed, which matters: provenance (S4) is evaluated
+after global symbol table usability (S3) and before the per component stripped
+gates (S5), not before symbols as a naive reading would suggest.
+
+\begin{table}[t]
+\caption{Pipeline stages and their reason codes.}
+\label{tab:stages}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{1.65cm}>{\raggedright\arraybackslash}p{4.15cm}@{}}
+\toprule
+ID & Stage & Reason codes \\
+\midrule
+S1 & identity resolution & \texttt{purl\_match\_\-insufficient}, \texttt{mapping\_\-probable\_only}, \texttt{no\_identity\_\-mapping}, \texttt{version\_\-underivable} \\
+S2 & manifest lookup & \texttt{manifest\_no\_entry}, \texttt{manifest\_\-probable\_only} \\
+S3 & symbol table usability & \texttt{symbol\_table\_\-unusable} \\
+S4 & provenance gate & \texttt{provenance\_\-unverified} \\
+S5 & stripped gates & \texttt{stripped\_\-insufficient\_dynsym}, \texttt{stripped\_\-static\_binary} \\
+S5b & symbol observability & \texttt{symbol\_not\_\-observable} \\
+S6 & identity unverified & \texttt{identity\_\-unverified} \\
+S7 & evidence evaluation & decided (empty code) or \texttt{default\_\-insufficient} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Stage S5b did not exist when the corpus was first scanned. It was added in
+response to the soundness finding of Section~\ref{sec:soundness}; its
+introduction is dated and reported rather than folded silently into the
+instrument.
+
+\subsection{Ground truth and the frozen snapshot}
+\label{sec:frozen}
+
+The KT-2 evidence set holds 100 statements sampled with a fixed seed from real
+\texttt{decisions.jsonl} output: 80 refusals and 20 clearances. Each was labelled
+by hand against the binary, not by reading the tool's own evidence back to
+itself.
+
+One methodological point governs how every number in Section~\ref{sec:results}
+should be read. Each row records the verdict the pipeline emitted \emph{before}
+the S5b guard was added. KT-2 asks whether those clearances were sound when
+emitted. Rescoring the same rows against the corrected engine would evaluate a
+different instrument, one modified in direct response to the finding under test,
+and would void the pre registration. The snapshot is therefore frozen, and post
+correction figures are reported separately and labelled throughout. Where a
+number could belong to either snapshot we state which.
+
+\section{Results}
+\label{sec:results}
+
+\subsection{Result 1: termination upstream of evidence}
+
+\begin{table}[t]
+\caption{Termination stage for all 15,385 attributed findings in
+\texttt{decisions.jsonl}, post guard. Results traversal.}
+\label{tab:histogram}
+\centering
+\begin{tabular}{@{}llrrr@{}}
+\toprule
+ID & Stage & Count & \% & Cum. \% \\
+\midrule
+S1 & identity resolution & 14,144 & 91.93 & 91.93 \\
+S2 & manifest lookup & 1,180 & 7.67 & \textbf{99.60} \\
+S3 & symbol table usability & \textbf{0} & 0.00 & 99.60 \\
+S4 & provenance gate & 21 & 0.14 & 99.74 \\
+S5 & stripped gates & \textbf{0} & 0.00 & 99.74 \\
+S5b & symbol observability & 35 & 0.23 & 99.97 \\
+S6 & identity unverified & 0 & 0.00 & 99.97 \\
+S7 & decided & 5 & 0.03 & 100.00 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:histogram} is the central measurement of this paper. Two entries
+are zero, and those zeros carry the result.
+
+Of 15,385 attributed findings, 15,324 (99.60\%) terminate at identity resolution
+or manifest lookup. Sixty one reach symbol evaluation or later. Five reach a
+decided verdict.
+
+The dominant reason codes are \texttt{purl\_match\_insufficient} (6,591),
+\texttt{mapping\_probable\_only} (4,183), \texttt{no\_identity\_mapping} (3,370)
+and \texttt{manifest\_no\_entry} (1,180). The first three are identity failures
+of different shapes: the package reference cannot be matched to a component with
+sufficient confidence, the available alias is probable rather than reviewed, or
+no alias exists at all.
+
+\paragraph{The zeros were the expected wall.} Table~\ref{tab:profile} shows why
+this surprised us. Across the corpus, 83.0\% of inventoried binaries are
+stripped. We designed around that constraint, built the stripped gates at S5, and
+expected them to dominate the histogram. They never fired once. The pipeline died
+so far upstream that the condition we had engineered for was never tested.
+
+\begin{table}[t]
+\caption{Binary profile by stratum, catalogue traversal, summed from the
+published per artifact profile. Containers are defined as oci-base plus oci-app
+plus substitute-container, which is the grouping the profile tool uses. The
+firmware stratum is materially less stripped and more static than the container
+stratum, so it is where symbol evidence would have been most viable.}
+\label{tab:profile}
+\centering
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Stratum & Binaries & Stripped & Static \\
+\midrule
+Firmware & 4,236 & 75.5\% & 42.9\% \\
+Containers & 18,724 & 96.6\% & 2.7\% \\
+\midrule
+All catalogued & 27,658 & 83.0\% & 18.8\% \\
+All scanned & 27,670 & 83.0\% & 18.8\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The final two rows of Table~\ref{tab:profile} are the two traversals of
+Section~\ref{sec:traversals}. They differ by 12 binaries and both are published;
+Section~\ref{sec:denominator} accounts for the difference exactly.
+
+\paragraph{Termination is not uniform across ecosystems.} On the three RPM based
+artifacts in the corpus (Fedora 40, Rocky Linux 9, UBI9 minimal),
+\texttt{no\_identity\_mapping} alone accounts for 19, 318 and 61 refusals
+respectively. This is not an RPM source package normalization failure; it is the
+absence of any alias entry at all. The alias seed carries ten rows, nine of them
+probable, and is Debian shaped. RPM artifacts fail at identity earlier and more
+completely than Debian based ones.
+
+The practical consequence is that identity resolution is not one problem solved
+once. It appears to require separate work per packaging ecosystem, and a table
+built against one distribution family will underperform on another without
+failing loudly.
+
+\paragraph{Firmware stratum.} On the 12 firmware artifacts (5,553 findings),
+95.50\% terminate at S1 and 4.27\% at S2. One finding is decided. The stratum
+with the most favourable binary profile for symbol evidence is also where
+identity resolution performs worst, consistent with firmware vendors shipping
+components whose provenance the scanner infers rather than reads.
+
+\subsection{KT-1: not evaluable}
+\label{sec:kt1}
+
+\begin{table}[t]
+\caption{Decided coverage over the 15,641 finding aggregate. Neither snapshot
+answers the pre registered question.}
+\label{tab:kt1}
+\centering
+\begin{tabular}{@{}lrr@{}}
+\toprule
+Metric & Post guard & Pre guard \\
+\midrule
+Decided & 5 & 40 \\
+Decided rate & 0.032\% & 0.2557\% \\
+\texttt{not\_affected} with bundle & 0 & 35 \\
+\texttt{affected} & 5 & 5 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The measured decided rate is 0.032\% post guard, with a 95\% Wilson interval of
+0.0137\% to 0.0748\%. The pre guard snapshot is 0.2557\%.
+
+Both are far below the 30\% bar, and it would be easy, and wrong, to record KT-1
+as a fail. The pre registered evaluability rule forbids it. Zero findings
+terminated at a symbol table stage and 99.60\% terminated before any symbol gate.
+The pipeline did not test the hypothesis KT-1 encodes and then lose; it never ran
+the test. A fail label would assert a measurement we did not make.
+
+\textbf{KT-1 is recorded as not evaluable.} An earlier reading of the same data
+labelled it fail on the 0.2557\% figure. That label is formally withdrawn, and
+the withdrawn reading is preserved in the evidence trail rather than deleted,
+because a corrected record that hides the correction is worth less than one that
+shows it.
+
+This is the third consecutive not evaluable result on this corpus, across three
+instrument passes each intended to restore evaluability. Under the pre registered
+rule, three is a pattern and the action is stop.
+
+\subsection{The denominator, stated precisely}
+\label{sec:denominator}
+
+KT-1 is computed over 15,641 findings drawn from 55 scanned directories, while
+the stage histogram covers 15,385 findings. The gap is 256 and it is fully
+accounted for. Three directories carry findings but produced no attributed
+decision rows: two auxiliary single binary rescan directories with 144 and 109
+findings, and one container base image with 3. Those sum to 256 exactly. A
+further seven directories have empty decision files and contribute nothing,
+because they carry no findings at all.
+
+The two rescan directories are not product artifacts. They are not in
+\texttt{ARTIFACTS.yaml} and the aggregate assigns them to an \texttt{unknown}
+class precisely because the lookup fails. Their 253 findings are nonetheless
+inside the pre registered KT-1 denominator by construction of the aggregation
+script. Excluding them gives 15,388, and the decided rate moves from 0.0320\% to
+0.0325\%, which changes nothing about the verdict but should be on the record
+rather than discovered by a reader.
+
+The same accounting explains the 12 binary difference between the two traversals
+in Table~\ref{tab:profile}. The results traversal includes those two rescan
+directories (one binary each) and 21 binaries attributed to a container base
+image whose payload could not be downloaded; the catalogue traversal includes 11
+binaries from a benchmark fixture that has no scan result. One of those terms
+deserves its own mention: an artifact whose payload is absent from disk, and
+which the catalogue traversal therefore reports as zero binaries, still
+contributes 21 binaries to the published inventory total through a scan summary
+written before the payload went missing. That is a stale record feeding a
+current figure, and it is the same defect class as the denominator issue above:
+two traversals that disagree about what the corpus is.
+
+\subsection{Result 2: D02 on internal symbols is unfalsifiable}
+\label{sec:soundness}
+
+Of the 40 findings that reached a decision in the pre guard snapshot, 35 were
+cleared \texttt{not\_affected} under D02. All 35 were OpenSSL, spanning three
+CVEs. KT-2 required hand verification, and the first statement examined exposed
+the defect.
+
+The pipeline claimed that \texttt{OSSL\_CRMF\_ENCRYPTEDVALUE\_decrypt} was absent
+from \texttt{libcrypto.so.3} in a Redis container image. The claim was true as
+stated. The function is not in the dynamic symbol table. It is also not in the
+dynamic symbol table of any OpenSSL build ever produced, because it is internal
+and OpenSSL does not export it.
+
+\begin{lstlisting}
+$ readelf --dyn-syms -W libcrypto.so.3 | grep -i CRMF
+OSSL_CRMF_ENCRYPTEDVALUE_free
+OSSL_CRMF_CERTID_new
+OSSL_CRMF_CERTTEMPLATE_free
+... approximately forty more
+
+$ objdump -d libcrypto.so.3 | grep -ic crmf
+597
+\end{lstlisting}
+
+The certificate request messaging subsystem is compiled in. There are 597
+references to it in executable code. The deallocation function for the exact data
+type the vulnerability operates on is exported. Debian does not build with the
+relevant feature disabled. The single thing absent is the one function the check
+looked for, and its absence was structurally guaranteed before the check ran.
+
+\paragraph{Why this is worse than a wrong answer.} A shared library presents two
+distinct surfaces. The export table lists functions other programs may call. The
+executable code contains everything the library does, most of which is private.
+Our check read the export table and treated absence there as evidence about the
+code. Those are different claims, and the great majority of a library's functions
+never appear in an export table while remaining present and executable.
+
+The clearance was therefore not merely incorrect. It was \emph{unfalsifiable}:
+there exists no binary anywhere for which that check could have returned anything
+other than absent. The tool had a rule that always says yes and reported its
+output as evidence.
+
+\begin{table*}[t]
+\caption{Symbol observability across the three cleared CVEs, with one contrast
+case. Only the last row describes a check whose outcome was capable of varying.}
+\label{tab:symbols}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}llllp{4.4cm}@{}}
+\toprule
+CVE & Symbol & Library & Exported & Code present \\
+\midrule
+CVE-2026-42767 & \texttt{OSSL\_CRMF\_ENCRYPTEDVALUE\_decrypt} & \texttt{libcrypto.so.3} & no & 597 CRMF references \\
+CVE-2026-45445 & \texttt{aes\_ocb\_cipher} & \texttt{libcrypto.so.3} & 0 & 304 OCB references \\
+CVE-2026-14456 & \texttt{port\_default\_packet\_handler} & \texttt{libssl.so.3} & 0 & 691 DTLS references; 13 exported DTLS symbols; 43 DTLS strings \\
+CVE-2023-0286 & \texttt{GENERAL\_NAME\_cmp} & \texttt{libcrypto.so.3} & \textbf{yes} & contrast case; absence here would be meaningful \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+Table~\ref{tab:symbols} shows the pattern held across all three cleared CVEs. The
+contrast row matters: \texttt{GENERAL\_NAME\_cmp} is part of the public API and
+does appear in the export table, so for that CVE the same rule produces genuine
+evidence. One symbol in four. The five surviving \texttt{affected} verdicts in
+the post guard corpus run on this path under D04.
+
+Across the corpus the 35 unsound clearances distribute as 22 instances of
+CVE-2026-14456, 9 of CVE-2026-42767 and 4 of CVE-2026-45445.
+
+\paragraph{Root cause in the manifest.} The manifest entries record these symbols
+with \texttt{confidence: definitive} and a \texttt{patch-touched-function}
+derivation. That derivation correctly identifies the function the upstream fix
+touched. It does not check whether the function is observable in a stripped,
+dynamically linked build, nor which shipped shared object hosts it. The note on
+one entry states that the function is not exported on the corpus builds and
+treats that as supporting evidence. The defect is written into the manifest by
+its own author, in plain language, and neither the author nor any check in the
+pipeline recognised it.
+
+\subsection{KT-2: fail}
+
+\begin{table}[t]
+\caption{KT-2 hand verification, 100 statements. The scored column is the
+pre registered result as recorded. The corrected column is a later overlay
+described in Section~\ref{sec:version}; the labels themselves were not
+rescored.}
+\label{tab:kt2}
+\centering
+\begin{tabular}{@{}lrr@{}}
+\toprule
+Metric & As scored & Corrected \\
+\midrule
+Statements labelled & 100 / 100 & 100 / 100 \\
+False \texttt{not\_affected} & \textbf{20 / 20} & \textbf{16 / 20} \\
+Refusals correct & 80 / 80 & 80 / 80 \\
+Overall agreement & 80\% & 84\% \\
+\textbf{Verdict} & \textbf{FAIL} & \textbf{FAIL} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+As scored, all 20 clearances in the labelled set are false and all 80 refusals
+agree with the hand label. The pre registered bar was zero false clearances, so
+KT-2 fails on the first statement examined and would fail on any of the other
+nineteen. The sample distributes as 13 instances of CVE-2026-14456, 6 of
+CVE-2026-42767 and 1 of CVE-2026-45445.
+
+Four of those 20 labels were later found to be wrong, in the direction of
+harshness: the pipeline's clearance was correct and our hand label was not.
+Section~\ref{sec:version} gives the reason. The corrected count is 16 false
+clearances, and KT-2 still fails, because the bar was one and not a rate. We
+report both columns rather than replacing one with the other, and the labelled
+file records the original label alongside a dated amendment rather than
+overwriting it.
+
+One reporting point, because this is easy to present misleadingly. Precision and
+recall computed per reason code come out at 1.000 across the four labelled
+refusal codes. That figure describes refusal rows only. The clearances carry no
+reason code and appear in the same table as a row with recall 0.000 and 20 false
+negatives. Reporting the 1.000 figures without the adjacent zero row would be an
+accurate sentence assembled into a false impression. The two must always be
+printed together.
+
+\subsection{Engine response, reported separately}
+
+After the finding, D02 was changed to refuse unless the manifest asserts
+\texttt{dynsym\_export\_verified} on every definitive vulnerable symbol. Only
+\texttt{GENERAL\_NAME\_cmp} carries that flag. Re running decide over the corpus
+converts all 35 clearances to \texttt{symbol\_not\_observable} refusals at S5b,
+28 of which were unsound and 7 of which were correct for a reason the pipeline
+never computed (Section~\ref{sec:version}).
+The post guard pipeline emits zero \texttt{not\_affected} verdicts on this
+corpus.
+
+That is the correct behaviour and it is also not a product. A clearance tool that
+clears nothing has removed its own reason to exist. It does not restore KT-1
+either: 99.60\% of findings still terminate at S1 or S2.
+
+It also, as the next section describes, did not fix the defect underneath the
+one it was aimed at.
+
+\subsection{Result 3: version applicability was never computed}
+\label{sec:version}
+
+Some days after the soundness finding was written up, we checked each of the
+four manifest CVEs against its published advisory. Two of the four do not apply
+to the versions on the artifacts where the pipeline decided them.
+
+The clearest case concerns the CVE we had described as a DTLS issue. It is not.
+It is an unbounded memory growth defect in a QUIC server component, present only
+since the release in which that component was introduced, and its advisory
+excludes the entire earlier branch that four of our artifacts ship. On those
+artifacts the vulnerable code is genuinely absent, because the subsystem does
+not exist in that branch. The pipeline's \texttt{not\_affected} was the correct
+verdict, arrived at through reasoning that had nothing to do with the reason it
+was correct.
+
+Our own supporting evidence for that CVE had compounded the error. Having
+already corrected a wrong library check, we had gone on to count references to
+the wrong protocol entirely, on a build with no QUIC server in it, and reported
+those counts as proof that the vulnerable code was present.
+
+\paragraph{Three layers, one blind spot.} The scanner reported findings on
+artifacts whose observed version its advisory excludes, and on one artifact
+reported a package version that both the package metadata and the shipped
+library contradict. The engine never compares a finding's version against the
+manifest's affected version list before a symbol rule fires; the list is data the
+implementation loads for its symbols and never consults for its versions. And
+the hand verification, ours, asked whether the symbol evidence supported the
+claim without first asking whether the claim was in scope.
+
+The consequences are bounded and worth stating precisely.
+
+\begin{table}[t]
+\caption{Reclassification of the 35 pre guard clearances once version
+applicability is computed.}
+\label{tab:version}
+\centering
+\begin{tabular}{@{}lr@{}}
+\toprule
+Category & Count \\
+\midrule
+CVE applies; symbol internal and unobservable & \textbf{28} \\
+CVE does not apply to the observed version & 7 \\
+\midrule
+Total pre guard clearances & 35 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Twenty eight of the 35 clearances remain unsound on the mechanism of
+Section~\ref{sec:soundness}. Seven were correct by accident. In the labelled
+sample the same split gives 16 false clearances rather than 20. Of the 40 pre
+guard decisions, a version gate would have terminated 7 before any symbol rule
+ran.
+
+\paragraph{What this does not overturn.} The five surviving \texttt{affected}
+verdicts are not version false: one is on firmware running a branch the advisory
+does list, and four are on a CVE whose range does include the observed versions.
+We had also written that all five rested on a single public API symbol, and that
+was wrong; they span two CVEs. One of the five is supported by evidence taken
+from a second, differently versioned copy of the library shipped under a separate
+prefix on the same image, rather than from the package the finding refers to.
+That verdict is correct, and nothing in its evidence bundle demonstrates it.
+
+\paragraph{The shape of the error.} The guard added in response to
+Section~\ref{sec:soundness} closed symbol observability. It did not close
+version applicability, library home binding, or which copy of a library an
+observation came from. A correction aimed one layer too shallow leaves the
+record looking repaired while the deeper defect is untouched, and we would not
+have found this one either had we not gone back to the advisories after the
+write up was already drafted.
+
+\subsection{D01: no corpus instance}
+
+D01 is untouched by the soundness finding, because component presence is
+observable on stripped dynamic binaries through identity symbols and library
+dependencies. It is also untested, for a reason worth reporting.
+
+The corpus produced zero D01 rows. Of 55 scanned directories, 22 carry a Grype
+match on a package whose name or PURL names OpenSSL. A path agnostic search
+locates an OpenSSL shared object on all 22, and on none is one absent. There was
+no natural instance in which the scanner reported a component the artifact did
+not contain.
+
+That absence is informative: scanner component attribution was correct on
+presence in every case we could test. The open question throughout was whether
+the vulnerable \emph{code} was present, which is exactly what D02 could not
+answer. Only a synthetic probe on a BusyBox image exercises D01, and the honest
+claim is that D01 did not fail on the single artifact tested and remains untested
+at scale.
+
+Note the three way count this depends on: 22 directories with a Grype package
+match, 19 that ever bound \texttt{component=openssl} in the pipeline, and 55
+scanned. The three RPM images appear in the 22 but not the 19, which is Result 1
+visible in a second view of the same data.
+
+\section{A secondary result: one scanner, two input paths}
+\label{sec:interop}
+
+While assembling the corpus we encountered an unrelated defect with more
+immediate practical consequence than anything above. It concerns a widely used
+open source scanner reading SBOMs produced by a widely used open source SBOM
+generator. Both findings below were reported upstream with reproductions before
+publication.
+
+\subsection{CycloneDX: partial loss, in both directions}
+
+Scanning a container image tar directly yields 409 unique CVE IDs. Generating a
+CycloneDX SBOM of the same tar, then scanning that SBOM with the same scanner
+binary against the same database on the same day, yields 137. No error is
+emitted, no warning appears, and the SBOM is schema valid.
+
+Debian files security advisories against source packages rather than the binary
+packages that install. The generator records the source package twice, as a
+namespaced property and as a PURL qualifier. The scanner's SBOM ingest path reads
+neither; it looks for its own namespaced property and, in its absence, silently
+sets the source name to the binary name. Every Debian advisory match then fails.
+
+The disagreement is bidirectional, and this matters for how the result should be
+stated. The image result contains 278 IDs absent from the SBOM result. The SBOM
+result contains 6 IDs absent from the image result. The numeric difference
+between the two counts is 272, which is 278 minus 6. Copying the value the
+generator already wrote into the property the scanner reads produces 415, which
+is exactly the union of the two sets. So the SBOM path is not simply a lossy view
+of the direct path, and neither result is a superset of the other. Any framing
+that treats the direct scan as ground truth is overstating what the data shows.
+
+Across 22 public images, 14 are affected. The most extreme moves from 335 to
+4,007 after correction. On three Debian images the count of packages whose source
+name differs from the binary name is zero out of 149, zero out of 112 and zero
+out of 88 through the SBOM path, against 114, 85 and 62 through the direct path.
+Zero on every image is not a sampling artifact. The eight unaffected images are
+APK, RPM or Go binary based, and that split along Debian's advisory model is the
+evidence for the mechanism rather than the list itself. Four of those eight
+report zero on both paths and are therefore uninformative on their own; the
+control that carries weight is a second scanner, which matches its own direct
+scan on every image and both formats we tested.
+
+Two clarifications. The mechanism was already documented by a maintainer for a
+different distribution family in 2024, and we credit that rather than claiming
+discovery; our contribution is the effect size, the control group and the
+property copy intervention. And we make no claim about which count is correct for
+triage purposes, since many recovered findings carry a distribution status that
+de prioritises them. The claim is that two paths through one tool disagree
+without saying so, and the information required to reconcile them is already in
+the file.
+
+\subsection{SPDX: the OS is never detected}
+
+The same generator asked for SPDX rather than CycloneDX, on the same tar,
+produces a document carrying 151 packages with valid PURLs. The scanner retains
+one and reports zero vulnerabilities. The surviving package is a genuine Java
+component rather than a misread system package.
+
+The debug output identifies the mechanism, and it is not PURL parsing. On the
+SPDX path the scanner logs that it detected no operating system, warns that the
+family is unsupported, and never runs OS package detection at all. On the
+CycloneDX path, from the same generator run on the same tar, it detects the
+distribution and version correctly and proceeds with 149 packages. A second
+Debian image shows the same shape: 89 packages with PURLs in the SPDX document,
+zero packages and zero vulnerabilities out, against 87 unique vulnerabilities
+from the direct scan.
+
+This reproduces across generator versions sixteen months apart. A second scanner
+reading the same SPDX documents retains the packages and matches its own direct
+scan, so the information is present and consumable.
+
+The compliance consequence is direct, and it differs in kind from the partial
+under count above. An organisation that standardises on SPDX for its regulatory
+deliverables may receive a clean bill of health from a tool that skipped its
+entire system inventory, from an artifact that is complete, valid and correct. A
+zero is indistinguishable from a genuinely clean image from outside.
+
+\section{Discussion}
+
+\subsection{Two independent reasons to stop}
+
+KT-1 asks whether the pipeline can decide at scale, and the answer is that we do
+not know, because it stops at identity. KT-2 asks whether its decisions are
+sound, and the answer is no, on a mechanism we can name. Either alone would
+justify stopping under the pre registered rule. Together they say something more
+specific than a general negative.
+
+\subsection{What symbol absence can and cannot support}
+
+The generalisable claim is narrow and, we think, useful.
+\texttt{Vulnerable\_code\_not\_present} justified by symbol table absence is sound
+only for symbols that would appear in the export map of a reference build. For
+internal functions, and internal functions are the majority, absence is
+guaranteed before the check runs and the tool will confidently clear everything
+it is pointed at.
+
+Anyone automating this needs a manifest field asserting observability, verified
+against a reference build, and needs to refuse rather than clear when it is
+absent. They also need to record which library hosts each symbol. Our engine
+searched every inventoried binary's export table indiscriminately, which allowed
+a DTLS symbol to be checked against the wrong library, since DTLS does not live
+where the rest of the cryptographic primitives do. A check against the wrong file
+is not a negative result for that CVE.
+
+Beyond that, internal functions require disassembly level evidence of absence,
+which is materially harder than reading a symbol table and is not addressed here.
+
+\subsection{Identity, not evidence, is the binding constraint}
+
+The field's attention, including ours, has been on the hard and interesting
+problem of proving code absent from a binary. Our measurement says that is not
+where the pipeline breaks. It breaks on establishing that a scanner's package
+reference and an advisory's component are the same thing, that a source package
+name in one ecosystem corresponds to an upstream project, and that a version
+string maps to a version range. Until that is solved the interesting question
+does not arise, and the per ecosystem non uniformity in
+Section~\ref{sec:results} suggests it must be solved more than once.
+
+\subsection{Two errors we made finding this}
+
+Both are in the record deliberately, because a tool whose premise is that it only
+claims what it can prove should be candid about how easy it is to prove the wrong
+thing.
+
+We checked the DTLS symbol against the wrong library first, found zero
+references, and nearly wrote it up as a correct clearance. That would have been a
+wrong conclusion reached by a wrong method that happened to agree with the answer
+we wanted. Separately, hunting for artifacts where OpenSSL was genuinely absent,
+we searched a Debian multiarch path glob and got three false candidates including
+a firmware image, before a path agnostic search cleared them.
+
+The shared defect class is assuming file layout instead of asking the filesystem.
+It cost two near misses in one afternoon on a project whose entire premise is
+deterministic evidence, and Section~\ref{sec:denominator} shows a third instance
+of the same class at the level of the corpus itself.
+
+\subsection{The uncomfortable part}
+
+The tool did not catch its own error. Nothing in its design was capable of
+noticing, because the failure was not a bug in a rule but a category error in
+what the rule's input could mean. Detection required a person with
+\texttt{readelf} and an afternoon of suspicion.
+
+That is not a comfortable conclusion for anyone automating evidence production
+for regulatory filings, and we do not have a general answer to it. The narrow
+answer is that hand verification against ground truth is not optional, and that a
+pre registered soundness bar of zero is what forced us to look.
+
+\section{Limitations}
+\label{sec:limits}
+
+\begin{enumerate}
+\item \textbf{Single implementation.} One engine, not independently
+reimplemented.
+\item \textbf{Single scanner for the corpus.} Findings come from Grype 0.115.0
+only.
+\item \textbf{OpenSSL only soundness path.} All 35 clearances and all labelled
+false clearances are OpenSSL CVEs. Nothing here establishes unsoundness for
+other components or for D01 and D04.
+\item \textbf{Version strings and backports.} Per artifact versions come from
+the string in the shipped library, corroborated by package metadata. A
+distribution that backports a fix without changing the upstream version string
+would defeat that oracle, and Debian routinely does exactly this. Our
+applicability determinations are therefore sound for the case where a version is
+outside an advisory's range entirely, which is the case we rely on, and weaker
+for the case where a version sits inside a range but may carry a backported fix.
+\item \textbf{No version gate.} The engine never computes version
+applicability (Section~\ref{sec:version}). Every clearance and every
+\texttt{affected} verdict in this paper was produced without it.
+\item \textbf{Which copy was measured.} The engine binds a symbol observation to
+any inventoried binary rather than to the library the finding names. One of the
+five \texttt{affected} verdicts is supported only by observations on a second
+copy of the library at a different version.
+\item \textbf{D01 untested at scale.} Zero natural corpus instances; one
+synthetic probe.
+\item \textbf{Frozen KT-2 snapshot.} Scores the pre guard pipeline by design
+(Section~\ref{sec:frozen}); post guard figures reported separately.
+\item \textbf{Denominator composition.} The KT-1 denominator includes 253
+findings from two directories that are not product artifacts
+(Section~\ref{sec:denominator}).
+\item \textbf{Stale record in a current figure.} The published inventory total
+includes 21 binaries from an artifact whose payload is absent from disk
+(Section~\ref{sec:denominator}).
+\item \textbf{Manifest depth.} 25 seed components, of which 7 are provenance
+verified. Most scanner CVE and component pairs have no manifest entry at all,
+which is itself part of the S2 count.
+\item \textbf{Identity alias immaturity.} Ten alias rows, nine probable, one hand
+verified definitive. The identity layer is a seed, not a mature mapping, and
+Result 1 is in part a measurement of that immaturity rather than of the ecosystem
+alone.
+\item \textbf{Layout assumptions.} Engine and analysis scripts embedded Debian
+multiarch path priors, corrected during this work.
+\item \textbf{Firmware stratum size.} 12 artifacts, one decided finding.
+\item \textbf{Static and musl release binaries.} Eight artifacts, zero decided.
+\item \textbf{Substitute artifacts.} Seven container stand ins for firmware
+targets that could not be obtained, retained with honest class labels and
+excluded from firmware stratum claims.
+\item \textbf{Three instrument passes.} Three consecutive not evaluable readings;
+the pre registered rule treats this as terminal rather than as an invitation to a
+fourth.
+\item \textbf{Interoperability tooling provenance.} Binaries used for
+Section~\ref{sec:interop} live outside the repository; hash verification against
+official checksums is the mitigation. Those figures were computed from cached
+SBOMs and re verified against a current vulnerability database at time of
+writing.
+\item \textbf{No refitting.} No threshold moved and no rule was refitted to
+observed data. Changes needed for a second version are recorded as future work.
+\end{enumerate}
+
+\section{Ethics and responsible disclosure}
+\label{sec:ethics}
+
+\paragraph{Disclosure.} Both interoperability defects in
+Section~\ref{sec:interop} were reported to the maintainers of the affected
+project, with complete reproductions on public images, before this paper was
+prepared for publication. Each report credits the prior art we found for the
+underlying mechanism and states plainly which parts of our contribution are new.
+Where an arithmetic error was found in our own filed report after posting, we
+published a correction on the same thread rather than editing the original, so
+the record shows the correction.
+
+We characterise both as interoperability gaps between namespaced metadata
+conventions rather than as defects in either tool, and we take no position on
+which of the two disagreeing counts is correct for any given triage purpose.
+Neither finding enables an attack: both cause a scanner to report fewer findings
+than another path through the same tool, which is a reporting fidelity problem
+for the operator, not a capability granted to an adversary. We did not withhold
+either report pending publication.
+
+\paragraph{No new vulnerabilities.} This work reports no previously unknown
+software vulnerability. Every CVE referenced was already public at the time of
+measurement. The soundness finding in Section~\ref{sec:soundness} is a defect in
+our own tool's reasoning, disclosed here in full.
+
+\paragraph{Scanning third party artifacts.} All artifacts were obtained from
+publicly available distribution channels: vendor firmware download pages, project
+release pages, and public container registries. Analysis was limited to static
+inspection of binaries already present on disk. No device was operated, no
+network service was probed, no access control was circumvented, and no
+proprietary artifact is redistributed by us.
+
+\paragraph{Human subjects.} None. This work involves no human participants and no
+personal data, and required no institutional ethics review.
+
+\section{Data availability and licensing}
+\label{sec:data}
+
+\paragraph{What we publish.} The corpus catalogue, recording for every artifact
+its identifier, class, source URL, fetch timestamp and SHA-256; the complete
+decision record for every finding; the evidence bundles for decided findings; the
+hand labelled ground truth; the computed metrics; and the figure provenance
+audit. Code and re derivation scripts are published under Apache 2.0; the data
+under Creative Commons Attribution 4.0.
+
+\paragraph{What we do not publish, and why.} We do not redistribute any scanned
+artifact. The corpus contains proprietary vendor firmware, container images and
+vendor supplied toolchains whose licences do not permit redistribution by a third
+party. The catalogue instead records a source URL and a cryptographic hash for
+each, so a reader can obtain the same bytes from the original publisher and
+verify they match what we measured. Where an artifact could not be obtained at
+all, the catalogue records it as absent rather than substituting something else;
+where a stand in was used it carries an explicit class label.
+
+This means reproduction depends on upstream availability. Vendor download pages
+move and release archives are withdrawn. The recorded hashes let a reader confirm
+that whatever they retrieve is what we analysed, but we cannot guarantee
+retrieval itself. We regard this as the honest trade against redistributing
+material we have no right to redistribute.
+
+\paragraph{Trademarks.} Product, project and company names referenced here are
+the trademarks of their respective owners and are used descriptively to identify
+the software measured. Their use implies no affiliation with or endorsement by
+those owners.
+
+\paragraph{Not legal advice.} This paper describes a regulatory context to
+motivate a technical problem. Nothing in it is legal advice, and nothing in it
+establishes whether any particular product, statement or artifact satisfies any
+obligation under the Cyber Resilience Act or any other regime. Responsibility for
+statements in a technical file rests with the manufacturer.
+
+\section{Conclusion}
+
+We built a binary grounded VEX clearance pipeline, pre registered two kill tests,
+and both resolved against it.
+
+The coverage test is not evaluable rather than failed, because 99.60\% of
+attributed findings terminated at identity resolution or manifest lookup before
+any binary was opened, and zero terminated at a symbol table stage despite 83\%
+of corpus binaries being stripped. The soundness test fails absolutely: of the 35
+clearances the pipeline emitted, 28 rested on absence of internal functions from
+an export map where absence was guaranteed a priori, and the remaining 7 were
+correct only because the CVE did not apply to the shipped version, which the
+pipeline never checked.
+
+The useful residue is not a tool. It is a stage attributed map of where this
+approach dies on real shipped artifacts, a named failure mode that anyone
+building symbol based clearance should know about before shipping, and a hand
+labelled ground truth that did not previously exist publicly.
+
+The corpus catalogue with hashes, every decision the pipeline made, the evidence
+bundles and the labelled statements are published. Every figure in this paper
+regenerates from a single script, and the discrepancies between the two
+traversals of Section~\ref{sec:traversals} are published as an audit record
+rather than reconciled away. The material required to prove us wrong is included
+deliberately.

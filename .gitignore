@@ -66,3 +66,7 @@ corpus/tmp/
 !testdata/inventory/bin/
 !testdata/inventory/bin/**
 !testdata/inventory/bin/*.exe
+
+# Paper build artifacts. The submission PDF is compiled from
+# paper/lading-paper-acmart.tex with acmart, not committed here.
+paper/*.pdf
