@@ -206,7 +206,11 @@ vulnerabilities" records neither which tools produced it nor that the pairing ma
   Clarification comment posted 2026-08-25:
   https://github.com/aquasecurity/trivy/discussions/11139#discussioncomment-18144443.
   States that 278 is the cardinality of image \ sbom rather than 409 minus 137,
-  lists the 6 SBOM-only IDs, and records that 415 is the union of the two sets.
+  lists the 6 SBOM-only IDs, and records that 415 is the union of the two sets.  
+  Pointer comment posted on #7850 2026-08-25:
+  https://github.com/aquasecurity/trivy/discussions/7850#discussioncomment-18144530.
+  Credits DmitriyLewen's original explanation on his own thread and routes readers
+  to #11139.
 
 - **Trivy — SPDX ingestion package loss.** **NOT YET FILED.** Draft at
   `launch/issues/trivy-002-spdx-ingest-package-loss.md`.

@@ -32,5 +32,6 @@ Bug-report and measurement threads filed with tool maintainers (distinct from pr
 | Date (UTC) | Vendor | URL | What was reported | Status |
 |------------|--------|-----|-------------------|--------|
 | 2026-08-24 | Aqua Security / Trivy | https://github.com/aquasecurity/trivy/discussions/11139 | CycloneDX Debian source-package attribution: `nginx:1.25` — 137 unique CVEs (`trivy sbom` on Syft CDX) vs 409 (`trivy image`); 278 missed (13 CRITICAL, 63 HIGH). Mechanism credited to #7850; Debian effect-size contribution. Digest `sha256:a484819eb60211f5299034ac80f6a681b06f89e65866ce91f356ed7c72af059c`. trivy 0.72.0; syft 1.51.0 and 1.22.0. | Open (False Detection discussion) |
+| 2026-08-25 | Aqua Security / Trivy | https://github.com/aquasecurity/trivy/discussions/7850#discussioncomment-18144530 | Pointer on #7850: credits DmitriyLewen's Alpine SrcName explanation; routes Debian effect-size measurement to #11139 (22 images; nginx 137 vs 409). | Posted |
 | — | Aqua Security / Trivy | — | SPDX ingestion near-total package loss (Syft spdx-json → `trivy sbom`). Draft: `launch/issues/trivy-002-spdx-ingest-package-loss.md` | **Not yet filed** |
 | — | Anchore / Syft | — | Optional `aquasecurity:trivy:SrcName` emission from existing source fields | **Not yet filed** — pending Trivy response |
