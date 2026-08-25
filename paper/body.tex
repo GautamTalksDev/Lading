@@ -536,7 +536,7 @@ CVE & Symbol & Library & Exported & Code present \\
 \midrule
 CVE-2026-42767 & \texttt{OSSL\_CRMF\_ENCRYPTEDVALUE\_decrypt} & \texttt{libcrypto.so.3} & no & 597 CRMF references \\
 CVE-2026-45445 & \texttt{aes\_ocb\_cipher} & \texttt{libcrypto.so.3} & 0 & 304 OCB references \\
-CVE-2026-14456 & \texttt{port\_default\_packet\_handler} & \texttt{libssl.so.3} & 0 & 691 DTLS references; 13 exported DTLS symbols; 43 DTLS strings \\
+CVE-2026-14456 & \texttt{port\_default\_packet\_handler} & \texttt{libssl.so.3} & 0 & \emph{Withdrawn, see Section~\ref{sec:version}.} As measured: 691 DTLS references; 13 exported DTLS symbols; 43 DTLS strings. This CVE is QUIC, not DTLS, and does not apply to the branch measured. \\
 CVE-2023-0286 & \texttt{GENERAL\_NAME\_cmp} & \texttt{libcrypto.so.3} & \textbf{yes} & contrast case; absence here would be meaningful \\
 \bottomrule
 \end{tabular}
@@ -548,8 +548,10 @@ does appear in the export table, so for that CVE the same rule produces genuine
 evidence. One symbol in four. The five surviving \texttt{affected} verdicts in
 the post guard corpus run on this path under D04.
 
-Across the corpus the 35 unsound clearances distribute as 22 instances of
-CVE-2026-14456, 9 of CVE-2026-42767 and 4 of CVE-2026-45445.
+Across the corpus the 35 clearances distribute as 22 instances of
+CVE-2026-14456, 9 of CVE-2026-42767 and 4 of CVE-2026-45445. Twenty eight of the
+35 are unsound on the mechanism above; Section~\ref{sec:version} accounts for
+the remaining seven.
 
 \paragraph{Root cause in the manifest.} The manifest entries record these symbols
 with \texttt{confidence: definitive} and a \texttt{patch-touched-function}
