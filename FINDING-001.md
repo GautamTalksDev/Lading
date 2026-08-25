@@ -22,8 +22,11 @@ defaults to the binary package name and Debian advisory matching fails for that 
 On `nginx:1.25`, this produces **137 vulnerabilities instead of 415** — same tool, same
 vulnerability database, same day, same artifact.
 
-Copying the value Syft already wrote into the property name Trivy reads restores the
-full count exactly. **No data was missing from the SBOM at any point.**
+Copying the value Syft already wrote into the property name Trivy reads produces
+**415**, which is exactly the union of the two result sets: the **409** the direct
+scan reports plus **6** nginx-package advisories that only the SBOM path surfaces.
+Neither result is a superset of the other. **No data was missing from the SBOM at
+any point.**
 
 ## 2. Effect size
 
@@ -199,7 +202,11 @@ vulnerabilities" records neither which tools produced it nor that the pairing ma
   Image digest
   `sha256:a484819eb60211f5299034ac80f6a681b06f89e65866ce91f356ed7c72af059c`.  
   Reproduced on a freshly pulled image **2026-08-24**, trivy **0.72.0**, syft **1.51.0**
-  and **1.22.0**.
+  and **1.22.0**.  
+  Clarification comment posted 2026-08-25:
+  https://github.com/aquasecurity/trivy/discussions/11139#discussioncomment-18144443.
+  States that 278 is the cardinality of image \ sbom rather than 409 minus 137,
+  lists the 6 SBOM-only IDs, and records that 415 is the union of the two sets.
 
 - **Trivy — SPDX ingestion package loss.** **NOT YET FILED.** Draft at
   `launch/issues/trivy-002-spdx-ingest-package-loss.md`.
