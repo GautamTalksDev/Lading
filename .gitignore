@@ -70,3 +70,13 @@ corpus/tmp/
 # Paper build artifacts. The submission PDF is compiled from
 # paper/lading-paper-acmart.tex with acmart, not committed here.
 paper/*.pdf
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.toc
+paper/*.fls
+paper/*.fdb_latexmk
+paper/*.synctex.gz
+paper/*.bbl
+paper/*.blg
+paper/*.cut
