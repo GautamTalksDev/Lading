@@ -15,3 +15,4 @@ This is a compliance evidence tool. Every output is a claim someone will rely on
 - When in doubt, the answer is `under_investigation`.
 - **Never** add a dependency not already in `go.mod` without asking first.
 - Prefer the standard library — `debug/elf`, `debug/pe`, `debug/macho` are stdlib and are the core of this tool.
+- Every commit must be made with git commit -s. A commit without a Signed-off-by trailer breaks DCO on this repository and cannot be amended once pushed.

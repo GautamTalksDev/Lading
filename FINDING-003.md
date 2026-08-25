@@ -1,6 +1,6 @@
 # FINDING-003: Version applicability was never computed
 
-**Status:** Draft. Not published. Labels, manifest, RESULTS, and PAPER are frozen until this finding is committed.
+**Status:** Draft. Not published. Finding committed as `c518ee3`; amendments against it in `61de30e`.
 **Date of measurement:** 2026-08-25
 **Measurement record:** [audit/CP-V2-RECHECK.md](audit/CP-V2-RECHECK.md)
 **Author:** Gautam Khosla
