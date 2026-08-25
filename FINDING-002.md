@@ -37,28 +37,28 @@ A check against the wrong `.so` is not a negative result for that CVE.
 
 ### CVE-2026-14456 / `port_default_packet_handler`
 
-- **Library:** `libssl.so.3` (DTLS/QUIC live here, not in `libcrypto.so.3`).
+- **Library:** `libssl.so.3` (QUIC port code lives here, not in `libcrypto.so.3`).
 - **`.dynsym`:** `port_default_packet_handler` **not** in `.dynsym` (**0** exported).
-- **Disassembly:** `objdump -d libssl.so.3 | grep -ic dtls` → **691**.
-- **Exports:** `nm -D --defined-only libssl.so.3 | grep -ci dtls` → **13** exported DTLS symbols (`port_default_packet_handler` is not among them).
-- **Strings:** `strings -a libssl.so.3 | grep -ci dtls` → **43**.
-- **Shape:** same as CRMF and OCB — code present, symbol private, absence from `.dynsym` guaranteed.
+- **Shape:** file-static QUIC handler — symbol private, absence from `.dynsym` guaranteed on stripped dynamically-linked builds.
 
-**Correction (part of the record).** The initial check ran `objdump -d libcrypto.so.3 | grep -icE 'dtls|packet_handler'` and recorded **0** DTLS references / **98** `quic` hits. That was the wrong library: DTLS code does not live in `libcrypto.so.3`. The numbers above replace that measurement. The first observation is retained only as the reason the check was re-run, not as evidence about CVE-2026-14456.
+**Correction (FINDING-003, 2026-08-25).** This CVE is a QUIC incoming-channel DoS, present since OpenSSL 3.5. The symbol is the patch-touched function in `ssl/quic/quic_port.c`. Earlier text treated DTLS `.text` / export / strings counts on oci-redis-7’s **3.0.20** `libssl.so.3` (691 `dtls` refs, 13 exported DTLS symbols, 43 DTLS strings) as proof the vulnerable code is present. On 3.0.20 there is no QUIC server; those DTLS counts do not attest this CVE. The initial wrong-library check (`libcrypto.so.3`) is retained only as the reason the measurement was re-run. The symbol choice was right; the DTLS wording was not.
 
 **Contrast:** `GENERAL_NAME_cmp` **is** exported from `libcrypto.so.3` (`T GENERAL_NAME_cmp@@OPENSSL_3.0.0`) — the one OpenSSL vulnerable symbol where `.dynsym` absence would be meaningful evidence of non-presence. See Manifest attribution below: that symbol belongs to CVE-2023-0286, not to CVE-2026-14456.
 
 ## Scope
 
-All **35** corpus `NOT_AFFECTED` clearances were D02 on these three CVEs. All are therefore unsound under the current evidence model:
+All **35** corpus `NOT_AFFECTED` clearances were D02 on these three CVEs.
 
-| CVE | Corpus D02 clearances |
-|-----|----------------------:|
-| CVE-2026-14456 | 22 |
-| CVE-2026-42767 | 9 |
-| CVE-2026-45445 | 4 |
+**Amendment (FINDING-003, 2026-08-25).** Seven of the 22 CVE-2026-14456 rows are on OpenSSL 3.0.x, which the advisory excludes (no 3.0.x range; present since 3.5). Those seven `NOT_AFFECTED` verdicts were correct by accident. This finding’s mechanism holds for the remaining **28** (CVE applies; D02 on an unobservable internal symbol is unfalsifiable):
 
-The real-100 KT-2 sample includes **20** of these false clearances (all pipeline `NOT_AFFECTED` rows); hand labels record **UNDER_INVESTIGATION** per this finding.
+| CVE | Corpus D02 | Unsound (CVE applies) | Accidental NA (CVE does not apply) |
+|-----|-----------:|----------------------:|-----------------------------------:|
+| CVE-2026-14456 | 22 | 15 (3.5.6 / 3.5.7) | 7 (3.0.11 / 3.0.19 / 3.0.20) |
+| CVE-2026-42767 | 9 | 9 | 0 |
+| CVE-2026-45445 | 4 | 4 | 0 |
+| **Total** | **35** | **28** | **7** |
+
+The real-100 KT-2 sample labelled all **20** pipeline `NOT_AFFECTED` rows `UNDER_INVESTIGATION`. FINDING-003 corrects four of those labels (real-008, real-031, real-035, real-086) to accidental `NOT_AFFECTED`. Corrected false-clearance count: **16 of 20**. Original `human_label` values remain in `real-100.yaml`; see that file’s `amendment_2026_08_25` block. KT-2 still **FAIL** (bar was one).
 
 ## Root cause in the manifest
 
@@ -86,10 +86,14 @@ FINDING-002 previously listed the `GENERAL_NAME_cmp` export as a contrast bullet
 ## Implication
 
 - **D02** is sound only for symbols verified present in `.dynsym` on at least one reference build (`dynsym_export_verified`). For internal functions it requires disassembly-level evidence, not symbol-table absence on the consumer binary or export map alone.
-- **D01** (`component_not_present`) is unaffected by this finding — but CP-11 produced **zero** natural D01 instances. Of **55** scanned artifacts, **22** have grype matches on package name/PURL naming OpenSSL; path-agnostic `find <rootfs> -name 'libssl.so*' -o -name 'libcrypto.so*'` locates `.so` on **all 22** (**0** without). Only **19** artifacts ever bind `component=openssl` in `decisions.jsonl`. Grype package presence was correct in every testable case; only the vulnerable-code question (D02) arose.
+- **D01** (`component_not_present`) is unaffected by this finding — but CP-11 produced **zero** natural D01 instances. Of **55** scanned artifacts, **22** have grype matches on package name/PURL naming OpenSSL; path-agnostic `find <rootfs> -name 'libssl.so*' -o -name 'libcrypto.so*'` locates `.so` on **all 22** (**0** without). Only **19** artifacts ever bind `component=openssl` in `decisions.jsonl`. Grype package *name* presence was correct in every testable case; FINDING-003 records a *version* mismatch on subst-golang-bookworm (PURL `3.0.15`, `.so` and dpkg `3.0.20`).
 - **Library home.** The observability guard closes the “internal symbol ⇒ guaranteed absence” hole, but the engine still searches every inventoried binary’s `.dynsym` indiscriminately. It does not record which library a vulnerable symbol is expected to live in. A `libcrypto.so.3` check cannot answer a `libssl.so.3` question; that binding belongs in the manifest (or the engine will keep measuring the wrong file).
 - **Layout assumptions.** Analysis during this session assumed Debian multiarch paths (`usr/lib/*/`) when hunting absent OpenSSL libraries; that produced three false D01 candidates (including Netgear firmware) before a path-agnostic `find` cleared them. Same defect class as the initial wrong-library check for CVE-2026-14456 — the instrument and its analysis scripts both embed layout priors that must be stated, not assumed.
+- **Extra copy (FINDING-003).** D04 on oci-rabbitmq-3 / CVE-2026-45445 took `aes_ocb_cipher` from `/opt/openssl` **3.1.8** while the finding is bound to distro **3.0.13**. Unsupported `AFFECTED` that happens to be version-right. Fourth instance of the layout class.
+- **Version gate (FINDING-003).** `evaluate.go` never compares a finding version to `affected_versions`. A version gate would have terminated **7 of 40** pre-guard decisions before any symbol rule. The observability guard did not close that hole.
 
 ## Engine response (2026-08-24)
 
 `decide` refuses D02 with `reason_code: symbol_not_observable` when a definitive vulnerable symbol lacks `dynsym_export_verified` in the manifest. See `internal/decide/evaluate.go` and `manifest/components/native/openssl.yaml` (`GENERAL_NAME_cmp` on CVE-2023-0286 only carries `dynsym_export_verified: true`).
+
+**FINDING-003 (2026-08-25):** that guard is observability-only. Version applicability is still uncomputed.

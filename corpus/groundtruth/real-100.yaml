@@ -4,6 +4,43 @@ source: corpus/results/*/decisions.jsonl
 notes: 'S-14 KT-2 ground truth drawn from real corpus pipeline verdicts. human_label is hand-filled (2026-08-24).
   Synthetic statements.yaml remains unit-test fixtures only and is not KT-2 evidence. 20/20 pipeline NOT_AFFECTED
   rows are FINDING-002 false clearances; 80/80 pipeline refusals confirmed UNDER_INVESTIGATION.'
+# FINDING-003 (2026-08-25). Original human_label values above and on every statement
+# are frozen. Do not treat this block as a rescoring of the pre-registered snapshot.
+amendment_2026_08_25:
+  finding: FINDING-003.md
+  commit: c518ee3f3dbc910305a5bbe4b2556408a1dee661
+  original_false_not_affected: 20
+  corrected_false_not_affected: 16
+  accidental_not_affected:
+    - id: real-008
+      cve: CVE-2026-14456
+      artifact: oci-redis-7
+      observed_openssl: "3.0.20"
+      original_human_label: UNDER_INVESTIGATION
+      corrected_human_label: NOT_AFFECTED
+      reason: CVE-2026-14456 has no 3.0.x range.
+    - id: real-031
+      cve: CVE-2026-14456
+      artifact: oci-node-20
+      observed_openssl: "3.0.19"
+      original_human_label: UNDER_INVESTIGATION
+      corrected_human_label: NOT_AFFECTED
+      reason: CVE-2026-14456 has no 3.0.x range.
+    - id: real-035
+      cve: CVE-2026-14456
+      artifact: oci-nginx-1.25
+      observed_openssl: "3.0.11"
+      original_human_label: UNDER_INVESTIGATION
+      corrected_human_label: NOT_AFFECTED
+      reason: CVE-2026-14456 has no 3.0.x range.
+    - id: real-086
+      cve: CVE-2026-14456
+      artifact: subst-golang-bookworm
+      observed_openssl: "3.0.20"
+      original_human_label: UNDER_INVESTIGATION
+      corrected_human_label: NOT_AFFECTED
+      reason: CVE-2026-14456 has no 3.0.x range. PURL asserted 3.0.15; SO and dpkg are 3.0.20.
+  dtls_wording: human_notes on CVE-2026-14456 rows that cite DTLS are superseded by FINDING-003; the symbol is QUIC.
 stratification:
   firmware_min: 40
   not_affected_min: 20
@@ -131,6 +168,12 @@ statements:
   human_notes: 'FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym
     (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on
     oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).'
+  amendment_2026_08_25:
+    finding: FINDING-003.md
+    original_human_label: UNDER_INVESTIGATION
+    corrected_human_label: NOT_AFFECTED
+    observed_openssl: "3.0.20"
+    reason: CVE-2026-14456 has no 3.0.x range.
 - id: real-009
   cve: CVE-2025-66863
   component: ''
@@ -459,6 +502,12 @@ statements:
   human_notes: 'FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym
     (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on
     oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).'
+  amendment_2026_08_25:
+    finding: FINDING-003.md
+    original_human_label: UNDER_INVESTIGATION
+    corrected_human_label: NOT_AFFECTED
+    observed_openssl: "3.0.19"
+    reason: CVE-2026-14456 has no 3.0.x range.
 - id: real-032
   cve: CVE-2026-28418
   component: ''
@@ -516,6 +565,12 @@ statements:
   human_notes: 'FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym
     (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on
     oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).'
+  amendment_2026_08_25:
+    finding: FINDING-003.md
+    original_human_label: UNDER_INVESTIGATION
+    corrected_human_label: NOT_AFFECTED
+    observed_openssl: "3.0.11"
+    reason: CVE-2026-14456 has no 3.0.x range.
 - id: real-036
   cve: CVE-2026-31699
   component: ''
@@ -1236,6 +1291,12 @@ statements:
   human_notes: 'FINDING-002: D02 on port_default_packet_handler unsound — handler not in libssl.so.3 .dynsym
     (0 exported) while objdump shows 691 DTLS references, 13 exported DTLS symbols, 43 DTLS strings on
     oci-redis-7 libssl.so.3. Initial check used libcrypto.so.3 (wrong library).'
+  amendment_2026_08_25:
+    finding: FINDING-003.md
+    original_human_label: UNDER_INVESTIGATION
+    corrected_human_label: NOT_AFFECTED
+    observed_openssl: "3.0.20"
+    reason: CVE-2026-14456 has no 3.0.x range. PURL asserted 3.0.15; SO and dpkg are 3.0.20.
 - id: real-087
   cve: CVE-2026-31723
   component: ''

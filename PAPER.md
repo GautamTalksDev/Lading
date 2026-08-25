@@ -3,7 +3,19 @@
 **Gautam Khosla**  
 Draft · 2026-08-24 · Engine `evidence-v1` · Commit `97eca4038f5d2e7ff6a4e053c01a1a0841671eb1`
 
-All figures re-derive from `bash scripts/rederive-results.sh` → `corpus/results/cp11-metrics.json`.
+All figures re-derive from `bash scripts/rederive-results.sh` → `corpus/results/cp11-metrics.json`,
+except FINDING-003 counts (28/35, 16/20, 7/40), which are read from `decisions.jsonl`
+and advisory ranges and are **not** in `cp11-metrics.json`.
+
+**Correction (2026-08-25, [FINDING-003.md](FINDING-003.md)):** Version applicability was
+never computed. Corpus OpenSSL is seven versions, not a single 3.0.20. **28 of 35**
+pre-guard D02 rows remain unsound; **7** are accidental `NOT_AFFECTED` (CVE-2026-14456
+has no 3.0.x range). KT-2 overlay: **16 of 20** remaining false clearances (frozen labels
+still 20/20). CVE-2026-14456 is QUIC, not DTLS. The five `AFFECTED` rows are not all
+CVE-2023-0286 / `GENERAL_NAME_cmp`. RabbitMQ D04 is an unsupported verdict that happens
+to be version-right. A version gate would have terminated **7 of 40** pre-guard
+decisions. `real-100.yaml` `human_label` values are frozen; overlay is
+`amendment_2026_08_25`.
 
 ---
 
@@ -21,18 +33,29 @@ reached symbol evaluation at corpus scale. Post-guard decided rate: **5 / 15,641
 
 **Result 2 (soundness).** On the **40** paths that did decide before the guard, **35**
 used D02 (`vulnerable_code_not_present`) on **internal** OpenSSL symbols — absent from
-`.dynsym` by construction while related code ships in the `.so`. Unfalsifiable, not merely
-wrong. KT-2 on **100** hand-labeled real statements: **FAIL** — **20/20** pipeline
-`not_affected` clearances false; **80/80** refusals agree ([FINDING-002.md](FINDING-002.md)).
+`.dynsym` by construction while related code ships in the `.so`. **28 of 35** are
+unfalsifiable where the CVE applies ([FINDING-002.md](FINDING-002.md)). **7 of 35** are
+accidental `NOT_AFFECTED`: CVE-2026-14456 does not apply to OpenSSL 3.0.x, a fact nobody
+computed ([FINDING-003.md](FINDING-003.md)). KT-2 on **100** hand-labeled real
+statements: **FAIL** — frozen labels **20/20** pipeline `not_affected` vs hand
+`UNDER_INVESTIGATION`; overlay **16/20** remaining false clearances; **80/80** refusals
+agree. Version applicability was never computed; a version gate would have terminated
+**7 of 40** pre-guard decisions. This is not bidirectional unsoundness: the seven
+accidental NAs and three of the five `AFFECTED` rows are version-plausible for the CVEs
+they decided; two RabbitMQ D04 rows are unsupported as to which binary the symbol was
+observed on.
 
 A post-hoc D01 probe on `oci-busybox-latest` / `busybox` did not fail on the single
 synthetic case tested; D01 had **no natural corpus instance** and is untested at scale.
 Of **55** scanned artifacts, **22** have grype matches on package name/PURL naming OpenSSL;
 path-agnostic `find` locates `libssl`/`libcrypto` on **all 22** (**0** without) — only
 **19** ever bind `component=openssl` in the pipeline. Grype package presence was correct
-in every testable case; the open question was vulnerable **code**, which D02 could not
-answer. The precise claim: **D02 on internal symbols is unsound; D01 did not fail on one
-synthetic probe but had no corpus instance; identity resolution is the binding constraint.**
+in every testable case on **name**; FINDING-003 records a **version** mismatch on
+`subst-golang-bookworm` (PURL `3.0.15`, `.so` and dpkg `3.0.20`). The open question on
+in-range rows was vulnerable **code**, which D02 could not answer. The precise claim:
+**D02 on internal symbols is unsound where the CVE applies; version applicability was
+never computed; D01 did not fail on one synthetic probe but had no corpus instance;
+identity resolution is the binding constraint at corpus scale.**
 
 Negative result under a pre-registered stop rule (README §11).
 
@@ -185,44 +208,65 @@ Where identity and manifest gates cleared (pre-guard), **35 / 40** decided rows 
 **NOT_AFFECTED** via D02 on OpenSSL CVEs whose vulnerable symbols are **file-static** —
 never exported on `.dynsym` in stripped, dynamically-linked builds.
 
-Evidence from oci-redis-7 (OpenSSL **3.0.20**):
+**FINDING-003 split.** **28 of 35** are unsound: the CVE applies, and D02 on an
+unobservable internal symbol is unfalsifiable. **7 of 35** (CVE-2026-14456 on OpenSSL
+3.0.x) are accidental `NOT_AFFECTED` — the advisory excludes 3.0.x; nobody computed
+that. Corpus OpenSSL is seven versions, not 3.0.20.
+
+Evidence from oci-redis-7 (OpenSSL **3.0.20** — in range for 42767 and 45445; **out of
+range** for 14456):
 
 | CVE | Symbol | Library | `.dynsym` | Code present |
 |-----|--------|---------|-----------|--------------|
 | CVE-2026-42767 | `OSSL_CRMF_ENCRYPTEDVALUE_decrypt` | `libcrypto.so.3` | absent (CRMF API exported) | **597** `crmf` refs in `.text` |
 | CVE-2026-45445 | `aes_ocb_cipher` | `libcrypto.so.3` | **0** exported | **304** `ocb` refs |
-| CVE-2026-14456 | `port_default_packet_handler` | `libssl.so.3` | **0** exported | **691** `dtls` refs; **13** exported DTLS syms; **43** DTLS strings |
+| CVE-2026-14456 | `port_default_packet_handler` | `libssl.so.3` | **0** exported | QUIC handler; not DTLS. This artifact is 3.0.20, which the advisory excludes. Unsound 14456 rows are the **15** on 3.5.x. |
 
-**Correction (part of the record):** CVE-2026-14456 was initially checked against
-`libcrypto.so.3` (0 DTLS refs). DTLS lives in `libssl.so.3`. The wrong-library check
-is retained only as the reason the measurement was re-run.
+**Withdrawn (DTLS wording):** earlier text treated 691 `dtls` refs / 13 exported DTLS
+symbols / 43 DTLS strings on this 3.0.20 `libssl.so.3` as proof the vulnerable code is
+present. CVE-2026-14456 is a QUIC incoming-channel DoS, present since 3.5. The symbol
+is the patch-touched function in `ssl/quic/quic_port.c`. The initial wrong-library
+check (`libcrypto.so.3`) is retained only as the reason the measurement was re-run.
 
 **Contrast (exported, D02-sound in principle):** `GENERAL_NAME_cmp` is exported from
-`libcrypto.so.3` (`T GENERAL_NAME_cmp@@OPENSSL_3.0.0`) — CVE-2023-0286 only; the five
-post-guard **AFFECTED** rows use this path (D04).
+`libcrypto.so.3` (`T GENERAL_NAME_cmp@@OPENSSL_3.0.0`) — CVE-2023-0286 only.
+
+**Withdrawn (PAPER.md 200–202):** this draft previously asserted that all five
+post-guard `AFFECTED` rows use the `GENERAL_NAME_cmp` path. They do not. One is
+CVE-2023-0286 / `GENERAL_NAME_cmp` on Netgear 1.0.2h (in range). Two are
+CVE-2026-45445 / `aes_ocb_cipher` on oci-node-20 3.0.19 (in range, symbol in
+`/usr/local/bin/node` `.symtab`). Two are CVE-2026-45445 on oci-rabbitmq-3: finding
+PURL 3.0.13 is in range, but `symbols_present` evidence is `/opt/openssl` **3.1.8**,
+not the distro 3.0.13 object — an unsupported `AFFECTED` that happens to be
+version-right ([FINDING-003.md](FINDING-003.md)).
 
 **Mechanism:** On a dynamically-linked `.so`, D02 observes only `.dynsym`. Internal
 functions are absent from the export map whether or not their code is compiled in.
 Absence is guaranteed a priori → verdict unfalsifiable.
 
 Post-guard engine response: refuse D02 when `dynsym_export_verified` is unset
-(`symbol_not_observable`, S5b). All **35** unsound clears converted.
+(`symbol_not_observable`, S5b). All **35** D02 rows converted to S5b. That guard is
+observability-only; version applicability is still uncomputed. A version gate would
+have terminated **7 of 40** pre-guard decisions before any symbol rule.
 
-Full analysis: [FINDING-002.md](FINDING-002.md).
+Full analysis: [FINDING-002.md](FINDING-002.md), [FINDING-003.md](FINDING-003.md).
 
 ### 4.4 KT-2 — FAIL
 
-| Metric | Value |
-|--------|------:|
-| Hand labels | **100 / 100** |
-| False `not_affected` | **20 / 20** pipeline `NOT_AFFECTED` rows |
-| Refusal agreement | **80 / 80** |
-| **Verdict** | **FAIL** |
+| Metric | Frozen labels | FINDING-003 overlay |
+|--------|--------------:|--------------------:|
+| Hand labels | **100 / 100** | same file; `human_label` unchanged |
+| False `not_affected` | **20 / 20** pipeline `NOT_AFFECTED` rows | **16 / 20** remaining; **4** accidental NA (real-008, real-031, real-035, real-086) |
+| Refusal agreement | **80 / 80** | **80 / 80** |
+| **Verdict** | **FAIL** | **FAIL** (bar was one) |
 
-All **20** false clearances are OpenSSL D02 on the three internal-symbol CVEs above.
-Hand check: `UNDER_INVESTIGATION`. On refusal rows only, precision and recall are
-**1.000** for the four labeled `reason_code` values; the `(none)` row (recall **0.000**,
-fn=**20**) captures the false clearances excluded from that denominator.
+All **20** frozen disagreements are OpenSSL D02 on the three internal-symbol CVEs.
+Overlay: **16** remain false clearances (FINDING-002 holds; CVE applies). **4** are
+accidental `NOT_AFFECTED` (CVE-2026-14456 vs observed 3.0.x). Hand check on the
+frozen file is still `UNDER_INVESTIGATION`; the overlay lives in
+`amendment_2026_08_25`. On refusal rows only, precision and recall are **1.000** for
+the four labeled `reason_code` values; the `(none)` row (recall **0.000**, fn=**20**)
+is the frozen-label count. `cp11-metrics.json` was not re-derived.
 
 ### 4.5 D01 — no corpus instance; synthetic probe only
 
@@ -246,9 +290,10 @@ natural corpus instance.
 PURL → D01 / `component_not_present`. D01 did not fail on this one artifact; corpus-scale
 D01 soundness remains untested.
 
-**Interpretation:** for every grype package-match case we could test, scanner **presence**
-was correct; the open question was always vulnerable **code** — precisely what D02 could
-not answer.
+**Interpretation:** for every grype package-match case we could test, scanner **name**
+presence was correct; FINDING-003 records a **version** mismatch on
+`subst-golang-bookworm`. On in-range rows the open question was vulnerable **code** —
+precisely what D02 could not answer.
 
 ### 4.6 Binary profile
 
@@ -265,7 +310,7 @@ Stripping did not bind: identity stopped evaluation first.
 | | KT-1 | KT-2 |
 |---|------|------|
 | Question | Can the pipeline decide at scale? | Are decided clearances sound? |
-| Answer | **NOT EVALUABLE** — stops at identity | **FAIL** — D02 unfalsifiable on internals |
+| Answer | **NOT EVALUABLE** — stops at identity | **FAIL** — D02 unfalsifiable on internals where the CVE applies; version never computed |
 | Implication | Fix identity before measuring clearance rate | D02 needs export verification or disassembly |
 
 Per §11, **both** justify stop: unreachable instrument **and** unsound clearances where
@@ -292,6 +337,8 @@ D01 soundness remains untested.
 1. Verifiable distro source-package ↔ upstream mappings (S1 dominates today).
 2. PURL `upstream=` as assertion, not evidence ([FINDING-001.md](FINDING-001.md)).
 3. Manifest depth beyond **25** seed components.
+4. A version-applicability gate before any symbol rule
+   ([FINDING-003.md](FINDING-003.md)); the observability guard did not close that hole.
 
 ---
 
@@ -300,8 +347,13 @@ D01 soundness remains untested.
 1. **Single engine implementation** — `evidence-v1`; not independently reimplemented.
 2. **Frozen KT-2 snapshot** — scores pre-guard pipeline; deliberate pre-registration
    discipline (§3.4).
-3. **OpenSSL-only soundness path** — all **35** D02 clears and **20** KT-2 false NAs are
-   OpenSSL internal-symbol CVEs; other components untested at evidence stage.
+3. **OpenSSL-only soundness path** — all **35** D02 clears and **20** frozen KT-2 NA
+   disagreements are OpenSSL internal-symbol CVEs; other components untested at evidence
+   stage. Overlay: **28 of 35** unsound; **16 of 20** remaining false clearances
+   ([FINDING-003.md](FINDING-003.md)). Observed versions use `strings -a` plus
+   `dpkg`/`apk`; a rebuilt or patched distro object can carry a version token that does
+   not reflect backported fixes (Debian’s CVE handling). FINDING-003 in-range /
+   out-of-range calls use that upstream token; they do not prove a specific Debian patch.
 4. **D01: no corpus instance; one synthetic probe** — **22 / 55** artifacts have grype
    package-name/PURL OpenSSL matches; **19 / 55** bind `component=openssl` in
    `decisions.jsonl`; path-agnostic `find` locates `.so` on **all 22**; **zero** D01 rows
@@ -309,7 +361,8 @@ D01 soundness remains untested.
 5. **Layout assumptions** — analysis scripts and the engine initially assumed Debian
    multiarch paths (`usr/lib/*/`); three false D01 candidates (including Netgear) cleared
    only after path-agnostic search — same defect class as the wrong-library CVE-2026-14456
-   check (FINDING-002).
+   check (FINDING-002). RabbitMQ D04 `symbols_present` on `/opt/openssl` 3.1.8 vs finding
+   PURL 3.0.13 is a fourth instance (FINDING-003).
 6. **Firmware stratum** — **12** artifacts; **1/5,553** decided post-guard.
 7. **Manifest seed** — **25** components; **7** provenance-verified.
 8. **Identity aliases** — **9/10** probable only.
@@ -324,14 +377,19 @@ D01 soundness remains untested.
 
 Under README §11:
 
-**Stop.** KT-1 **NOT EVALUABLE** (third consecutive). KT-2 **FAIL** (20/20 false
-clearances). Post-guard: **0** `not_affected`, **5** `affected`, **0.032%** decided.
+**Stop.** KT-1 **NOT EVALUABLE** (third consecutive). KT-2 **FAIL** (frozen 20/20;
+overlay **16/20** remaining false clearances). Post-guard: **0** `not_affected`,
+**5** `affected`, **0.032%** decided. Version applicability was never computed.
 
 **Publish:** A stage-attributed termination map plus a named internal-symbol D02 failure
-mode with re-derivable binary evidence — not a clearance product.
+mode with re-derivable binary evidence, plus the missing version gate
+([FINDING-003.md](FINDING-003.md)) — not a clearance product.
 
-**Do not publish:** The pipeline rarely clears **and** when it did, clearance was not
-reliable. Those are different claims; both are supported.
+**Do not publish:** The pipeline rarely clears **and** where the CVE applied, D02
+clearance on internal symbols was unfalsifiable. Those are different claims; both are
+supported. Do not publish that every decided row was the wrong verdict: seven D02 NAs
+and three of five `AFFECTED` rows are version-plausible; two RabbitMQ D04 rows are
+unsupported, not version-wrong.
 
 ---
 
