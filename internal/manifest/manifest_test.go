@@ -57,6 +57,38 @@ func TestLoad_SeedEntries(t *testing.T) {
 	}
 }
 
+func TestLoad_DynsymExportVerified(t *testing.T) {
+	m, err := manifest.Load(manifestRoot(t))
+	if err != nil {
+		t.Fatal(err)
+	}
+	ents, ok := m.LookupCVE("CVE-2023-0286")
+	if !ok || len(ents) == 0 {
+		t.Fatal("missing CVE-2023-0286")
+	}
+	found := false
+	for _, vs := range ents[0].VulnerableSymbols {
+		if vs.Name == "GENERAL_NAME_cmp" {
+			found = true
+			if !vs.DynsymExportVerified {
+				t.Fatal("GENERAL_NAME_cmp must carry dynsym_export_verified (FINDING-002)")
+			}
+		}
+	}
+	if !found {
+		t.Fatal("CVE-2023-0286 missing GENERAL_NAME_cmp")
+	}
+	zlib, ok := m.LookupCVE("CVE-2022-37434")
+	if !ok || len(zlib) == 0 {
+		t.Fatal("missing CVE-2022-37434")
+	}
+	for _, vs := range zlib[0].VulnerableSymbols {
+		if vs.DynsymExportVerified {
+			t.Fatalf("%s: absent dynsym_export_verified must default false", vs.Name)
+		}
+	}
+}
+
 func TestLoad_RejectsMissingProvenance(t *testing.T) {
 	dir := t.TempDir()
 	writeMinimalManifestTree(t, dir, `

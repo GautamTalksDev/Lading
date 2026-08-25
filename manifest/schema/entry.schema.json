@@ -97,6 +97,11 @@
           "enum": ["definitive", "probable"],
           "description": "probable entries must never drive not_affected."
         },
+        "dynsym_export_verified": {
+          "type": "boolean",
+          "default": false,
+          "description": "Asserts the symbol was verified present in .dynsym on a reference build. D02 refuses with reason_code symbol_not_observable when this field is absent or false. See FINDING-002."
+        },
         "provenance": { "$ref": "#/$defs/provenance" }
       }
     },

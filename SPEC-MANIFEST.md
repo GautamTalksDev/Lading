@@ -83,7 +83,10 @@ entries:
 |-------|----------|---------|
 | `name` | yes | Normalized symbol name |
 | `confidence` | yes | `definitive` or `probable` |
+| `dynsym_export_verified` | no (default: `false`) | Asserts the symbol was verified present in `.dynsym` on a reference build. D02 refuses with `reason_code: symbol_not_observable` when this field is absent or false. See FINDING-002. |
 | `provenance` | yes | See below — **must include a fix-commit URL** |
+
+**Export observability.** D02 (`vulnerable_code_not_present`) is sound only when the named function is observable in `.dynsym`. Internal (file-static or hidden) functions are absent from the export map whether or not their code shipped; treating that absence as evidence is unfalsifiable (FINDING-002). Set `dynsym_export_verified: true` only after confirming the symbol on a reference build. The engine does not infer this flag.
 
 ### `provenance` fields (hard rules)
 
