@@ -138,6 +138,17 @@ regenerates from \texttt{scripts/rederive-results.sh}. Archived dataset:
 We thank the maintainers of the open source scanning tools measured here. Both
 defects reported in Section~\ref{sec:interop} were filed upstream with
 reproductions before publication.
+
+\paragraph{Use of generative AI.} A large language model assistant was used
+during this work for drafting and editing prose, for reviewing arguments and
+figures, and for generating shell and analysis scripts under direction. It was
+not used to produce any measurement, any decision record, or any hand label.
+Every figure reported here derives from the published scripts and data, and
+every claim was verified by the author against primary sources: the
+vulnerability advisories, the binaries themselves, and the cited literature.
+Two errors introduced during earlier drafting were found by that verification
+and are reported in Sections~\ref{sec:soundness} and~\ref{sec:version} rather
+than removed. The author is solely responsible for the content.
 \end{acks}
 
 \bibliographystyle{ACM-Reference-Format}
@@ -155,19 +166,23 @@ composition analysis.
 \newblock arXiv:2604.21278.
 
 \bibitem{cofano}
-D. Cofano et al.
-\newblock On SBOM precision and vulnerability loss in the Python ecosystem.
-\newblock CITATION TO BE COMPLETED FROM THE PRIMARY SOURCE.
+S. Cofano, G. Benedetti, and M. Dell'Amico.
+\newblock SBOM generation tools in the Python ecosystem: an in detail analysis.
+\newblock arXiv:2409.01214, 2024.
 
 \bibitem{benedetti}
-G. Benedetti et al.
-\newblock On the identifiability of vulnerabilities from generated SBOMs.
-\newblock CITATION TO BE COMPLETED FROM THE PRIMARY SOURCE.
+G. Benedetti, S. Cofano, A. Brighente, and M. Conti.
+\newblock The impact of SBOM generators on vulnerability assessment in Python:
+a comparison and a novel approach.
+\newblock In \emph{Applied Cryptography and Network Security (ACNS)}, 2025.
+arXiv:2409.06390.
 
 \bibitem{dann}
-A. Dann et al.
-\newblock Evaluating software composition analysis tools.
-\newblock CITATION TO BE COMPLETED FROM THE PRIMARY SOURCE.
+A. Dann, H. Plate, B. Hermann, S. E. Ponta, and E. Bodden.
+\newblock Identifying challenges for OSS vulnerability scanners: a study and
+test suite.
+\newblock \emph{IEEE Transactions on Software Engineering}, 48(9):3613--3625,
+2022.
 
 \end{thebibliography}
 

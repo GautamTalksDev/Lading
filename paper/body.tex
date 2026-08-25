@@ -170,12 +170,11 @@ rather than Java, and where the attempt terminates.
 
 \paragraph{Identity and naming as a known bottleneck.} That SBOM identity is
 lossy is established. As surveyed by Churakova et al.~\cite{churakova}: Cofano et
-al.~\cite{cofano} report that low SBOM precision can lose on the order of 80\% of
-vulnerabilities relative to ground truth in the Python ecosystem; Benedetti et
-al.~\cite{benedetti} estimate that roughly 20\% of vulnerabilities may be
-identifiable from generated SBOMs at current generator precision; and Dann et
-al.~\cite{dann} report a true positive rate near 34\% on a Java oriented scanner
-evaluation. We report these figures as characterised in that survey rather than
+al.~\cite{cofano} analyse the accuracy of SBOM generators in the Python
+ecosystem; Benedetti et al.~\cite{benedetti} measure the downstream effect and
+estimate that roughly 20\% of vulnerabilities are identifiable from generated
+SBOMs at current generator precision; and Dann et al.~\cite{dann} report a low
+true positive rate on a Java oriented scanner test suite. We report these figures as characterised in that survey rather than
 as our own reading of the primary sources. Our contribution is not the discovery
 that
 identity is hard. It is the measurement of \emph{where} identity terminates a
