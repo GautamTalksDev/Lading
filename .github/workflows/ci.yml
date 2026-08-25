@@ -71,7 +71,7 @@ jobs:
           # testdata/evidence-pack/test-sign.key (gitignore *.key; not in CI).
           KEY="$(mktemp)"
           openssl genpkey -algorithm ED25519 -out "$KEY"
-          head -n 1 "$KEY" | grep -qx '-----BEGIN PRIVATE KEY-----'
+          head -n 1 "$KEY" | grep -qx -e '-----BEGIN PRIVATE KEY-----'
           ./bin/lading evidence --artifact "$ART" --scan-dir "$SCAN" --timestamp "$TS" --sign-key "$KEY" --out /tmp/e1.html
           ./bin/lading evidence --artifact "$ART" --scan-dir "$SCAN" --timestamp "$TS" --sign-key "$KEY" --out /tmp/e2.html
           cmp /tmp/e1.html /tmp/e2.html

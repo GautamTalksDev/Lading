@@ -21,6 +21,7 @@ list_fixtures() {
   python3 - <<'PY'
 from pathlib import Path
 import re
+import sys
 mk = Path("testdata/inventory/Makefile").read_text(encoding="utf-8")
 # Capture the FIXTURES := \ … block until a blank line or non-continuation.
 m = re.search(r"^FIXTURES\s*:=\s*((?:\\\n|.*\n)*?)(?=^\S|\Z)", mk, re.M)
@@ -40,12 +41,20 @@ for line in block.splitlines():
     paths.append(line)
 if not paths:
     raise SystemExit("check-fixtures: empty FIXTURES list")
-print("\n".join(paths))
+# Binary write: CPython on Windows translates LF to CRLF in text mode,
+# and a trailing CR makes a tracked path miss the index lookup.
+sys.stdout.buffer.write(("\n".join(paths) + "\n").encode("utf-8"))
 PY
+}
+
+# Drop CR from captured lines (python3 / git.exe / Git Bash on Windows).
+cr_strip() {
+  printf '%s' "${1//$'\r'/}"
 }
 
 FIXTURES=()
 while IFS= read -r line || [[ -n "${line}" ]]; do
+  line="$(cr_strip "${line}")"
   [[ -z "${line}" ]] && continue
   FIXTURES+=("${line}")
 done < <(list_fixtures)
@@ -68,7 +77,10 @@ file_sha256() {
 
 fail=0
 for rel in "${FIXTURES[@]}"; do
-  if ! git ls-files --error-unmatch "${rel}" >/dev/null 2>&1; then
+  # Exact index path. git.exe may emit CRLF; strip before ==.
+  listed="$(git ls-files -- "${rel}")"
+  listed="$(cr_strip "${listed}")"
+  if [[ "${listed}" != "${rel}" ]]; then
     echo "check-fixtures: NOT TRACKED by git: ${rel}" >&2
     fail=1
     continue
@@ -91,6 +103,8 @@ if [[ "${CHECK_HASH}" -eq 1 ]]; then
     exit 1
   fi
   while read -r expect path || [[ -n "${expect:-}" ]]; do
+    expect="$(cr_strip "${expect}")"
+    path="$(cr_strip "${path}")"
     [[ -z "${expect}" || "${expect}" =~ ^# ]] && continue
     path="${path#./}"
     if [[ ! -f "${path}" ]]; then
@@ -98,7 +112,7 @@ if [[ "${CHECK_HASH}" -eq 1 ]]; then
       fail=1
       continue
     fi
-    got="$(file_sha256 "${path}")"
+    got="$(cr_strip "$(file_sha256 "${path}")")"
     if [[ "${got}" != "${expect}" ]]; then
       echo "check-fixtures: hash mismatch ${path}" >&2
       echo "  expected ${expect}" >&2
@@ -109,8 +123,9 @@ if [[ "${CHECK_HASH}" -eq 1 ]]; then
 
   # Every Makefile fixture must appear in FIXTURES.sha (and vice versa is covered above).
   while IFS= read -r rel || [[ -n "${rel}" ]]; do
+    rel="$(cr_strip "${rel}")"
     [[ -z "${rel}" ]] && continue
-    if ! grep -q " ${rel}\$" "${SHA_FILE}" && ! grep -q " ${rel}$" "${SHA_FILE}"; then
+    if ! tr -d '\r' < "${SHA_FILE}" | grep -q " ${rel}$"; then
       echo "check-fixtures: Makefile fixture missing from FIXTURES.sha: ${rel}" >&2
       fail=1
     fi
