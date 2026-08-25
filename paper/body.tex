@@ -7,7 +7,7 @@ not use. Under the EU Cyber Resilience Act, and under the customer security
 questionnaires that already function as de facto regulation, somebody must
 justify each row. The Vulnerability Exploitability eXchange (VEX) formats carry
 those justifications in machine readable form, and one of the permitted
-justifications, \texttt{vulnerable\_code\_not\_present}, is a claim about the
+justifications, \vcnp{}, is a claim about the
 artifact rather than about its dependency graph.
 
 That claim invites automation. If the vulnerable function is named and the
@@ -35,9 +35,9 @@ naming are hard; we locate where that hardness stops a binary grounded pipeline,
 and show it stops upstream of the evidence question entirely.
 
 \textbf{A named, reproducible soundness failure for symbol based clearance.}
-Symbol table absence is a natural justification for
-\texttt{vulnerable\_code\_not\_present}. It is unsound for internal functions in
-a way that is invisible from outside: the check returns absent on every build
+Symbol table absence is a natural
+justification for the claim that vulnerable code is not present. It is unsound
+for internal functions in a way that is invisible from outside: the check returns absent on every build
 regardless of whether the code ships. We found this by hand verifying our own
 tool's output, and nothing in the tool was capable of detecting it. We give the
 mechanism, the disassembly evidence, and a contrast case where the same check is
@@ -76,7 +76,7 @@ Among the permitted \texttt{not\_affected} justifications, most are claims about
 program behaviour: that the code cannot be reached in execution, that an
 adversary cannot control it, that mitigations exist. Those are hard to establish
 and harder to audit. One justification is different in kind:
-\texttt{vulnerable\_code\_not\_present} asserts a fact about the artifact, and is
+\vcnp{} asserts a fact about the artifact, and is
 the only one a deterministic inspection of the shipped bytes could hope to
 settle.
 
@@ -97,7 +97,7 @@ Finally the pipeline \emph{decides or refuses}, emitting
 Two rules can clear a finding. \textbf{D01} (\texttt{component\_not\_present})
 fires when the SBOM names a component whose identity symbols and library
 dependencies are absent from the artifact. \textbf{D02}
-(\texttt{vulnerable\_code\_not\_present}) fires when the component is present but
+(\vcnp{}) fires when the component is present but
 the manifest named vulnerable symbol is not. A third rule, \textbf{D04}, emits
 \texttt{affected} when a vulnerable symbol is observed.
 
@@ -352,7 +352,7 @@ Of 15,385 attributed findings, 15,324 (99.60\%) terminate at identity resolution
 or manifest lookup. Sixty one reach symbol evaluation or later. Five reach a
 decided verdict.
 
-The dominant reason codes are \texttt{purl\_match\_insufficient} (6,591),
+The dominant reason codes are \texttt{purl\_\-match\_\-insufficient} (6,591),
 \texttt{mapping\_probable\_only} (4,183), \texttt{no\_identity\_mapping} (3,370)
 and \texttt{manifest\_no\_entry} (1,180). The first three are identity failures
 of different shapes: the package reference cannot be matched to a component with
@@ -544,8 +544,9 @@ CVE-2023-0286 & \texttt{GENERAL\_NAME\_cmp} & \texttt{libcrypto.so.3} & \textbf{
 Table~\ref{tab:symbols} shows the pattern held across all three cleared CVEs. The
 contrast row matters: \texttt{GENERAL\_NAME\_cmp} is part of the public API and
 does appear in the export table, so for that CVE the same rule produces genuine
-evidence. One symbol in four. The five surviving \texttt{affected} verdicts in
-the post guard corpus run on this path under D04.
+evidence. One symbol in four. An earlier draft stated that the five surviving
+\texttt{affected} verdicts all run on this path under D04. That was wrong and is
+withdrawn in Section~\ref{sec:version}: they span two CVEs.
 
 Across the corpus the 35 clearances distribute as 22 instances of
 CVE-2026-14456, 9 of CVE-2026-42767 and 4 of CVE-2026-45445. Twenty eight of the
@@ -724,29 +725,31 @@ visible in a second view of the same data.
 \label{sec:interop}
 
 While assembling the corpus we encountered an unrelated defect with more
-immediate practical consequence than anything above. It concerns a widely used
-open source scanner reading SBOMs produced by a widely used open source SBOM
-generator. Both findings below were reported upstream with reproductions before
+immediate practical consequence than anything above. It concerns Trivy 0.72.0
+reading SBOMs produced by Syft 1.51.0, two widely deployed open source tools.
+Both findings below were reported upstream with complete reproductions on public
+images before this paper was prepared, as False Detection discussions numbered
+11139 and 11140 on the Trivy repository, and neither was withheld pending
 publication.
 
 \subsection{CycloneDX: partial loss, in both directions}
 
 Scanning a container image tar directly yields 409 unique CVE IDs. Generating a
-CycloneDX SBOM of the same tar, then scanning that SBOM with the same scanner
+CycloneDX SBOM of the same tar, then scanning that SBOM with the same Trivy
 binary against the same database on the same day, yields 137. No error is
 emitted, no warning appears, and the SBOM is schema valid.
 
 Debian files security advisories against source packages rather than the binary
-packages that install. The generator records the source package twice, as a
-namespaced property and as a PURL qualifier. The scanner's SBOM ingest path reads
+packages that install. Syft records the source package twice, as a
+namespaced property and as a PURL qualifier. Trivy's SBOM ingest path reads
 neither; it looks for its own namespaced property and, in its absence, silently
 sets the source name to the binary name. Every Debian advisory match then fails.
 
 The disagreement is bidirectional, and this matters for how the result should be
 stated. The image result contains 278 IDs absent from the SBOM result. The SBOM
 result contains 6 IDs absent from the image result. The numeric difference
-between the two counts is 272, which is 278 minus 6. Copying the value the
-generator already wrote into the property the scanner reads produces 415, which
+between the two counts is 272, which is 278 minus 6. Copying the value Syft
+already wrote into the property Trivy reads produces 415, which
 is exactly the union of the two sets. So the SBOM path is not simply a lossy view
 of the direct path, and neither result is a superset of the other. Any framing
 that treats the direct scan as ground truth is overstating what the data shows.
@@ -759,7 +762,7 @@ Zero on every image is not a sampling artifact. The eight unaffected images are
 APK, RPM or Go binary based, and that split along Debian's advisory model is the
 evidence for the mechanism rather than the list itself. Four of those eight
 report zero on both paths and are therefore uninformative on their own; the
-control that carries weight is a second scanner, which matches its own direct
+control that carries weight is Grype, which matches its own direct
 scan on every image and both formats we tested.
 
 Two clarifications. The mechanism was already documented by a maintainer for a
@@ -773,21 +776,21 @@ the file.
 
 \subsection{SPDX: the OS is never detected}
 
-The same generator asked for SPDX rather than CycloneDX, on the same tar,
-produces a document carrying 151 packages with valid PURLs. The scanner retains
+Syft asked for SPDX rather than CycloneDX, on the same tar,
+produces a document carrying 151 packages with valid PURLs. Trivy retains
 one and reports zero vulnerabilities. The surviving package is a genuine Java
 component rather than a misread system package.
 
 The debug output identifies the mechanism, and it is not PURL parsing. On the
-SPDX path the scanner logs that it detected no operating system, warns that the
+SPDX path Trivy logs that it detected no operating system, warns that the
 family is unsupported, and never runs OS package detection at all. On the
-CycloneDX path, from the same generator run on the same tar, it detects the
+CycloneDX path, from the same Syft run on the same tar, it detects the
 distribution and version correctly and proceeds with 149 packages. A second
 Debian image shows the same shape: 89 packages with PURLs in the SPDX document,
 zero packages and zero vulnerabilities out, against 87 unique vulnerabilities
 from the direct scan.
 
-This reproduces across generator versions sixteen months apart. A second scanner
+This reproduces across Syft versions sixteen months apart. Grype
 reading the same SPDX documents retains the packages and matches its own direct
 scan, so the information is present and consumable.
 
