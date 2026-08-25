@@ -243,7 +243,7 @@ not having measured this earlier.
 
 \subsection{Pipeline and tool versions}
 
-Each artifact is extracted to a profile rootfs, scanned with Grype 0.115.0, and
+Each artifact is extracted to a profile rootfs, scanned with Grype~\cite{grype} 0.115.0, and
 the findings passed to \textsc{Lading}, which emits one row per finding to
 \texttt{decisions.jsonl} together with an evidence bundle for decided rows.
 Aggregation and re derivation run from a single script. Corpus numbers flow
@@ -725,8 +725,8 @@ visible in a second view of the same data.
 \label{sec:interop}
 
 While assembling the corpus we encountered an unrelated defect with more
-immediate practical consequence than anything above. It concerns Trivy 0.72.0
-reading SBOMs produced by Syft 1.51.0, two widely deployed open source tools.
+immediate practical consequence than anything above. It concerns Trivy~\cite{trivy} 0.72.0
+reading SBOMs produced by Syft~\cite{syft} 1.51.0, two widely deployed open source tools.
 Both findings below were reported upstream with complete reproductions on public
 images before this paper was prepared, as False Detection discussions numbered
 11139 and 11140 on the Trivy repository, and neither was withheld pending
@@ -776,8 +776,8 @@ the file.
 
 \subsection{SPDX: the OS is never detected}
 
-Syft asked for SPDX rather than CycloneDX, on the same tar,
-produces a document carrying 151 packages with valid PURLs. Trivy retains
+Asked for SPDX rather than CycloneDX on the same tar, Syft produces a
+document carrying 151 packages with valid PURLs. Trivy retains
 one and reports zero vulnerabilities. The surviving package is a genuine Java
 component rather than a misread system package.
 
