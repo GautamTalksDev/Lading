@@ -201,6 +201,7 @@ Three consecutive not evaluable readings were recorded. The project stopped.
 
 ## Licence and citation
 
+**Paper:** [10.5281/zenodo.22099794](https://doi.org/10.5281/zenodo.22099794)
 **Dataset:** [10.5281/zenodo.22093232](https://doi.org/10.5281/zenodo.22093232)
 
 Code under [Apache 2.0](LICENSE). Data and the hand labelled ground truth under CC BY 4.0. Contributions required a DCO sign off; see [CONTRIBUTING.md](CONTRIBUTING.md).
