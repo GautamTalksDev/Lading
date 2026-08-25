@@ -66,10 +66,12 @@ Requires a prior lading scan (or corpus results directory). Pass --timestamp
 			}
 
 			htmlBytes := evidencehtml.Render(pack)
-			if err := os.WriteFile(outPath, htmlBytes, 0o644); err != nil {
-				return fmt.Errorf("evidence: write html: %w", err)
+			//nolint:gosec // G306: evidence HTML is a published pack; world-readable by design
+			if writeErr := os.WriteFile(outPath, htmlBytes, 0o644); writeErr != nil {
+				return fmt.Errorf("evidence: write html: %w", writeErr)
 			}
 
+			//nolint:gosec // G304: signKey is required non-empty CLI --sign-key (validated above)
 			keyPEM, err := os.ReadFile(signKey)
 			if err != nil {
 				return fmt.Errorf("evidence: read sign key: %w", err)
@@ -79,8 +81,9 @@ Requires a prior lading scan (or corpus results directory). Pass --timestamp
 				return fmt.Errorf("evidence: sign: %w", err)
 			}
 			sigPath := outPath + ".sig"
-			if err := os.WriteFile(sigPath, sig, 0o644); err != nil {
-				return fmt.Errorf("evidence: write signature: %w", err)
+			//nolint:gosec // G306: detached signature is published beside the pack; not a secret
+			if writeErr := os.WriteFile(sigPath, sig, 0o644); writeErr != nil {
+				return fmt.Errorf("evidence: write signature: %w", writeErr)
 			}
 
 			_, _ = fmt.Fprintf(cmd.OutOrStdout(), "wrote %s (%d bytes)\n", filepath.ToSlash(outPath), len(htmlBytes))

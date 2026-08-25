@@ -283,11 +283,11 @@ type decisionRecord struct {
 }
 
 func writeDecisionsJSONL(path string, rows []decisionRecord) error {
-	f, err := os.OpenFile(path, os.O_CREATE|os.O_TRUNC|os.O_WRONLY, 0o600)
+	f, err := os.OpenFile(path, os.O_CREATE|os.O_TRUNC|os.O_WRONLY, 0o600) //nolint:gosec // G304: path is Join(OutDir, "decisions.jsonl"); basename is a literal
 	if err != nil {
 		return err
 	}
-	defer f.Close()
+	defer func() { _ = f.Close() }()
 	enc := json.NewEncoder(f)
 	for _, row := range rows {
 		if err := enc.Encode(row); err != nil {

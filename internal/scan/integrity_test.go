@@ -20,8 +20,8 @@ func TestVerifyArtifactIntegrity_HashMismatch(t *testing.T) {
 		t.Fatal(err)
 	}
 	// Tamper one byte after cataloguing.
-	if err := os.WriteFile(path, []byte("tampered-bytes"), 0o600); err != nil {
-		t.Fatal(err)
+	if writeErr := os.WriteFile(path, []byte("tampered-bytes"), 0o600); writeErr != nil {
+		t.Fatal(writeErr)
 	}
 
 	err = scan.VerifyArtifactIntegrity(path, scan.IntegrityExpectation{Expected: want})
@@ -72,8 +72,8 @@ func TestRun_RefusesTamperedBeforeUnpack(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if err := os.WriteFile(path, []byte("v2"), 0o600); err != nil {
-		t.Fatal(err)
+	if writeErr := os.WriteFile(path, []byte("v2"), 0o600); writeErr != nil {
+		t.Fatal(writeErr)
 	}
 
 	res, err := scan.Run(scan.Options{

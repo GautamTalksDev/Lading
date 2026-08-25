@@ -150,7 +150,11 @@ func Load(opts Options) (Pack, error) {
 		}
 		if d.StatementID != "" {
 			row.BundleStatementID = d.StatementID
-			stmtDir := filepath.Join(scanDir, "evidence-bundle", "statements", d.StatementID)
+			stmtRoot := filepath.Join(scanDir, "evidence-bundle", "statements")
+			stmtDir, confErr := confinedDir(stmtRoot, d.StatementID)
+			if confErr != nil {
+				return Pack{}, fmt.Errorf("evidencehtml: %s: %w", d.CVE, confErr)
+			}
 			if err := enrichFromBundle(stmtDir, &row); err != nil && !os.IsNotExist(err) {
 				return Pack{}, fmt.Errorf("evidencehtml: %s: %w", d.CVE, err)
 			}
@@ -165,7 +169,9 @@ func Load(opts Options) (Pack, error) {
 
 	manifestVer := "0.2.0"
 	if p := opts.ManifestDir; p != "" {
-		if data, err := os.ReadFile(filepath.Join(p, "VERSION")); err == nil {
+		verPath := filepath.Join(p, "VERSION")
+		//nolint:gosec // G304: p is operator --manifest; basename VERSION is a literal
+		if data, err := os.ReadFile(verPath); err == nil {
 			manifestVer = strings.TrimSpace(string(data))
 		}
 	}
@@ -189,6 +195,23 @@ func Load(opts Options) (Pack, error) {
 	}, nil
 }
 
+// confinedDir joins root/elem and refuses anything that is not a single
+// path element under root (statement_id comes from scan JSON).
+func confinedDir(root, elem string) (string, error) {
+	if strings.TrimSpace(elem) == "" {
+		return "", fmt.Errorf("evidencehtml: empty path element")
+	}
+	if elem == "." || elem == ".." || strings.Contains(elem, "..") || elem != filepath.Base(elem) {
+		return "", fmt.Errorf("evidencehtml: path element %q escapes %s", elem, root)
+	}
+	joined := filepath.Join(root, elem)
+	rel, err := filepath.Rel(root, joined)
+	if err != nil || rel == "." || rel == ".." || strings.HasPrefix(rel, ".."+string(os.PathSeparator)) {
+		return "", fmt.Errorf("evidencehtml: path element %q escapes %s", elem, root)
+	}
+	return joined, nil
+}
+
 func sortRows(rows []Row) {
 	sort.Slice(rows, func(i, j int) bool {
 		if rows[i].CVE != rows[j].CVE {
@@ -210,6 +233,7 @@ type decisionLine struct {
 }
 
 func loadDecisions(path string) ([]decisionLine, error) {
+	//nolint:gosec // G304: path is Join(Abs(scanDir), "decisions.jsonl"); basename is a literal
 	data, err := os.ReadFile(path)
 	if err != nil {
 		return nil, fmt.Errorf("read decisions: %w", err)
@@ -236,6 +260,7 @@ type grypeMeta struct {
 }
 
 func loadGrypeMeta(path string) (grypeMeta, error) {
+	//nolint:gosec // G304: path is Join(Abs(scanDir), "grype.json"); basename is a literal
 	data, err := os.ReadFile(path)
 	if err != nil {
 		return grypeMeta{}, fmt.Errorf("read grype.json: %w", err)
@@ -263,6 +288,7 @@ func loadGrypeMeta(path string) (grypeMeta, error) {
 }
 
 func loadScanSummary(path string) (ScanSummary, error) {
+	//nolint:gosec // G304: path is Join(Abs(scanDir), "scan-summary.json"); basename is a literal
 	data, err := os.ReadFile(path)
 	if err != nil {
 		return ScanSummary{}, fmt.Errorf("read scan-summary.json: %w", err)
@@ -291,7 +317,11 @@ func enrichFromBundle(stmtDir string, row *Row) error {
 	var slice manifest.Slice
 
 	readJSON := func(name string, dest any) error {
+		if name != filepath.Base(name) || strings.Contains(name, "..") {
+			return fmt.Errorf("evidencehtml: invalid bundle file %q", name)
+		}
 		p := filepath.Join(stmtDir, name)
+		//nolint:gosec // G304: stmtDir confined by confinedDir; name is a literal basename
 		data, err := os.ReadFile(p)
 		if err != nil {
 			return err
@@ -362,6 +392,7 @@ func lookupCatalog(catalogPath, id, artifactPath string) ArtifactIdentity {
 	if catalogPath == "" {
 		return ai
 	}
+	//nolint:gosec // G304: catalogPath is operator --catalog; empty is skipped above
 	data, err := os.ReadFile(catalogPath)
 	if err != nil {
 		return ai

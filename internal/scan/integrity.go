@@ -64,11 +64,11 @@ type IntegrityExpectation struct {
 
 // SHA256File returns the hex SHA-256 of a regular file.
 func SHA256File(path string) (string, error) {
-	f, err := os.Open(path)
+	f, err := os.Open(path) //nolint:gosec // G304: path is the caller-supplied artifact path under analysis
 	if err != nil {
 		return "", err
 	}
-	defer f.Close()
+	defer func() { _ = f.Close() }()
 	h := sha256.New()
 	if _, err := io.Copy(h, f); err != nil {
 		return "", err

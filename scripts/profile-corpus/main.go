@@ -78,12 +78,17 @@ func main() {
 
 	printSummary(rows)
 	profileMD := filepath.Join(root, "PROFILE.md")
+	//nolint:gosec // G306: PROFILE.md is generated documentation; world-readable by design
 	must(os.WriteFile(profileMD, []byte(oneSentence(rows)+"\n"), 0o644))
 	fmt.Fprintf(os.Stderr, "[profile] wrote %s\n", profileMD)
 }
 
 func profileOne(root, cache string, a artifactEntry) row {
 	r := row{ID: a.ID, Class: a.Class}
+	if !validCatalogID(a.ID) {
+		r.Note = "invalid-id"
+		return r
+	}
 	if a.Status == "missing" {
 		r.Note = "status=missing"
 		return r
@@ -311,8 +316,9 @@ func extractDockerArchive(imageTar, dest string) error {
 		return err
 	}
 	defer func() { _ = os.RemoveAll(tmp) }()
-	if err := exec.Command("tar", "-xf", imageTar, "-C", tmp).Run(); err != nil {
-		return fmt.Errorf("tar image.tar: %w", err)
+	//nolint:gosec // G204: tar is a literal; imageTar is Join(downloads, validated-id, "image.tar"); tmp is MkdirTemp
+	if tarErr := exec.Command("tar", "-xf", imageTar, "-C", tmp).Run(); tarErr != nil {
+		return fmt.Errorf("tar image.tar: %w", tarErr)
 	}
 	manPath := filepath.Join(tmp, "manifest.json")
 	raw, err := os.ReadFile(manPath) // #nosec G304
@@ -365,8 +371,8 @@ func extractSquashFromBin(bin, dest string) error {
 	if err != nil {
 		return err
 	}
-	if err := os.MkdirAll(dest, 0o750); err != nil {
-		return err
+	if mkErr := os.MkdirAll(dest, 0o750); mkErr != nil {
+		return mkErr
 	}
 	cmd := exec.Command("unsquashfs", "-ignore-errors", "-no-exit-code", "-f", "-d", dest, "-o", strconv.FormatInt(off, 10), bin) // #nosec G204
 	out, err := cmd.CombinedOutput()
@@ -395,8 +401,8 @@ func extractSquashFromGzipImage(gzPath, dest string) error {
 	if err != nil {
 		return err
 	}
-	if err := os.MkdirAll(dest, 0o750); err != nil {
-		return err
+	if mkErr := os.MkdirAll(dest, 0o750); mkErr != nil {
+		return mkErr
 	}
 	u := exec.Command("unsquashfs", "-ignore-errors", "-no-exit-code", "-f", "-d", dest, "-o", strconv.FormatInt(off, 10), tmpName) // #nosec G204
 	out, err := u.CombinedOutput()
@@ -523,6 +529,7 @@ func indexOf(data, magic []byte) int {
 }
 
 func markReady(dest, note string) (string, string, error) {
+	//nolint:gosec // G306: .profile-ready is a cache marker in an extracted tree; world-readable by design
 	if err := os.WriteFile(filepath.Join(dest, ".profile-ready"), []byte(note+"\n"), 0o644); err != nil {
 		return "", "", err
 	}
@@ -672,6 +679,16 @@ func abs(x float64) float64 {
 }
 
 func itoa(n int) string { return strconv.Itoa(n) }
+
+func validCatalogID(id string) bool {
+	if strings.TrimSpace(id) == "" {
+		return false
+	}
+	if strings.Contains(id, "..") {
+		return false
+	}
+	return id == filepath.Base(id)
+}
 
 func dirNonEmpty(p string) bool {
 	ents, err := os.ReadDir(p)

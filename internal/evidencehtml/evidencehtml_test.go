@@ -56,8 +56,8 @@ func TestSignDetachedDeterministic(t *testing.T) {
 	}
 	keyPEM := pem.EncodeToMemory(&pem.Block{Type: "PRIVATE KEY", Bytes: der})
 	keyPath := filepath.Join(t.TempDir(), "test-sign.key")
-	if err := os.WriteFile(keyPath, keyPEM, 0o600); err != nil {
-		t.Fatal(err)
+	if writeErr := os.WriteFile(keyPath, keyPEM, 0o600); writeErr != nil {
+		t.Fatal(writeErr)
 	}
 	keyPEM, err = os.ReadFile(keyPath)
 	if err != nil {
