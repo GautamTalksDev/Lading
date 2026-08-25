@@ -1,6 +1,6 @@
 # FINDING-001 — Source-package attribution is lost between Syft and Trivy, hiding up to 92% of Debian vulnerabilities
 
-**Status:** Draft. Not published. Trivy CycloneDX filing live (2026-08-24); SPDX and Syft pending.
+**Status:** Draft. Not published. Trivy CycloneDX filing live (2026-08-24); SPDX filed (#11140, 2026-08-25); Syft pending.
 **Date of experiment:** 2026-08-24
 **Author:** Gautam Khosla
 **Reproduction:** five commands, public images, no credentials required.
@@ -212,8 +212,18 @@ vulnerabilities" records neither which tools produced it nor that the pairing ma
   Credits DmitriyLewen's original explanation on his own thread and routes readers
   to #11139.
 
-- **Trivy — SPDX ingestion package loss.** **NOT YET FILED.** Draft at
-  `launch/issues/trivy-002-spdx-ingest-package-loss.md`.
+- **Trivy — SPDX ingestion package loss.** Filed **2026-08-25** as a False
+  Detection discussion:
+  https://github.com/aquasecurity/trivy/discussions/11140  
+  References #11139 as related but distinct. Leads on the debug evidence:
+  the SPDX path logs `Detected OS family="none"` and `Unsupported os`, so
+  OS package detection never runs, while CycloneDX from the same Syft run
+  on the same tar detects `debian 12.5` with `pkg_num=149`. Cites #8629 and
+  #7100 as the closest prior art on the same "no OS detected" shape.
+  Figures: 151 packages with PURLs in the SPDX document, 1 retained
+  (a genuine `pkg:maven/libintl/libintl@0.21`), 0 vulnerabilities, against
+  150 packages and 137 unique CVEs via CycloneDX and 409 via `trivy image`.
+  Verified against trivy DB 2026-08-25.
 
 - **Syft — source-package property emission.** **NOT YET FILED.** Decide after Trivy
   responds, since the fix may belong on only one side.
@@ -227,5 +237,6 @@ vulnerabilities" records neither which tools produced it nor that the pairing ma
 - [x] **File with Trivy** (CycloneDX / `upstream=` read path). Done 2026-08-24:
   [discussion #11139](https://github.com/aquasecurity/trivy/discussions/11139) (False
   Detection; mechanism credited to #7850).
-- [ ] File Trivy SPDX ingestion issue (`launch/issues/trivy-002-spdx-ingest-package-loss.md`).
+- [x] File Trivy SPDX ingestion issue (`launch/issues/trivy-002-spdx-ingest-package-loss.md`).
+  Done 2026-08-25: [discussion #11140](https://github.com/aquasecurity/trivy/discussions/11140).
 - [ ] Only then: publish.
