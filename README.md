@@ -2,7 +2,7 @@
 
 **A tool that tried to prove vulnerabilities were absent from shipped software. It did not work. This repository is the measurement of how it failed, published in full.**
 
-[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/GautamTalksDev/Lading/badge)](https://scorecard.dev/viewer/?uri=github.com/GautamTalksDev/Lading)
+[![OpenSSF Scorecard](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fapi.scorecard.dev%2Fprojects%2Fgithub.com%2FGautamTalksDev%2FLading&query=%24.score&label=OpenSSF%20Scorecard)](https://scorecard.dev/viewer/?uri=github.com/GautamTalksDev/Lading)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
 [![Result](https://img.shields.io/badge/result-negative%20%C2%B7%20published-critical)](RESULTS.md)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22093232.svg)](https://doi.org/10.5281/zenodo.22093232)

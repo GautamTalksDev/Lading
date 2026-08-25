@@ -9,7 +9,8 @@ on:
 
 # Scorecard publish_results rejects workflow-level write permissions.
 # See: https://github.com/ossf/scorecard-action#publishing-results
-permissions: read-all
+permissions:
+  contents: read
 
 jobs:
   analysis:
